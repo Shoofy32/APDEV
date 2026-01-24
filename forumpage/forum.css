@@ -1,0 +1,159 @@
+
+
+.header_container {
+    display: flex;
+    height: 50px;
+    background-color: #3e505b;
+    align-items: center;
+
+}
+.navigation_header {
+    background-color: #3e505b;
+    margin-left: 20px;
+}
+.header_buttons {
+    color: #8ab0ab;
+    text-decoration: none;
+    font-size: 20px;
+}
+#login {
+    background-color: #1A1D1A;
+    width: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.account_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 9px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+.username {
+    font-size: 20px;
+    color: aqua;
+}
+.visited_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #1A1D1A;
+    
+}
+.separator {
+    margin-top: 1px;
+}
+.breadcrumbs{
+    display: flex;
+    margin-top: 10px;
+    padding-left: 15px;
+    color:  #8AB0AB;;
+
+}
+.breadcrumbs a {
+     color: #8AB0AB;
+}
+.thread_head {
+    display: flex;
+    justify-content: center;
+    
+    background: #1A1D1A;
+    
+    
+}
+.thread_head_container img {
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.thread_head_container h5 {
+    margin-top: 7px;
+    text-align: center;
+    color: #8AB0AB;
+}
+.thread_head_container p {
+    text-align: center;
+    color: #8AB0AB;
+}
+.content_container {
+    height: 100vh;
+    background-color:  #1A1D1A;;
+}
+hr {
+    color: red;
+}
+
+.post_container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+    
+    
+}
+.post_info {
+    display: flex;
+    margin-bottom: 0;
+    width: 100%;
+   
+   
+    
+   
+}
+.post_info img {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+}
+.post_info h5{
+    font-size: 9px;
+    padding-top: 7px;
+    color: #8AB0AB;
+    
+    
+
+}
+.post_user {
+    padding-left: 3px;
+}
+
+.timestamp  {
+  padding-top: 6px;
+  color: #8AB0AB;
+  opacity: 0.6;
+  font-size: 9px;
+  
+}
+
+.post_contents {
+    position: relative;
+    bottom: 9px;
+    color: #8AB0AB;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.post_contents h3 {
+    font-size: 19px;
+}
+
+.post_contents p {
+    font-size: 14px;
+}
+
+.link {
+   
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.link:hover {
+    background-color: #3E5058;
+}
+
+.interaction_container {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
