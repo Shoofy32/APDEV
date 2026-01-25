@@ -87,7 +87,7 @@ hr {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    
+    margin-bottom: 50px;
     
     
 }
@@ -163,4 +163,31 @@ hr {
     background-color: #8AB0AB;;
     height: 30px;
     border-radius: 5px;
+    width:60px;
+}
+
+.interaction_container button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+
+.interaction_container button p {
+    float: left;
+    
+    padding-left: 5;
+}
+
+#reply_head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#reply_head button {
+   position: relative;
+   left: 300px;
+}
+#reply_head h5 {
+   position: relative;
+   left: 50px;
 }
