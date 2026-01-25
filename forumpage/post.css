@@ -1,0 +1,126 @@
+body{
+    
+}
+.content_container {
+    height: 100vh;
+    background-color: #1A1D1A;
+}
+.header_container {
+    display: flex;
+    height: 50px;
+    background-color: #3e505b;
+    align-items: center;
+
+}
+.navigation_header {
+    background-color: #3e505b;
+    margin-left: 20px;
+}
+.header_buttons {
+    color: #8ab0ab;
+    text-decoration: none;
+    font-size: 20px;
+}
+#login {
+    background-color: #1A1D1A;
+    width: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.account_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 9px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.username {
+    font-size: 20px;
+    color: aqua;
+}
+.visited_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #1A1D1A;
+    
+}
+.separator {
+    margin-top: 1px;
+}
+.breadcrumbs{
+    display: flex;
+    margin-top: 10px;
+    padding-left: 15px;
+    color:  #8AB0AB;;
+
+}
+.breadcrumbs a {
+     color: #8AB0AB;
+}
+
+.post_container {
+    padding-top: 50px;
+   
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px
+   
+}
+
+.post_container input {
+   background: #03120E;
+  color: #8AB0AB;
+  font-size: 16px;
+  padding: 10px;
+  width: 500px;
+  border: 3px solid #8ab0ab;
+  border-radius: 6px;
+}
+.title_container {
+    border:1px solid #3E5058;
+    
+    
+}
+
+.post_container textarea {
+    width: 500px;
+    height: 200px;
+    background: #03120E;
+    color: #8AB0AB;
+    font-size: 14px;
+    padding: 12px;
+  
+    border: 3px solid #8ab0ab;
+    border-radius: 6px;
+    
+   
+}
+.area_container {
+    border: 1px solid #3E5058;
+}
+.post_container button {
+     background: #3E5058;
+  color: #8AB0AB;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  left: 200;
+
+}
+.post_container input::placeholder {
+    color: #8AB0AB;
+  
+}
+
+.post_container textarea::placeholder {
+  color: #8AB0AB;
+ 
+}
