@@ -1,5 +1,10 @@
-
-
+body{
+    
+}
+.content_container {
+    height: 100vh;
+    background-color: #1A1D1A;
+}
 .header_container {
     display: flex;
     height: 50px;
@@ -30,6 +35,7 @@
     margin-left: auto;
     margin-right: 10px;
 }
+
 .username {
     font-size: 20px;
     color: aqua;
@@ -54,50 +60,17 @@
 .breadcrumbs a {
      color: #8AB0AB;
 }
-.thread_head {
-    display: flex;
-    justify-content: center;
-    
-    background: #1A1D1A;
-    
-    
-}
-.thread_head_container img {
-    margin-top: 5px;
-    border-radius: 5px;
-}
-.thread_head_container h5 {
-    margin-top: 7px;
-    text-align: center;
-    color: #8AB0AB;
-}
-.thread_head_container p {
-    text-align: center;
-    color: #8AB0AB;
-}
-.content_container {
-    height: 100vh;
-    background-color:  #1A1D1A;;
-}
-hr {
-    color: red;
-}
-.post_wrapper{
-    
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 50px;
-}
+
 .post_container {
-    
-    flex:1;
-    max-width: 800px;
-    
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-bottom: 20px;
     background-color: #121615;
     border-radius: 10px;
     padding: 15px;
+    
+    
     
     
 }
@@ -152,23 +125,12 @@ hr {
     font-size: 14px;
 }
 
-.link {
-   
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-.link:hover {
-    background-color: #3E5058;
-}
 
 .interaction_container {
     display: flex;
     flex-direction: row;
     gap: 4px;
-    z-index: 3;
 }
-
 
 .interaction_container button {
     border: none;
@@ -190,22 +152,11 @@ hr {
     padding-left: 5;
 }
 
-#reply_head {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#reply_head button {
-   position: relative;
-   left: 300px;
-}
-#reply_head h5 {
-   position: relative;
-   left: 50px;
-}
 #reply_container.open {
     opacity: 1;
     z-index: 999;
+    background: none;
+    border: 0;
 }
 #reply_container{
     background-color: rgba(0,0,0,0.3);
@@ -274,21 +225,7 @@ hr {
     border: 0;
 }
 
-.view_post {
-
-  text-decoration: none;
-  color: inherit;
-  width: fit-content;
-  display: block;
-  height: fit-content;
-  
+#confirm_post {
+    position: absolute;
+    top:350px;
 }
-
-.view_post:hover  {
-  background-color: red; /* slightly lighter than post bg */
-  border-color: #8AB0AB;
-  cursor: pointer;
-  border: 5px solid red;
-  border-radius: 10px;
-}
-
