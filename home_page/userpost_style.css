@@ -1,0 +1,211 @@
+/* Posts - Div Container that contains PFP, Username, and Date of Post */
+.icon_name_date_post{
+
+
+    display: flex;
+    align-items: center;
+
+    height: 20px;
+
+
+}
+
+/* Latests Posts - Secondary Div Container that contains a post */
+.post{
+
+
+    width: auto;
+    height: auto;
+
+    margin-top: 10px;
+
+    padding-left: 20px;
+    padding-top: 15px;
+
+    background-color: #3E5058;
+    border-radius: 5px;
+
+}
+
+/* Posts - PFP image */
+.icon_name_date_post img{
+
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+
+}
+
+/* Posts - Username */
+.icon_name_date_post .name_post{
+
+    font-size: 14px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+    margin-left: 10px;
+
+}
+
+/* Posts - Date of Post */
+.icon_name_date_post .date_post{
+
+    font-size: 11px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: lightgray;
+
+    margin-left: 10px;
+    
+}
+
+/* Posts - Title of Post */
+.post h3{
+
+    font-size: 22px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    margin-top: 20px;
+    color: white;
+
+}
+
+/* Posts - Div Container that Contains the Tags of the Post */
+.tags_post{
+
+    display: flex;
+    align-items: center;
+
+}
+
+/* Posts - Text of Tags */
+.tags_post p{
+
+    width: auto;
+    height: 14px;
+
+    margin-top: -15px;
+    margin-left: 4px;
+
+    padding-left: 2px;
+    padding-right: 2px;
+
+    font-size: 10px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+
+    color: grey;
+    background-color: lightgrey;
+
+    border-radius: 2px;
+
+
+}
+
+/* Posts - Short Description of Post*/
+.post .description_short_post{
+
+
+    width: 95%;
+
+    margin-top: 0px;
+
+    font-size: 15px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+    overflow: hidden;
+
+}
+
+
+
+/* Posts - Div Container that Contains the Like and Dislike Buttons */
+.likes_dislikes_post{
+
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+    
+    margin-top: -10px;
+}
+
+/* Posts - Div Container that Contains a Button and its Counter */
+.likes_dislikes_post .counter_container{
+
+    display: flex;
+    align-items: center;
+
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+
+    padding-left: 15px;
+
+    border-radius: 5px;
+
+}
+
+/* Posts (Counter) - Icon of Button */
+.likes_dislikes_post i{
+
+    color: white;
+
+    padding-right: 15px;
+    
+    
+}
+
+/* Posts (Counter) - Counter of Button */
+.likes_dislikes_post p{
+
+
+    font-size: 14px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    margin-right: 20px;
+
+    padding-left: 5px;
+    
+    color: white;
+
+}
+
+/* Posts (Counter) - Icon of Button */
+/* On Hover */
+.likes_dislikes_post i:hover{
+
+    color: coral;
+
+    cursor: pointer;
+
+}
+
+/* Posts - Div Container that Contains a Button and its Counter */
+/* On Hover */
+.likes_dislikes_post .counter_container:hover{
+
+    background-color: #495d65;
+
+}
+
+/* Latests Posts - Secondary Div Container that contains a post */
+.post:not(.likes_dislikes_post):hover {
+
+
+    background-color: #314147;
+
+    cursor: pointer;
+
+}
+
