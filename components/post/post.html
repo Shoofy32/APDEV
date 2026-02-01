@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <script src="https://kit.fontawesome.com/f1ef7848b2.js" crossorigin="anonymous"></script>
+
+        <!-- Link CSS File for user post css design-->
+        <link rel= "stylesheet" type = "text/css" href = "userpost_style.css">
+
+        <!-- Link JS File for posts interaction -->
+        <script src = "posts.js"></script>
+
+
+    <body>
+
+        <div class = "post">
+
+            <!-- Div Contains the PFP, Username, and Date of Post-->
+            <div class = "icon_name_date_post">
+
+                <img src = "images/Placeholder.jpg">
+
+                <p class = "name_post"> Placeholder </p>
+
+                <p class = "date_post"> 01/02/2025 </p>
+
+
+            </div>
+
+            <!-- Post Title -->
+            <h3> Title Placeholder </h3>
+
+            <!-- Div Contains Different Tags of the Post -->
+            <div class = "tags_post">
+
+                <p> Tag 1 </p>
+                <p> Tag 2 </p>
+                <p> Tag 3 </p>
+
+            </div>
+
+            <!-- Short Description of Post -->
+            <p class = "description_short_post"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima id incidunt itaque odio nesciunt. Fugit quo, officia molestiae accusantium ex dolore architecto eum nobis nisi deserunt dolorum iure possimus labore. </p>
+
+            <!-- Div contains likes and dislikes counter -->
+            <div class = "likes_dislikes_post">
+
+                <!-- Div contains like counter and its value -->
+                <div class = "counter_container">
+
+                    <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                    
+                    <p class = "like_counter"> 0 </p>
+
+                </div>
+
+                <!-- Div contains dislike counter and its value -->
+                <div class = "counter_container">
+
+                    <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                    
+                    <p class = "dislike_counter"> 0 </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </body>
+
+
+</html>
