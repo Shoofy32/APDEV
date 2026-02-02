@@ -591,33 +591,7 @@ hr {
     background-color: #3E5058;
 }
 
-.interaction_container {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    z-index: 3;
-}
 
-
-.interaction_container button {
-    border: none;
-    background-color: #8AB0AB;;
-    height: 30px;
-    border-radius: 5px;
-    width:60px;
-}
-
-.interaction_container button img {
-    float: left;
-    padding-top: 4px;
-    padding-left: 5;
-}
-
-.interaction_container button p {
-    float: left;
-    
-    padding-left: 5;
-}
 
 #reply_head {
     display: flex;
@@ -674,7 +648,7 @@ hr {
 }
 
 #reply_container > div:nth-child(2) {
-     font-size: 12px;
+font-size: 12px;
   color: #8AB0AB;
   opacity: 0.7;
   margin-bottom: 6px;
@@ -742,3 +716,56 @@ hr {
   transform: translateY(-1px);
 }
 
+.interaction_container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    z-index: 3;
+    flex-grow: 1;
+}
+
+
+.dislike_button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:60px;
+}
+.like_button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:60px;
+}
+
+
+.dislike_button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+
+.like_button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+
+.dislike_button p {
+    float: left;
+    
+    padding-left: 5;
+}
+.challenge_container {
+    width: 300px;
+}
+.challenge_button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    color: red;
+}

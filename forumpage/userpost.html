@@ -4,28 +4,164 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
     <body>
+             
+   <article>
+
+
+            <header>
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+                <!-- Link to Free Icons Website https://fontawesome.com/ -->
+                <script src = "https://kit.fontawesome.com/f1ef7848b2.js" crossorigin = "anonymous"></script>
+
+                <!-- Link CSS File for header css design-->
+                <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
+
+                <!-- Link JS File for sidebar interaction -->
+                <script src = "sidebar.js"></script>
+
+                <!-- Logo -->
+                <a class = "logo" href = "homepage.html"> <img src = "images/Blevvit_Logo.png"> </a>
+
+                
+                <!-- Search bar -->
+                 <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search...">
+
+                 </div>
+
+
+                <!-- Log In and Sign Up Buttons -->
+                <div class = "log_sign_in">
+
+                    <button onclick = "window.open('../log_regpage/login.html', '_self')"> Log In </button>
+                    <button onclick = "window.open('../log_regpage/registration.html', '_self')"> Sign Up </button>
+
+                </div>
+
+
+            </header>
+
+
+        </article>
+
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container" onclick = "showSideBar()">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i> <span> Home </span> </button>
+
+                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                    <hr>
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Popular Topics </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Announcements </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Creative Writing </span> 
+                        </button>
+
+                        <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Technology </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span> General Fiction </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr>
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Resources </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> <span>  </span> Rules </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         
    
-        <header>
-            <div class="header_container">
-                <div class="navigation_header">
-                    <a href="../home_page/homepage.html" class="header_buttons">Forums</a>
-                </div>
-                 <div class="navigation_header">
-                    <a href="../home_page/homepage.html" class="header_buttons">Latest</a>
-                </div>
-
-                 <div class="account_button">
-                     <h3 class="username"> Charlie_Kirk</h3>
-                     <img style="float: right; border-radius: 20px;" src="kirk.jfif" height="32px" width="32px"/>
-                    
-                         
-                     
-                </div>
-                    
-            </div>
-        </header>
+    
         <div class="content_container">
              <div class="visited_container">
                 <div class="breadcrumbs">
