@@ -1,269 +1,195 @@
-/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
-* {
-    box-sizing: border-box;
-}
-
-
-/* Div - Add Spacing */
-.spacing{
-
-    margin: 10px;
-
-}
-
-/* Div - Add Spacing but Small */
-.spacing_small{
-
-    margin: 5px;
-
-}
-
-
-
-/* Sidebar */
-.side_bar{
-
-    position: fixed; /* Sticks to the page while scrolling */
-
-    width: 30px;
-    height: 100%;
-
-    padding-top: 120px;
-
-    background-color: #3E5058;
-
-    border-right: 2px solid orange;
-
-    float: left;
-
-    z-index: 2;
-
-}
-
-/* Sidebar - Div Container for Clickable Button */
-.side_bar .clickable_container{
-
-    position: absolute;
-
-    width: 25px;
-    height: 20px;
-
-    left: 15px;
-    top: 100px;
-
-    background-color: #3E5058;
-
-    z-index: 5;
-
-}
-
-/* Sidebar - Clickable Button */
-.side_bar .clickable{
-
-    position: absolute;
-
-    top: 10px;
-
-    color: orange;
-
-    transform: scale(1.5, 1.5);
-
-}
-
-/* Sidebar - Divider Line */
-.side_bar hr{
-
-    width: 140%;
-
-
-    border: 1px solid #314249;
-
-}
-
-/* Sidebar - Clickable Button */
-/* Button on Hover */
-.side_bar .clickable:hover{
-
-    color: coral;
-
-    cursor: pointer;
-
-}
-
-/* Sidebar - Div Container for Content */
-.side_bar_content{
-
-    display: flex;
-    flex-direction: column;
-
-
-    height: 200px;
-    width: 150px;
-
-    margin-left: 20px;
-
-    transform: translateY(-30px);
-
-    visibility: hidden;
-}
-
-/* Sidebar - Div Container for Home Section */
-.side_bar_home{
-
-    display: flex;
-    flex-direction: column;
-
-    position: relative;
-
-    width: 95%;
-
-}
-
-/* Sidebar - Home Section Buttons */
-.side_bar_home button, .side_bar_dropdown button{
-
-    display: flex;
-    align-items: center;
-
-    height: 40px;
-    width: 150%;
-
-    margin-left: -5px;
-
-    padding-left: 20px;
-
-    font-family: "Inter", Arial;
-    font-weight: 300;
-
-    color: white;
-    background-color: #3E5058;
-
-    border: 0px;
-    border-radius: 10px;
-
-}
-
-/* Sidebar - Home Section Content Image */
-.side_bar_home i, .side_bar_dropdown i{
-
-    transform: scale(1.2, 1.2);
-
-}
-
-/* Sidebar - Home Section Content Titles */
-.side_bar_home button span, .side_bar_dropdown span{
-
-    margin-left: 15px; 
-
-    font-size: 14px;
-
-
-}
-
-/* Sidebar - Home Section Buttons */
-/* Buttons on Hover */
-.side_bar_home button:hover, .side_bar_dropdown button:hover{
-
-    background-color: #2e3c42;
-
-    cursor: pointer;
+body{
     
-
-}
-
-
-
-/* Sidebar Topics Section - Div Container for Title and the Topics in Dropdown  */
-.side_bar_topics{
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    width: 90%;
-    
-
-}
-
-/* Sidebar Topics Section - Text */
-.side_bar_topics p{
-
-    font-family: "Inter", Arial;
-    font-size: 14px;
-    font-weight: 500;
-
-    color: #78939e;
-
-
-}
-
-/* Sidebar Topics Section - Title and Caret Icon Container for Dropdown */
-.side_bar_title_container{
-
-    display: flex;
-    align-items: center;
-
-    margin-left: 55px;
-
-    padding-left: 20px;
-
-    width: 150%;
-    height: 40px;
-
-}
-
-/* Sidebar Topics Section - Title and Caret Icon Container */
-/* Container on Hover */
-.side_bar_title_container:hover{
-
-    background-color: #4b616a;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-
-}
-
-/* Sidebar Topics Section - Div Container for the Actual Dropdown Content */
-.side_bar_dropdown{
-
-    display: inline-block;
-
-    width: 105%;
-    height: 100px;
-
-    margin-bottom: 120px;
-
-}
-
-.side_bar_content_slice{
-
-    display: flex;
-    align-items: center;
-
-}
-
-.side_bar_content_slice p{
-
-    margin-left: 15px; 
-
-    color: white;
-
-}
-body {
-    margin: 0;
-    font-family: Arial;
 }
 .content_container {
     height: 100vh;
     background-color: #1A1D1A;
 }
-.header_container {
+/* Homepage Header CSS properties */
+header {
+
+
     display: flex;
-    height: 50px;
-    background-color: #3e505b;
     align-items: center;
+
+    position: fixed; /* Sticks to the page while scrolling */
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 60px;
+
+    background-color: #3E5058;
+
+    border-bottom: 2px solid orange;
+
+    overflow: hidden; /* Hide elements if doesn't fit*/
+
+    z-index: 3;
+
+
+}
+
+
+
+/* Homepage Header - Logo */
+header .logo img{
+
+    position: relative;
+
+    width: 325px;
+    height: 65px;
+
+
+}
+
+
+
+/* Homepage Header - Search Bar */
+header .search_bar{
+
+    display: flex;
+    align-items: center;
+
+    width: 500px;
+    height: 40px;
+
+    background-color: #324248;
+
+    margin-left:  15%;
+
+    border: 2px solid coral;
+    border-radius: 25px;
+
+
+
+}
+
+/* Homepage Header - Search Bar */
+/* Logo */
+header i{
+
+    margin-left: 10px;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Input Text */
+header .search_bar input{
+
+    width: 400px;
+    height: 40px;
+
+    margin-left: 5px;
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+    background-color: #32424800;
+
+    border: 0px;
+
+    font-size: medium;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Placeholder */
+header .search_bar input::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: lightgray;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Focus */
+header .search_bar input:focus{
+
+    outline: none;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Search Bar On Hover */
+header .search_bar:hover{
+
+    background-color: #3d5057;
+    
+    border-color: orange;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Placeholder When Search Bar On Hover */
+header .search_bar:hover input::placeholder{
+
+    color: white;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Change Search Bar When Actively Typing */
+header .search_bar:has(input:focus){
+
+    background-color: #3d5057;
+
+    border-color: white;
+
+}
+
+
+/* Homepage Header - Log in & Sign Up Buttons */
+header .log_sign_in{
+
+    margin-left: auto;
+    margin-right: 20px;
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Buttons */
+header .log_sign_in button{
+
+    height: 40px;
+    width: 65px;
+    font-size: 12px;
+
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Button On Hover */
+header .log_sign_in button:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+
+}
+
+
+#header_dropdown_space{
+
+    display: inline-block;
+
+    margin-top: 85px;
+
 
 }
 .navigation_header {
@@ -328,7 +254,7 @@ body {
 
 .post_container input {
    background: #03120E;
-  color: #8AB0AB;
+  color: white;
   font-size: 16px;
   padding: 10px;
   width: 500px;
@@ -345,7 +271,7 @@ body {
     width: 500px;
     height: 200px;
     background: #03120E;
-    color: #8AB0AB;
+    color: white;
     font-size: 14px;
     padding: 12px;
   
@@ -358,23 +284,29 @@ body {
     border: 1px solid #3E5058;
 }
 .post_container button {
-     background: #3E5058;
-  color: #8AB0AB;
+     background: #ff7a3d;          
+  color: white;
+  margin-top: 10px;
+
   border: none;
-  padding: 8px 18px;
   border-radius: 8px;
+
+  padding: 8px 16px;
   font-size: 14px;
-  font-weight: 500;
-  position: relative;
-  left: 200;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,.35);
+  transition: all .15s ease;
 
 }
 .post_container input::placeholder {
-    color: #8AB0AB;
+    color: white;
   
 }
 
 .post_container textarea::placeholder {
-  color: #8AB0AB;
+  color: white;
  
 }
