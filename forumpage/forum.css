@@ -479,11 +479,53 @@ header .log_sign_in button:hover{
 
 
 }
-#login {
-    background-color: #1A1D1A;
-    width: 50px;
-    border-radius: 10px;
-    text-align: center;
+
+.announcement_container {
+   
+   position: relative;
+   width: 300px;
+   left: 200px;
+   display: flex;
+   background-color: #3E5058;
+  
+     background-color: #8AB0AB;
+
+    border: 2px solid #3E5058;
+    border-radius: 3px;
+
+
+  
+}
+.announcement_head_container {
+    display: flex;
+    
+    
+    
+}
+.announcement_head_container img {
+   left: 30;
+    
+}
+.announcement_head {
+      width: 100%;
+    height: 50px;
+    
+    background-color: #26413C;
+
+    border-bottom: 2px solid #3E5058;
+    
+}
+.announcement {
+   padding-top: 20px;
+   padding-left: 10px;
+}
+
+.announcement_head h5 {
+    color: white;
+}
+.thread_head_img {
+    position: relative;
+    left: 150px;
 }
 .account_button {
     display: flex;
@@ -531,10 +573,13 @@ header .log_sign_in button:hover{
     margin-top: 5px;
     border-radius: 5px;
 }
+#reply_head > h5 {
+     color: coral;
+}
 .thread_head_container h5 {
     margin-top: 7px;
     text-align: center;
-    color: coral;
+   
 }
 .thread_head_container p {
     text-align: center;
@@ -543,7 +588,8 @@ header .log_sign_in button:hover{
 .content_container {
     padding-top: 55px;
     height: 100vh;
-    background-color:  #1A1D1A;;
+    background-color:  #1A1D1A;
+    min-width: 500px;
 }
 hr :not(.side_bar_content) {
     color: red;
@@ -636,26 +682,48 @@ hr :not(.side_bar_content) {
     z-index: 3;
 }
 
-
-.interaction_container button {
+.like_button {
     border: none;
     background-color: #8AB0AB;;
     height: 30px;
     border-radius: 5px;
     width:60px;
 }
-
-.interaction_container button img {
+.like_button img {
     float: left;
     padding-top: 4px;
     padding-left: 5;
 }
-
-.interaction_container button p {
+.like_button p {
     float: left;
     
     padding-left: 5;
 }
+.dislike_button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:60px;
+}
+.dislike_button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+.dislike_button p {
+    float: left;
+    padding-left: 5;
+}
+.Challenge {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+}
+
+
 
 #reply_head {
     display: flex;
@@ -669,76 +737,6 @@ hr :not(.side_bar_content) {
 #reply_head h5 {
    position: relative;
    left: 50px;
-}
-#reply_container.open {
-    opacity: 1;
-    z-index: 999;
-}
-#reply_container{
-    background-color: rgba(0,0,0,0.3);
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid #3E5058;
-    border-radius: 10px;
-    opacity: 0;
-    z-index: -999;
-    transition: all 0.3s ease-in-out;
-
-}
-
-#reply_container textarea{
-   width: 500px;
-   height: 300px;
-   background-color: #1A1D1A;
-   color: #8AB0AB;
-    
-}
-
-#reply_container textarea::placeholder {
-  color: #8AB0AB;
-  opacity: 0.5;
-} 
-
-#reply_container textarea:focus {
-  outline: none;
-  border-color: #8AB0AB;
-}
-
-#reply_container > div:nth-child(2) {
-     font-size: 12px;
-  color: #8AB0AB;
-  opacity: 0.7;
-  margin-bottom: 6px;
-}
-
-#reply_container > div:nth-child(1) {
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    left: 530px;
-    top:1px;
-    border-radius: 8px;
-    width: 30px;
-    height: 30px;
-    background-color: gray;
-}
-
-#reply_container > div:nth-child(1) > img {
-    height: 20px;
-    width: 20px;
-}
-
-#reply_container > div:nth-child(1) > button {
-    background-color: rgba(0,0,0,0);
-    border: 0;
 }
 
 .view_post {
@@ -759,7 +757,7 @@ hr :not(.side_bar_content) {
   border-radius: 10px;
 }
 #post_button {
-      background: #ff7a3d;          /* accent orange */
+  background: #ff7a3d;          
   color: white;
   margin-top: 10px;
 
