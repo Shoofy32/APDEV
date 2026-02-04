@@ -1,11 +1,25 @@
 const LikeButton = document.querySelectorAll('.like_button')
 const DislikeButton = document.querySelectorAll('.dislike_button')
 const post = document.getElementById('post_button');
-const replyButton = document.querySelectorAll('.reply_button')
-const reply = document.getElementById('reply_container');
-const close = document.getElementById('closeReply');
 
+const ChallengeButton = document.querySelectorAll('.Challenge')
+const challenge = document.getElementById('challenge_container');
+const close = document.getElementById('closeChallenge');
 
+ChallengeButton.forEach(element => {
+    element.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        challenge.classList.add("open");
+    })
+})
+
+close.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // This is fine here
+    challenge.classList.remove("open");
+    console.log(challenge.classList);
+    alert("CLOSING")
+})
 
 post.addEventListener('click', function() {
   // Navigate to the new page

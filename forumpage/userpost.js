@@ -28,7 +28,15 @@ postReply.addEventListener("click", () => {
       </div>
 
       <div class="post_contents">
-        <p>${content}</p>
+       <div class="replying_to_container"><span>Charlie_Kirk said:</span><br><br>
+                        <p>
+                            Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                        It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. It is good that my wife remarried me!
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   
+                        </p>
+                    </div>
+        <p class="reply_contents">${content}</p>
       </div>
     </div>
   </div>
@@ -38,7 +46,7 @@ postReply.addEventListener("click", () => {
 });
 replyButton.forEach(element => {
 element.addEventListener('click', () => {
- 
+   
   reply.classList.add("open");
     })
 })
