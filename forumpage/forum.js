@@ -15,14 +15,14 @@ ChallengeButton.forEach(element => {
 
 close.addEventListener("click", (e) => {
     e.preventDefault();
-    e.stopPropagation(); // This is fine here
+    e.stopPropagation(); 
     challenge.classList.remove("open");
     console.log(challenge.classList);
     alert("CLOSING")
 })
 
 post.addEventListener('click', function() {
-  // Navigate to the new page
+ 
   window.location.href = 'post.html';
 });
 LikeButton.forEach(element => {
