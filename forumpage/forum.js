@@ -5,6 +5,7 @@ const post = document.getElementById('post_button');
 const ChallengeButton = document.querySelectorAll('.Challenge')
 const challenge = document.getElementById('challenge_container');
 const close = document.getElementById('closeChallenge');
+const postBet = document.getElementById("postBet");
 
 ChallengeButton.forEach(element => {
     element.addEventListener('click', (e) => {
@@ -61,3 +62,20 @@ DislikeButton.forEach(element => {
  })
 })
 
+postBet.addEventListener("click", (e) => {
+    let likes = document.getElementById("betLikes").value;
+    if(likes > 1){
+        e.preventDefault();
+        e.stopPropagation(); 
+        challenge.classList.remove("open");
+        console.log(challenge.classList);
+        let roll = Math.floor(Math.random() * 20);
+        document.getElementById("betLikes").value=""
+        alert(roll)
+        console.log(typeof likes);
+    }
+    else {
+        alert("Please enter a positive number")
+        document.getElementById("betLikes").value=""
+    }
+})
