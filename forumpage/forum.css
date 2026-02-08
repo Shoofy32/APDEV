@@ -289,9 +289,13 @@
     color: white;
 
 }
+html {
+    background-color: #1A1D1A;
+}
 body {
     margin: 0;
     font-family: Arial;
+    background-color: #1A1D1A;
 }
 /* Homepage Header CSS properties */
 header {
@@ -587,7 +591,7 @@ header .log_sign_in button:hover{
 }
 .content_container {
     padding-top: 55px;
-    height: 100vh;
+   min-height: 100vh;
     background-color:  #1A1D1A;
     min-width: 500px;
 }
