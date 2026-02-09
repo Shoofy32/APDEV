@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
         <!-- Link to Free Icons Website https://fontawesome.com/ -->
-        <script src="https://kit.fontawesome.com/f1ef7848b2.js" crossorigin="anonymous"></script>
+        <link href="../../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
         <!-- Link CSS File for header css design-->
         <link rel= "stylesheet" type = "text/css" href = "header_style.css">
@@ -38,6 +38,9 @@
 
         <!-- Link JS File for posts interaction -->
         <script src = "posts.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script type = "module" src = "searchbar.js"></script>
         
     </head>
 
@@ -51,7 +54,7 @@
             <header>
 
                 <!-- Logo -->
-                <a class = "logo" href = "homepage.html"> <img src = "images/Blevvit_Logo.png"> </a>
+                <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
 
                 
                 <!-- Search bar -->
@@ -59,7 +62,7 @@
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
-                    <input type = "text" placeholder = "Search...">
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
 
                  </div>
 
@@ -541,53 +544,45 @@
                 <!-- Container for the Post, Which When Clicked Opens the Userpost Page -->
                 <div class = "post">
 
-                    <!-- Div Container Contains the Area Where the User can Click to Open the Userpost -->
-                    <div class = "clickable_post" onclick = "window.open('../forumpage/userpost.html', '_self')">
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
 
-                        <!-- Div Contains the PFP, Username, and Date of Post-->
-                        <div class = "icon_name_date_post">
+                        <img src = "../resources/users/kirk.jfif">
 
-                            <img src = "images/kirk.jfif">
+                        <p class = "name_post"> Charlie_Kirk </p>
 
-                            <p class = "name_post"> Charlie_Kirk </p>
+                        <p class = "date_post"> 2 days ago </p>
 
-                            <p class = "date_post"> 2 days ago </p>
-
-
-                        </div>
-
-                        <!-- Post Title -->
-                        <h3> Title Placeholder </h3>
-
-                        <!-- Div Contains Different Tags of the Post -->
-                        <div class = "tags_post">
-
-                            <p> Tag 1 </p>
-                            <p> Tag 2 </p>
-                            <p> Tag 3 </p>
-
-                        </div>
-
-                        <!-- Short Description of Post -->
-                        <p class = "description_short_post"> 
-                            Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
-                            It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. It is good that my wife remarried me!
-                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 
-                        </p>
 
                     </div>
 
+                    <!-- Post Title -->
+                    <h3> DLSU PCs are the best! </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> 
+                        Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                        It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. I could even play with my waifu in 3d! 
+                    </p>
 
                     <!-- Div contains likes and dislikes counter -->
-                    <div class = "likes_dislikes_post">
+                    <div class = "stats_post">
 
                         <!-- Div contains like counter and its value -->
                         <div class = "counter_container">
 
-                            <i class="fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
                             
-                            <p class = "like_counter"> 0 </p>
+                            <p class = "like_counter"> 12 </p>
 
                         </div>
 
@@ -596,32 +591,80 @@
 
                             <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
                             
-                            <p class = "dislike_counter"> 0 </p>
+                            <p class = "dislike_counter"> 3 </p>
 
                         </div>
 
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 1 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
 
                     </div>
 
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
                 </div>
-      
 
                 <div class = "post">
 
                     <!-- Div Contains the PFP, Username, and Date of Post-->
                     <div class = "icon_name_date_post">
 
-                        <img src = "images/Placeholder.jpg">
+                        <img src = "../resources/users/zed.jpg">
 
-                        <p class = "name_post"> Placeholder </p>
+                        <p class = "name_post"> Zed </p>
 
-                        <p class = "date_post"> 01/02/2025 </p>
+                        <p class = "date_post"> 2 days ago </p>
 
 
                     </div>
 
                     <!-- Post Title -->
-                    <h3> Title Placeholder </h3>
+                    <h3> Is i67 21th generation CPU good </h3>
 
                     <!-- Div Contains Different Tags of the Post -->
                     <div class = "tags_post">
@@ -633,120 +676,12 @@
                     </div>
 
                     <!-- Short Description of Post -->
-                    <p class = "description_short_post"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima id incidunt itaque odio nesciunt. Fugit quo, officia molestiae accusantium ex dolore architecto eum nobis nisi deserunt dolorum iure possimus labore. </p>
+                    <p class = "description_short_post"> I was planning to upgrade to the new i67, I've been hearing that it only gives 20k FPS on flappy bird. Alternatively for 69 dollars, I can also get the new
+                            Ryzen 78. Thanks!
+                     </p>
 
                     <!-- Div contains likes and dislikes counter -->
-                    <div class = "likes_dislikes_post">
-
-                        <!-- Div contains like counter and its value -->
-                        <div class = "counter_container">
-
-                            <i class="fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
-                            
-                            <p class = "like_counter"> 0 </p>
-
-                        </div>
-
-                        <!-- Div contains dislike counter and its value -->
-                        <div class = "counter_container">
-
-                            <i class = "fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
-                            
-                            <p class = "dislike_counter"> 0 </p>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <div class = "post">
-
-                    <!-- Div Contains the PFP, Username, and Date of Post-->
-                    <div class = "icon_name_date_post">
-
-                        <img src = "images/Placeholder.jpg">
-
-                        <p class = "name_post"> Placeholder </p>
-
-                        <p class = "date_post"> 01/02/2025 </p>
-
-
-                    </div>
-
-                    <!-- Post Title -->
-                    <h3> Title Placeholder </h3>
-
-                    <!-- Div Contains Different Tags of the Post -->
-                    <div class = "tags_post">
-
-                        <p> Tag 1 </p>
-                        <p> Tag 2 </p>
-                        <p> Tag 3 </p>
-
-                    </div>
-
-                    <!-- Short Description of Post -->
-                    <p class = "description_short_post"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima id incidunt itaque odio nesciunt. Fugit quo, officia molestiae accusantium ex dolore architecto eum nobis nisi deserunt dolorum iure possimus labore. </p>
-
-                    <!-- Div contains likes and dislikes counter -->
-                    <div class = "likes_dislikes_post">
-
-                        <!-- Div contains like counter and its value -->
-                        <div class = "counter_container">
-
-                            <i class="fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
-                            
-                            <p class = "like_counter"> 0 </p>
-
-                        </div>
-
-                        <!-- Div contains dislike counter and its value -->
-                        <div class = "counter_container">
-
-                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
-                            
-                            <p class = "dislike_counter"> 0 </p>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <div class = "post">
-
-                    <!-- Div Contains the PFP, Username, and Date of Post-->
-                    <div class = "icon_name_date_post">
-
-                        <img src = "images/Placeholder.jpg">
-
-                        <p class = "name_post"> Placeholder </p>
-
-                        <p class = "date_post"> 01/02/2025 </p>
-
-
-                    </div>
-
-                    <!-- Post Title -->
-                    <h3> Title Placeholder </h3>
-
-                    <!-- Div Contains Different Tags of the Post -->
-                    <div class = "tags_post">
-
-                        <p> Tag 1 </p>
-                        <p> Tag 2 </p>
-                        <p> Tag 3 </p>
-
-                    </div>
-
-                    <!-- Short Description of Post -->
-                    <p class = "description_short_post"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima id incidunt itaque odio nesciunt. Fugit quo, officia molestiae accusantium ex dolore architecto eum nobis nisi deserunt dolorum iure possimus labore. </p>
-
-                    <!-- Div contains likes and dislikes counter -->
-                    <div class = "likes_dislikes_post">
+                    <div class = "stats_post">
 
                         <!-- Div contains like counter and its value -->
                         <div class = "counter_container">
@@ -766,10 +701,270 @@
 
                         </div>
 
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
 
                     </div>
 
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
                 </div>
+
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "../resources/users/discordmod.jpg">
+
+                        <p class = "name_post"> CCS_GodXX </p>
+
+                        <p class = "date_post"> 2 days ago </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3> CCS smart deodorant </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> I don't shower much for the CCS smell but lately I've noticed the girls avoiding me. I heard the CCS department recently created a smart deodorant that can make me smell good.
+                            What smell would you guys recommend, I can't pick between Gokongwei Sensational and One Week CCS Smell.
+                     </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post">
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "images/Placeholder.jpg">
+
+                        <p class = "name_post"> Placeholder </p>
+
+                        <p class = "date_post"> 01/02/2025 </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3> Title Placeholder </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima id incidunt itaque odio nesciunt. Fugit quo, officia molestiae accusantium ex dolore architecto eum nobis nisi deserunt dolorum iure possimus labore. </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post">
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
 
             </div>
 
