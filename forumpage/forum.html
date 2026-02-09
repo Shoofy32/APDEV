@@ -15,7 +15,7 @@
                 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
                 <!-- Link to Free Icons Website https://fontawesome.com/ -->
-                <script src = "https://kit.fontawesome.com/f1ef7848b2.js" crossorigin = "anonymous"></script>
+                <link href="../../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
                 <!-- Link CSS File for header css design-->
                 <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
@@ -23,8 +23,11 @@
                 <!-- Link JS File for sidebar interaction -->
                 <script src = "sidebar.js"></script>
 
+                <!-- Link JS File for posts interaction -->
+                <script type = "module" src = "searchbar.js"></script>
+
                 <!-- Logo -->
-                <a class = "logo" href = "../home_page/homepage.html"> <img src = "images/Blevvit_Logo.png"> </a>
+                <a class = "logo" href = "../home_page/homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
 
                 
                 <!-- Search bar -->
@@ -32,7 +35,7 @@
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
-                    <input type = "text" placeholder = "Search...">
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
 
                  </div>
 
@@ -205,7 +208,7 @@
 
             <div id="all_posts">
                  
-                <div class="post_wrapper">
+            <div class="post_wrapper">
                 <a class="view_post" href="userpost.html">
                 <div class="post_container">
                 
@@ -475,7 +478,7 @@
                     <div class="post_contents">
                         <h3>Maki Android</h3>
                         <p>
-                                                    Everyone listen listen LISTEN!! 😤💥
+                        Everyone listen listen LISTEN!! 😤💥
                         Nico Yazawa, the cutest idol in the universe, has discovered something VERY dangerous…
 
                         🤖✨ THE NEW MAKI ANDROID ✨🤖
@@ -558,27 +561,25 @@
             <button id="closeChallenge"><img src="x-octagon.svg"/></button> 
         </div>
         <div class="dicebg">
-            <img src="d20.png">
+            <img id="d20" src="d20.png">
         </div>
-        <div style="color: white;">
-            Replying to <strong>Gamble!</strong>
+        <div id="inner_gambling">
+             <div style="color: white;">
+            <strong>Gamble</strong>
         </div>
         
-        <input id="betLikes" type="number" placeholder="How many likes will you bet?"></input>
+        <input id="betLikes" type="number" placeholder="Enter a number"></input>
 
         <div id="confirm_post">
             <button id="postBet">Bet</button> 
         </div>
-    </div>
-        
-           
-      
-               
 
-           
-        
-      
+        </div>
+       
+    </div>
+
     <script src="forum.js" charset="utf-8"></script>
+    
     </body>
 
 </html>

@@ -748,7 +748,7 @@ hr :not(.side_bar_content) {
     background-color: rgba(0,0,0,0.3);
     position: fixed;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 300px;
@@ -772,8 +772,8 @@ hr :not(.side_bar_content) {
 }
 
 #challenge_container input{
-   width: 500px;
-   height: 500px;
+   width: 200px;
+   height: 100px;
    background-color: #1A1D1A;
    color: #8AB0AB;
     
@@ -858,3 +858,22 @@ hr :not(.side_bar_content) {
   transform: translateY(-1px);
 }
 
+#inner_gambling {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+
+}
+#inner_gambling button {
+    border-radius: 5px;
+    background-color: red;
+    width: 150px;
+}
+
+#inner_gambling input {
+    text-align: center;
+    font-size: 25px;
+}

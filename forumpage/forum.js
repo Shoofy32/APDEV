@@ -112,13 +112,13 @@ const post = document.getElementById('post_button');
 const challenge = document.getElementById('challenge_container');
 const close = document.getElementById('closeChallenge');
 const postBet = document.getElementById("postBet");
-
+const d20 = document.getElementById("d20")
 close.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation(); 
     challenge.classList.remove("open");
-    console.log(challenge.classList);
-    alert("CLOSING");
+   
+   
 });
 
 post.addEventListener('click', function() {
@@ -130,9 +130,74 @@ postBet.addEventListener("click", (e) => {
     if(likes > 1){
         e.preventDefault();
         e.stopPropagation(); 
-        challenge.classList.remove("open");
+        
         console.log(challenge.classList);
         let roll = Math.floor(Math.random() * 20);
+      switch (roll) {
+    case 1:
+        d20.src = "images/1.png";
+        break;
+    case 2:
+        d20.src = "images/2.png";
+        break;
+    case 3:
+        d20.src = "images/3.png";
+        break;
+    case 4:
+        d20.src = "images/4.png";
+        break;
+    case 5:
+        d20.src = "images/5.png";
+        break;
+    case 6:
+        d20.src = "images/6.png";
+        break;
+    case 7:
+        d20.src = "images/7.png";
+        break;
+    case 8:
+        d20.src = "images/8.png";
+        break;
+    case 9:
+        d20.src = "images/9.png";
+        break;
+    case 10:
+        d20.src = "images/10.png";
+        break;
+    case 11:
+        d20.src = "images/11.png";
+        break;
+    case 12:
+        d20.src = "images/12.png";
+        break;
+    case 13:
+        d20.src = "images/13.png";
+        break;
+    case 14:
+        d20.src = "images/14.png";
+        break;
+    case 15:
+        d20.src = "images/15.png";
+        break;
+    case 16:
+        d20.src = "images/16.png";
+        break;
+    case 17:
+        d20.src = "images/17.png";
+        break;
+    case 18:
+        d20.src = "images/18.png";
+        break;
+    case 19:
+        d20.src = "images/19.png";
+        break;
+    case 20:
+        d20.src = "images/20.png";
+        break;
+}
+
+            
+        
         document.getElementById("betLikes").value = "";
         alert(roll);
         console.log(typeof likes);
