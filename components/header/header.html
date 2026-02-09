@@ -14,6 +14,9 @@
         <!-- Link CSS File for header css design-->
         <link rel= "stylesheet" type = "text/css" href = "header_style.css">
 
+        <!-- Link JS File for posts interaction -->
+        <script type = "module" src = "searchbar.js"></script>
+
     </head>
     
     <body>
@@ -25,7 +28,7 @@
             <header>
 
                 <!-- Logo -->
-                <a class = "logo" href = "homepage.html"> <img src = "images/Blevvit_Logo.png"> </a>
+                <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
 
                 
                 <!-- Search bar -->
@@ -33,7 +36,7 @@
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
-                    <input type = "text" placeholder = "Search...">
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
 
                  </div>
 

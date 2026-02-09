@@ -1,0 +1,62 @@
+/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
+* {
+    box-sizing: border-box;
+}
+
+
+/* Helps adjust website for mobile devices */
+
+
+/* Homepage Body CSS properties */
+body{
+
+    background-color: #1A1D1A;
+
+    margin: 0px; /* Mainly for header */
+
+    font-family: "Inter", Arial;
+    
+
+}
+
+
+mark{
+
+    background-color: coral;
+
+}
+
+.search_container{
+
+    display: flex;
+    flex-direction: column;
+
+    width: 1400px;
+    height: 1000px;
+
+    padding-left: 100px;
+    padding-top: 100px;
+
+}
+
+
+.search_results_container{
+
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.query_result_display{
+
+    font-weight: 600;
+    color: white;
+
+}
+
+.search_query{
+
+    font-style: italic;
+
+}
