@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title> Blevvit </title>
+
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href="../../fontawesome/css/all.min.css" rel = "stylesheet"/>
+        
+            <!-- Link CSS File for searchresults css design-->
+        <link rel= "stylesheet" type = "text/css" href = "searchresults_style.css">
+
+        <!-- Link CSS File for header css design-->
+        <link rel= "stylesheet" type = "text/css" href = "header_style.css">
+
+        <!-- Link CSS File for sidebar css design-->
+        <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
+
+        <!-- Link CSS File for user post css design-->
+        <link rel= "stylesheet" type = "text/css" href = "userpost_style.css">
+
+        <!-- Link JS File for homepage interaction -->
+        <script type = "module" src = "searchresults.js"></script>
+
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "sidebar.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script src = "posts.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script type = "module" src = "searchbar.js"></script>
+
+
+    </head>
+
+
+    <body>
+
+       <!-- Contains the header of the home page -->
+        <article>
+
+
+            <header>
+
+                <!-- Logo -->
+                <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+
+                
+                <!-- Search bar -->
+                 <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+
+                 </div>
+
+
+                <!-- Log In and Sign Up Buttons -->
+                <div class = "log_sign_in">
+
+                    <button onclick = "window.open('../log_regpage/login.html', '_self')"> Log In </button>
+                    <button onclick = "window.open('../log_regpage/registration.html', '_self')"> Sign Up </button>
+
+                </div>
+
+
+            </header>
+
+
+        </article>
+
+
+       <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container" onclick = "showSideBar()">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i> <span> Home </span> </button>
+
+                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                    <hr>
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Popular Topics </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Announcements </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Creative Writing </span> 
+                        </button>
+
+                        <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Technology </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span> General Fiction </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr>
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Resources </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> <span>  </span> Rules </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class = search_container>
+
+        <h2 class = "query_result_display"> <span class = "query_counter"> 0 </span> Search Result(s) for: <span class = "search_query"> Blank </span></h2>
+            <div class = "search_results_container">
+
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "../resources/users/kirk.jfif">
+
+                        <p class = "name_post"> Charlie_Kirk </p>
+
+                        <p class = "date_post"> 2 days ago </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3 class = "post_title"> DLSU PCs are the best! </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> 
+                        Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                        It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. I could even play with my waifu in 3d! 
+                    </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post">
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 12 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 3 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 1 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "../resources/users/zed.jpg">
+
+                        <p class = "name_post"> Zed </p>
+
+                        <p class = "date_post"> 2 days ago </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3 class = "post_title"> Is i67 21th generation CPU good </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> I was planning to upgrade to the new i67, I've been hearing that it only gives 20k FPS on flappy bird. Alternatively for 69 dollars, I can also get the new
+                            Ryzen 78. Thanks!
+                     </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post">
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "../resources/users/discordmod.jpg">
+
+                        <p class = "name_post"> CCS_GodXX </p>
+
+                        <p class = "date_post"> 2 days ago </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3 class = "post_title"> CCS smart deodorant </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> I don't shower much for the CCS smell but lately I've noticed the girls avoiding me. I heard the CCS department recently created a smart deodorant that can make me smell good.
+                            What smell would you guys recommend, I can't pick between Gokongwei Sensational and One Week CCS Smell.
+                     </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post">
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "images/Placeholder.jpg">
+
+                        <p class = "name_post"> Placeholder </p>
+
+                        <p class = "date_post"> 01/02/2025 </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3 class = "post_title"> Title Placeholder </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p> Tag 1 </p>
+                        <p> Tag 2 </p>
+                        <p> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima id incidunt itaque odio nesciunt. Fugit quo, officia molestiae accusantium ex dolore architecto eum nobis nisi deserunt dolorum iure possimus labore. </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post">
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement)" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div>
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+                            <input class = "betLikes" type = "number" placeholder = "0"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+        
+
+    </body>
+
+
+</html>
