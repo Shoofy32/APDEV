@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="userpage.css">
+    
+    <script>src="forum.js"</script>
+    
+    <link rel="stylesheet" href="forum.css">
+
+    <title>Bio</title>
+
+    <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <!-- Link to Free Icons Website https://fontawesome.com/ -->
+    <script src = "https://kit.fontawesome.com/f1ef7848b2.js" crossorigin = "anonymous"></script>
+
+    <!-- Link CSS File for header css design-->
+    <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
+
+    <!-- Link JS File for sidebar interaction -->
+    <script src = "sidebar.js"></script>
+
+    <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+
+    <!-- Link CSS File for header css design-->
+    <link rel= "stylesheet" type = "text/css" href = "header_style.css">
+</head>
+<body>
+
+    <article>
+
+            <header>
+
+                <!-- Logo -->
+                <a class = "logo" href = "../home_page/homepage.html"> <img src = "svg_and_images\Blevvit_Logo.png"> </a>
+
+                
+                <!-- Search bar -->
+                 <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search...">
+
+                 </div>
+
+
+                <!-- Log In and Sign Up Buttons -->
+                <div class = "log_sign_in">
+
+                    <button onclick = "window.open('../log_regpage/login.html', '_self')"> Log In </button>
+                    <button onclick = "window.open('../log_regpage/registration.html', '_self')"> Sign Up </button>
+
+                </div>
+
+
+            </header>
+
+
+    </article>
+
+    <!-- Contains the side bar -->
+    <div class = "side_bar" id = "side_bar"> 
+
+
+        <!-- Contains the clickable button that opens up the side bar-->
+        <div class = "clickable_container" id = "sidebar_button_container" onclick = "showSideBar()">
+
+            <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+        </div>
+
+        <!-- Contains the different contents found in the side bar -->
+        <div class = "side_bar_content" id = "side_bar_content">
+
+            <!-- Contains the home, trending, and your threads buttons -->
+            <div class = "side_bar_home">
+
+                <button> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i> <span> Home </span> </button>
+
+                <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                <hr>
+        
+            </div>
+
+            <div class = "spacing_small"> </div>
+
+            <!-- Contains the different topics you can search in the website -->
+            <div class = "side_bar_topics"> 
+
+                <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                    <p class = "side_bar_title"> Popular Topics </p>
+
+                    <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                </div>
+
+                
+                <!-- Topic Tabs Through Dropdown -->
+                <div class = "side_bar_dropdown">
+
+                    <div class = "spacing"> </div>
+
+                    <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Announcements </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Creative Writing </span> 
+                    </button>
+
+                    <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Technology </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                        <span> General Fiction </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Q&A </span> 
+                    </button>
+                    
+        
+
+                </div>
+
+
+
+            </div>
+
+            <div class = "spacing_small"> </div>
+
+            <hr>
+
+            <div class = "spacing_small"> </div>
+
+            <!-- Contains the different resources you can search in the website -->
+            <div class = "side_bar_topics"> 
+
+                <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                    <p class = "side_bar_title"> Resources </p>
+
+                    <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                </div>
+
+                
+                <!-- Resources Tabs Through Dropdown -->
+                <div class = "side_bar_dropdown">
+
+                    <div class = "spacing"> </div>
+
+                    <button> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> <span>  </span> Rules </button>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    
+    <div class ="mainbox"> 
+        <div class="infobox">
+            <div class="pfpbox">
+                <img src="../home_page/images/nico.jfif" class="pfp"> 
+            </div>
+
+            <div class="name">
+                <h1>AnimeLover7667 </h1>
+
+                Currently watching: Dr. Stone, To Your Eternity, WindBreaker, Fire Force
+            </div> 
+        </div>
+        <div class ="postbox" id="all_posts">
+            <div class="post_wrapper">
+                        
+                        <div class="post_container">
+                        
+                            <div class="post_info">
+                                <div>
+                                    <img src="../home_page/images/nico.jfif"/>
+                                </div>
+                                
+                            
+                                <div class="post_user">
+                                    <h5>AnimeLover7667</h5>
+                                </div>
+
+                                <div class="timestamp">
+                                    <p>&nbsp; 2 days ago</p>
+                                </div>
+                        
+                            
+                        
+                            </div>
+
+
+                            <div class="post_contents">
+                                <h3>Weekly Journal entry #1 </h3>
+                                <p>I LOVE ANIME, love live is the best anime ever. Nico Yazawa is my waifu Nico Nico NIIII. I am now watching Dr. Stone because I think the premise is cool and unique. Please no spoilers in replies. ty  
+                                </p>
+                            </div>
+                
+                            <div class="interaction_container">
+                                <div> 
+                                    <button class="like_button">
+                                        <img class="thumbs_up" src="svg_and_images\hand-thumbs-up.svg">
+                                        <p>0</p>
+                                    </button>
+                                </div>
+                                <div> <button class="dislike_button">
+                                    <img src="svg_and_images\hand-thumbs-down.svg">
+                                    <p>0</p>
+                                </button>
+                                </div>
+
+                                <div> <button class="Challenge">
+                                    <p>Challenge</p>
+                                </button>
+                                </div>
+                            
+                                
+                            </div> 
+                    
+
+                    
+                
+                    
+                        </div>  
+                    
+                    
+            </div>
+        </div>
+    </div>
+
+    <div class="challenge" id="challenge_container">
+        <div>
+            <button id="closeChallenge"><img src="svg_and_images\x-octagon.svg"/></button> 
+        </div>
+        <div class="dicebg">
+            <img src="svg_and_images\d20.png">
+        </div>
+        <div style="color: white;">
+            Replying to <strong>Gamble!</strong>
+        </div>
+        
+        <input id="betLikes" type="number" placeholder="How many likes will you bet?"></input>
+
+        <div id="confirm_post">
+            <button id="postBet">Bet</button> 
+        </div>
+    </div>
+
+
+    <script src="forum.js" charset="utf-8"></script>
+</body>
+</html>

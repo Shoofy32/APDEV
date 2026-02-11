@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         if(email != "" && password !="" && email.includes("@gmail.com") && username !="" && (password === password2)) {
             
+            localStorage.setItem('username', username);
+            window.location.href = '../home_page/homepage.html';
+
             window.open('../home_page/homepage.html', '_self');
         }
         else if(password != password2){

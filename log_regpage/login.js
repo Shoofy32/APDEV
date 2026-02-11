@@ -4,17 +4,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     function login (){
         
-        let email = document.getElementById("email").value;
+        let user = document.getElementById("user").value;
         let password = document.getElementById("password").value;
 
-        if(email != "" && password !="" && email.includes("@gmail.com")){
-            document.getElementById("email").innerHTML="";
+        if(user != "" && password !=""){
+            document.getElementById("user").innerHTML="";
+
+            localStorage.setItem('username', user);
+            window.location.href = '../home_page/homepage.html';
+
             window.open('../home_page/homepage.html', '_self');
         }
             
         else{
-            console.log(email.innerHTML);
-            console.log(password.innerHTML);
             alert("Please enter all your credentials properly")
         }
             
