@@ -158,6 +158,8 @@ header .log_sign_in button{
     border: 1px solid coral;
     border-radius: 10px;
 
+    float: left;
+
 
 }
 
