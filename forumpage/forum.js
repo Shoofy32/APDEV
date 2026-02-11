@@ -8,6 +8,14 @@ function loadNewPost() {
     
     if (postData) {
         const post = JSON.parse(postData);
+        
+    
+        let tagsHTML = '';
+        if (post.tags && post.tags.length > 0) {
+            post.tags.forEach(tag => {
+                tagsHTML += `<p> ${tag} </p>`;
+            });
+        }
       
         const newPostHTML = `
         <div class = "post" onclick = "openPost()">
@@ -30,9 +38,7 @@ function loadNewPost() {
             <!-- Div Contains Different Tags of the Post -->
             <div class = "tags_post">
 
-                <p> Tag 1 </p>
-                <p> Tag 2 </p>
-                <p> Tag 3 </p>
+                ${tagsHTML}
 
             </div>
 
@@ -164,6 +170,44 @@ function setupButtons() {
             }
         });
     });
+
+     document.querySelectorAll('.Delete').forEach(element=> {
+         element.addEventListener('click', (e) => {
+            var parent_div = element.parentElement.parentElement.parentElement
+            parent_div.remove();
+            console.log(parent_div)
+            e.preventDefault(); 
+           
+        });
+    })
+
+     document.querySelectorAll('.Edit').forEach(element=> {
+         element.addEventListener('click', (e) => {
+            var parent_div = element.parentElement.parentElement.parentElement
+            var contents = parent_div.querySelector(".description_short_post")
+            var current_content = contents.innerText;
+            contents.innerHTML = `<textarea id="editArea"> ${current_content}</textarea><div id="edit_container">
+            <button id="Save">Save </button>
+            </div>
+        
+            ` ;
+            var textarea = document.getElementById("editArea");
+            var save = document.getElementById("Save");
+            textarea.addEventListener("click", function(e) {
+               
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            save.addEventListener("click", function(e) {
+                  e.stopPropagation();
+                e.preventDefault();
+                contents.innerHTML = `<p>${textarea.value} (edited)</p>`
+            });
+            console.log(current_content)
+            e.preventDefault(); 
+           
+        });
+    })
 
 
     // Challenge Button Disabled Here (REMOVE BEFORE SUBMISSION)

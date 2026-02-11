@@ -879,3 +879,65 @@ hr :not(.side_bar_content) {
   transform: translateY(-1px);
 }
 
+.Challenge {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+}
+
+.Delete {
+    margin-left: auto;
+    border: none;
+    background-color: red;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
+
+}
+.Delete > h4{
+    color: white;
+    
+  
+
+}
+
+
+
+
+.Edit {
+    margin-left: auto;
+    border: none;
+    background-color: orange;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
+
+}
+
+.Delete_container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#editArea {
+    width: 750px;
+    height: 300px;
+}
+#Save {
+    background-color:#8AB0AB;
+    
+}
+#edit_container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
