@@ -293,8 +293,7 @@ html {
     background-color: #1A1D1A;
 }
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
     font-family: Arial;
     background-color: #1A1D1A;
 }
@@ -599,70 +598,50 @@ header .log_sign_in button:hover{
 hr :not(.side_bar_content) {
     color: red;
 }
-
-#all_posts{
-
-
+.post_wrapper{
+    
+    
     display: flex;
-    flex-direction: column;
-
-    width: 850px;
-
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-.name_post, .date_post{
-
-    padding-top: 15px;
-
-}
-
-.post .title_post{
-
-    padding-bottom: 15px;
-}
-
-.tags_post{
-
-    display: flex;
-
     align-items: center;
-
-    margin-top: 10px;
-
-    height: 5px;
-
-
+    justify-content: center;
+    margin-bottom: 50px;
 }
-
-.description_short_post{
-
-    margin-top: -10px;
-}
-
-.post .like_counter, .post .dislike_counter, .post .comment_counter, .post .challenge_text{
-
-    padding-top: 15px;
-
-}
-
-.post .roll_20_number{
-
-    top: 210px;
-
-}
-
-.post .result{
-
-    margin-top: 15px;
+.post_container {
+    
+    flex:1;
+    max-width: 800px;
+    
+    background-color: #3E5058;
+    border-radius: 10px;
+    padding: 15px;
+    
     
 }
-.post .bet_container p{
+.post_info {
+    display: flex;
+    margin-bottom: 0;
+    width: 100%;
+   
+   
+    
+   
+}
+.post_info img {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+}
+.post_info h5{
+    font-size: 9px;
+    padding-top: 7px;
+    color: #7fd6d6;
+    
+    
 
-    padding-top: 15px;
-
+}
+.post_user {
+    padding-left: 3px;
 }
 
 .timestamp  {
@@ -748,8 +727,40 @@ hr :not(.side_bar_content) {
     width:100px;
 }
 
+.Delete {
+    margin-left: auto;
+    border: none;
+    background-color: red;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
 
+}
+.Delete > p{
+    color: white;
+  
 
+}
+
+.Edit {
+    margin-left: auto;
+    border: none;
+    background-color: orange;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
+
+}
+.Delete > p{
+    color: white;
+  
+
+}
+.Delete_container {
+    margin-left: auto;
+}
 #reply_head {
     display: flex;
     justify-content: center;
@@ -769,7 +780,7 @@ hr :not(.side_bar_content) {
     background-color: rgba(0,0,0,0.3);
     position: fixed;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 300px;
@@ -793,8 +804,8 @@ hr :not(.side_bar_content) {
 }
 
 #challenge_container input{
-   width: 500px;
-   height: 500px;
+   width: 200px;
+   height: 100px;
    background-color: #1A1D1A;
    color: #8AB0AB;
     
@@ -879,3 +890,36 @@ hr :not(.side_bar_content) {
   transform: translateY(-1px);
 }
 
+#inner_gambling {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+
+}
+#inner_gambling button {
+    border-radius: 5px;
+    background-color: red;
+    width: 150px;
+}
+
+#inner_gambling input {
+    text-align: center;
+    font-size: 25px;
+}
+#editArea {
+    width: 750px;
+    height: 300px;
+}
+#Save {
+    background-color:#8AB0AB;
+    
+}
+#edit_container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
