@@ -8,14 +8,6 @@ function loadNewPost() {
     
     if (postData) {
         const post = JSON.parse(postData);
-        
-    
-        let tagsHTML = '';
-        if (post.tags && post.tags.length > 0) {
-            post.tags.forEach(tag => {
-                tagsHTML += `<p> ${tag} </p>`;
-            });
-        }
       
         const newPostHTML = `
         <div class = "post" onclick = "openPost()">
@@ -38,7 +30,9 @@ function loadNewPost() {
             <!-- Div Contains Different Tags of the Post -->
             <div class = "tags_post">
 
-                ${tagsHTML}
+                <p> Tag 1 </p>
+                <p> Tag 2 </p>
+                <p> Tag 3 </p>
 
             </div>
 
@@ -250,7 +244,8 @@ post.addEventListener('click', function() {
     window.location.href = 'post.html';
 });
 
-postBet.addEventListener("click", (e) => {
+
+/*postBet.addEventListener("click", (e) => {
     let likes = document.getElementById("betLikes").value;
     if(likes > 1){
         e.preventDefault();
@@ -266,4 +261,4 @@ postBet.addEventListener("click", (e) => {
         document.getElementById("betLikes").value = "";
     }
 });
-
+*/

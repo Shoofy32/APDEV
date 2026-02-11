@@ -245,7 +245,7 @@ header .log_sign_in button:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:10px
+    gap:20px
    
 }
 
@@ -280,8 +280,8 @@ header .log_sign_in button:hover{
 .area_container {
     border: 1px solid #3E5058;
 }
-.post_container #post {
-  background: #ff7a3d;          
+.post_container button {
+     background: #ff7a3d;          
   color: white;
   margin-top: 10px;
 
@@ -306,117 +306,4 @@ header .log_sign_in button:hover{
 .post_container textarea::placeholder {
   color: white;
  
-}
-#add_tag {
-    background: #ff7a3d;        
-      border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-
-
-}
-#add_tag_container {
-    display: flex;
-    align-items: flex-start;
-    width: 500px;
-}
-
-#challenge_container{
-    background-color: rgba(0,0,0,0.3);
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 500px;
-    height: 200px;
-    top: 30%;
-    left: 35%;
-    border: 3px solid #584d3e;
-    border-radius: 10px;
-    opacity: 0;
-    z-index: -9999;
-    transition: all 0.3s ease-in-out;
-    gap: 10px;
-
-}
-
-#challenge_container.open {
-    opacity: 1;
-    z-index: 99999;
-    
-}
-
-#challenge_container input{
-   width: 200px;
-   height: 100px;
-   background-color: #1A1D1A;
-   color: #8AB0AB;
-    
-}
-
-#challenge_container textarea::placeholder {
-  color: #8AB0AB;
-  opacity: 0.5;
-} 
-
-#reply_container textarea:focus {
-  outline: none;
-  border-color: #8AB0AB;
-}
-
-#challenge_container > div:nth-child(2) {
-     font-size: 12px;
-  color: #8AB0AB;
-  opacity: 0.7;
-  margin-bottom: 6px;
-}
-
-#challenge_container > div:nth-child(1) {
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    left: 530px;
-    top:1px;
-    border-radius: 8px;
-    width: 30px;
-    height: 30px;
-    background-color: gray;
-}
-
-#challenge_container > div:nth-child(1) > img {
-    height: 20px;
-    width: 20px;
-}
-
-#challenge_container > div:nth-child(1) > button {
-    background-color: rgba(0,0,0,0);
-    border: 0;
-}
-
-#confirm_post {
-    margin-top: 10px;
-    margin-left: 50px;
-    
-   
-}
-
-#postTag {
-     width: 100px;
-     border-radius: 5px;
-     background-color: coral;
-     
-}
-#tag_container {
-    display: flex;
-    width: 500px;
-    gap: 5px;
-}
-.tags {
-    border-radius: 10px;
-    background-color: gainsboro;
-    font-size: 12px;
-    width: 50px;
-    text-align: center;
 }
