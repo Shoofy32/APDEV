@@ -15,50 +15,116 @@ function loadNewPost() {
         const post = JSON.parse(postData);
       
         const newPostHTML = `
-            <div class="post_wrapper">
-                <div class="post_container">
-                    <div class="post_info">
-                        <div>
-                            <img src="kirk.jfif"/>
-                        </div>
-                        <div class="post_user">
-                            <h5>Charlie_Kirk</h5>
-                        </div>
-                        <div class="timestamp">
-                            <p>&nbsp; just now</p>
-                        </div>
-                    </div>
+        <div class = "post" onclick = "openPost()">
 
-                    <div class="post_contents">
-                        <h3>${post.title}</h3>
-                        <p>${post.content}</p>
-                    </div>
-           
-                    <div class="interaction_container">
-                        <div> 
-                            <button class="like_button">
-                                <img class="thumbs_up" src="hand-thumbs-up.svg">
-                                <p>0</p>
-                            </button>
-                        </div>
-                        <div> 
-                            <button class="dislike_button">
-                                <img src="hand-thumbs-down.svg">
-                                <p>0</p>
-                            </button>
-                        </div>
-                        <div> 
-                            <button class="Challenge">
-                                <p>Challenge</p>
-                            </button>
-                        </div>
-                    </div> 
-                </div>
+            <!-- Div Contains the PFP, Username, and Date of Post-->
+            <div class = "icon_name_date_post">
+
+                <img src = "images/Placeholder.jpg">
+
+                <p class = "name_post"> Placeholder </p>
+
+                <p class = "date_post"> 01/02/2025 </p>
+
+
             </div>
+
+            <!-- Post Title -->
+            <h3 class = "title_post"> ${post.title} </h3>
+
+            <!-- Div Contains Different Tags of the Post -->
+            <div class = "tags_post">
+
+                <p> Tag 1 </p>
+                <p> Tag 2 </p>
+                <p> Tag 3 </p>
+
+            </div>
+
+            <!-- Short Description of Post -->
+            <p class = "description_short_post"> ${post.content} </p>
+
+            <!-- Div contains likes and dislikes counter -->
+            <div class = "stats_post" onclick = "event.stopPropagation();"> <!-- Prevent onclick to open post -->
+
+                <!-- Div contains like counter and its value -->
+                <div class = "counter_container">
+
+                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                    <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                    
+                    <p class = "like_counter"> 0 </p>
+
+                </div>
+
+                <!-- Div contains dislike counter and its value -->
+                <div class = "counter_container">
+
+                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                    <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                    
+                    <p class = "dislike_counter"> 0 </p>
+
+                </div>
+
+                <!-- Div contains comment counter and its value -->
+                <div class = "comment_container">
+
+                    <i class="fa-regular fa-comment"></i>
+                    
+                    <p class = "comment_counter"> 0 </p>
+
+                </div>
+
+                <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
+                <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+
+                    <i class="fa-solid fa-bullseye"></i>
+                    
+                    <p class = "challenge_text"> Challenge </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Div contains the challenge container -->
+            <div class = "challenge" id = "challenge_container" onclick = "event.stopPropagation()">
+
+                <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                    <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                </div>
+
+                <h2 class = "roll_20"> Roll D20 </h2>
+
+                <p class = "roll_20_number"></p>
+
+
+                <div class = "dicebg">
+                    <img src="../../resources/images/d20.png">
+                </div>
+
+                <p class = "result"> Result </p>
+
+                <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                <div class = "bet_container">
+
+                    <p> Bet Likes </p>
+
+                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                    <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
+                    <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
+
+                </div>
+
+            </div>
+
+        </div>
         `;
         
        
-        const firstPost = document.querySelector('.post_wrapper');
+        const firstPost = document.querySelector('.post');
         if (firstPost) {
             firstPost.insertAdjacentHTML('beforebegin', newPostHTML);
         }
@@ -152,10 +218,11 @@ close.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation(); 
     challenge.classList.remove("open");
-   
-   
+    console.log(challenge.classList);
+    alert("CLOSING");
 });
 
+*/
 post.addEventListener('click', function() {
     window.location.href = 'post.html';
 });
@@ -165,74 +232,9 @@ postBet.addEventListener("click", (e) => {
     if(likes > 1){
         e.preventDefault();
         e.stopPropagation(); 
-        
+        challenge.classList.remove("open");
         console.log(challenge.classList);
         let roll = Math.floor(Math.random() * 20);
-      switch (roll) {
-    case 1:
-        d20.src = "images/1.png";
-        break;
-    case 2:
-        d20.src = "images/2.png";
-        break;
-    case 3:
-        d20.src = "images/3.png";
-        break;
-    case 4:
-        d20.src = "images/4.png";
-        break;
-    case 5:
-        d20.src = "images/5.png";
-        break;
-    case 6:
-        d20.src = "images/6.png";
-        break;
-    case 7:
-        d20.src = "images/7.png";
-        break;
-    case 8:
-        d20.src = "images/8.png";
-        break;
-    case 9:
-        d20.src = "images/9.png";
-        break;
-    case 10:
-        d20.src = "images/10.png";
-        break;
-    case 11:
-        d20.src = "images/11.png";
-        break;
-    case 12:
-        d20.src = "images/12.png";
-        break;
-    case 13:
-        d20.src = "images/13.png";
-        break;
-    case 14:
-        d20.src = "images/14.png";
-        break;
-    case 15:
-        d20.src = "images/15.png";
-        break;
-    case 16:
-        d20.src = "images/16.png";
-        break;
-    case 17:
-        d20.src = "images/17.png";
-        break;
-    case 18:
-        d20.src = "images/18.png";
-        break;
-    case 19:
-        d20.src = "images/19.png";
-        break;
-    case 20:
-        d20.src = "images/20.png";
-        break;
-}
-
-            
-        
         document.getElementById("betLikes").value = "";
        
         console.log(typeof likes);
@@ -241,3 +243,4 @@ postBet.addEventListener("click", (e) => {
         document.getElementById("betLikes").value = "";
     }
 });
+

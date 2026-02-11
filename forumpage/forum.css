@@ -293,7 +293,8 @@ html {
     background-color: #1A1D1A;
 }
 body {
-    margin: 0;
+    margin: 0px;
+    padding: 0px;
     font-family: Arial;
     background-color: #1A1D1A;
 }
@@ -598,50 +599,70 @@ header .log_sign_in button:hover{
 hr :not(.side_bar_content) {
     color: red;
 }
-.post_wrapper{
-    
-    
+
+#all_posts{
+
+
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 50px;
-}
-.post_container {
-    
-    flex:1;
-    max-width: 800px;
-    
-    background-color: #3E5058;
-    border-radius: 10px;
-    padding: 15px;
-    
-    
-}
-.post_info {
-    display: flex;
-    margin-bottom: 0;
-    width: 100%;
-   
-   
-    
-   
-}
-.post_info img {
-    float: left;
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-}
-.post_info h5{
-    font-size: 9px;
-    padding-top: 7px;
-    color: #7fd6d6;
-    
-    
+    flex-direction: column;
+
+    width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
 
 }
-.post_user {
-    padding-left: 3px;
+
+.name_post, .date_post{
+
+    padding-top: 15px;
+
+}
+
+.post .title_post{
+
+    padding-bottom: 15px;
+}
+
+.tags_post{
+
+    display: flex;
+
+    align-items: center;
+
+    margin-top: 10px;
+
+    height: 5px;
+
+
+}
+
+.description_short_post{
+
+    margin-top: -10px;
+}
+
+.post .like_counter, .post .dislike_counter, .post .comment_counter, .post .challenge_text{
+
+    padding-top: 15px;
+
+}
+
+.post .roll_20_number{
+
+    top: 210px;
+
+}
+
+.post .result{
+
+    margin-top: 15px;
+    
+}
+.post .bet_container p{
+
+    padding-top: 15px;
+
 }
 
 .timestamp  {
@@ -780,7 +801,7 @@ hr :not(.side_bar_content) {
     background-color: rgba(0,0,0,0.3);
     position: fixed;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 300px;
@@ -804,8 +825,8 @@ hr :not(.side_bar_content) {
 }
 
 #challenge_container input{
-   width: 200px;
-   height: 100px;
+   width: 500px;
+   height: 500px;
    background-color: #1A1D1A;
    color: #8AB0AB;
     
