@@ -48,13 +48,12 @@ function updateCounter(buttonElement, divElement){
 }
 
 
+// Function opens User Post Page
 function openPost(){
 
-
-
+    window.open("../forumpage/userpost.html", "_self");
 
 }
-
 
 
 // Function opens the challenge window
