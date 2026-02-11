@@ -5,12 +5,12 @@ window.clearFilterTags = clearFilterTags;
 var searchResult; // Global variable for searchResult Which Stores Value Inputted in Search Bar
 
 // Load showSearchResults on Page Load
-window.onload = function(){
+window.addEventListener('load', function() {
 
     localStorage.removeItem("filter_result");
     showSearchResults();
 
-}
+});
 
 
 // Function that showsSearchResults Based on Search Result (Has Export so searchbar.js can utilize it)

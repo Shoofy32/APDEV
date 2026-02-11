@@ -138,37 +138,10 @@ header .search_bar:has(input:focus){
 
 /* Homepage Header - Log in & Sign Up Buttons */
 header .log_sign_in{
-    display: grid; 
-    grid-template-columns: 1fr 1fr;
 
     margin-left: auto;
     margin-right: 20px;
 
-}
-
-header .log_sign_in1{
-
-    margin-left: auto;
-    margin-right: 20px;
-}
-
-header .log_sign_in2{
-    display: grid; 
-    grid-template-columns: 1fr 1fr;
-}
-
-header .username{
-
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-
-    font-family: "Inter", Arial;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
 }
 
 /* Homepage Header - Log in & Sign Up Buttons */
