@@ -38,6 +38,9 @@
         <!-- Link JS File for posts interaction -->
         <script src = "posts.js"></script>
 
+        <!-- Link JS File for logins -->
+        <script src = "header.js"></script>
+
         <!-- Link JS File for posts interaction -->
         <script type = "module" src = "searchbar.js"></script>
         
@@ -67,14 +70,23 @@
 
 
                 <!-- Log In and Sign Up Buttons -->
-                <div class = "log_sign_in">
+                <div class="log_sign_in" id="topright">
+                <div class = "log_sign_in2" id="user">
+
+                    <p id="username" class="username">hello</p>
+                    <button id="logout" > Log out </button>
+
+                </div>
+
+                <div class = "log_sign_in1" id="anon">
 
                     <button onclick = "window.open('../log_regpage/login.html', '_self')"> Log In </button>
                     <button onclick = "window.open('../log_regpage/registration.html', '_self')"> Sign Up </button>
 
                 </div>
 
-
+                
+                </div>
             </header>
 
 
