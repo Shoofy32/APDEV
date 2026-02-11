@@ -1,4 +1,9 @@
-// ===== LOAD NEW POST FROM localStorage =====
+const post = document.getElementById('post_button');
+const challenge = document.getElementById('challenge_container');
+const close = document.getElementById('closeChallenge');
+const postBet = document.getElementById("postBet");
+const d20 = document.getElementById("d20")
+
 window.addEventListener('DOMContentLoaded', function() {
     loadNewPost();
 });
@@ -99,20 +104,50 @@ function setupButtons() {
         });
     });
 
-    // Challenge buttons
     document.querySelectorAll('.Challenge').forEach(element => {
         element.addEventListener('click', (e) => {
             e.preventDefault(); 
             challenge.classList.add("open");
         });
     });
+
+    document.querySelectorAll('.Delete').forEach(element=> {
+         element.addEventListener('click', (e) => {
+            var parent_div = element.parentElement.parentElement.parentElement
+            parent_div.remove();
+            console.log(parent_div)
+            e.preventDefault(); 
+           
+        });
+    })
+
+     document.querySelectorAll('.Edit').forEach(element=> {
+         element.addEventListener('click', (e) => {
+            var parent_div = element.parentElement.parentElement.parentElement
+            var contents = parent_div.querySelector(".post_contents").querySelector("p");
+            var current_content = contents.innerText;
+            contents.innerHTML = `<textarea id="editArea"> ${current_content}</textarea><div id="edit_container">
+            <button id="Save">Save </button>
+            </div>
+        
+            ` ;
+            var textarea = document.getElementById("editArea");
+            var save = document.getElementById("Save");
+            textarea.addEventListener("click", function(e) {
+            e.preventDefault();
+            });
+            save.addEventListener("click", function(e) {
+                e.preventDefault();
+                contents.innerHTML = `<p>${textarea.value} (edited)</p>`
+            });
+            console.log(current_content)
+            e.preventDefault(); 
+           
+        });
+    })
 }
 
-const post = document.getElementById('post_button');
-const challenge = document.getElementById('challenge_container');
-const close = document.getElementById('closeChallenge');
-const postBet = document.getElementById("postBet");
-const d20 = document.getElementById("d20")
+
 close.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation(); 
@@ -199,7 +234,7 @@ postBet.addEventListener("click", (e) => {
             
         
         document.getElementById("betLikes").value = "";
-        alert(roll);
+       
         console.log(typeof likes);
     } else {
         alert("Please enter a positive number");

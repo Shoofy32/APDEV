@@ -727,8 +727,40 @@ hr :not(.side_bar_content) {
     width:100px;
 }
 
+.Delete {
+    margin-left: auto;
+    border: none;
+    background-color: red;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
 
+}
+.Delete > p{
+    color: white;
+  
 
+}
+
+.Edit {
+    margin-left: auto;
+    border: none;
+    background-color: orange;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
+
+}
+.Delete > p{
+    color: white;
+  
+
+}
+.Delete_container {
+    margin-left: auto;
+}
 #reply_head {
     display: flex;
     justify-content: center;
@@ -876,4 +908,18 @@ hr :not(.side_bar_content) {
 #inner_gambling input {
     text-align: center;
     font-size: 25px;
+}
+#editArea {
+    width: 750px;
+    height: 300px;
+}
+#Save {
+    background-color:#8AB0AB;
+    
+}
+#edit_container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 5px;
 }
