@@ -21,7 +21,6 @@ function loadNewPost() {
 
                 <p class = "date_post"> 01/02/2025 </p>
 
-
             </div>
 
             <!-- Post Title -->
@@ -78,6 +77,16 @@ function loadNewPost() {
                     
                     <p class = "challenge_text"> Challenge </p>
 
+                </div>
+
+                <!-- ADD THIS: Edit/Delete buttons container -->
+                <div class="Delete_container"> 
+                    <button class="Delete">
+                        <h4>Delete</h4>
+                    </button>
+                    <button class="Edit">
+                        <h4>Edit</h4>
+                    </button>
                 </div>
 
             </div>
@@ -175,33 +184,46 @@ function setupButtons() {
         });
     })
 
-     document.querySelectorAll('.Edit').forEach(element=> {
-         element.addEventListener('click', (e) => {
-            var parent_div = element.parentElement.parentElement.parentElement
-            var contents = parent_div.querySelector(".description_short_post")
-            var current_content = contents.innerText;
-            contents.innerHTML = `<textarea id="editArea"> ${current_content}</textarea><div id="edit_container">
-            <button id="Save">Save </button>
-            </div>
+    document.querySelectorAll('.Edit').forEach(element=> {
+    element.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         
-            ` ;
-            var textarea = document.getElementById("editArea");
-            var save = document.getElementById("Save");
-            textarea.addEventListener("click", function(e) {
-               
-                e.stopPropagation();
-                e.preventDefault();
-            });
-            save.addEventListener("click", function(e) {
-                  e.stopPropagation();
-                e.preventDefault();
-                contents.innerHTML = `<p>${textarea.value} (edited)</p>`
-            });
-            console.log(current_content)
-            e.preventDefault(); 
-           
+        var parent_div = element.parentElement.parentElement.parentElement;
+        var contents = parent_div.querySelector(".description_short_post");
+        
+        // Check if already in edit mode
+        var existingTextarea = contents.querySelector('.editArea');
+        if (existingTextarea) {
+            return; // Already editing, do nothing
+        }
+        
+        // Get the text content (handle both <p> tags and plain text)
+        var paragraph = contents.querySelector('p');
+        var current_content = paragraph ? paragraph.innerText.replace(' (edited)', '') : contents.innerText.trim();
+        
+        contents.innerHTML = `
+            <textarea class="editArea">${current_content}</textarea>
+            <div class="edit_container">
+                <button class="Save">Save</button>
+            </div>
+        `;
+        
+        var textarea = contents.querySelector(".editArea");
+        var save = contents.querySelector(".Save");
+        
+        textarea.addEventListener("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
         });
-    })
+        
+        save.addEventListener("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            contents.innerHTML = `<p>${textarea.value} (edited)</p>`;
+        });
+    });
+});
 
 
     // Challenge Button Disabled Here (REMOVE BEFORE SUBMISSION)
@@ -244,7 +266,8 @@ post.addEventListener('click', function() {
     window.location.href = 'post.html';
 });
 
-postBet.addEventListener("click", (e) => {
+
+/*postBet.addEventListener("click", (e) => {
     let likes = document.getElementById("betLikes").value;
     if(likes > 1){
         e.preventDefault();
@@ -260,4 +283,4 @@ postBet.addEventListener("click", (e) => {
         document.getElementById("betLikes").value = "";
     }
 });
-
+*/
