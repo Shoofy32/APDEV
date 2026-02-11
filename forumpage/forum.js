@@ -1,9 +1,4 @@
-const post = document.getElementById('post_button');
-const challenge = document.getElementById('challenge_container');
-const close = document.getElementById('closeChallenge');
-const postBet = document.getElementById("postBet");
-const d20 = document.getElementById("d20")
-
+// ===== LOAD NEW POST FROM localStorage =====
 window.addEventListener('DOMContentLoaded', function() {
     loadNewPost();
 });
@@ -170,14 +165,7 @@ function setupButtons() {
         });
     });
 
-    document.querySelectorAll('.Challenge').forEach(element => {
-        element.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            challenge.classList.add("open");
-        });
-    });
-
-    document.querySelectorAll('.Delete').forEach(element=> {
+     document.querySelectorAll('.Delete').forEach(element=> {
          element.addEventListener('click', (e) => {
             var parent_div = element.parentElement.parentElement.parentElement
             parent_div.remove();
@@ -190,7 +178,7 @@ function setupButtons() {
      document.querySelectorAll('.Edit').forEach(element=> {
          element.addEventListener('click', (e) => {
             var parent_div = element.parentElement.parentElement.parentElement
-            var contents = parent_div.querySelector(".post_contents").querySelector("p");
+            var contents = parent_div.querySelector(".description_short_post")
             var current_content = contents.innerText;
             contents.innerHTML = `<textarea id="editArea"> ${current_content}</textarea><div id="edit_container">
             <button id="Save">Save </button>
@@ -200,9 +188,12 @@ function setupButtons() {
             var textarea = document.getElementById("editArea");
             var save = document.getElementById("Save");
             textarea.addEventListener("click", function(e) {
-            e.preventDefault();
+               
+                e.stopPropagation();
+                e.preventDefault();
             });
             save.addEventListener("click", function(e) {
+                  e.stopPropagation();
                 e.preventDefault();
                 contents.innerHTML = `<p>${textarea.value} (edited)</p>`
             });
@@ -211,9 +202,35 @@ function setupButtons() {
            
         });
     })
+
+
+    // Challenge Button Disabled Here (REMOVE BEFORE SUBMISSION)
+
+    /*
+
+    // Challenge buttons
+    document.querySelectorAll('.Challenge').forEach(element => {
+        element.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            challenge.classList.add("open");
+        });
+    });
+
+    */
+
+
 }
 
 
+// Challenge Button Behavior Disabled Here (REMOVE BEFORE SUBMISSION)
+
+
+const post = document.getElementById('post_button');
+const challenge = document.getElementById('challenge_container');
+const close = document.getElementById('closeChallenge');
+const postBet = document.getElementById("postBet");
+
+/*
 close.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation(); 
@@ -236,7 +253,7 @@ postBet.addEventListener("click", (e) => {
         console.log(challenge.classList);
         let roll = Math.floor(Math.random() * 20);
         document.getElementById("betLikes").value = "";
-       
+        alert(roll);
         console.log(typeof likes);
     } else {
         alert("Please enter a positive number");
