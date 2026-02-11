@@ -1,0 +1,441 @@
+/* Homepage Header CSS properties */
+
+header {
+
+
+    display: flex;
+    align-items: center;
+
+    position: fixed; /* Sticks to the page while scrolling */
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 60px;
+
+    background-color: #3E5058;
+
+    border-bottom: 2px solid orange;
+
+    overflow: hidden; /* Hide elements if doesn't fit*/
+
+    z-index: 3;
+
+
+}
+
+
+
+/* Homepage Header - Logo */
+header .logo img{
+
+    position: relative;
+
+    width: 325px;
+    height: 65px;
+
+
+}
+
+
+
+/* Homepage Header - Search Bar */
+header .search_bar{
+
+    display: flex;
+    align-items: center;
+
+    width: 500px;
+    height: 40px;
+
+    background-color: #324248;
+
+    margin-left:  15%;
+
+    border: 2px solid coral;
+    border-radius: 25px;
+
+
+
+}
+
+/* Homepage Header - Search Bar */
+/* Logo */
+header i{
+
+    margin-left: 10px;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Input Text */
+header .search_bar input{
+
+    width: 400px;
+    height: 40px;
+
+    margin-left: 5px;
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+    background-color: #32424800;
+
+    border: 0px;
+
+    font-size: medium;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Placeholder */
+header .search_bar input::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: lightgray;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Focus */
+header .search_bar input:focus{
+
+    outline: none;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Search Bar On Hover */
+header .search_bar:hover{
+
+    background-color: #3d5057;
+    
+    border-color: orange;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Placeholder When Search Bar On Hover */
+header .search_bar:hover input::placeholder{
+
+    color: white;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Change Search Bar When Actively Typing */
+header .search_bar:has(input:focus){
+
+    background-color: #3d5057;
+
+    border-color: white;
+
+}
+
+
+/* Homepage Header - Log in & Sign Up Buttons */
+header .log_sign_in{
+
+    margin-left: auto;
+    margin-right: 20px;
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Buttons */
+header .log_sign_in button{
+    font-size: 12px;
+    height: 40px;
+    width: 65px;
+
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Button On Hover */
+header .log_sign_in button:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+
+}
+
+
+#header_dropdown_space{
+
+    display: inline-block;
+
+    margin-top: 85px;
+
+
+}
+body{
+    min-height: 100vh;
+    background-color: #1A1D1A;
+}
+
+#all_posts {
+ 
+    background-color: #1A1D1A;
+    min-height: 100vh;
+}
+.content_container {
+    height: 100vh;
+    background-color: #1A1D1A;
+}
+.header_container {
+    display: flex;
+    height: 50px;
+    background-color: #3e505b;
+    align-items: center;
+
+}
+.navigation_header {
+    background-color: #3e505b;
+    margin-left: 20px;
+}
+.header_buttons {
+    color: #8ab0ab;
+    text-decoration: none;
+    font-size: 20px;
+}
+#login {
+    background-color: #1A1D1A;
+    width: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.account_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 9px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.username {
+    font-size: 20px;
+    color: aqua;
+}
+.visited_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #1A1D1A;
+    
+}
+.separator {
+    margin-top: 1px;
+}
+.breadcrumbs{
+    display: flex;
+    margin-top: 10px;
+    padding-left: 15px;
+    color:  #8AB0AB;;
+
+}
+.breadcrumbs a {
+     color: #8AB0AB;
+}
+
+.post_container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+
+    flex:1;
+    max-width: 800px;
+    
+    background-color: #3E5058;
+    border-radius: 10px;
+    padding: 15px;
+    
+    
+    
+    
+}
+.post_info {
+    display: flex;
+    margin-bottom: 0;
+    width: 100%;
+   
+   
+    
+   
+}
+.post_info img {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+}
+.post_info h5{
+    font-size: 9px;
+    padding-top: 7px;
+    color: #7fd6d6;
+    
+    
+
+}
+.post_user {
+    padding-left: 3px;
+}
+
+.timestamp  {
+  padding-top: 6px;
+  color: white;
+  opacity: 0.6;
+  font-size: 9px;
+}
+
+.post_contents {
+    position: relative;
+    bottom: 9px;
+    color: white;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.post_contents h3 {
+    font-size: 19px;
+    color: coral;
+}
+
+.post_contents p {
+    font-size: 14px;
+}
+
+
+.interaction_container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.interaction_container button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:60px;
+}
+
+.interaction_container button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+
+.interaction_container button p {
+    float: left;
+    
+    padding-left: 5;
+}
+
+#reply_container.open {
+    opacity: 1;
+    z-index: 999;
+    background: none;
+    border: 0;
+}
+#reply_container{
+    background-color: rgba(0,0,0,0.3);
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #3E5058;
+    border-radius: 10px;
+    opacity: 0;
+    z-index: -999;
+    transition: all 0.3s ease-in-out;
+
+}
+
+#reply_container textarea{
+   width: 500px;
+   height: 300px;
+   background-color: #1A1D1A;
+   color: #8AB0AB;
+    
+}
+
+#reply_container textarea::placeholder {
+  color: #8AB0AB;
+  opacity: 0.5;
+} 
+
+#reply_container textarea:focus {
+  outline: none;
+  border-color: #8AB0AB;
+}
+
+#reply_container > div:nth-child(2) {
+     font-size: 12px;
+  color: #8AB0AB;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+#reply_container > div:nth-child(1) {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    left: 530px;
+    top:1px;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+}
+
+#reply_container > div:nth-child(1) > img {
+    height: 20px;
+    width: 20px;
+}
+
+#reply_container > div:nth-child(1) > button {
+    background-color: rgba(0,0,0,0);
+    border: 0;
+}
+
+#confirm_post {
+    position: absolute;
+    top:350px;
+}
+.replying_to_container {
+    padding: 10px;
+    border: 1px solid black;
+    border-left: solid coral 2px;
+    
+}
+.reply_contents {
+    margin-top: 20px;
+    
+}

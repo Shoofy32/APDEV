@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href = "../fontawesome/css/all.min.css" rel = "stylesheet">
+
+        <!-- Link CSS File for header css design-->
+        <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
+
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "sidebar.js"></script>
+
+    </head>
+
+
+    <body>
+
+        <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container" onclick = "showSideBar()">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button onclick = "window.open('../home_page/homepage.html', '_self')"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;" onclick = ></i>
+                         <span> Home </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                    <hr>
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Popular Topics </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Announcements </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Creative Writing </span> 
+                        </button>
+
+                        <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Technology </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span> General Fiction </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr>
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Resources </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> <span>  </span> Rules </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </body>
+
+
+</html>
