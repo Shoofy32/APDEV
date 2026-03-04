@@ -8,8 +8,10 @@
     </head>
     <body>
 
-        
+    <title> Blevvit - User Post </title>
    
+    <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
+    
    <article>
 
 
@@ -26,6 +28,9 @@
 
                 <!-- Link JS File for sidebar interaction -->
                 <script src = "sidebar.js"></script>
+
+                <!-- Link JS File for forum load link interaction -->
+                <script src = "forumloadlink.js"></script>
 
                 <!-- Logo -->
                 <a class = "logo" href = "../home_page/homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
@@ -55,6 +60,7 @@
 
         </article>
 
+
         <div class = "side_bar" id = "side_bar"> 
 
 
@@ -71,7 +77,9 @@
                 <!-- Contains the home, trending, and your threads buttons -->
                 <div class = "side_bar_home">
 
-                    <button> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i> <span> Home </span> </button>
+                    <button onclick = "window.open('../home_page/homepage.html', '_self')"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;" onclick = ></i>
+                         <span> Home </span> 
+                    </button>
 
                     <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
 
@@ -100,15 +108,15 @@
 
                         <div class = "spacing"> </div>
 
-                        <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                        <button onclick = "goToForum('Announcements')"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
                             <span> Announcements </span> 
                         </button>
 
-                        <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                        <button onclick = "goToForum('Creative Writing')"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                             <span> Creative Writing </span> 
                         </button>
 
-                        <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                        <button onclick = "goToForum('Technology')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
                             <span> Technology </span> 
                         </button>
 
@@ -185,12 +193,11 @@
                   
                     <div class="post_info">
                         <div>
-                            <img src="kirk.jfif"/>
+                            <a href = "../userpage/charlie.html"><img src="../resources/users/kirk.jfif"/></a>
                         </div>
                         
-                    
                         <div class="post_user">
-                            <h5>Charlie_Kirk</h5>
+                            <a href = "../userpage/charlie.html"><h5>Charlie_Kirk</h5></a>
                         </div>
 
                         <div class="timestamp">
@@ -213,12 +220,12 @@
                     <div> 
                         <button class="like_button">
                             <img class="thumbs_up" src="hand-thumbs-up.svg">
-                            <p>0</p>
+                            <p>10</p>
                         </button>
                     </div>
                     <div> <button class="dislike_button">
                         <img src="hand-thumbs-down.svg">
-                        <p>0</p>
+                        <p>15</p>
                     </button>
                     </div>
                     <div><button class="reply_button">Reply</button></div>
@@ -233,33 +240,21 @@
                     
                 </div> 
 
-
-                
-
-                
-
-                
-
-
-                
-
-
-                
-        
-            
             
             </div>
 
+
+
             <div class="post_container">
-                  
+
                     <div class="post_info">
                         <div>
-                            <img src="zed.jpg"/>
+                            <a href = "../userpage/zed.html"><img src="../resources/users/zed.jpg"/></a>
                         </div>
                         
                     
                         <div class="post_user">
-                            <h5>TheNinjaDude</h5>
+                            <a href = "../userpage/zed.html"><h5>TheNinjaDude</h5></a>
                         </div>
 
                         <div class="timestamp">
@@ -280,7 +275,134 @@
                     </div>
                     <p class="reply_contents">Honestly, they're kinda slow for me. What room is this?</p>
                 </div>
-               
+
+                
+                <div class="interaction_container">
+                    <div> 
+                        <button class="like_button">
+                            <img class="thumbs_up" src="hand-thumbs-up.svg">
+                            <p>3</p>
+                        </button>
+                    </div>
+                    <div> <button class="dislike_button">
+                        <img src="hand-thumbs-down.svg">
+                        <p>0</p>
+                    </button>
+                    </div>
+                    <div><button class="reply_button">Reply</button></div>
+                      <div> <button class="Challenge">
+                            <p>Challenge</p>
+                        </button>
+                        </div>
+                        
+                     <div class="Delete_container"> 
+                        <button class="Delete">
+                        <p>Delete</p>
+                        </button>
+                        <button class="Edit">
+                        <p>Edit</p>
+                        </button>
+                    </div>
+                    
+                    </div> 
+
+
+            </div>
+           
+
+            <div class="post_container">
+
+                    <div class="post_info">
+                        <div>
+                            <a href = "../userpage/nico.html"><img src="../resources/users/nico.jfif"/></a>
+                        </div>
+                        
+                    
+                        <div class="post_user">
+                            <a href = "../userpage/nico.html"><h5>LovelyNicoYazawa</h5></a>
+                        </div>
+
+                        <div class="timestamp">
+                            <p>&nbsp; 2 days ago</p>
+                        </div>
+                  
+                    
+                   
+                    </div>
+
+
+                <div class="post_contents">
+                    <div class="replying_to_container"><span>Charlie_Kirk said:</span><br><br>
+                        <p >
+                            Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                            It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. I could even play with my waifu in 3d!
+                        </p>
+                    </div>
+                    <p class="reply_contents"> Issue is I have to be in a computer lab for me to use them. Would rather just bring a laptop...</p>
+                </div>
+
+                
+                <div class="interaction_container">
+                    <div> 
+                        <button class="like_button">
+                            <img class="thumbs_up" src="hand-thumbs-up.svg">
+                            <p>2</p>
+                        </button>
+                    </div>
+                    <div> <button class="dislike_button">
+                        <img src="hand-thumbs-down.svg">
+                        <p>0</p>
+                    </button>
+                    </div>
+                    <div><button class="reply_button">Reply</button></div>
+                      <div> <button class="Challenge">
+                            <p>Challenge</p>
+                        </button>
+                        </div>
+                        
+                     <div class="Delete_container"> 
+                        <button class="Delete">
+                        <p>Delete</p>
+                        </button>
+                        <button class="Edit">
+                        <p>Edit</p>
+                        </button>
+                    </div>
+                    
+                    </div> 
+
+
+            </div>
+
+            <div class="post_container">
+                  
+                    <div class="post_info">
+                        <div>
+                            <a href = "../userpage/charlie.html"><img src="../resources/users/kirk.jfif"/></a>
+                        </div>
+                        
+                        <div class="post_user">
+                            <a href = "../userpage/charlie.html"><h5>Charlie_Kirk</h5></a>
+                        </div>
+
+                        <div class="timestamp">
+                            <p>&nbsp; 2 days ago</p>
+                        </div>
+                  
+                    
+                   
+                    </div>
+
+
+                <div class="post_contents">
+                    <div class="replying_to_container"><span>LovelyNicoYazawa said:</span><br><br>
+                        <p >
+                            Issue is I have to be in a computer lab for me to use them. Would rather just bring a laptop...
+                        </p>
+                    </div>
+                    <p class="reply_contents"> Yeah but its a good alternative</p>
+                </div>
+
                 
                 <div class="interaction_container">
                     <div> 
@@ -313,7 +435,199 @@
 
 
             </div>
-           
+
+
+            <div class="post_container">
+                  
+                    <div class="post_info">
+                        <div>
+                            <a href = "../userpage/charlie.html"><img src="../resources/users/kirk.jfif"/></a>
+                        </div>
+                        
+                        <div class="post_user">
+                            <a href = "../userpage/charlie.html"><h5>Charlie_Kirk</h5></a>
+                        </div>
+
+                        <div class="timestamp">
+                            <p>&nbsp; 2 days ago</p>
+                        </div>
+                  
+                    
+                   
+                    </div>
+
+
+                <div class="post_contents">
+                    <div class="replying_to_container"><span>TheNinjaDude said:</span><br><br>
+                        <p >
+                            Honestly, they're kinda slow for me. What room is this?
+                        </p>
+                    </div>
+                    <p class="reply_contents"> Room G204A if I remember. Do correct me if im wrong tho.</p>
+                </div>
+
+                
+                <div class="interaction_container">
+                    <div> 
+                        <button class="like_button">
+                            <img class="thumbs_up" src="hand-thumbs-up.svg">
+                            <p>0</p>
+                        </button>
+                    </div>
+                    <div> <button class="dislike_button">
+                        <img src="hand-thumbs-down.svg">
+                        <p>0</p>
+                    </button>
+                    </div>
+                    <div><button class="reply_button">Reply</button></div>
+                      <div> <button class="Challenge">
+                            <p>Challenge</p>
+                        </button>
+                        </div>
+                        
+                     <div class="Delete_container"> 
+                        <button class="Delete">
+                        <p>Delete</p>
+                        </button>
+                        <button class="Edit">
+                        <p>Edit</p>
+                        </button>
+                    </div>
+                    
+                    </div> 
+
+
+            </div>
+
+
+            <div class="post_container">
+                  
+                    <div class="post_info">
+                        <div>
+                            <a href = "../userpage/zed.html"><img src="../resources/users/zed.jpg"/></a>
+                        </div>
+                        
+                    
+                        <div class="post_user">
+                            <a href = "../userpage/zed.html"><h5>TheNinjaDude</h5></a>
+                        </div>
+
+                        <div class="timestamp">
+                            <p>&nbsp; Yesterday </p>
+                        </div>
+                  
+                    
+                   
+                    </div>
+
+
+                <div class="post_contents">
+                    <div class="replying_to_container"><span>Charlie_Kirk said:</span><br><br>
+                        <p >
+                            Room G204A if I remember. Do correct me if im wrong tho.
+                        </p>
+                    </div>
+                    <p class="reply_contents">Oh okok nice. I'll check them out and updatae you here.</p>
+                </div>
+
+                
+                <div class="interaction_container">
+                    <div> 
+                        <button class="like_button">
+                            <img class="thumbs_up" src="hand-thumbs-up.svg">
+                            <p>0</p>
+                        </button>
+                    </div>
+                    <div> <button class="dislike_button">
+                        <img src="hand-thumbs-down.svg">
+                        <p>0</p>
+                    </button>
+                    </div>
+                    <div><button class="reply_button">Reply</button></div>
+                      <div> <button class="Challenge">
+                            <p>Challenge</p>
+                        </button>
+                        </div>
+                        
+                     <div class="Delete_container"> 
+                        <button class="Delete">
+                        <p>Delete</p>
+                        </button>
+                        <button class="Edit">
+                        <p>Edit</p>
+                        </button>
+                    </div>
+                    
+                    </div> 
+
+
+            </div>
+
+
+            <div class="post_container">
+                  
+                    <div class="post_info">
+                        <div>
+                            <a href = "../userpage/zed.html"><img src="../resources/users/zed.jpg"/></a>
+                        </div>
+                        
+                    
+                        <div class="post_user">
+                            <a href = "../userpage/zed.html"><h5>TheNinjaDude</h5></a>
+                        </div>
+
+                        <div class="timestamp">
+                            <p>&nbsp; 8 hours ago</p>
+                        </div>
+                  
+                    
+                   
+                    </div>
+
+
+                <div class="post_contents">
+                    <div class="replying_to_container"><span>TheNinjaDude said:</span><br><br>
+                        <p >
+                            Oh okok nice. I'll check them out and updatae you here.
+                        </p>
+                    </div>
+                    <p class="reply_contents"> Yeah you're right. They actually have pretty good specs for a school computer. But I would attribute
+                        this to being a CCS building tho so it might not be the same on other buildings.
+                    </p>
+                </div>
+
+                
+                <div class="interaction_container">
+                    <div> 
+                        <button class="like_button">
+                            <img class="thumbs_up" src="hand-thumbs-up.svg">
+                            <p>0</p>
+                        </button>
+                    </div>
+                    <div> <button class="dislike_button">
+                        <img src="hand-thumbs-down.svg">
+                        <p>0</p>
+                    </button>
+                    </div>
+                    <div><button class="reply_button">Reply</button></div>
+                      <div> <button class="Challenge">
+                            <p>Challenge</p>
+                        </button>
+                        </div>
+                        
+                     <div class="Delete_container"> 
+                        <button class="Delete">
+                        <p>Delete</p>
+                        </button>
+                        <button class="Edit">
+                        <p>Edit</p>
+                        </button>
+                    </div>
+                    
+                    </div> 
+
+
+            </div>
 
         <div class="reply" id="reply_container">
                     <div>

@@ -315,6 +315,26 @@ i.fa-solid.fa-hexagon.fa-rotate-90.fa-2xl{
 
 }
 
+.recent_announcements p{
+
+    font-family: "Inter", Arial;
+    font-weight: 600;
+    font-size: 16px;
+    color: #3E5058;
+    margin-left: 10px;
+
+    text-decoration: underline;
+
+
+}
+
+.recent_announcements p:hover{
+
+    cursor: pointer;
+    color: #526c77;
+
+}
+
 /* Home Side Content - Latest Posts Div */
 .home_side_content .latest_posts{
 
@@ -323,6 +343,7 @@ i.fa-solid.fa-hexagon.fa-rotate-90.fa-2xl{
     margin-top: 30px;
 
 }
+
 
 /* Home Side Content - Statistics Div */
 .home_side_content .statistics{
