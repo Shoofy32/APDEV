@@ -456,50 +456,58 @@ body{
     
 }
 
-.Delete {
+
+.Delete, .Edit {
+
     display: flex;
-    flex-direction: row;
+    align-content: center;
     justify-content: center;
+
     margin-left: auto;
     border: none;
-    background-color: red;
+    background-color: #2e3c42;
     height: 30px;
     border-radius: 5px;
-    width:90px;
+    width:100px;
     right: 300px;   
 
 }
 
-.Edit {
-     display: flex;
-      flex-direction: row;
-    justify-content: center;
-    margin-left: auto;
-    border: none;
-    background-color: orange;
-    height: 30px;
-    border-radius: 5px;
-    width:90px;
-    right: 300px;   
+.Delete:hover, .Edit:hover{
 
-}
-.Delete > p{
-    color: white;
-    text-align: center;
-    font-size: 17px;
+
+    background-color: #29373c;
+    cursor: pointer;
     
+}
+
+.Delete > p, .Edit > p{
+
+    font-size: 17px;
+    color: white;
+    font-weight: 500;
+
+    margin-right: 3px;
 
 }
+
+.Delete_container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    margin-right: 5px;
+}
+
+
 .Delete_container {
     margin-left: auto;
     display: flex;
     gap: 4px;
     
     
-}
-.Edit > p {
-     font-size: 17px;
-      text-align: center;
 }
 
 #editArea {

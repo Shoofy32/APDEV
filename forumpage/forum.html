@@ -2,7 +2,6 @@
     <head>
         <link href="forum.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
     </head>
     <body>
 
@@ -16,7 +15,7 @@
                 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
                 <!-- Link to Free Icons Website https://fontawesome.com/ -->
-                <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
+               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
                 <!-- Link CSS File for header css design-->
                 <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
@@ -25,24 +24,13 @@
                 <link rel= "stylesheet" type = "text/css" href = "userpost_style.css">
 
                 <!-- Link JS File for sidebar interaction -->
-                
+                <script src = "sidebar.js"></script>
 
                 <!-- Link JS File for posts interaction -->
                 <script type = "module" src = "searchbar.js"></script>
 
                 <!-- Link JS File for posts interaction -->
                 <script src = "posts.js"></script>
-
-                <script src="forum.js" charset="utf-8"></script>
-
-                <!-- Link JS File for forum load interaction -->
-                <script src = "forumload.js" charset="utf-8"></script>
-
-                <!-- Link JS File for forum load link interaction -->
-                <script src = "forumloadlink.js"></script>
-
-                <!-- Link JS File for forum load link interaction -->
-                <script src = "sidebar.js"></script>
 
                 <!-- Logo -->
                 <a class = "logo" href = "../home_page/homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
@@ -119,15 +107,15 @@
 
                         <div class = "spacing"> </div>
 
-                        <button onclick = "goToForum('Announcements')"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                        <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
                             <span> Announcements </span> 
                         </button>
 
-                        <button onclick = "goToForum('Creative Writing')"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                        <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                             <span> Creative Writing </span> 
                         </button>
 
-                        <button onclick = "goToForum('Technology')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                        <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
                             <span> Technology </span> 
                         </button>
 
@@ -196,8 +184,32 @@
 
             </div>
             
-            <div class = "thread_head">
+            <div class="thread_head">
+                <div class="thread_head_container">
+                    <div class="announcement_head_container">
+                        <div class="thread_head_img">
+                            <img src="technology.jpg" width="800px" height="150px"/> <br>
+                        </div>
+                         
+                         <div class="announcement_container">
+                             <div class="announcement_head">
+                                
+                                <h5>Announcements</h5>
+                                <div class="announcement">
+                                    01/01/2025:<br>
+                                    Hey guys we are charlie Kirk
+                                </div>
+                             </div>
 
+                         </div>
+                    </div>
+                   
+                    <div id="forum_head">
+                        <h5> Technology </h5>
+                        <button id="post_button">Create Post</button>
+                    </div>
+                    <p>Anything tech related. You are Iron Man.</p>
+                </div>
                 
 
             </div>
@@ -205,44 +217,142 @@
             <div id="all_posts">
                  
                 <!-- Container for the Post, Which When Clicked Opens the Userpost Page -->
+                <div class = "post">
+
+                    <!-- Div Contains the PFP, Username, and Date of Post-->
+                    <div class = "icon_name_date_post">
+
+                        <img src = "../resources/users/kirk.jfif">
+
+                        <p class = "name_post"> Charlie_Kirk </p>
+
+                        <p class = "date_post"> 2 days ago </p>
+
+
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3 class = "title_post" > DLSU PCs are the best! </h3>
+
+                    <!-- Div Contains Different Tags of the Post -->
+                    <div class = "tags_post">
+
+                        <p class = "tag"> Technology </p>
+                        <p class = "tag"> Tag 2 </p>
+                        <p class = "tag"> Tag 3 </p>
+
+                    </div>
+
+                    <!-- Short Description of Post -->
+                    <p class = "description_short_post"> 
+                        Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                        It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. I could even play with my waifu in 3d! 
+                    </p>
+
+                    <!-- Div contains likes and dislikes counter -->
+                    <div class = "stats_post" onclick = "event.stopPropagation();"> <!-- Prevent onclick to open post -->
+
+                        <!-- Div contains like counter and its value -->
+                        <div class = "counter_container">
+
+                            <!-- stopPropogation prevents button from opening up userpost forum -->
+                            <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                            
+                            <p class = "like_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains dislike counter and its value -->
+                        <div class = "counter_container">
+
+                            <!-- stopPropogation prevents button from opening up userpost forum -->
+                            <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                            
+                            <p class = "dislike_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains comment counter and its value -->
+                        <div class = "comment_container">
+
+                            <i class="fa-regular fa-comment"></i>
+                            
+                            <p class = "comment_counter"> 0 </p>
+
+                        </div>
+
+                        <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
+                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+
+                            <i class="fa-solid fa-bullseye"></i>
+                            
+                            <p class = "challenge_text"> Challenge </p>
+
+                        </div>
+
+
+                        <div class="Delete_container"> 
+                            <button class="Delete">
+                            <h4>Delete</h4>
+                            </button>
+                            <button class="Edit">
+                            <h4>Edit</h4>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Div contains the challenge container -->
+                    <div class = "challenge" id = "challenge_container">
+
+                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                        <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+                        </div>
+
+                        <h2 class = "roll_20"> Roll D20 </h2>
+
+                        <p class = "roll_20_number"></p>
+
+
+                        <div class = "dicebg">
+                            <img src="../../resources/images/d20.png">
+                        </div>
+
+                        <p class = "result"> Result </p>
+
+                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                        <div class = "bet_container">
+
+                            <p> Bet Likes </p>
+
+                            <!-- stopPropogation prevents button from opening up userpost forum -->
+                            <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
+                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                
+
+
+                </div>
                
                 
             </div>
         
         </div>
 
-
+    
     
 
-    <!--
-        
-    -->
-    <!-- Disabled (REMVOE BEFORE SUBMISSION)
-        
-    
-        <div class="challenge" id="challenge_container">
-        <div>
-            <button id="closeChallenge"><img src="x-octagon.svg"/></button> 
-        </div>
-        <div class="dicebg">
-            <img src="d20.png">
-        </div>
-        <div style="color: white;">
-            Replying to <strong>Gamble!</strong>
-        </div>
-        
-        <input id="betLikes" type="number" placeholder="How many likes will you bet?"></input>
 
-        <div id="confirm_post">
-            <button id="postBet">Bet</button> 
-        </div>
-    </div>
-
-    
-    -->
-
-
-
+    <script src="forum.js" charset="utf-8"></script>
     
     </body>
 

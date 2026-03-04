@@ -19,15 +19,19 @@ post_button.addEventListener("click", function (e) {
     // Collect all tags
     const tagElements = tag_container.querySelectorAll(".tags");
     const tags = Array.from(tagElements).map(tag => tag.innerText);
-    alert(tags)
+
     // Save post data to localStorage (now including tags)
     const postData = {
+
         title: title,
         content: content,
         username: "Charlie_Kirk",
-        userImage: "kirk.jfif",
+        userurl: "../userpage/charlie.html",
+        userImage: "../resources/users/kirk.jfif",
         timestamp: new Date().toISOString(),
-        tags: tags  // Add tags array
+        tags: tags // Add tags array
+
+
     };
     
     localStorage.setItem('newPost', JSON.stringify(postData));

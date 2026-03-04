@@ -578,7 +578,7 @@ header .log_sign_in button:hover{
     margin-top: 5px;
     border-radius: 5px;
 }
-#reply_head > h5 {
+#forum_head> h5 {
      color: coral;
 }
 .thread_head_container h5 {
@@ -750,16 +750,16 @@ hr :not(.side_bar_content) {
 
 
 
-#reply_head {
+#forum_head {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#reply_head button {
+#forum_head button {
    position: relative;
    left: 300px;
 }
-#reply_head h5 {
+#forum_head h5 {
    position: relative;
    left: 50px;
 }
@@ -934,34 +934,10 @@ hr :not(.side_bar_content) {
     background-color:#8AB0AB;
     
 }
-
-.editArea {
-    width: 100%;
-    min-height: 150px;
-    padding: 10px;
-    font-size: 14px;
-    font-family: inherit;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    box-sizing: border-box;
-}
-
-.edit_container {
-    margin-top: 10px;
+#edit_container {
     display: flex;
-    gap: 10px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 5px;
 }
 
-.edit_container .Save {
-    padding: 8px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.edit_container .Save:hover {
-    background-color: #45a049;
-}
