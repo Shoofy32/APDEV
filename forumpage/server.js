@@ -38,11 +38,6 @@ app.get("/users", async (req, res) => {
   res.json(users);
 });
 
-app.get("/user", async (req, res) => {
-  const users = await Post.find();
-  res.json(users);
-});
-
 // DELETE
 app.delete("/delete-user/:id", async (req, res) => {
   await User.findByIdAndDelete(req.params.id);

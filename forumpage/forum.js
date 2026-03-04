@@ -88,6 +88,67 @@ post.addEventListener('click', function() {
     window.location.href = `post.html?forum=${forum_name}`;
 });
 
+async function loadPosts() {
+  const response = await fetch("http://localhost:5000/users");
+  const users = await response.json();
+
+  const all_posts = document.getElementById('all_posts');
+  
+
+  users.forEach(user => {
+    const userPost = document.createElement("div");
+    userPost.classList.add("post");
+
+    // Container
+    const iconNameDate = document.createElement("div");
+    iconNameDate.classList.add("icon_name_date_post");
+
+    // Profile image
+    const profile = document.createElement("img");
+    profile.src = "../resources/users/kirk.jfif";
+
+    // Username
+    const namePost = document.createElement("p");
+    namePost.classList.add("name_post");
+    namePost.textContent = user.username;
+
+    // Date
+    const datePost = document.createElement("p");
+    datePost.classList.add("date_post");
+    datePost.textContent = new Date().toLocaleDateString();
+    //Tags(to be implemented)
+
+    //Title and Description
+    const title = document.createElement("h3");
+    title.classList.add("title_post")
+    title.onclick = openPost
+    title.innerText = user.post_title
+    const description = document.createElement("p")
+    description.classList.add('description_short_post')
+    description.innerText = user.post_content
+
+    //Stats(likes, dislikes)
+    const stats_container = document.createElement('div')
+    stats_container.classList.add('stats_post')
+    const like = document.createElement('div')
+    like.classList.add('counter_container')
+    const i = document.createElement('i')
+    i.classList.add('fa-regular')
+    i.classList.add('fa-thumbs-up')
+    const total_likes = document.createElement('p')
+    total_likes.classList.add('like_counter')
+    like.append(i, total_likes)
+    stats_container.append(like)
+    // Build structure
+    iconNameDate.append(profile, namePost, datePost);
+  
+  
+    userPost.append(iconNameDate, title,description,stats_container);
+    alert("WE MADE IT")
+    all_posts.append(userPost)
+  
+  });
+}
 
 async function loadPosts() {
   const response = await fetch("http://localhost:5000/users");

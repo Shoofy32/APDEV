@@ -11,7 +11,9 @@
     
     <link rel="stylesheet" href="forum.css">
 
-    <title>Bio -  Blevvit</title>
+    <title> Blevvit - Bio </title>
+
+    <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
 
     <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,13 +21,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <!-- Link to Free Icons Website https://fontawesome.com/ -->
-    <script src = "https://kit.fontawesome.com/f1ef7848b2.js" crossorigin = "anonymous"></script>
+    <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
     <!-- Link CSS File for header css design-->
     <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
 
     <!-- Link JS File for sidebar interaction -->
     <script src = "sidebar.js"></script>
+
+    <!-- Link JS File for forum load link interaction -->
+    <script src = "forumloadlink.js"></script>
 
     <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,7 +92,9 @@
             <!-- Contains the home, trending, and your threads buttons -->
             <div class = "side_bar_home">
 
-                <button> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i> <span> Home </span> </button>
+                <button onclick = "window.open('../home_page/homepage.html', '_self')"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;" onclick = ></i>
+                        <span> Home </span> 
+                </button>
 
                 <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
 
@@ -116,15 +123,15 @@
 
                     <div class = "spacing"> </div>
 
-                    <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                    <button onclick = "goToForum('Announcements')"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
                         <span> Announcements </span> 
                     </button>
 
-                    <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                    <button onclick = "goToForum('Creative Writing')"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                         <span> Creative Writing </span> 
                     </button>
 
-                    <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                    <button onclick = "goToForum('Technology')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
                         <span> Technology </span> 
                     </button>
 
@@ -182,7 +189,7 @@
     <div class ="mainbox"> 
         <div class="infobox">
             <div class="pfpbox">
-                <img src="../home_page/images/kirk.jfif" class="pfp"> 
+                <img src="../resources/users/kirk.jfif" class="pfp"> 
             </div>
 
             <div class="name">
@@ -198,7 +205,7 @@
                         
                             <div class="post_info">
                                 <div>
-                                    <img src="../home_page/images/kirk.jfif"/>
+                                    <img src="../resources/users/kirk.jfif"/>
                                 </div>
                                 
                             
@@ -234,7 +241,7 @@
                                 </button>
                                 </div>
 
-                                <div> <button class="Challenge">
+                                <div onclick = "openChallenge(this.parentElement);"> <button class="Challenge" >
                                     <p>Challenge</p>
                                 </button>
                                 </div>

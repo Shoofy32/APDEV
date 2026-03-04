@@ -11,7 +11,9 @@
     
     <link rel="stylesheet" href="forum.css">
 
-    <title>Bio</title>
+    <title> Blevvit - Bio </title>
+
+    <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
 
     <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,13 +21,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <!-- Link to Free Icons Website https://fontawesome.com/ -->
-    <script src = "https://kit.fontawesome.com/f1ef7848b2.js" crossorigin = "anonymous"></script>
+    <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
     <!-- Link CSS File for header css design-->
     <link rel= "stylesheet" type = "text/css" href = "sidebar_style.css">
 
     <!-- Link JS File for sidebar interaction -->
     <script src = "sidebar.js"></script>
+
+    <!-- Link JS File for forum load link interaction -->
+    <script src = "forumloadlink.js"></script>
 
     <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,7 +93,7 @@
             <div class = "side_bar_home">
 
                 <button onclick = "window.open('../home_page/homepage.html', '_self')"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;" onclick = ></i>
-                    <span> Home </span> 
+                        <span> Home </span> 
                 </button>
 
                 <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
@@ -118,15 +123,15 @@
 
                     <div class = "spacing"> </div>
 
-                    <button> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                    <button onclick = "goToForum('Announcements')"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
                         <span> Announcements </span> 
                     </button>
 
-                    <button> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                    <button onclick = "goToForum('Creative Writing')"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                         <span> Creative Writing </span> 
                     </button>
 
-                    <button onclick = "window.open('../forumpage/forum.html', '_self')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                    <button onclick = "goToForum('Technology')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
                         <span> Technology </span> 
                     </button>
 
@@ -184,7 +189,7 @@
     <div class ="mainbox"> 
         <div class="infobox">
             <div class="pfpbox">
-                <img src="svg_and_images\zed.jpg" class="pfp"> 
+                <img src="../resources/users/zed.jpg" class="pfp"> 
             </div>
 
             <div class="name">
@@ -220,66 +225,6 @@
                             <div class="post_contents">
                                 <h3>Is i67 21th generation CPU good</h3>
                                 <p>I was planning to upgrade to the new i67, I've been hearing that it only gives 20k FPS on flappy bird. Alternatively for 69 dollars, I can also get the new Ryzen 78. Thanks!
-                                
-                                </p>
-                            </div>
-                
-                            <div class="interaction_container">
-                                <div> 
-                                    <button class="like_button">
-                                        <img class="thumbs_up" src="svg_and_images\hand-thumbs-up.svg">
-                                        <p>0</p>
-                                    </button>
-                                </div>
-                                <div> <button class="dislike_button">
-                                    <img src="svg_and_images\hand-thumbs-down.svg">
-                                    <p>0</p>
-                                </button>
-                                </div>
-
-                                <div> <button class="Challenge">
-                                    <p>Challenge</p>
-                                </button>
-                                </div>
-                            
-                                
-                            </div> 
-                    
-
-                    
-                
-                    
-                        </div>  
-                    
-                    
-            </div>
-
-            <div class="post_wrapper">
-                        
-                        <div class="post_container">
-                        
-                            <div class="post_info">
-                                <div>
-                                    <img src="svg_and_images\zed.jpg"/>
-                                </div>
-                                
-                            
-                                <div class="post_user">
-                                    <h5>Zed</h5>
-                                </div>
-
-                                <div class="timestamp">
-                                    <p>&nbsp; 2 days ago</p>
-                                </div>
-                        
-                            
-                        
-                            </div>
-
-
-                            <div class="post_contents">
-                                <h3>Kill all Noxxers!</h3>
-                                <p>I hate noxxers so muchhhh they are just some red bums grrrrr. Ambessa is a deadbeat mother who gave up her kids for some magic dih.
                                 
                                 </p>
                             </div>

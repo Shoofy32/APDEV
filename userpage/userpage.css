@@ -44,5 +44,15 @@ body {
 .mainbox{
     display: flex;
     flex-direction: column;
+    position: absolute;
+    
+    top: 50px;
+    left: 40vh;
+    right: 40vh;
+
     margin-top: 60px;
+
+
+    width: 1000px;
+
 }

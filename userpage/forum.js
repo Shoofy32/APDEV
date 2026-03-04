@@ -121,10 +121,6 @@ close.addEventListener("click", (e) => {
     alert("CLOSING");
 });
 
-post.addEventListener('click', function() {
-    window.location.href = 'post.html';
-});
-
 postBet.addEventListener("click", (e) => {
     let likes = document.getElementById("betLikes").value;
     if(likes > 1){
@@ -141,3 +137,6 @@ postBet.addEventListener("click", (e) => {
         document.getElementById("betLikes").value = "";
     }
 });
+
+
+
