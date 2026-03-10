@@ -1,0 +1,659 @@
+/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    background-color: #1A1D1A;;
+
+    margin: 0px;
+
+    font-family: "Inter", Arial;
+    
+}
+
+/* Div - Add Spacing */
+.spacing{
+
+    margin: 10px;
+
+}
+
+/* Div - Add Spacing but Small */
+.spacing_small{
+
+    margin: 5px;
+
+}
+
+
+/* Homepage Header CSS properties */
+header {
+
+
+    display: flex;
+    align-items: center;
+
+    position: fixed; /* Sticks to the page while scrolling */
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 60px;
+
+    background-color: #3E5058;
+
+    border-bottom: 2px solid orange;
+
+    overflow: hidden; /* Hide elements if doesn't fit*/
+
+    z-index: 3;
+
+
+}
+
+
+
+/* Homepage Header - Logo */
+header .logo img{
+
+    position: relative;
+
+    width: 325px;
+    height: 65px;
+
+
+}
+
+
+
+/* Homepage Header - Search Bar */
+header .search_bar{
+
+    display: flex;
+    align-items: center;
+
+    width: 500px;
+    height: 40px;
+
+    background-color: #324248;
+
+    margin-left:  15%;
+
+    border: 2px solid coral;
+    border-radius: 25px;
+
+
+
+}
+
+/* Homepage Header - Search Bar */
+/* Logo */
+header i{
+
+    margin-left: 10px;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Input Text */
+header .search_bar input{
+
+    width: 400px;
+    height: 40px;
+
+    margin-left: 5px;
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+    background-color: #32424800;
+
+    border: 0px;
+
+    font-size: medium;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Placeholder */
+header .search_bar input::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: lightgray;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Focus */
+header .search_bar input:focus{
+
+    outline: none;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Search Bar On Hover */
+header .search_bar:hover{
+
+    background-color: #3d5057;
+    
+    border-color: orange;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Placeholder When Search Bar On Hover */
+header .search_bar:hover input::placeholder{
+
+    color: white;
+
+}
+
+/* Homepage Header - Search Bar */
+/* Change Search Bar When Actively Typing */
+header .search_bar:has(input:focus){
+
+    background-color: #3d5057;
+
+    border-color: white;
+
+}
+
+
+/* Homepage Header - Log in & Sign Up Buttons */
+header .log_sign_in{
+
+    margin-left: auto;
+    margin-right: 20px;
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Buttons */
+header .log_sign_in button{
+
+    height: 40px;
+    width: 65px;
+
+    font-family: "Inter", Arial;
+    font-size: 13.33px;
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Button On Hover */
+header .log_sign_in button:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+
+}
+
+
+#header_dropdown_space{
+
+    display: inline-block;
+
+    margin-top: 85px;
+
+
+}
+
+.announcement_container {
+   
+   position: relative;
+   width: 300px;
+   left: 200px;
+   display: flex;
+   background-color: #3E5058;
+  
+     background-color: #8AB0AB;
+
+    border: 2px solid #3E5058;
+    border-radius: 3px;
+
+
+  
+}
+.announcement_head_container {
+    display: flex;
+    
+    
+    
+}
+.announcement_head_container img {
+   left: 30;
+    
+}
+.announcement_head {
+      width: 100%;
+    height: 50px;
+    
+    background-color: #26413C;
+
+    border-bottom: 2px solid #3E5058;
+    
+}
+.announcement {
+   padding-top: 20px;
+   padding-left: 10px;
+}
+
+.announcement_head h5 {
+
+    font-size: 20px;
+    color: white;
+
+}
+.thread_head_img {
+
+    position: relative;
+    left: 150px;
+
+}
+
+.thread_head_img img{
+
+    width: 850px;
+    height: 350px;
+
+}
+
+
+.account_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 9px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+.username {
+    font-size: 20px;
+    color: aqua;
+}
+.visited_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #1A1D1A;
+    margin-left: 30px;
+    
+    
+}
+
+.separator {
+
+    color:  coral;
+    margin-top: -20px;
+
+}
+.breadcrumbs{
+    display: flex;
+    margin-top: 10px;
+    padding-left: 15px;
+    color:  coral;
+
+}
+.breadcrumbs a {
+     color:  coral;
+}
+.thread_head {
+    display: flex;
+    justify-content: center;
+    
+    background: #1A1D1A;
+    
+    
+}
+.thread_head_container img {
+    margin-top: 5px;
+    border-radius: 5px;
+}
+#forum_head> h5 {
+
+    font-size: 30px;
+    font-weight: 700;
+    color: coral;
+
+}
+.thread_head_container h5 {
+    margin-top: 7px;
+    text-align: center;
+   
+}
+.thread_head_container p {
+    text-align: center;
+    color: white;
+}
+.content_container {
+    padding-top: 55px;
+   min-height: 100vh;
+    background-color:  #1A1D1A;
+    min-width: 500px;
+}
+
+hr :not(.side_bar_content) {
+    color: red;
+}
+
+.all_posts{
+
+
+    display: flex;
+    flex-direction: column;
+
+    width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+.timestamp  {
+  padding-top: 6px;
+  color: white;
+  opacity: 0.6;
+  font-size: 9px;
+  
+}
+
+.post_contents {
+    position: relative;
+    bottom: 9px;
+    color: white;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.post_contents h3 {
+    font-size: 19px;
+    color: coral;
+}
+
+.post_contents p {
+    font-size: 14px;
+}
+
+.link {
+   
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.link:hover {
+    background-color: #3E5058;
+}
+
+.interaction_container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    z-index: 3;
+}
+
+.like_button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:60px;
+}
+.like_button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+.like_button p {
+    float: left;
+    
+    padding-left: 5;
+}
+.dislike_button {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:60px;
+}
+.dislike_button img {
+    float: left;
+    padding-top: 4px;
+    padding-left: 5;
+}
+.dislike_button p {
+    float: left;
+    padding-left: 5;
+}
+.Challenge {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+}
+
+
+
+#forum_head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#forum_head button {
+   position: relative;
+   left: 300px;
+}
+#forum_head h5 {
+   position: relative;
+   left: 50px;
+}
+
+.view_post {
+
+  text-decoration: none;
+  color: inherit;
+  width: fit-content;
+  display: block;
+  height: fit-content;
+  
+}
+
+.view_post:hover  {
+  background-color: red; /* slightly lighter than post bg */
+  border-color: #8AB0AB;
+  cursor: pointer;
+  border: 5px solid red;
+  border-radius: 10px;
+}
+#post_button {
+  background: #ff7a3d;          
+  color: white;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,.35);
+  transition: all .15s ease;
+}
+#post_button:hover {
+  background: #ff8c55;
+  transform: translateY(-1px);
+}
+
+.Challenge {
+    border: none;
+    background-color: #8AB0AB;;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+}
+
+
+.delete_edit_container {
+
+    margin-left: auto;
+    margin-right: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    
+}
+
+.delete_button {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    border: none;
+    background-color: #394b53;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
+
+}
+
+.edit_button {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    border: none;
+    background-color: #394b53;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;   
+
+}
+
+.delete_button:hover{
+
+    cursor: pointer;
+    background-color: #495d65;
+
+}
+
+.edit_button:hover{
+
+    cursor: pointer;
+    background-color: #495d65;
+
+}
+
+.delete_button > h4, .edit_button > h4{
+
+    font-family: "Inter", Arial;
+    font-weight: 600;
+    font-size: 14px;
+
+
+    color: white;
+
+}
+
+#editArea {
+    width: 750px;
+    height: 300px;
+}
+#Save {
+    background-color:#8AB0AB;
+    
+}
+#edit_container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+#editArea{
+
+    width: 95%;
+    height: 140px;
+
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+
+    padding-left: 5px;
+    padding-top: 5px;
+
+    background-color: lightgray;
+
+    border: 2px solid salmon;
+    border-radius: 5px;
+
+    font-family: "Inter", Arial;
+    font-size: 17px;
+
+    resize: none;
+
+
+}
+
+#editArea::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 500;
+
+}
+
+#Save{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 95px;
+
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+}
+
+#Save:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+}
