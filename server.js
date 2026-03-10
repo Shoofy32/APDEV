@@ -18,7 +18,6 @@ const postSchema = new mongoose.Schema({
   post_title: String,
   post_content: String,
   forum_name: String,
-  tags: [String]
   
 });
 
@@ -53,9 +52,4 @@ app.put("/update-user/:id", async (req, res) => {
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
-});
-//Deleting for testing
-app.get("/delete-all", async (req, res) => {
-  await Post.deleteMany({});
-  res.json({ message: "All posts deleted" });
 });

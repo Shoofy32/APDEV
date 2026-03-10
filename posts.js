@@ -47,7 +47,11 @@ function updateCounter(buttonElement, divElement){
 }
 
 // Function opens the post and moves user to the userpost html file
+function openPost(){
 
+    window.open("../forumpage/userpost.html", "_self");
+
+}
 
 
 
