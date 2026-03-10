@@ -1,0 +1,97 @@
+<html>
+    <head>
+
+        <!-- Link CSS File for create post css design-->
+        <link href="../css/createpost_style.css" rel="stylesheet"/>
+
+        <!-- Link CSS File for forum css design-->
+        <link href="../css/forum_style.css" rel="stylesheet"/>
+
+
+        <!-- Link JS File for posts interaction -->
+        <script type = "module" src = "searchbar.js"></script>
+
+        <!-- Link JS File for create posts interaction -->
+        <script type = "module" src = "../javascript/createpost.js"></script>
+
+    </head>
+    <body>
+
+        
+   
+    <article>
+
+        <header>
+
+            <!-- Logo -->
+            <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+
+            
+            <!-- Search bar -->
+                <div class = "search_bar">
+
+                <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+
+                </div>
+
+
+            <!-- Log In and Sign Up Buttons -->
+            <div class = "log_sign_in">
+
+                <button onclick = "window.open('login.html', '_self')"> Log In </button>
+                <button onclick = "window.open('registration.html', '_self')"> Sign Up </button>
+
+            </div>
+
+
+        </header>
+
+
+    </article>
+
+    <div class="content_container">
+
+            <div class="visited_container">
+            <div class="breadcrumbs">
+
+                <a href = "homepage.html">Blevvit&nbsp; </a>
+                <span class = "separator">
+                <h5> - </h5>
+                </span>
+                    <a href = "forum.html">&nbsp;Forums</a>
+            
+            </div>
+        
+        </div>
+    
+    
+        <form>
+            <div class="post_container">
+            <div class="title_container">
+                <input id="title" name="title" placeholder="Title"/>
+            </div>
+            
+        
+            <div id="tag_container">
+
+            </div>
+            <textarea id="content" name="content" placeholder="Body"></textarea>
+        
+                <div id="add_tag_container">
+                <button id="add_tag">
+                Add Tag
+            </button>
+            </div>
+            <button onclick="addUser()" type="button" id="post">Post</button>
+            </div>
+        </form>
+    
+        
+        
+    </div>
+
+ </body>
+
+</html>

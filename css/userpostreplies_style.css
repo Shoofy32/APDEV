@@ -1,0 +1,581 @@
+a {
+  text-decoration: none;
+}
+
+/* Posts - Div Container that contains PFP, Username, and Date of Post */
+.icon_name_date_post{
+
+    display: flex;
+    align-items: center;
+
+    height: 20px;
+
+}
+
+/* Latests Posts - Secondary Div Container that contains a post */
+.post, .reply, .create_reply_container{
+
+    width: auto;
+    height: auto;
+
+    margin-top: 10px;
+
+    padding-left: 20px;
+    padding-top: 15px;
+
+    background-color: #3E5058;
+    border-radius: 5px;
+
+}
+
+/* Posts - PFP image */
+.icon_name_date_post img{
+
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+
+}
+
+/* Posts - Username */
+.icon_name_date_post .name_post{
+
+    font-size: 14px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: #57cbb8;
+
+    margin-left: 10px;
+
+}
+
+/* Posts - Date of Post */
+.icon_name_date_post .date_post{
+
+    font-size: 11px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: lightgray;
+
+    margin-left: 10px;
+    
+}
+
+/* Posts - Title of Post */
+.post h3, .reply h3{
+
+    font-size: 22px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    margin-top: 20px;
+    color: coral;
+
+}
+
+/* Posts - Div Container that Contains the Tags of the Post */
+.tags_post{
+
+    display: flex;
+    align-items: center;
+
+}
+
+/* Posts - Text of Tags */
+.tags_post p{
+
+    width: auto;
+    height: 14px;
+
+    margin-top: -15px;
+    margin-left: 4px;
+
+    padding-left: 2px;
+    padding-right: 2px;
+
+    font-size: 10px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    color: grey;
+    background-color: lightgrey;
+
+    border-radius: 2px;
+
+}
+
+/* Posts - Short Description of Post*/
+.post .description_short_post, .reply .description_short_post{
+
+    width: 95%;
+
+    margin-top: 0px;
+
+    font-size: 15px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+    overflow: hidden;
+
+}
+
+/* Posts - Div Container that Contains the Like and Dislike Buttons */
+.stats_post{
+
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+    
+    margin-top: -10px;
+}
+
+/* Posts - Div Container that Contains a Button and its Counter */
+.counter_container, .challenge_button, .reply_button{
+
+    display: flex;
+    align-items: center;
+
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+
+    padding-left: 15px;
+
+    border-radius: 5px;
+
+}
+
+/* Posts - Div Container that Contains a Reply Button */
+.reply_button{
+
+    margin-left: 20px;
+
+}
+
+/* Posts (Counter) - Icon of Button */
+.stats_post i{
+
+    color: white;
+
+    padding-right: 15px;
+    
+}
+
+/* Posts (Counter) - Counter of Button */
+.stats_post p{
+
+    font-size: 14px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    margin-right: 20px;
+
+    padding-left: 5px;
+    
+    color: white;
+
+}
+
+
+/* Posts (Counter) - Icon of Button */
+/* On Hover */
+.stats_post i:hover{
+
+    color: coral;
+
+    cursor: pointer;
+
+}
+
+/* Posts - Div Container that Contains a Button and its Counter */
+/* On Hover */
+.counter_container:hover, .challenge_button:hover, .reply_button:hover{
+
+    background-color: #495d65;
+    cursor: pointer;
+
+}
+
+/* Latests Posts - Text Result of Roll */
+.roll_20_number{
+
+    position: absolute;
+
+    top: 180px;
+
+    font-size: 40px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    color: rgb(255, 149, 110);
+
+}
+
+/* Latests Posts - Text Result of Roll */
+.result{
+
+    font-size: 18px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    color: rgb(255, 149, 110);
+
+}
+
+/* Latests Posts - Challenge Button Text */
+.challenge_button p, .reply_button p{
+
+    font-weight: 500;
+
+    transform: translateX(-5px);
+
+}
+
+/* Challenge - Div Container for Challenge*/
+#challenge_container{
+
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 500px;
+    height: 550px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 3px solid #584d3e;
+    border-radius: 10px;
+    opacity: 0;
+    z-index: -999;
+    transition: all 0.3s ease-in-out;
+    gap: 3px;
+
+    cursor: default;
+
+}
+
+/* Challenge - Roll 20 Title */
+.roll_20{
+
+    font-size: 40px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    margin: 0px;
+    color: white;
+
+}
+
+.dicebg{
+
+    display: flex;
+    justify-content: center;
+
+}
+
+/* Challenge - Challenge Container on Visible State */
+#challenge_container.open {
+    opacity: 1;
+    z-index: 999;
+    background: none;
+    border: 0;
+
+    background-color: #3e5058b9;
+}
+
+/* Latests Posts - Container Storing Input and Button */
+.bet_container{
+
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 50px;
+
+}
+
+/* Challenge - Bet Likes Text */
+.bet_container p{
+
+    font-size: 18px;
+    font-family: "Inter", Arial;
+    font-weight: 800;
+
+    transform: translateY(-8px);
+
+    color: white;
+
+}
+
+/* Challenge - Bet Container Button */
+.bet_container button{
+
+    font-family: "Inter", Arial;
+    font-size: 18px;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+}
+
+/* Challenge - Input Likes Container */
+#challenge_container input{
+
+    width: 50px;
+    height: 40px;
+    background-color: #1A1D1A;
+    color: #8AB0AB;
+
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+    font-size: 16px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    color: white;
+    
+}
+
+/* Challenge - Input Likes Container - Inner Spin Buttons */
+#challenge_container input::-webkit-inner-spin-button{
+
+    width: 20px;
+    height: 20px;
+    
+}
+
+/* Challenge - Bet Likes Button */
+#postBet{
+
+    width: 100px;
+    height:45px;
+
+    margin-left: 15px;
+
+}
+
+#challenge_container textarea::placeholder{
+    color: #8AB0AB;
+    opacity: 0.5;
+} 
+
+#reply_container textarea:focus{
+    outline: none;
+    border-color: #8AB0AB;
+}
+
+#challenge_container > div:nth-child(2){
+
+    font-size: 12px;
+    color: #8AB0AB;
+    opacity: 0.7;
+    margin-bottom: 6px;
+
+}
+
+/* Challenge - Close Challenge Button */
+#challenge_container > div:nth-child(1){
+
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+    left: 460px;
+    top:1px;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+
+}
+
+#challenge_container > div:nth-child(1) > button{
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+
+    border: 0px;
+
+}
+
+#challenge_container > div:nth-child(1) > button > i{
+
+    background-color: rgb(59, 73, 80);
+    transform: scale(2, 2);
+
+}
+
+.replying_to_container {
+
+    width: 800px;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    padding: 15px;
+
+    background-color: #314047;
+
+    border-left: solid coral 3px;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    
+}
+
+.replying_to_container p{
+
+    margin-top: 0px;
+
+    color: white;
+
+}
+
+
+.replying_to_container .user_repliedto{
+    position: relative;
+    color: coral;
+
+
+    font-weight: 700;
+    font-size: 17px;
+
+
+}
+
+.create_reply_container{
+
+    position: relative;
+
+}
+
+.closeReply{
+
+    display: flex;
+    position: absolute;
+
+    left: 780px;
+    top: 30px;
+
+
+}
+
+.closeReply:hover{
+
+    cursor: pointer;
+
+}
+
+.closeReply i{
+
+    color: coral;
+
+}
+
+.closeReply:hover i{
+
+    color: rgb(224, 106, 63);
+
+}
+
+.reply_to{
+
+    font-size: 20px;
+    font-weight: 500;
+
+    color: salmon;
+
+}
+
+.reply_content{
+
+    width: 95%;
+    height: 140px;
+
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+
+    padding-left: 5px;
+    padding-top: 5px;
+
+    background-color: lightgray;
+
+    border: 2px solid salmon;
+    border-radius: 5px;
+
+    font-family: "Inter", Arial;
+    font-size: 17px;
+
+    resize: none;
+
+
+}
+
+.reply_content::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 500;
+
+}
+
+.confirm_post_container{
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin-right: 4%;
+    margin-bottom: 20px;
+
+}
+
+.confirm_post{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 95px;
+
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+}
+
+.confirm_post:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+}
+
+
+
+

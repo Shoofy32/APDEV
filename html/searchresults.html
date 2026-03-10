@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title> Blevvit - Search </title>
+
+        <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
+
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href="../../fontawesome/css/all.min.css" rel = "stylesheet"/>
+        
+            <!-- Link CSS File for searchresults css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/searchresults_style.css">
+
+        <!-- Link CSS File for header css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/header_style.css">
+
+        <!-- Link CSS File for sidebar css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/sidebar_style.css">
+
+        <!-- Link CSS File for user post css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/userpost_style.css">
+
+        <!-- Link JS File for homepage interaction -->
+        <script type = "module" src = "../javascript/searchresults.js"></script>
+
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "../javascript/sidebar.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script src = "../javascript/posts.js"></script>
+
+        <!-- Link JS File for searchbar interaction -->
+        <script type = "module" src = "../javascript/searchbar.js"></script>
+
+        <!-- Link JS File for forum load link interaction -->
+        <script src = "../javascript/forumloadlink.js"></script>
+
+
+    </head>
+
+
+    <body>
+
+       <!-- Contains the header of the home page -->
+        <article>
+
+
+            <header>
+
+                <!-- Logo -->
+                <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+
+                
+                <!-- Search bar -->
+                 <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+
+                 </div>
+
+
+                <!-- Log In and Sign Up Buttons -->
+                <div class = "log_sign_in">
+
+                    <button onclick = "window.open('../log_regpage/login.html', '_self')"> Log In </button>
+                    <button onclick = "window.open('../log_regpage/registration.html', '_self')"> Sign Up </button>
+
+                </div>
+
+
+            </header>
+
+
+        </article>
+
+
+       <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container" onclick = "showSideBar()">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button onclick = "window.open('homepage.html', '_self')"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;" onclick = ></i>
+                         <span> Home </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                    <hr>
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Popular Topics </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button onclick = "goToForum('Announcements')"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Announcements </span> 
+                        </button>
+
+                        <button onclick = "goToForum('Creative Writing')"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Creative Writing </span> 
+                        </button>
+
+                        <button onclick = "goToForum('Technology')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Technology </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span> General Fiction </span> 
+                        </button>
+
+                        <button> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr>
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+
+                        <p class = "side_bar_title"> Resources </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> <span>  </span> Rules </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class = "search_results_general_container">
+
+            <div class = tag_filter_container>
+
+                <div class= "title_container">
+
+                    <i class="fa-solid fa-filter fa-xl" style="color: #ffffff;"></i>
+                    <p class = "filter_tags_title"> Filter Tags </p>
+
+
+                </div>
+
+                <p> Filter: </p>
+                <input type = "text" placeholder = "Search..." onkeydown = "updateTagSelection(this, event)">
+
+                <div class = "input_tags_wrapper"></div>
+
+                <div class = "filter_tag_button_container">
+
+                    <button class = "filter_tag_button" onclick = "filterByTags()"> Filter Result </button>
+                    <button class = "filter_tag_button" onclick = "clearFilterTags()"> Clear Filters </button>
+                </div>
+
+            </div>
+
+
+            <div class = search_container>
+
+                <h2 class = "query_result_display"> <span class = "query_counter"> 0 </span> Search Result(s) for: <span class = "search_query"> Blank </span></h2>
+                    <div class = "search_results_container">
+
+                        <div class = "post" onclick = "openPost()">
+
+                            <!-- Div Contains the PFP, Username, and Date of Post-->
+                            <div class = "icon_name_date_post">
+
+                                <a href="../userpage/ccs.html"><img src = "../resources/users/discordmod.jpg"></a>
+
+                                <a href="../userpage/ccs.html"><p class = "name_post"> CCS_GodXX </p></a>
+
+                                <p class = "date_post"> 2 days ago </p>
+
+
+                            </div>
+
+                            <!-- Post Title -->
+                            <h3 class = "title_post" onclick = "openPost()"> Forum Announcments - Starting Rules </h3>
+
+                            <!-- Div Contains Different Tags of the Post -->
+                            <div class = "tags_post">
+
+                                <p class = "tag"> Announcements </p>
+                                <p class = "tag"> Rules </p>
+                                <p class = "tag"> Questing </p>
+
+                            </div>
+
+                            <!-- Short Description of Post -->
+                            <p class = "description_short_post"> 
+                            1. No racism or sexual posts in posts
+
+                            2. Be respectful
+
+                            3. Only posts topics where they should be posted in
+                            
+                            4. No Hate Speech
+                            </p>
+
+                            <!-- Div contains likes and dislikes counter -->
+                            <div class = "stats_post" onclick = "event.stopPropagation();"> <!-- Prevent onclick to open post -->
+
+                                <!-- Div contains like counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "like_counter"> 125 </p>
+
+                                </div>
+
+                                <!-- Div contains dislike counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "dislike_counter"> 0 </p>
+
+                                </div>
+
+                                <!-- Div contains comment counter and its value -->
+                                <div class = "comment_container">
+
+                                    <i class="fa-regular fa-comment"></i>
+                                    
+                                    <p class = "comment_counter"> 32 </p>
+
+                                </div>
+
+                                <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    
+                                    <p class = "challenge_text"> Challenge </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Div contains the challenge container -->
+                            <div class = "challenge" id = "challenge_container">
+
+                                <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                                <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+                                </div>
+
+                                <h2 class = "roll_20"> Roll D20 </h2>
+
+                                <p class = "roll_20_number"></p>
+
+
+                                <div class = "dicebg">
+                                    <img src="../../resources/images/d20.png">
+                                </div>
+
+                                <p class = "result"> Result </p>
+
+                                <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                                <div class = "bet_container">
+
+                                    <p> Bet Likes </p>
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
+                                    <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class = "post" onclick = "openPost()">
+
+                            <!-- Div Contains the PFP, Username, and Date of Post-->
+                            <div class = "icon_name_date_post">
+
+                                <a href="../userpage/charlie.html"><img src = "../resources/users/kirk.jfif"></a>
+
+                                <a href="../userpage/charlie.html"><p class = "name_post"> Charlie_Kirk </p></a>
+
+                                <p class = "date_post"> 2 days ago </p>
+
+
+                            </div>
+
+                            <!-- Post Title -->
+                            <h3 class = "title_post" onclick = "openPost()"> DLSU PCs are the best! </h3>
+
+                            <!-- Div Contains Different Tags of the Post -->
+                            <div class = "tags_post">
+
+                                <p class = "tag"> Technology </p>
+                                <p class = "tag"> School </p>
+                                <p class = "tag"> Computers </p>
+
+                            </div>
+
+                            <!-- Short Description of Post -->
+                            <p class = "description_short_post"> 
+                                Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                                It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. I could even play with my waifu in 3d! 
+                            </p>
+
+                            <!-- Div contains likes and dislikes counter -->
+                            <div class = "stats_post" onclick = "event.stopPropagation();"> <!-- Prevent onclick to open post -->
+
+                                <!-- Div contains like counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "like_counter"> 10 </p>
+
+                                </div>
+
+                                <!-- Div contains dislike counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "dislike_counter"> 15 </p>
+
+                                </div>
+
+                                <!-- Div contains comment counter and its value -->
+                                <div class = "comment_container">
+
+                                    <i class="fa-regular fa-comment"></i>
+                                    
+                                    <p class = "comment_counter"> 6 </p>
+
+                                </div>
+
+                                <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    
+                                    <p class = "challenge_text"> Challenge </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Div contains the challenge container -->
+                            <div class = "challenge" id = "challenge_container">
+
+                                <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                                <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+                                </div>
+
+                                <h2 class = "roll_20"> Roll D20 </h2>
+
+                                <p class = "roll_20_number"></p>
+
+
+                                <div class = "dicebg">
+                                    <img src="../resources/images/d20.png">
+                                </div>
+
+                                <p class = "result"> Result </p>
+
+                                <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                                <div class = "bet_container">
+
+                                    <p> Bet Likes </p>
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
+                                    <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class = "post" onclick = "openPost()">
+
+                            <!-- Div Contains the PFP, Username, and Date of Post-->
+                            <div class = "icon_name_date_post">
+
+                                <a href ="../userpage/zed.html"><img src = "../resources/users/zed.jpg"></a>
+
+                                <a href ="../userpage/zed.html"><p class = "name_post"> Zed </p></a>
+
+                                <p class = "date_post"> 2 days ago </p>
+
+
+                            </div>
+
+                            <!-- Post Title -->
+                            <h3 class = "title_post"> Is i67 21th generation CPU good </h3>
+
+                            <!-- Div Contains Different Tags of the Post -->
+                            <div class = "tags_post">
+
+                                <p class = "tag"> Technology </p>
+                                <p class = "tag"> Programming </p>
+                                <p class = "tag"> PC Parts </p>
+
+                            </div>
+
+                            <!-- Short Description of Post -->
+                            <p class = "description_short_post"> I was planning to upgrade to the new i67, I've been hearing that it only gives 20k FPS on flappy bird. Alternatively for 69 dollars, I can also get the new
+                                    Ryzen 78. Thanks!
+                            </p>
+
+                            <!-- Div contains likes and dislikes counter -->
+                            <div class = "stats_post" onclick = "event.stopPropagation();"> <!-- Prevent onclick to open post -->
+
+                                <!-- Div contains like counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "like_counter"> 25 </p>
+
+                                </div>
+
+                                <!-- Div contains dislike counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "dislike_counter"> 8 </p>
+
+                                </div>
+
+                                <!-- Div contains comment counter and its value -->
+                                <div class = "comment_container">
+
+                                    <i class="fa-regular fa-comment"></i>
+                                    
+                                    <p class = "comment_counter"> 4 </p>
+
+                                </div>
+
+                                <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    
+                                    <p class = "challenge_text"> Challenge </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Div contains the challenge container -->
+                            <div class = "challenge" id = "challenge_container">
+
+                                <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                                <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                                </div>
+
+                                <h2 class = "roll_20"> Roll D20 </h2>
+
+                                <p class = "roll_20_number"></p>
+
+
+                                <div class = "dicebg">
+                                    <img src="../resources/images/d20.png">
+                                </div>
+
+                                <p class = "result"> Result </p>
+
+                                <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                                <div class = "bet_container">
+
+                                    <p> Bet Likes </p>
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
+                                    <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class = "post" onclick = "openPost()">
+
+                            <!-- Div Contains the PFP, Username, and Date of Post-->
+                            <div class = "icon_name_date_post">
+
+                                <a href="../userpage/ccs.html"><img src = "../resources/users/discordmod.jpg"></a>
+
+                                <a href="../userpage/ccs.html"><p class = "name_post"> CCS_GodXX </p></a>
+
+                                <p class = "date_post"> 2 days ago </p>
+
+
+                            </div>
+
+                            <!-- Post Title -->
+                            <h3 class = "title_post"> CCS smart deodorant </h3>
+
+                            <!-- Div Contains Different Tags of the Post -->
+                            <div class = "tags_post">
+
+                                <p class = "tag"> Technology </p>
+                                <p class = "tag"> Hygiene </p>
+                                <p class = "tag"> Products </p>
+
+                            </div>
+
+                            <!-- Short Description of Post -->
+                            <p class = "description_short_post"> I don't shower much for the CCS smell but lately I've noticed the girls avoiding me. I heard the CCS department recently created a smart deodorant that can make me smell good.
+                                    What smell would you guys recommend, I can't pick between Gokongwei Sensational and One Week CCS Smell.
+                            </p>
+
+                            <!-- Div contains likes and dislikes counter -->
+                            <div class = "stats_post" onclick = "event.stopPropagation();"> <!-- Prevent onclick to open post -->
+
+                                <!-- Div contains like counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class = "fa-regular fa-thumbs-up" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "like_counter"> 10 </p>
+
+                                </div>
+
+                                <!-- Div contains dislike counter and its value -->
+                                <div class = "counter_container">
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <i class="fa-regular fa-thumbs-down" onclick = "updateCounter(this, this.parentElement.parentElement); event.stopPropagation();" data-clicked = "false"></i>
+                                    
+                                    <p class = "dislike_counter"> 50 </p>
+
+                                </div>
+
+                                <!-- Div contains comment counter and its value -->
+                                <div class = "comment_container">
+
+                                    <i class="fa-regular fa-comment"></i>
+                                    
+                                    <p class = "comment_counter"> 5 </p>
+
+                                </div>
+
+                                <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    
+                                    <p class = "challenge_text"> Challenge </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Div contains the challenge container -->
+                            <div class = "challenge" id = "challenge_container" onclick = "event.stopPropagation()">
+
+                                <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+                                <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+                                </div>
+
+                                <h2 class = "roll_20"> Roll D20 </h2>
+
+                                <p class = "roll_20_number"></p>
+
+
+                                <div class = "dicebg">
+                                    <img src="../resources/images/d20.png">
+                                </div>
+
+                                <p class = "result"> Result </p>
+
+                                <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+                                <div class = "bet_container">
+
+                                    <p> Bet Likes </p>
+
+                                    <!-- stopPropogation prevents button from opening up userpost forum -->
+                                    <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
+                                    <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        
+                    </div>
+
+
+
+            </div>
+
+
+
+            
+        </div>
+
+
+
+
+        
+
+    </body>
+
+
+</html>
