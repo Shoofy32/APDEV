@@ -326,12 +326,16 @@ body{
 }
 
 
-.interaction_container {
+.stats_post{
+
     display: flex;
-    flex-direction: row;
-    text-align: center;
-    gap: 4px;
+    align-items: center;
+
+    height: 40px;
+    
+    margin-top: -10px;
 }
+
 
 .like_button {
     border: none;
@@ -456,51 +460,60 @@ body{
     
 }
 
-.Delete {
+
+.Delete, .Edit {
+
     display: flex;
-    flex-direction: row;
+    align-content: center;
     justify-content: center;
-    margin-left: auto;
-    border: none;
-    background-color: red;
-    height: 30px;
-    border-radius: 5px;
-    width:90px;
-    right: 300px;   
 
-}
-
-.Edit {
-     display: flex;
-      flex-direction: row;
-    justify-content: center;
-    margin-left: auto;
-    border: none;
-    background-color: orange;
-    height: 30px;
-    border-radius: 5px;
-    width:90px;
-    right: 300px;   
-
-}
-.Delete > p{
-    color: white;
-    text-align: center;
-    font-size: 17px;
     
+    border: none;
+    background-color: #3E5058;
+    padding-top: 9px;
+    border-radius: 5px;
+    width:auto;
+   
 
 }
+
+.Delete:hover, .Edit:hover{
+
+
+    background-color: #29373c;
+    cursor: pointer;
+    
+}
+
+
 .Delete_container {
-    margin-left: auto;
     display: flex;
-    gap: 4px;
-    
-    
+    align-items: center;
+
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+    gap: 20px;
+    padding-left: 15px;
+
+    border-radius: 5px;
+
 }
-.Edit > p {
-     font-size: 17px;
-      text-align: center;
+
+.Delete_container > .Delete > h4 {
+    
+    font-size: 14px;
+    color: white;
 }
+
+.Delete_container > .Edit> h4 {
+    
+    font-size: 14px;
+    color: white;
+}
+
+
 
 #editArea {
     width: 750px;
@@ -615,4 +628,38 @@ body{
 #inner_gambling input {
     text-align: center;
     font-size: 25px;
+}
+
+.counter_container, .comment_container, .challenge_button{
+
+    display: flex;
+    align-items: center;
+
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+    gap: 20px;
+    padding-left: 15px;
+
+    border-radius: 5px;
+
+}
+
+.counter_container:hover, .comment_container:hover, .challenge_button:hover{
+
+    background-color: #495d65;
+
+}
+
+.like_counter, .comment_counter, .challenge_text{
+
+    padding-top: 15px;
+
+}
+
+.comment_container, .challenge_button{
+
+    margin-left: 20px;
+
 }
