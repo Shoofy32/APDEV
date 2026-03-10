@@ -1,280 +1,161 @@
-const replyButton = document.querySelectorAll('.reply_button')
-const reply = document.getElementById('reply_container');
-const close = document.getElementById('closeReply');
-const postReply = document.getElementById('postReply');
-const textArea = document.getElementById('content');
-const all_posts = document.getElementById('all_posts');
-const challenge = document.getElementById('challenge_container');
-const closeChallenge = document.getElementById('closeChallenge');
-const postBet = document.getElementById("postBet");
-const d20 = document.getElementById("d20")
 
-var original_post="";
-var current_post = "";
-var user = "";
-postReply.addEventListener("click", () => {
-  const content = textArea.value.trim();
-  if (!content) return;
 
-  reply.classList.remove("open");
-if(original_post.length !== 0) {
-  all_posts.insertAdjacentHTML("beforeend", `
-  <div class="post_container">
-    <div class="reply">
-      <div class="post_info">
-        <img src="kirk.jfif"/>
-
-        <div class="post_user">
-          <h5>Charlie_Kirk</h5>
-        </div>
-
-        <div class="timestamp">
-          <p>&nbsp; just now</p>
-        </div>
-      </div>
-
-      <div class="post_contents">
-       <div class="replying_to_container"><span>${user} said:</span><br><br>
-                        <p>
-                           ${original_post}
-                        </p>
-                    </div>
-        <p class="reply_contents">${content}</p>
-      </div>
-    </div>
-        <div class="interaction_container">
-                    <div> 
-                        <button class="like_button">
-                            <img class="thumbs_up" src="hand-thumbs-up.svg">
-                            <p>0</p>
-                        </button>
-                    </div>
-                    <div> <button class="dislike_button">
-                        <img src="hand-thumbs-down.svg">
-                        <p>0</p>
-                    </button>
-                    </div>
-                    <div><button class="reply_button">Reply</button></div>
-                    
-                    </div> 
-  </div>
-  `);
-
-}
-else {
-  all_posts.insertAdjacentHTML("beforeend", `
-  <div class="post_container">
-    <div class="reply">
-      <div class="post_info">
-        <img src="kirk.jfif"/>
-
-        <div class="post_user">
-          <h5>Charlie_Kirk</h5>
-        </div>
-
-        <div class="timestamp">
-          <p>&nbsp; just now</p>
-        </div>
-      </div>
-
-      <div class="post_contents">
-       <div class="replying_to_container"><span>${user} said:</span><br><br>
-                        <p>
-                           ${current_post}
-                        </p>
-                    </div>
-        <p class="reply_contents">${content}</p>
-      </div>
-    </div>
-        <div class="interaction_container">
-                    <div> 
-                        <button class="like_button">
-                            <img class="thumbs_up" src="hand-thumbs-up.svg">
-                            <p>0</p>
-                        </button>
-                    </div>
-                    <div> <button class="dislike_button">
-                        <img src="hand-thumbs-down.svg">
-                        <p>0</p>
-                    </button>
-                    </div>
-                    <div><button class="reply_button">Reply</button></div>
-                    
-                    </div> 
-  </div>
-  `);
-
-}
+const documentId = window.location.href
+const index = documentId.indexOf("id=")
+const id = documentId.slice(index + 3)
+const all_posts = document.getElementById('all_posts')
+const add_reply = document.getElementById('reply_container')
+const close = document.getElementById('closeReply')
+const confirm_reply = document.getElementById('postReply')
+const reply_content = document.getElementById('content')
+async function loadPost(id) {
+  const response = await fetch(`http://localhost:5000/post/${id}`);
+  const post = await response.json()
+ 
   
+  const post_container = document.createElement('div')
+  post_container.id = post._id
+  post_container.classList.add("post_container")
+  //Post information(Profile, date, username)
 
-  textArea.value = "";
-});
-all_posts.addEventListener('click', (e) => {
+  const post_info = document.createElement('div')
+  post_info.classList.add("post_info")
+  const image_div = document.createElement('div')
+  const profile_picture = document.createElement('img')
+  profile_picture.src = "../resources/users/kirk.jfif"
 
-  if (e.target.classList.contains('reply_button')) {
-    const parent = e.target.parentNode.parentNode.parentNode;
-    const contents = parent.querySelector('.post_contents');
-    const info = parent.querySelector('.post_info');
-    var reply_post = contents.querySelector('.reply_contents');
-    var check_post = contents.querySelector("#original_post");
-    user = info.querySelector('.post_user').querySelector('h5').textContent;
+
+  const post_user = document.createElement('div')
+  post_user.classList.add("post_user")
+  const userh5 = document.createElement('h5')
+  userh5.innerText = post.username
+  post_user.append(userh5)
+  //TODO ADD DATE LOGIC BACKEND
+
+  post_info.append(profile_picture, post_user)
+
+  //Post contents
+  const post_contents = document.createElement('div')
+  post_container.classList.add("post_contents")
+  const post_title = document.createElement('h3')
+  post_title.innerText = post.post_title
+  post_contents.append(post_title)
+
+  const post_body = document.createElement('p')
+  post_body.id = "original_post"
+  post_body.innerText = post.post_content
+  post_contents.append(post_body)
+  //Interaction Container (likes, dislikes, reply)
+  const interaction_container = document.createElement("div")
+  interaction_container.classList.add("stats_post")
+
+  const like = document.createElement('div')
+  like.classList.add('counter_container')
+
+  const i = document.createElement('i')
+  i.classList.add('fa-regular')
+  i.classList.add('fa-thumbs-up')
+
+  const total_likes = document.createElement('p')
+  total_likes.classList.add('like_counter')
+  total_likes.innerText = 0
+  like.append(i, total_likes)
+
+  const dislike = document.createElement('div')
+  dislike.classList.add('counter_container')
+
+  const i2 = document.createElement('i')
+  i2.classList.add('fa-regular')
+  i2.classList.add('fa-thumbs-down')
+
+  const total_dislikes = document.createElement('p')
+  total_dislikes.classList.add('like_counter')
+  total_dislikes.innerText = 0
+  dislike.append(i2, total_dislikes)
+
+  const comment = document.createElement('div')
+  comment.classList.add('comment_container')
+
+  const i3 = document.createElement('i')
+  i3.classList.add('fa-regular')
+  i3.classList.add('fa-comment')
+
+  const reply = document.createElement('p')
+  reply.classList.add('comment_counter')
+  reply.innerText = "Reply"
+  comment.append(i3, reply)
+
+  comment.addEventListener("click",function(event) {
+    const parent = event.target.parentNode.parentNode.parentNode;
+    const reply_to_id = parent.id
+    add_reply.classList.add("open");
+    confirm_reply.addEventListener("click",function() {
+      reply_post("TheNiggaDude", post.username,reply_content.value,id )
+      add_reply.classList.remove('open')
+    })
+  })
+ 
+ 
+
+  const challenge = document.createElement('div')
+  challenge.classList.add('challenge_button')
+
+  const i4 = document.createElement('i')
+  i4.classList.add('fa-solid')
+  i4.classList.add('fa-bullseye')
+
+  const challenge_text = document.createElement('p')
+  challenge_text.classList.add('challenge_text')
+  challenge_text.innerText = "Challenge"
+
   
-    if(check_post) {
-      original_post = check_post.textContent;
-      current_post = "";
-    } else {
-      original_post = "";
-      current_post = reply_post.textContent;
-    }
+  challenge.append(i4, challenge_text)
+
+  const delete_edit_container = document.createElement('div')
+  delete_edit_container.classList.add('Delete_container')
+  const delete_button = document.createElement('button')
+  delete_button.classList.add("Delete")
+  const delete_text = document.createElement('h4')
+  delete_text.innerText = "Delete"
+  const edit_button = document.createElement('button')
+  edit_button.classList.add("Edit")
+  const edit_text = document.createElement('h4')
+  edit_text.innerText = "Edit"
+  delete_button.append(delete_text)
+  edit_button.append(edit_text)
+  delete_edit_container.append(delete_button, edit_button)
+
+  interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+
+
+  post_container.append(post_info, post_contents, interaction_container)
+
+  all_posts.append(post_container)
 
     
-    reply.classList.add("open");
-  }
-});
+    
+ 
+ 
 
-close.addEventListener("click", ()=> {
-    reply.classList.remove("open");
-})
-
-document.querySelectorAll('.Delete').forEach(element=> {
-         element.addEventListener('click', (e) => {
-            var parent_div = element.parentElement.parentElement.parentElement
-            parent_div.remove();
-            console.log(parent_div)
-            e.preventDefault(); 
-           
-        });
-    })
-
-document.querySelectorAll('.Edit').forEach(element=> {
-         element.addEventListener('click', (e) => {
-
-            var parent_div = element.parentElement.parentElement.parentElement
-            var contents = parent_div.querySelector(".post_contents").querySelector(".reply_contents");
-           
-           
-            if(contents) {
-            
-            contents = parent_div.querySelector(".post_contents").querySelector(".reply_contents");
-            
-            }
-            else {
-              contents=parent_div.querySelector(".post_contents").querySelector("p");
-            }
-            var current_content = contents.innerText;
-            contents.innerHTML = `<textarea id="editArea"> ${current_content}</textarea><div id="edit_container">
-            <button id="Save">Save </button>
-            </div>
-        
-            ` ;
-            var textarea = document.getElementById("editArea");
-            var save = document.getElementById("Save");
-            textarea.addEventListener("click", function(e) {
-            e.preventDefault();
-            });
-            save.addEventListener("click", function(e) {
-                e.preventDefault();
-                contents.innerHTML = `<p>${textarea.value} (edited)</p>`
-            });
-            console.log(current_content)
-            e.preventDefault(); 
-           
-        });
-    })
-
- document.querySelectorAll('.Challenge').forEach(element => {
-        element.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            challenge.classList.add("open");
-        });
-    });
-
-closeChallenge.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation(); 
-    challenge.classList.remove("open");
-   
-   
-});
-
-postBet.addEventListener("click", (e) => {
-    let likes = document.getElementById("betLikes").value;
-    if(likes > 1){
-        e.preventDefault();
-        e.stopPropagation(); 
-        
-        console.log(challenge.classList);
-        let roll = Math.floor(Math.random() * 20);
-      switch (roll) {
-    case 1:
-        d20.src = "images/1.png";
-        break;
-    case 2:
-        d20.src = "images/2.png";
-        break;
-    case 3:
-        d20.src = "images/3.png";
-        break;
-    case 4:
-        d20.src = "images/4.png";
-        break;
-    case 5:
-        d20.src = "images/5.png";
-        break;
-    case 6:
-        d20.src = "images/6.png";
-        break;
-    case 7:
-        d20.src = "images/7.png";
-        break;
-    case 8:
-        d20.src = "images/8.png";
-        break;
-    case 9:
-        d20.src = "images/9.png";
-        break;
-    case 10:
-        d20.src = "images/10.png";
-        break;
-    case 11:
-        d20.src = "images/11.png";
-        break;
-    case 12:
-        d20.src = "images/12.png";
-        break;
-    case 13:
-        d20.src = "images/13.png";
-        break;
-    case 14:
-        d20.src = "images/14.png";
-        break;
-    case 15:
-        d20.src = "images/15.png";
-        break;
-    case 16:
-        d20.src = "images/16.png";
-        break;
-    case 17:
-        d20.src = "images/17.png";
-        break;
-    case 18:
-        d20.src = "images/18.png";
-        break;
-    case 19:
-        d20.src = "images/19.png";
-        break;
-    case 20:
-        d20.src = "images/20.png";
-        break;
 }
 
-            
-        
-        document.getElementById("betLikes").value = "";
-        
-        console.log(typeof likes);
-    } else {
-        alert("Please enter a positive number");
-        document.getElementById("betLikes").value = "";
-    }
+async function reply_post(username, replying_to, reply_content, unique_post_id ) {
+
+
+
+  await fetch("http://localhost:5000/add-reply", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username,replying_to, reply_content, unique_post_id })
+  });
+}
+close.addEventListener("click", function() {
+  add_reply.classList.remove("open")
+
+})
+document.addEventListener("DOMContentLoaded", () => {
+    alert("Loading")
+    loadPost(id);
+    
+   
 });
