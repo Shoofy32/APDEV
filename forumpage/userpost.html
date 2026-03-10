@@ -2,6 +2,8 @@
     <head>
         <link href="userpost.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         <!-- Link JS File for posts interaction -->
         <script type = "module" src = "searchbar.js"></script>
@@ -190,6 +192,7 @@
             </div>
             <div id="all_posts">
                  <div class="post_container">
+                    
                   
                     <div class="post_info">
                         <div>
@@ -238,6 +241,69 @@
                 </div> 
 
             
+                </div>
+                <div class="post_container">
+
+                    <div class="post_info">
+                        <div>
+                            <a href = "../userpage/zed.html"><img src="../resources/users/zed.jpg"/></a>
+                        </div>
+                        
+                    
+                        <div class="post_user">
+                            <a href = "../userpage/zed.html"><h5>TheNinjaDude</h5></a>
+                        </div>
+
+                        <div class="timestamp">
+                            <p>&nbsp; 2 days ago</p>
+                        </div>
+                  
+                    
+                   
+                    </div>
+
+
+                <div class="post_contents">
+                    <div class="replying_to_container"><span>Charlie_Kirk said:</span><br><br>
+                        <p >
+                            Man DLSU pc's are the best!!! How could you not love the dlsu pcs? They have RTX 5090 in them. 
+                            It is so good that my groupmates in INFOM used its CPU to generate AI code!!! Thank you Lasalle Gaming. I could even play with my waifu in 3d!
+                        </p>
+                    </div>
+                    <p class="reply_contents">Honestly, they're kinda slow for me. What room is this?</p>
+                </div>
+
+                
+                <div class="interaction_container">
+                    <div> 
+                        <button class="like_button">
+                            <img class="thumbs_up" src="hand-thumbs-up.svg">
+                            <p>3</p>
+                        </button>
+                    </div>
+                    <div> <button class="dislike_button">
+                        <img src="hand-thumbs-down.svg">
+                        <p>0</p>
+                    </button>
+                    </div>
+                    <div><button class="reply_button">Reply</button></div>
+                      <div> <button class="Challenge">
+                            <p>Challenge</p>
+                        </button>
+                        </div>
+                        
+                     <div class="Delete_container"> 
+                        <button class="Delete">
+                        <p>Delete</p>
+                        </button>
+                        <button class="Edit">
+                        <p>Edit</p>
+                        </button>
+                    </div>
+                    
+                    </div> 
+
+
             </div>
 
 
@@ -278,6 +344,20 @@
         </div>
        
     </div>
+
+    <div class="reply" id="reply_container">
+                    <div>
+                       <button id="closeReply"><img src="x-octagon.svg"/></button> 
+                    </div>
+                    <div>
+                        Replying to <strong>Charlie_Kirk</strong>
+                    </div>
+                    <textarea id="content" name="content" placeholder="Reply"></textarea>
+                    <div id="confirm_post">
+                        <button id="postReply">Post</button> 
+                    </div>
+    </div>
+        
 
         
     <script src="userpost.js" charset="utf-8"></script>

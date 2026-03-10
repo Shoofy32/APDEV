@@ -22,22 +22,50 @@ const postSchema = new mongoose.Schema({
   
 });
 
-const Post = mongoose.model("Post", postSchema);
+const replySchema = new mongoose.Schema({
+  username: String,
+  replying_to: String,
+  reply_content: String,
+  unique_post_id: String
+ 
+  
+});
 
+const Post = mongoose.model("Post", postSchema);
+const Reply = mongoose.model("Reply", replySchema);
 // CREATE
-app.post("/add-user", async (req, res) => {
+app.post("/add-post", async (req, res) => {
   const {username, post_title,post_content, forum_name } = req.body;
   const newPost = new Post({ username,post_title, post_content, forum_name });
   await newPost.save();
   res.json({ message: "User added" });
 });
 
+app.post("/add-reply", async (req, res) => {
+  const {username, replying_to,reply_content, unique_post_id} = req.body;
+  const newReply = new Reply({ username,replying_to, reply_content, unique_post_id });
+  await newReply.save();
+  res.json({ message: "Reply added" });
+});
+
+
 // READ
-app.get("/users", async (req, res) => {
+app.get("/posts", async (req, res) => {
   const users = await Post.find();
   res.json(users);
 });
-
+app.get("/replies", async (req, res) => {
+  const users = await Reply.find();
+  res.json(users);
+});
+app.get("/post/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 // DELETE
 app.delete("/delete-user/:id", async (req, res) => {
   await User.findByIdAndDelete(req.params.id);

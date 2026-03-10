@@ -326,12 +326,16 @@ body{
 }
 
 
-.interaction_container {
+.stats_post{
+
     display: flex;
-    flex-direction: row;
-    text-align: center;
-    gap: 4px;
+    align-items: center;
+
+    height: 40px;
+    
+    margin-top: -10px;
 }
+
 
 .like_button {
     border: none;
@@ -463,13 +467,13 @@ body{
     align-content: center;
     justify-content: center;
 
-    margin-left: auto;
+    
     border: none;
-    background-color: #2e3c42;
-    height: 30px;
+    background-color: #3E5058;
+    padding-top: 9px;
     border-radius: 5px;
-    width:100px;
-    right: 300px;   
+    width:auto;
+   
 
 }
 
@@ -481,34 +485,35 @@ body{
     
 }
 
-.Delete > p, .Edit > p{
-
-    font-size: 17px;
-    color: white;
-    font-weight: 500;
-
-    margin-right: 3px;
-
-}
 
 .Delete_container {
-    margin-left: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
 
-    margin-right: 5px;
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+    gap: 20px;
+    padding-left: 15px;
+
+    border-radius: 5px;
+
+}
+
+.Delete_container > .Delete > h4 {
+    
+    font-size: 14px;
+    color: white;
+}
+
+.Delete_container > .Edit> h4 {
+    
+    font-size: 14px;
+    color: white;
 }
 
 
-.Delete_container {
-    margin-left: auto;
-    display: flex;
-    gap: 4px;
-    
-    
-}
 
 #editArea {
     width: 750px;
@@ -623,4 +628,38 @@ body{
 #inner_gambling input {
     text-align: center;
     font-size: 25px;
+}
+
+.counter_container, .comment_container, .challenge_button{
+
+    display: flex;
+    align-items: center;
+
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+    gap: 20px;
+    padding-left: 15px;
+
+    border-radius: 5px;
+
+}
+
+.counter_container:hover, .comment_container:hover, .challenge_button:hover{
+
+    background-color: #495d65;
+
+}
+
+.like_counter, .comment_counter, .challenge_text{
+
+    padding-top: 15px;
+
+}
+
+.comment_container, .challenge_button{
+
+    margin-left: 20px;
+
 }
