@@ -38,6 +38,7 @@ const userSchema = new mongoose.Schema({
 const replySchema = new mongoose.Schema({
   username: String,
   replying_to: String,
+  original_content:String,
   reply_content: String,
   unique_post_id: String
  
@@ -126,8 +127,8 @@ app.post("/add-post", async (req, res) => {
 });
 
 app.post("/add-reply", async (req, res) => {
-  const {username, replying_to,reply_content, unique_post_id} = req.body;
-  const newReply = new Reply({ username,replying_to, reply_content, unique_post_id });
+  const {username, replying_to, original_content, reply_content, unique_post_id} = req.body;
+  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id });
   await newReply.save();
   res.json({ message: "Reply added" });
 });
@@ -141,6 +142,16 @@ app.get("/posts", async (req, res) => {
 app.get("/replies", async (req, res) => {
   const users = await Reply.find();
   res.json(users);
+});
+
+app.get("/replies/:postId", async (req, res) => {
+
+  const postId = req.params.postId;
+
+  const replies = await Reply.find({ unique_post_id: postId });
+
+  res.json(replies);
+
 });
 app.get("/post/:id", async (req, res) => {
   try {
