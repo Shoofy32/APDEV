@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
 
     username: String,
     email: String,
-    password: String
+    password: String,
+    bio: String
     
 });
 
@@ -55,27 +56,53 @@ const Reply = mongoose.model("Reply", replySchema);
 
 // ------ ------ User backend ------ ------
 app.post("/register", async (req, res) => {
-    console.log("Register route hit");
+    
     try {
         const { email, username, password } = req.body;
 
-        const newUser = new User({
+        const found = await User.findOne({ $or: [{ username: username }, { email: email }] });
+
+        if (!found){
+          const newUser = new User({
 
               username: username,
               email: email,
-              password: password
+              password: password,
+              bio: ""
 
-        });
+          });
 
-        await newUser.save();
+          await newUser.save();
+          return res.status(201).json({ success: true, message: "Registration successful!" });
+        }
 
-        res.status(201).send("User added successfully");
+        else{
+          return res.status(409).json({ success: false, message: "Username or email already exists." });
+        }
+        
     } catch (err) {
         console.error(err);
     }
 });
 
+app.post("/login", async (req,res) => {
 
+  try {
+    const {username, password} = req.body;
+
+    const found = await User.find({ $and: [{username: username},{password: password}]});
+
+    if(found){
+      return res.status(201).json({success: true, message: "Login successful, welcome back!"});
+    }
+    else{
+      return res.status(409).json({ success: false, message: "Incorrect username or password." });
+    }
+  }
+  catch (err){
+    console.error(err);
+  }
+});
 
 // ------ ------ Post backend ------ ------
 
