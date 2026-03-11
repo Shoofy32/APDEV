@@ -8,12 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let password = document.getElementById("password").value;
 
         if(user != "" && password !=""){
-            document.getElementById("user").innerHTML="";
-
-            localStorage.setItem('username', user);
-            window.location.href = '../home_page/homepage.html';
-
-            window.open('../home_page/homepage.html', '_self');
+            logUser(user, password);
         }
             
         else{
@@ -23,4 +18,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     button.addEventListener('click', login);
+
+    async function logUser(username, password) {
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert(data.message); // or update a UI element
+        } else {
+            alert(data.message); // show the error to the user
+        }
+    }
 });
