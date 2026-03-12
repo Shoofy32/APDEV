@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadPosts(id)
 })
 async function loadPost(id) {
-  const response = await fetch(`http://localhost:5000/post/${id}`);
+  const response = await fetch(`http://localhost:3000/post/${id}`);
   const post = await response.json()
  
   
@@ -105,86 +105,90 @@ async function loadPost(id) {
   reply.innerText = "Reply"
   comment.append(i3, reply)
 
- comment.addEventListener("click", function () {
+comment.addEventListener("click", function () {
 
-    const createReplyContainer = document.createElement("div");
-    createReplyContainer.className = "create_reply_container";
+  // prevent duplicate reply boxes
+  if (document.querySelector(".create_reply_container")) return;
 
+  const createReplyContainer = document.createElement("div");
+  createReplyContainer.className = "create_reply_container";
 
-    // CLOSE BUTTON
-    const closeReply = document.createElement("div");
-    closeReply.className = "closeReply";
+  // CLOSE BUTTON
+  const closeReply = document.createElement("div");
+  closeReply.className = "closeReply";
 
-    closeReply.addEventListener("click", function (event) {
-        replyPost(this.parentElement.parentElement);
-        event.stopPropagation();
-    });
+  const closeIcon = document.createElement("i");
+  closeIcon.className = "fa-regular fa-circle-xmark fa-2xl";
 
-    const closeIcon = document.createElement("i");
-    closeIcon.className = "fa-regular fa-circle-xmark fa-2xl";
+  closeReply.appendChild(closeIcon);
 
-    closeReply.appendChild(closeIcon);
+  closeReply.addEventListener("click", () => {
+    createReplyContainer.remove();
+  });
 
+  // REPLY TEXT
+  const replyTo = document.createElement("div");
+  replyTo.className = "reply_to";
+  replyTo.innerHTML = `Replying to <strong>${userh5.innerText}</strong>`;
 
-    // REPLY TO TEXT
-    const replyTo = document.createElement("div");
-    replyTo.className = "reply_to";
+  // TEXTAREA
+  const textarea = document.createElement("textarea");
+  textarea.className = "reply_content";
+  textarea.placeholder = "Reply";
 
-    const replyText = document.createTextNode("Replying to ");
+  // ERROR
+  const errorP = document.createElement("p");
+  errorP.className = "reply_error";
 
-    const strongUser = document.createElement("strong");
-    strongUser.innerHTML = userh5.innerHTML;
+  // POST BUTTON
+  const confirmPostContainer = document.createElement("div");
+  confirmPostContainer.className = "confirm_post_container";
 
-    replyTo.appendChild(replyText);
-    replyTo.appendChild(strongUser);
+  const confirmPostBtn = document.createElement("button");
+  confirmPostBtn.className = "confirm_post";
+  confirmPostBtn.textContent = "Post";
 
+  confirmPostContainer.appendChild(confirmPostBtn);
 
-    // TEXTAREA
-    const textarea = document.createElement("textarea");
-    textarea.className = "reply_content";
-    textarea.name = "content";
-    textarea.placeholder = "Reply";
+  // APPEND
+  createReplyContainer.append(
+    closeReply,
+    replyTo,
+    textarea,
+    errorP,
+    confirmPostContainer
+  );
 
+  comment.parentElement.parentElement.insertAdjacentElement(
+    "afterend",
+    createReplyContainer
+  );
 
-    // ERROR MESSAGE
-    const errorDiv = document.createElement("div");
+  confirmPostBtn.addEventListener("click", async () => {
 
-    const errorP = document.createElement("p");
-    errorP.className = "reply_error";
+    if (textarea.value.trim() === "") {
+      errorP.innerText = "Reply cannot be empty";
+      return;
+    }
 
-    errorDiv.appendChild(errorP);
+    await reply_post(
+      "MartinStefanGay",
+      userh5.innerText,
+      post_body.innerText,
+      textarea.value,
+      id
+    );
 
+    addReplyToDOM(
+      "MartinStefanGay",
+      userh5.innerText,
+      post_body.innerText,
+      textarea.value
+    );
 
-    // CONFIRM POST CONTAINER
-    const confirmPostContainer = document.createElement("div");
-    confirmPostContainer.className = "confirm_post_container";
-
-    const confirmPostBtn = document.createElement("button");
-    confirmPostBtn.className = "confirm_post";
-    confirmPostBtn.textContent = "Post";
-
-
-   
-
-    confirmPostContainer.appendChild(confirmPostBtn);
-
-
-    // APPEND EVERYTHING
-    createReplyContainer.appendChild(closeReply);
-    createReplyContainer.appendChild(replyTo);
-    createReplyContainer.appendChild(textarea);
-    createReplyContainer.appendChild(errorDiv);
-    createReplyContainer.appendChild(confirmPostContainer);
-    
-
-    // INSERT AFTER COMMENT
-    comment.parentElement.parentElement.insertAdjacentElement("afterend", createReplyContainer);
-    confirmPostBtn.addEventListener("click", function () {
-        alert("SENT")
-        reply_post("MartinStefanGay", userh5.innerText, post_body.innerText, textarea.value, id)
-    });
+    createReplyContainer.remove();
+  });
 });
-
   const challenge = document.createElement('div')
   challenge.classList.add('challenge_button')
 
@@ -388,86 +392,44 @@ async function loadPosts(id) {
 
     interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
 
-    comment.addEventListener("click", function () {
+   comment.addEventListener("click", function () {
 
-    const createReplyContainer = document.createElement("div");
-    createReplyContainer.className = "create_reply_container";
+  const parentPost = comment.parentElement.parentElement;
 
+  const existingReply = parentPost.nextElementSibling;
 
-    // CLOSE BUTTON
-    const closeReply = document.createElement("div");
-    closeReply.className = "closeReply";
+  if (existingReply && existingReply.classList.contains("create_reply_container")) {
+      existingReply.remove();
+      return;
+  }
 
-    closeReply.addEventListener("click", function (event) {
-        replyPost(this.parentElement.parentElement);
-        event.stopPropagation();
-    });
+  const createReplyContainer = document.createElement("div");
+  createReplyContainer.className = "create_reply_container";
 
-    const closeIcon = document.createElement("i");
-    closeIcon.className = "fa-regular fa-circle-xmark fa-2xl";
+  const closeReply = document.createElement("div");
+  closeReply.className = "closeReply";
 
-    closeReply.appendChild(closeIcon);
+  const closeIcon = document.createElement("i");
+  closeIcon.className = "fa-regular fa-circle-xmark fa-2xl";
 
+  closeReply.appendChild(closeIcon);
 
-    // REPLY TO TEXT
-    const replyTo = document.createElement("div");
-    replyTo.className = "reply_to";
+  closeReply.addEventListener("click", () => {
+      createReplyContainer.remove();
+  });
 
-    const replyText = document.createTextNode("Replying to ");
+  const textarea = document.createElement("textarea");
+  textarea.className = "reply_content";
+  textarea.placeholder = "Reply";
 
-    const strongUser = document.createElement("strong");
-    strongUser.innerHTML = reply.username;
+  const postBtn = document.createElement("button");
+  postBtn.className = "confirm_post";
+  postBtn.innerText = "Post";
 
-    replyTo.appendChild(replyText);
-    replyTo.appendChild(strongUser);
+  createReplyContainer.append(closeReply, textarea, postBtn);
 
-
-    // TEXTAREA
-    const textarea = document.createElement("textarea");
-    textarea.className = "reply_content";
-    textarea.name = "content";
-    textarea.placeholder = "Reply";
-
-
-    // ERROR MESSAGE
-    const errorDiv = document.createElement("div");
-
-    const errorP = document.createElement("p");
-    errorP.className = "reply_error";
-
-    errorDiv.appendChild(errorP);
-
-
-    // CONFIRM POST CONTAINER
-    const confirmPostContainer = document.createElement("div");
-    confirmPostContainer.className = "confirm_post_container";
-
-    const confirmPostBtn = document.createElement("button");
-    confirmPostBtn.className = "confirm_post";
-    confirmPostBtn.textContent = "Post";
-
-
-   
-
-    confirmPostContainer.appendChild(confirmPostBtn);
-
-
-    // APPEND EVERYTHING
-    createReplyContainer.appendChild(closeReply);
-    createReplyContainer.appendChild(replyTo);
-    createReplyContainer.appendChild(textarea);
-    createReplyContainer.appendChild(errorDiv);
-    createReplyContainer.appendChild(confirmPostContainer);
-    
-
-    // INSERT AFTER COMMENT
-    alert("TEST")
-    comment.parentElement.parentElement.insertAdjacentElement("afterend", createReplyContainer);
-    confirmPostBtn.addEventListener("click", function () {
-        alert("SENT")
-        reply_post("MartinStefanGay", reply.username, user_reply.innerText, textarea.value, id)
-    });
-    });
+  parentPost.insertAdjacentElement("afterend", createReplyContainer);
+});
 
 
     userPost.append(iconNameDate,post_contents, interaction_container)
