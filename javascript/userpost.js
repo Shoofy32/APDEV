@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadPosts(id)
 })
 async function loadPost(id) {
-  const response = await fetch(`http://localhost:5000/post/${id}`);
+  const response = await fetch(`http://localhost:3000/post/${id}`);
   const post = await response.json()
  
   
@@ -59,6 +59,18 @@ async function loadPost(id) {
   const post_title = document.createElement('h3')
   post_title.classList.add("title_post")
   post_title.innerText = post.post_title
+
+  const tags_post = document.createElement('div')
+        tags_post.classList.add("tags_post")
+        let tags = post.tags
+        for(let tag of tags) {
+            const p_tag = document.createElement('p')
+            p_tag.classList.add('tag')
+            p_tag.add
+            p_tag.innerText = tag
+            tags_post.append(p_tag)
+        }
+    
 
 
   const post_body = document.createElement('p')
@@ -227,7 +239,7 @@ async function loadPost(id) {
   interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
 
 
-  post_container.append(post_info, post_title, post_body, interaction_container)
+  post_container.append(post_info, post_title, tags_post,post_body, interaction_container)
 
   all_posts.append(post_container)
 
@@ -246,7 +258,7 @@ async function reply_post(username, replying_to, original_content, reply_content
 
   
 
-  await fetch("http://localhost:5000/add-reply", {
+  await fetch("http://localhost:3000/add-reply", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username,replying_to, original_content, reply_content, unique_post_id })

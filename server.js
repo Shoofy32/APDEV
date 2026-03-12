@@ -22,7 +22,9 @@ const postSchema = new mongoose.Schema({
   post_title: String,
   post_content: String,
   forum_name: String,
-  tags: [String]
+  tags: [String],
+  total_likes : Number
+  
   
 });
 
@@ -115,16 +117,6 @@ function hash(password) {
 
 // ------ ------ Post backend ------ ------
 
-// CREATE
-app.post("/add-user", async (req, res) => {
-
-    const {username, post_title,post_content, forum_name } = req.body;
-    const newPost = new Post({ username,post_title, post_content, forum_name });
-    await newPost.save();
-    res.json({ message: "User added" });
-
-});
-
 // READ
 app.get("/users", async (req, res) => {
 
@@ -152,8 +144,8 @@ app.put("/update-user/:id", async (req, res) => {
 
 // CREATE
 app.post("/add-post", async (req, res) => {
-  const {username, post_title,post_content, forum_name } = req.body;
-  const newPost = new Post({ username,post_title, post_content, forum_name });
+  const {username, post_title,post_content, forum_name, tags, total_likes } = req.body;
+  const newPost = new Post({ username,post_title, post_content, forum_name, tags, total_likes});
   await newPost.save();
   res.json({ message: "User added" });
 });

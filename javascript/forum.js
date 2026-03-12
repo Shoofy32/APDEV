@@ -1,6 +1,6 @@
 // ===== GLOBAL VARIABLES =====
 let post;
-let forum_name;
+let forum_name
 
 
 // ===== MAIN INITIALIZATION =====
@@ -8,28 +8,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const post = document.getElementById("post_button");
     const forumTitle = document.querySelector("#forum_head h5");
-
+    forum_name = document.getElementById("forum_head").firstChild.innerText
     if (forumTitle && post) {
         const forum_name = forumTitle.innerText;
         post.addEventListener("click", () => openPostPage(forum_name));
     }
 
-        loadPosts();   // backend call still runs
+        loadPosts();   
     
 
 });
 
 
 // ===== NAVIGATION =====
-function openPostPage() {
-    window.location.href = `createpost.html?forum=${forum_name}`;
+function openPostPage(name) {
+    window.location.href = `createpost.html?forum=${name}`;
 }
 
 
 // ===== LOAD POSTS =====
 async function loadPosts() {
 
-    const response = await fetch("http://localhost:5000/posts");
+    const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
 
     const all_posts = document.querySelector(".all_posts");
@@ -57,12 +57,24 @@ async function loadPosts() {
         title.classList.add("title_post");
         title.innerText = post.post_title;
 
+        const tags_post = document.createElement('div')
+        tags_post.classList.add("tags_post")
+        let tags = post.tags
+        for(let tag of tags) {
+            const p_tag = document.createElement('p')
+            p_tag.classList.add('tag')
+            p_tag.add
+            p_tag.innerText = tag
+            tags_post.append(p_tag)
+        }
+    
+
         const description = document.createElement("p");
         description.classList.add("description_short_post");
         description.innerText = post.post_content;
 
         iconNameDate.append(profile, namePost, datePost);
-        userPost.append(iconNameDate, title, description);
+        userPost.append(iconNameDate, title, tags_post, description);
 
         userPost.addEventListener("click", () => {
             const post_id = post._id;
