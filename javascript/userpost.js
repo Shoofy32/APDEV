@@ -179,13 +179,7 @@ comment.addEventListener("click", function () {
       id
     );
 
-    addReplyToDOM(
-      "MartinStefanGay",
-      userh5.innerText,
-      post_body.innerText,
-      textarea.value
-    );
-
+    
     createReplyContainer.remove();
   });
 });
@@ -250,7 +244,7 @@ async function reply_post(username, replying_to, original_content, reply_content
 
   
 
-  await fetch("http://localhost:5000/add-reply", {
+  await fetch("http://localhost:3000/add-reply", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username,replying_to, original_content, reply_content, unique_post_id })
@@ -259,7 +253,7 @@ async function reply_post(username, replying_to, original_content, reply_content
 
 
 async function loadPosts(id) {
-  const response = await fetch(`http://localhost:5000/replies/${id}`);
+  const response = await fetch(`http://localhost:3000/replies/${id}`);
   const replies = await response.json();
   all_posts = document.getElementsByClassName('all_posts')[0]
   
