@@ -28,6 +28,15 @@ const postSchema = new mongoose.Schema({
   
 });
 
+const likedPosts = new mongoose.Schema({
+  username: String,
+  liked_posts_id : [String]
+
+  
+  
+});
+
+
 
 // User login and registration Schema
 const userSchema = new mongoose.Schema({
@@ -204,4 +213,13 @@ app.get("/delete-all-rep", async (req, res) => {
   
   await Reply.deleteMany({})
   res.json({ message: "All posts deleted" });
+});
+
+app.delete("/post/:id", async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.json({ message: "Post deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });

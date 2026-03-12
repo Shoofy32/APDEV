@@ -8,13 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const post = document.getElementById("post_button");
     const forumTitle = document.querySelector("#forum_head h5");
-    forum_name = document.getElementById("forum_head").firstChild.innerText
+   
+    
     if (forumTitle && post) {
         const forum_name = forumTitle.innerText;
         post.addEventListener("click", () => openPostPage(forum_name));
     }
-
-        loadPosts();   
+        
+        loadPosts(forumTitle.innerText);   
     
 
 });
@@ -27,16 +28,17 @@ function openPostPage(name) {
 
 
 // ===== LOAD POSTS =====
-async function loadPosts() {
+async function loadPosts(name) {
 
     const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
 
     const all_posts = document.querySelector(".all_posts");
-
+    
     posts.forEach(post => {
-
+        if(post.forum_name === name) {
         const userPost = document.createElement("div");
+        userPost.id = post._id
         userPost.classList.add("post");
 
         const iconNameDate = document.createElement("div");
@@ -74,7 +76,99 @@ async function loadPosts() {
         description.innerText = post.post_content;
 
         iconNameDate.append(profile, namePost, datePost);
-        userPost.append(iconNameDate, title, tags_post, description);
+
+        //Interaction Containers
+        const interaction_container = document.createElement("div")
+        interaction_container.classList.add("stats_post")
+
+        const like = document.createElement('div')
+        like.classList.add('counter_container')
+
+        const i = document.createElement('i')
+        i.classList.add('fa-regular')
+        i.classList.add('fa-thumbs-up')
+
+        const total_likes = document.createElement('p')
+        total_likes.classList.add('like_counter')
+        total_likes.innerText = 0
+        like.append(i, total_likes)
+
+        const dislike = document.createElement('div')
+        dislike.classList.add('counter_container')
+
+        const i2 = document.createElement('i')
+        i2.classList.add('fa-regular')
+        i2.classList.add('fa-thumbs-down')
+
+        const total_dislikes = document.createElement('p')
+        total_dislikes.classList.add('like_counter')
+        total_dislikes.innerText = 0
+        dislike.append(i2, total_dislikes)
+
+        const comment = document.createElement('div')
+        comment.classList.add('comment_container')
+
+        const i3 = document.createElement('i')
+        i3.classList.add('fa-regular')
+        i3.classList.add('fa-comment')
+
+        const reply = document.createElement('p')
+        reply.classList.add('comment_counter')
+        reply.innerText = "0"
+        comment.append(i3, reply)
+
+
+        const challenge = document.createElement('div')
+        challenge.classList.add('challenge_button')
+
+        const i4 = document.createElement('i')
+        i4.classList.add('fa-solid')
+        i4.classList.add('fa-bullseye')
+
+        const challenge_text = document.createElement('p')
+        challenge_text.classList.add('challenge_text')
+        challenge_text.innerText = "Challenge"
+
+        
+        challenge.append(i4, challenge_text)
+
+        const delete_edit_container = document.createElement('div')
+        delete_edit_container.classList.add('delete_edit_container')
+        const delete_button = document.createElement('button')
+        delete_button.classList.add("delete_button")
+        delete_button.addEventListener("click", function(e) {
+            e.stopPropagation()
+            e.preventDefault()
+            alert("DELETE")
+            deletePost(post._id)
+        })
+
+        const delete_text = document.createElement('h4')
+        delete_text.innerText = "Delete"
+
+        const delete_image = document.createElement('i')
+        delete_image.classList.add('fa-regular', 'fa-trash-can')
+
+        delete_button.append(delete_image, delete_text)
+
+        const edit_button = document.createElement('button')
+        edit_button.classList.add("edit_button")
+        const edit_text = document.createElement('h4')
+        edit_text.innerText = "Edit"
+
+        const edit_image = document.createElement('i')
+        edit_image.classList.add('fa-solid', 'fa-pen-to-square')
+
+
+        edit_button.append(edit_image, edit_text)
+        delete_edit_container.append(delete_button, edit_button)
+
+        interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+
+
+
+
+        userPost.append(iconNameDate, title, tags_post, description, interaction_container);
 
         userPost.addEventListener("click", () => {
             const post_id = post._id;
@@ -82,6 +176,9 @@ async function loadPosts() {
         });
 
         all_posts.append(userPost);
+
+        }
+        
 
     });
 
@@ -131,5 +228,13 @@ function setupButtons() {
         });
 
     });
+
+}
+
+async function deletePost(id) {
+
+  await fetch(`http://localhost:3000/post/${id}`, {
+    method: "DELETE"
+  });
 
 }
