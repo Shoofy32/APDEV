@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const crypto = require("crypto");
 
 const app = express();
 
@@ -32,7 +33,8 @@ const userSchema = new mongoose.Schema({
     username: String,
     email: String,
     password: String,
-    bio: String
+    bio: String,
+    likes: Number
     
 });
 
@@ -67,8 +69,9 @@ app.post("/register", async (req, res) => {
 
               username: username,
               email: email,
-              password: password,
-              bio: ""
+              password: hash(password),
+              bio: "Describe yourself...",
+              likes: 0
 
           });
 
@@ -90,7 +93,7 @@ app.post("/login", async (req,res) => {
   try {
     const {username, password} = req.body;
 
-    const found = await User.find({ $and: [{username: username},{password: password}]});
+    const found = await User.find({ $and: [{username: username},{password: hash(password)}]});
 
     if(found){
       return res.status(201).json({success: true, message: "Login successful, welcome back!"});
@@ -103,6 +106,12 @@ app.post("/login", async (req,res) => {
     console.error(err);
   }
 });
+
+function hash(password) {
+  const hash = crypto.createHash('sha256');
+  hash.update(password);
+  return hash.digest('hex');
+}
 
 // ------ ------ Post backend ------ ------
 
@@ -140,10 +149,6 @@ app.put("/update-user/:id", async (req, res) => {
     res.json({ message: "User updated" });
 
 });
-
-
-
-
 
 // CREATE
 app.post("/add-post", async (req, res) => {
