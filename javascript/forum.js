@@ -137,7 +137,6 @@ async function loadPosts(name) {
         const delete_button = document.createElement('button')
         delete_button.classList.add("delete_button")
         delete_button.addEventListener("click", function(e) {
-            
             deletePost(post._id)
         })
 
@@ -167,11 +166,6 @@ async function loadPosts(name) {
 
 
         userPost.append(iconNameDate, title, tags_post, description, interaction_container);
-
-        userPost.addEventListener("click", () => {
-            const post_id = post._id;
-            window.location.href = `userpost.html?id=${post_id}`;
-        });
 
         all_posts.append(userPost);
 
