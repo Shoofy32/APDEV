@@ -104,13 +104,13 @@ app.post("/login", async (req,res) => {
   try {
     const {username, password} = req.body;
 
-    const found = await User.find({ $and: [{username: username},{password: hash(password)}]});
-
-    if(found){
-      return res.status(201).json({success: true, message: "Login successful, welcome back!"});
+    const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
+    
+    if(!found){
+      return res.status(409).json({ success: false, message: "Incorrect username or password." });
     }
     else{
-      return res.status(409).json({ success: false, message: "Incorrect username or password." });
+      return res.status(201).json({success: true, message: "Login successtestful, welcome back!"});
     }
   }
   catch (err){

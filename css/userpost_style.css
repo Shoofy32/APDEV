@@ -397,9 +397,9 @@ a {
 
 
 /* Challenge - Bet Likes Button */
-#postBet{
+.postBet{
 
-    width: 100px;
+    width: 200px;
     height:45px;
 
     margin-left: 15px;
