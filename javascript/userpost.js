@@ -63,6 +63,12 @@
     const post_body = document.createElement('p')
     post_body.classList.add("description_short_post")
     post_body.innerText = post.post_content
+    //Check if it is edited
+    if(post.is_edited === true) {
+            const strongEdited = document.createElement("strong")
+            strongEdited.innerHTML = " (edited)"
+            post_body.append(strongEdited)
+    }
     
     //Interaction Container (likes, dislikes, reply)
     const interaction_container = document.createElement("div")
@@ -182,9 +188,11 @@
 
     replies.forEach(reply => {
 
+        
         const userPost = document.createElement("div");
         userPost.classList.add("reply");
         const reply_id  = reply._id
+        userPost.id = reply_id
 
         // Container
         const iconNameDate = document.createElement("div");
@@ -224,6 +232,15 @@
         const user_reply = document.createElement("p") //The reply paragraph div
         user_reply.classList.add("description_short_post")
         user_reply.innerHTML = reply.reply_content
+
+
+        //Check if it is edited
+        if(reply.is_edited) {
+  
+            const strongEdited = document.createElement("strong")
+            strongEdited.innerHTML = " (edited)"
+            user_reply.append(strongEdited)
+        }
         post_contents.append(replying_to_container)
         post_contents.append(user_reply)
 
@@ -334,15 +351,23 @@ async function deleteReply(id) {
 }
 
 async function addReply(username, replying_to, original_content, reply_content, unique_post_id) {
-  
+  const is_edited = false
   const zero = 0
   await fetch("http://localhost:3000/add-reply", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, replying_to, original_content, reply_content, unique_post_id,zero})
+    body: JSON.stringify({ username, replying_to, original_content, reply_content, unique_post_id,zero, is_edited})
   });
 
  
 
 }
 
+
+async function updateReply(id, reply_content, is_edited) {
+  await fetch(`http://localhost:3000/reply/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reply_content, is_edited})
+  });
+}

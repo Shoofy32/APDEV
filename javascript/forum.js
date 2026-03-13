@@ -74,6 +74,11 @@ async function loadPosts(name) {
         const description = document.createElement("p");
         description.classList.add("description_short_post");
         description.innerText = post.post_content;
+        if(post.is_edited === true) {
+            const strongEdited = document.createElement("strong")
+            strongEdited.innerHTML = " (edited)"
+            description.append(strongEdited)
+        }
 
         iconNameDate.append(profile, namePost, datePost);
 
@@ -158,6 +163,7 @@ async function loadPosts(name) {
 
 
         edit_button.append(edit_image, edit_text)
+       
         delete_edit_container.append(delete_button, edit_button)
 
         interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
@@ -229,4 +235,12 @@ async function deletePost(id) {
     method: "DELETE"
   });
 
+}
+
+async function updatePost(id, post_content, is_edited) {
+  await fetch(`http://localhost:3000/post/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ post_content, is_edited})
+  });
 }

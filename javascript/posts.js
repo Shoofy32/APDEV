@@ -405,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var parent_div = editButton.closest(".post, .reply");
         var contents = parent_div.querySelector(".description_short_post")
         var current_content = contents.innerText;
-
+        var parent_id = parent_div.id
         contents.innerHTML = 
         `<textarea id="editArea"> ${current_content}</textarea>
         <div id="edit_container">
@@ -419,7 +419,19 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
             e.preventDefault();
             contents.innerHTML = `<p>${textarea.value} <strong>(edited)</strong></p>`
+            //If its a post use updatePost
+           
+            if(parent_div.classList.contains("post")) {
+                updatePost(parent_id, textarea.value, true)
+            }
+
+
+
+            else if(parent_div.classList.contains("reply")) {
+                updateReply(parent_id, textarea.value, true)
+            }
         });
+
 
     }
 
