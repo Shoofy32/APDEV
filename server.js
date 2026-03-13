@@ -54,7 +54,8 @@ const replySchema = new mongoose.Schema({
   replying_to: String,
   original_content:String,
   reply_content: String,
-  unique_post_id: String
+  unique_post_id: String,
+  likes: Number
  
   
 });
@@ -104,13 +105,13 @@ app.post("/login", async (req,res) => {
   try {
     const {username, password} = req.body;
 
-    const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
-    
-    if(!found){
-      return res.status(409).json({ success: false, message: "Incorrect username or password." });
+    const found = await User.find({ $and: [{username: username},{password: hash(password)}]});
+
+    if(found){
+      return res.status(201).json({success: true, message: "Login successful, welcome back!"});
     }
     else{
-      return res.status(201).json({success: true, message: "Login successtestful, welcome back!"});
+      return res.status(409).json({ success: false, message: "Incorrect username or password." });
     }
   }
   catch (err){
@@ -142,6 +143,25 @@ app.delete("/delete-user/:id", async (req, res) => {
 
 });
 
+app.delete("/post/:id", async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.json({ message: "Post deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+app.delete("/reply/:id", async (req, res) => {
+  try {
+    await Reply.findByIdAndDelete(req.params.id);
+    res.json({ message: "Reply deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // UPDATE
 app.put("/update-user/:id", async (req, res) => {
 
@@ -160,8 +180,8 @@ app.post("/add-post", async (req, res) => {
 });
 
 app.post("/add-reply", async (req, res) => {
-  const {username, replying_to, original_content, reply_content, unique_post_id} = req.body;
-  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id });
+  const {username, replying_to, original_content, reply_content, unique_post_id, likes} = req.body;
+  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id, likes });
   await newReply.save();
   res.json({ message: "Reply added" });
 });
@@ -195,6 +215,14 @@ app.get("/post/:id", async (req, res) => {
   }
 });
 
+app.get("/reply/:id", async (req, res) => {
+  try {
+    const post = await Reply.findById(req.params.id);
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
 app.listen(3000, () => {
@@ -215,11 +243,3 @@ app.get("/delete-all-rep", async (req, res) => {
   res.json({ message: "All posts deleted" });
 });
 
-app.delete("/post/:id", async (req, res) => {
-  try {
-    await Post.findByIdAndDelete(req.params.id);
-    res.json({ message: "Post deleted" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});

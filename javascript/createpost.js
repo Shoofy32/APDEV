@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 async function addPost() {
-  alert(tags)
+  
   const username = "TheNiggaDude"
   const params = new URLSearchParams(window.location.search);
   const forum_name = params.get("forum");
