@@ -23,7 +23,8 @@ const postSchema = new mongoose.Schema({
   post_content: String,
   forum_name: String,
   tags: [String],
-  total_likes : Number
+  total_likes : Number,
+  is_edited :Boolean
   
   
 });
@@ -55,7 +56,8 @@ const replySchema = new mongoose.Schema({
   original_content:String,
   reply_content: String,
   unique_post_id: String,
-  likes: Number
+  likes: Number,
+  is_edited: Boolean
  
   
 });
@@ -171,17 +173,36 @@ app.put("/update-user/:id", async (req, res) => {
 
 });
 
+app.put("/post/:id", async (req, res) => {
+  try {
+    const { post_content, is_edited } = req.body;
+    await Post.findByIdAndUpdate(req.params.id, { post_content, is_edited});
+    res.json({ message: "Post updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put("/reply/:id", async (req, res) => {
+  try {
+    const { reply_content, is_edited } = req.body;
+    await Reply.findByIdAndUpdate(req.params.id, { reply_content, is_edited});
+    res.json({ message: "Post updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 // CREATE
 app.post("/add-post", async (req, res) => {
-  const {username, post_title,post_content, forum_name, tags, total_likes } = req.body;
-  const newPost = new Post({ username,post_title, post_content, forum_name, tags, total_likes});
+  const {username, post_title,post_content, forum_name, tags, total_likes, is_edited } = req.body;
+  const newPost = new Post({ username,post_title, post_content, forum_name, tags, total_likes, is_edited});
   await newPost.save();
   res.json({ message: "User added" });
 });
 
 app.post("/add-reply", async (req, res) => {
-  const {username, replying_to, original_content, reply_content, unique_post_id, likes} = req.body;
-  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id, likes });
+  const {username, replying_to, original_content, reply_content, unique_post_id, likes, is_edited} = req.body;
+  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id, likes, is_edited });
   await newReply.save();
   res.json({ message: "Reply added" });
 });

@@ -63,11 +63,12 @@ async function addPost() {
   const post_title = document.getElementById('title').value
   const post_content = document.getElementById('content').value
   const total_likes = 0
+  const is_edited = false
   
   await fetch("http://localhost:3000/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes})
+    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited})
   });
 
  
