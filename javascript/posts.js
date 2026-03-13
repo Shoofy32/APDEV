@@ -4,9 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if userpost to avoid loading backend in forum page
     if(window.location.pathname != "/html/forum.html"){
 
-        loadPost(id)
-  
+        //Fixes loadPosts happening before loadPost
+      (async () => {
+        await loadPost(id);
         loadPosts(id);
+      })();
 
     }
 
@@ -436,5 +438,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
 
 
