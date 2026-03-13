@@ -358,9 +358,9 @@ a {
 }
 
 /* Challenge - Bet Likes Button */
-#postBet{
+.postBet{
 
-    width: 100px;
+    width: 200px;
     height:45px;
 
     margin-left: 15px;
@@ -420,6 +420,13 @@ a {
 
     background-color: rgb(59, 73, 80);
     transform: scale(2, 2);
+
+}
+
+#challenge_container #closeChallenge:hover{
+
+    cursor: pointer;
+    color: rgb(255, 149, 110);
 
 }
 

@@ -17,8 +17,6 @@ header {
 
     border-bottom: 2px solid orange;
 
-    overflow: hidden; /* Hide elements if doesn't fit*/
-
     z-index: 3;
 
 
@@ -138,11 +136,32 @@ header .search_bar:has(input:focus){
 
 /* Homepage Header - Log in & Sign Up Buttons */
 header .log_sign_in{
-    display: grid; 
-    grid-template-columns: 1fr 1fr;
+
+    display: flex;
+
+    width: 200px;
 
     margin-left: auto;
     margin-right: 20px;
+
+}
+
+/* Homepage Header - Log in & Sign Up Buttons */
+/* Buttons */
+header button{
+
+    height: 40px;
+    width: 65px;
+
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+    float: left;
+
 
 }
 
@@ -204,6 +223,92 @@ header .log_sign_in button:hover{
 
 header .log_sign_in1{
 
+    width: 190px;
+
+    display: center;
+    justify-content: center;
     margin-top: 27px;
+
+}
+
+
+
+
+/* Added for likes and notifications */
+header .likes_container{
+
+    display: flex;
+
+    width: 100px;
+
+    margin-left: 14%;
+    margin-right: 10px;
+    
+}
+
+header .notification_container{
+
+    position: relative;
+
+}
+
+header .likes_container button, .notification_container button{
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding-right: 20px;
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+
+    border: none;
+
+    font-size: medium;
+
+}
+
+header .likes_container button{
+
+
+    width: 100px;
+
+}
+
+
+header .likes_container button:hover, .notification_container button:hover{
+
+    color: salmon;
+    cursor: pointer;
+
+}
+
+header .notification_dropdown{
+
+
+    position: absolute;
+
+
+    background-color: #37474f;
+
+    top: 50px;
+
+    border-radius: 5px;
+
+    z-index: 4;
+
+    visibility: hidden;
+
+}
+
+header .notification_dropdown.reveal_hidden{
+
+
+    visibility: visible;
 
 }
