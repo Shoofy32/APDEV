@@ -49,6 +49,9 @@
         <!-- Link JS File for forum load link interaction -->
         <script src = "../javascript/forumloadlink.js"></script>
         
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/notifications.js"></script>
+
     </head>
 
 
@@ -65,30 +68,51 @@
 
                 
                 <!-- Search bar -->
-                 <div class = "search_bar">
+                <div class = "search_bar">
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
                     <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
 
-                 </div>
+                </div>
 
+                <div class = "likes_container">
+                    <button class = "like_button"> <i class="fa-regular fa-thumbs-up fa-xl"></i> 0 </button>
+                </div>
 
-                <!-- Log In and Sign Up Buttons -->
+                <div class = "notification_container">
+                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> 0 </button>
+
+                    <div class = "notification_dropdown">
+
+                        <p> Notifications </p>
+
+                        <div class = "notification_content_container">
+
+                            
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="log_sign_in" id="topright">
-                <div class = "log_sign_in2" id="user">
 
-                    <p id="username" class="username">hello</p>
-                    <button id="logout" > Log out </button>
 
-                </div>
 
-                <div class = "log_sign_in1" id="anon">
+                    <div class = "log_sign_in2" id="user">
 
-                    <button onclick = "window.open('login.html', '_self')"> Log In </button>
-                    <button onclick = "window.open('registration.html', '_self')"> Sign Up </button>
+                        <p id="username" class="username">hello</p>
+                        <button id="logout" > Log out </button>
 
-                </div>
+                    </div>
+
+                    <!-- Log In and Sign Up Buttons -->
+                    <div class = "log_sign_in1" id="anon">
+
+                        <button onclick = "window.open('login.html', '_self')"> Log In </button>
+                        <button onclick = "window.open('registration.html', '_self')"> Sign Up </button>
+
+                    </div>
 
                 
                 </div>

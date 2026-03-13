@@ -35,8 +35,6 @@
         <!-- Link JS File for forum interaction -->
         <script src = "../javascript/forum.js"></script>
 
-        <!-- Link JS File for posts interaction -->
-        <script src = "../javascript/posts.js"></script>
 
     </head>
 
@@ -214,6 +212,44 @@
 
         
     <script src="../javascript/userpost.js" charset="utf-8"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script src = "../javascript/posts.js"></script>
+
+
+
+        <!-- Div contains the challenge container -->
+        <div class = "challenge" id = "challenge_container">
+
+            <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+            <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                <button id = "closeChallenge"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+            </div>
+
+            <h2 class = "roll_20"> Roll D20 </h2>
+
+            <p class = "roll_20_number"></p>
+
+
+            <div class = "dicebg">
+                <img src="../../resources/images/d20.png">
+            </div>
+
+            <p class = "result"> Result </p>
+
+            <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+            <div class = "bet_container">
+
+                <p> Bet Likes </p>
+
+                <!-- stopPropogation prevents button from opening up userpost forum -->
+                <input class = "betLikes" type = "number" placeholder = "0"></input>
+                <button class = "postBet">Bet</button> 
+
+            </div>
+
+        </div>
+
     </body>
 
 </html>
