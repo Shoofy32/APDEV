@@ -227,7 +227,7 @@ header .log_sign_in1{
 
     display: center;
     justify-content: center;
-    margin-top: 27px;
+    align-content: center;
 
 }
 
@@ -238,6 +238,8 @@ header .log_sign_in1{
 header .likes_container{
 
     display: flex;
+    align-items: center;
+
 
     width: 100px;
 
@@ -252,7 +254,7 @@ header .notification_container{
 
 }
 
-header .likes_container button, .notification_container button{
+header .notification_container button{
 
     display: flex;
     align-items: center;
@@ -273,18 +275,50 @@ header .likes_container button, .notification_container button{
 
 }
 
-header .likes_container button{
+header .likes_container i{
 
-
-    width: 100px;
+    color: white;
 
 }
 
+header .likes_container p{
 
-header .likes_container button:hover, .notification_container button:hover{
+    margin-left: 5px;
+
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+}
+
+.notification_container button{
+
+    height: 58px;
+
+    padding-left: 5px;
+    border-radius: 0px;
+
+
+}
+
+/* Use when notification button is pressed, showing its active */
+.notification_container .notification_active{
+
+    background-color: #364650;
+
+}
+
+header .likes_container:hover, .notification_container button:hover{
 
     color: salmon;
     cursor: pointer;
+
+}
+
+header .likes_container:hover i, header .likes_container:hover p{
+
+    color: salmon;
 
 }
 
@@ -293,18 +327,30 @@ header .notification_dropdown{
 
     position: absolute;
 
+    height: 200px;
+    max-height: 400px;
+
+    width: 300px;
+
+    top: 60px;
+    right: 0px;
+
+    font-family: 'Inter', Arial;
+    
+    border: 2px solid #1A1D1A;
 
     background-color: #37474f;
 
-    top: 50px;
+    box-shadow: 0px 5px 10px #26413C;
 
-    border-radius: 5px;
-
-    z-index: 4;
+    z-index: 999;
 
     visibility: hidden;
 
+    overflow-y: auto;
+
 }
+
 
 header .notification_dropdown.reveal_hidden{
 
@@ -312,3 +358,110 @@ header .notification_dropdown.reveal_hidden{
     visibility: visible;
 
 }
+
+header .notifications_header{
+
+    font-size: 20px;
+    font-weight: 700;
+    color: salmon;
+
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #1A1D1A;
+
+}
+
+header .icon_name_challenge_container{
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+
+}
+
+
+header .challenge_notification{
+
+    background-color: #1A1D1A;
+    border-left: 4px solid coral;
+
+    margin-bottom: 20px;
+
+}
+
+
+header .accept_deny_container{
+
+    display: flex;
+    justify-content: flex-end;
+
+
+    margin-right: 10px;
+
+    gap: 10px;
+
+
+}
+
+
+header .accept_challenge, header .deny_challenge{
+
+    display: flex;
+    justify-content: center;
+
+    height: 30px;
+    width: 20px;
+
+}
+
+header img{
+
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+
+    margin-left: 10px;
+
+}
+
+
+header .icon_name_challenge_container p{
+
+    margin-left: 10px;
+
+    color: white;
+
+}
+
+header .challenger_name{
+
+    font-weight: 700;
+
+}
+
+header .roll_likes_container{
+
+    display: flex;
+
+    margin-top: -20px;
+    margin-bottom: -20px;
+    margin-left: 30px;
+
+}
+
+header .roll_likes_container i{
+
+    color: white;
+
+}
+
+header .roll_likes_container p{
+
+    color: salmon;
+    font-weight: 700;
+
+}
+
+

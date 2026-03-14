@@ -76,20 +76,74 @@
 
                 </div>
 
+                <!-- Like Container for showing current likes user has -->
                 <div class = "likes_container">
-                    <button class = "like_button"> <i class="fa-regular fa-thumbs-up fa-xl"></i> 0 </button>
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i>
+                    <p class = "like_amount">25</p>
                 </div>
 
+                <!-- Notification Container for challenge notifications from other users -->
                 <div class = "notification_container">
-                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> 0 </button>
+                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
 
                     <div class = "notification_dropdown">
 
-                        <p> Notifications </p>
+                        <p class = "notifications_header"> Notifications </p>
 
                         <div class = "notification_content_container">
 
-                            
+                            <div class = "challenge_notification">
+
+
+                                <div class = "icon_name_challenge_container">
+
+                                    <img src = "../resources/users/discordmod.jpg">
+                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
+
+                                </div>
+
+
+                                <div class = "roll_likes_container">
+
+                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  15 </p>
+                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 25 </p>
+
+                                </div>
+
+                                <div class = "accept_deny_container">
+
+                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
+                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "challenge_notification">
+
+
+                                <div class = "icon_name_challenge_container">
+
+                                    <img src = "../resources/users/discordmod.jpg">
+                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
+
+                                </div>
+
+                                <div class = "roll_likes_container">
+
+                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  12 </p>
+                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 18 </p>
+
+                                </div>
+
+                                <div class = "accept_deny_container">
+
+                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
+                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
+
+                                </div>
+
+                            </div>                            
                         </div>
 
                     </div>
@@ -581,7 +635,7 @@
             </div>
 
             <!-- Latest Posts Tab -->
-            <div class = "dropdown_latest_posts">
+            <div class = "all_posts">
 
                 <!-- Container for the Post, Which When Clicked Opens the Userpost Page -->
 
@@ -655,44 +709,11 @@
                         </div>
 
                         <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
-                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+                        <div class = "challenge_button">
 
                             <i class="fa-solid fa-bullseye"></i>
                             
                             <p class = "challenge_text"> Challenge </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Div contains the challenge container -->
-                    <div class = "challenge" id = "challenge_container">
-
-                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-                        <div> <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
-                        </div>
-
-                        <h2 class = "roll_20"> Roll D20 </h2>
-
-                        <p class = "roll_20_number"></p>
-
-
-                        <div class = "dicebg">
-                            <img src="../resources/images/d20.png">
-                        </div>
-
-                        <p class = "result"> Result </p>
-
-                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
-                        <div class = "bet_container">
-
-                            <p> Bet Likes </p>
-
-                            <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
-                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
 
                         </div>
 
@@ -766,44 +787,11 @@
                         </div>
 
                         <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
-                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+                        <div class = "challenge_button">
 
                             <i class="fa-solid fa-bullseye"></i>
                             
                             <p class = "challenge_text"> Challenge </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Div contains the challenge container -->
-                    <div class = "challenge" id = "challenge_container">
-
-                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-                        <div> <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
-                        </div>
-
-                        <h2 class = "roll_20"> Roll D20 </h2>
-
-                        <p class = "roll_20_number"></p>
-
-
-                        <div class = "dicebg">
-                            <img src="../resources/images/d20.png">
-                        </div>
-
-                        <p class = "result"> Result </p>
-
-                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
-                        <div class = "bet_container">
-
-                            <p> Bet Likes </p>
-
-                            <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
-                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
 
                         </div>
 
@@ -876,7 +864,7 @@
                         </div>
 
                         <!-- Div contains challenge button and Links Through openChallenge When Pressed --> <!-- stopPropogation prevents button from opening up userpost forum -->
-                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement); event.stopPropagation();">
+                        <div class = "challenge_button">
 
                             <i class="fa-solid fa-bullseye"></i>
                             
@@ -885,40 +873,6 @@
                         </div>
 
                     </div>
-
-
-                    <!-- Div contains the challenge container -->
-                    <div class = "challenge" id = "challenge_container">
-
-                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-                        <div> <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
-                        </div>
-
-                        <h2 class = "roll_20"> Roll D20 </h2>
-
-                        <p class = "roll_20_number"></p>
-
-
-                        <div class = "dicebg">
-                            <img src="../resources/images/d20.png">
-                        </div>
-
-                        <p class = "result"> Result </p>
-
-                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
-                        <div class = "bet_container">
-
-                            <p> Bet Likes </p>
-
-                            <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
-                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
-
-                        </div>
-
-                    </div>
-
 
                 </div>
 
@@ -997,39 +951,6 @@
                     </div>
 
 
-                    <!-- Div contains the challenge container -->
-                    <div class = "challenge" id = "challenge_container" onclick = "event.stopPropagation()">
-
-                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-                        <div> <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement); event.stopPropagation();"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
-                        </div>
-
-                        <h2 class = "roll_20"> Roll D20 </h2>
-
-                        <p class = "roll_20_number"></p>
-
-
-                        <div class = "dicebg">
-                            <img src="../resources/images/d20.png">
-                        </div>
-
-                        <p class = "result"> Result </p>
-
-                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
-                        <div class = "bet_container">
-
-                            <p> Bet Likes </p>
-
-                            <!-- stopPropogation prevents button from opening up userpost forum -->
-                            <input class = "betLikes" type = "number" placeholder = "0" onclick = "event.stopPropagation();"></input>
-                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement); event.stopPropagation();">Bet</button> 
-
-                        </div>
-
-                    </div>
-
-
                 </div>
 
                 <div class = "post" onclick = "openPost()">
@@ -1094,7 +1015,7 @@
                         </div>
 
                         <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
-                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+                        <div class = "challenge_button">
 
                             <i class="fa-solid fa-bullseye"></i>
                             
@@ -1103,38 +1024,6 @@
                         </div>
 
                     </div>
-
-
-                    <!-- Div contains the challenge container -->
-                    <div class = "challenge" id = "challenge_container">
-
-                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-                        <div>
-                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
-                        </div>
-
-                        <h2 class = "roll_20"> Roll D20 </h2>
-
-                        <p class = "roll_20_number"></p>
-
-
-                        <div class = "dicebg">
-                            <img src="../resources/images/d20.png">
-                        </div>
-
-                        <p class = "result"> Result </p>
-
-                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
-                        <div class = "bet_container">
-
-                            <p> Bet Likes </p>
-                            <input class = "betLikes" type = "number" placeholder = "0"></input>
-                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
-
-                        </div>
-
-                    </div>
-
 
                 </div>
 
@@ -1200,7 +1089,7 @@
                         </div>
 
                         <!-- Div contains challenge button and Links Through openChallenge When Pressed -->
-                        <div class = "challenge_button" onclick = "openChallenge(this.parentElement.parentElement)">
+                        <div class = "challenge_button">
 
                             <i class="fa-solid fa-bullseye"></i>
                             
@@ -1210,36 +1099,6 @@
 
                     </div>
 
-
-                    <!-- Div contains the challenge container -->
-                    <div class = "challenge" id = "challenge_container">
-
-                        <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-                        <div>
-                            <button id = "closeChallenge" onclick = "openChallenge(this.parentElement.parentElement.parentElement)"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
-                        </div>
-
-                        <h2 class = "roll_20"> Roll D20 </h2>
-
-                        <p class = "roll_20_number"></p>
-
-
-                        <div class = "dicebg">
-                            <img src="../resources/images/d20.png">
-                        </div>
-
-                        <p class = "result"> Result </p>
-
-                        <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
-                        <div class = "bet_container">
-
-                            <p> Bet Likes </p>
-                            <input class = "betLikes" type = "number" placeholder = "0"></input>
-                            <button id = "postBet" onclick = "rollD20(this.parentElement.parentElement)">Bet</button> 
-
-                        </div>
-
-                    </div>
 
 
                 </div>
@@ -1306,6 +1165,42 @@
         </article>
 
 
+
+        <!-- Div contains the challenge container -->
+        <div class = "challenge" id = "challenge_container">
+
+            <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+            <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                <button id = "closeChallenge"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+            </div>
+
+            <h2 class = "roll_20"> Roll D20 </h2>
+
+            <div class = "challenger_stats_container">                
+
+            </div>
+
+            <p class = "roll_20_number"></p>
+
+
+            <div class = "dicebg">
+                <img src="../../resources/images/d20.png">
+            </div>
+
+            <p class = "result"> Result </p>
+
+            <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+            <div class = "bet_container">
+
+                <p> Bet Likes </p>
+
+                <!-- stopPropogation prevents button from opening up userpost forum -->
+                <input class = "betLikes" type = "number" placeholder = "0"></input>
+                <button class = "postBet">Bet</button> 
+
+            </div>
+
+        </div>
 
 
         

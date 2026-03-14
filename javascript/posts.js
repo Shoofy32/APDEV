@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Check if userpost to avoid loading backend in forum page
-    if(window.location.pathname != "/html/forum.html"){
+    if(window.location.pathname != "/html/forum.html" && window.location.pathname != "/html/homepage.html"){
 
         //Fixes loadPosts happening before loadPost
       (async () => {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
     const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
 
-    // Add event listener on all posts
+    // Add event listener on all posts for event delegating
     all_posts.addEventListener("click", function(event) {
 
         event.stopPropagation();
@@ -63,10 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // If pressed, open challenge container
     closeChallengeButton.addEventListener("click", openChallenge);
 
-    // If bet challenge button is pressed, call rollD@0
-    betChallengeButton.addEventListener("click", () => {
+    // If bet challenge button is pressed, call rollD20
+    betChallengeButton.addEventListener("click", (event) => {
 
-        rollD20(betChallengeButton.closest(".challenge"));
+        event.stopPropagation();
+
+        if(!betChallengeButton.dataset.challengeFromNotification)
+            rollD20(betChallengeButton.closest(".challenge"), true);
 
     });
 
@@ -168,18 +171,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Asynch Function Rolls a Pseduo-D20 to Display a Number Between 0-20.
-    async function rollD20(divElement){
+    async function rollD20(divElement, isRollForChallengingUser){
+
+        // Obtain the amount of likes the user has
+        var userCurrentLikesContainer = document.getElementsByClassName("like_amount")[0];
+        var userCurrentLikes = parseInt(userCurrentLikesContainer.textContent);
 
         // Obtain the Value of the Number of Likes Input Box
-        var likesElement = divElement.getElementsByClassName("betLikes")[0];
+        var likesValueContainer = divElement.getElementsByClassName("betLikes")[0];
+        var likesValue = likesValueContainer.value;
 
         // Obtain the Roll 20 Number and the Result Text Elements
         var displayResultNumberElement = divElement.getElementsByClassName("roll_20_number")[0];
         var displayResultElement = divElement.getElementsByClassName("result")[0];
 
 
-        // Checks if Input Box has a Positive Value
-        if(likesElement.value >= 1){
+
+        // Checks if Input Box has a Positive Value and the bet likes does not exceed what the user already has
+        if(likesValue >= 1 && likesValue <= userCurrentLikes){
 
             var roll = 0; // Stores the Result of the Roll
 
@@ -187,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // For loop, Iterates through numOfLoops with a loopDelay and Updates displayResultNumber's Text Content with a Number 0-20
             for(var i = 0; i < numOfLoops; i++){
 
-                roll = Math.floor(Math.random() * 20); // Roll a number 0-20
+                roll = Math.floor(Math.random() * 20) + 1; // Roll a number 1-20
 
                 displayResultNumberElement.textContent = roll; // Update Text Content with roll Value
 
@@ -195,27 +204,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
-            // Add a Special Color in the Event User rolls a 20 or 1.
+
+            // Add a Special Color in the Event User rolls a 20, 1, or neither.
             if(roll == 20)
                 displayResultElement.style.color = "orange";
             else if(roll == 1)
                 displayResultElement.style.color = "orangered";
+            else
+                displayResultElement.style.color = "#ff956e";
+
+
+            // Subtract bet amount from user's current likes
+            userCurrentLikesContainer.textContent = userCurrentLikes - likesValue;
+
+
+            // Checks if the roll was for challenging a user (false) or for being challenged (true)
+            if(isRollForChallengingUser)
+                createChallengeNotification(roll, likesValue) // Call function to create the challenge for the user who was challenged.
+
 
             // Update displayResultElement with Final Value
             displayResultElement.textContent = "You rolled a " + roll;
+            likesValueContainer.value = ""; // Reset Input Box to Contain 0
 
-            likesElement.value = 0; // Reset Input Box to Contain 0
+
+            return roll; // Return number roll so that other functions may use it
+
 
         }
-        else{
+        else if(likesValue < 1 && likesValue <= userCurrentLikes){
 
             // Display Error when Non-Positive Number is Inputted
             displayResultElement.textContent = "Please provide a positive number!";
             displayResultElement.style.color = "orangered";
 
         }
+        else{
+
+            // Display Error when user bet an amount greater than what they have
+            displayResultElement.textContent = "Bet can't exceed amount of likes user has!";
+            displayResultElement.style.color = "orangered";
+
+        }
+
+        return 0; // Return empty roll
 
     }
+
+
 
     // Create a new anonymous Promise object that will create a timer based on parameter input
     function timer(ms){
@@ -226,6 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return promise;
 
     }
+
 
     // Function controls whether to open the reply container or remove it based if the container already exists
     function replyPost(divElement){
@@ -240,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    
     // Store global variables for the name and description of the that was replied to 
     let userToReplyTo;
     let userReplyToDescription;
@@ -282,121 +320,120 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Function creates the reply after pressing the enter button on the reply container
-    window.uploadReply = function uploadReply(divElement){
-    alert("test")
+    function uploadReply(divElement){
+        alert("test")
 
-    const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
-    
-    const replyContent = document.getElementsByClassName("reply_content")[0]; // Reply content
-    const replyContainer = document.getElementsByClassName("create_reply_container")[0]; // Reply container
-
-    const replyError = document.getElementsByClassName("reply_error")[0]; // Reply error
-
-    // Show error if input is empty
-    if(replyContent.value === "")
-        replyError.innerHTML = `<strong>Reply can't be empty!</strong>`;
-    else{
-
-        // Reply Post HTML
-        replyError.innerHTML = ``;
-
-        const postReplyContainer = 
-        ` <div class="post">
-
-            <div class="icon_name_date_post">
-
-                <img src="../resources/users/kirk.jfif">
-                <h5 class="name_post">StefanHates</h5>
-                <p class="date_post">3/13/2026</p>
-
-            </div>
-
-            <!-- Description of post replied to -->
-            <div class="replying_to_container"><span class = "user_repliedto">${userToReplyTo.innerText} said:</span><br><br>
-                <p>
-                    ${userReplyToDescription.innerText}
-                </p>
-            </div>
-
-            <!-- Short Description of Post -->
-            <p class = "description_short_post"> 
-                ${replyContent.value}
-            </p>
-
-
-            <div class="stats_post">
-
-                <div class="counter_container">
-
-                    <i class="fa-regular fa-thumbs-up"></i>
-                    <p class="like_counter">0</p>
-
-                </div>
-
-                <div class="counter_container">
-
-                    <i class="fa-regular fa-thumbs-down"></i>
-                    <p class="like_counter">0</p>
-
-                </div>
-
-                <div class="reply_button">
-
-                    <i class="fa-regular fa-comment"></i>
-                    <p class="comment_counter">Reply</p>
-                    
-                </div>
-                
-                <div class="challenge_button">
-
-                    <i class="fa-solid fa-bullseye"></i>
-                    <p class="challenge_text">Challenge</p>
-
-                </div>
-                
-                <div class="delete_edit_container">
-
-                    <button class="delete_button">
-
-                        <i class="fa-regular fa-trash-can"></i>
-                        <h4>Delete</h4>
-
-                    </button>
-
-                    <button class="edit_button">
-
-                        <i class="fa-solid fa-pen-to-square">
-                        </i><h4>Edit</h4>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>`;
-
-        //Add reply to backend
-        addReply(
-            "StefanHates",
-            userToReplyTo.textContent,
-            userReplyToDescription.innerText,
-            replyContent.value,  
-            id,
-            0
-        );
-
-        // Insert post to the very end of the posts container
-        postContainer.insertAdjacentHTML("beforeend", postReplyContainer);
+        const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
         
-        // Empty input box and remove reply
-        replyContent.value = "";
-        replyContainer.remove();
+        const replyContent = document.getElementsByClassName("reply_content")[0]; // Reply content
+        const replyContainer = document.getElementsByClassName("create_reply_container")[0]; // Reply container
+
+        const replyError = document.getElementsByClassName("reply_error")[0]; // Reply error
+
+        // Show error if input is empty
+        if(replyContent.value === "")
+            replyError.innerHTML = `<strong>Reply can't be empty!</strong>`;
+        else{
+
+            // Reply Post HTML
+            replyError.innerHTML = ``;
+
+            const postReplyContainer = 
+            ` <div class="post">
+
+                <div class="icon_name_date_post">
+
+                    <img src="../resources/users/kirk.jfif">
+                    <h5 class="name_post">StefanHates</h5>
+                    <p class="date_post">3/13/2026</p>
+
+                </div>
+
+                <!-- Description of post replied to -->
+                <div class="replying_to_container"><span class = "user_repliedto">${userToReplyTo.innerText} said:</span><br><br>
+                    <p>
+                        ${userReplyToDescription.innerText}
+                    </p>
+                </div>
+
+                <!-- Short Description of Post -->
+                <p class = "description_short_post"> 
+                    ${replyContent.value}
+                </p>
+
+
+                <div class="stats_post">
+
+                    <div class="counter_container">
+
+                        <i class="fa-regular fa-thumbs-up"></i>
+                        <p class="like_counter">0</p>
+
+                    </div>
+
+                    <div class="counter_container">
+
+                        <i class="fa-regular fa-thumbs-down"></i>
+                        <p class="like_counter">0</p>
+
+                    </div>
+
+                    <div class="reply_button">
+
+                        <i class="fa-regular fa-comment"></i>
+                        <p class="comment_counter">Reply</p>
+                        
+                    </div>
+                    
+                    <div class="challenge_button">
+
+                        <i class="fa-solid fa-bullseye"></i>
+                        <p class="challenge_text">Challenge</p>
+
+                    </div>
+                    
+                    <div class="delete_edit_container">
+
+                        <button class="delete_button">
+
+                            <i class="fa-regular fa-trash-can"></i>
+                            <h4>Delete</h4>
+
+                        </button>
+
+                        <button class="edit_button">
+
+                            <i class="fa-solid fa-pen-to-square">
+                            </i><h4>Edit</h4>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>`;
+
+            //Add reply to backend
+            addReply(
+                "StefanHates",
+                userToReplyTo.textContent,
+                userReplyToDescription.innerText,
+                replyContent.value,  
+                id,
+                0
+            );
+
+            // Insert post to the very end of the posts container
+            postContainer.insertAdjacentHTML("beforeend", postReplyContainer);
+            
+            // Empty input box and remove reply
+            replyContent.value = "";
+            replyContainer.remove();
 
 
 
-    }
-
+        }
 
 
     }
@@ -436,6 +473,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     }
+
+
+
+    // Make functions globally accessible
+    window.uploadReply = uploadReply;
+    window.openChallenge = openChallenge;
+    window.rollD20 = rollD20;
+    window.timer = timer;
 
 });
 
