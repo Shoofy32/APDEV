@@ -47,10 +47,10 @@
     userh5.classList.add('name_post')
     userh5.innerText = post.username
 
-    //TODO ADD DATE LOGIC BACKEND
+  
     const date_post = document.createElement("p")
     date_post.classList.add("date_post")
-    date_post.innerHTML = new Date().toLocaleDateString()
+    date_post.innerHTML = post.date
     post_info.append(profile_picture, userh5, date_post)
 
     //Post contents
@@ -59,15 +59,24 @@
     post_title.classList.add("title_post")
     post_title.innerText = post.post_title
 
+    const tags_post = document.createElement('div')
+        tags_post.classList.add("tags_post")
+        let tags = post.tags
+        for(let tag of tags) {
+            const p_tag = document.createElement('p')
+            p_tag.classList.add('tag')
+            p_tag.add
+            p_tag.innerText = tag
+            tags_post.append(p_tag)
+    }
+
 
     const post_body = document.createElement('p')
     post_body.classList.add("description_short_post")
     post_body.innerText = post.post_content
     //Check if it is edited
     if(post.is_edited === true) {
-            const strongEdited = document.createElement("strong")
-            strongEdited.innerHTML = " (edited)"
-            post_body.append(strongEdited)
+      post_body.innerText = post_body.innerText + " (edited)"
     }
     
     //Interaction Container (likes, dislikes, reply)
@@ -83,7 +92,7 @@
 
     const total_likes = document.createElement('p')
     total_likes.classList.add('like_counter')
-    total_likes.innerText = 0
+    total_likes.innerText = post.total_likes
     like.append(i, total_likes)
 
     const dislike = document.createElement('div')
@@ -109,9 +118,7 @@
     reply.classList.add('comment_counter')
     reply.innerText = "Reply"
     comment.append(i3, reply)
-    comment.addEventListener("click", function(){
-        window.replyPost(post_container); 
-    })
+    
 
     const challenge = document.createElement('div')
     challenge.classList.add('challenge_button')
@@ -155,7 +162,7 @@
     interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
 
 
-    post_container.append(post_info, post_title, post_body, interaction_container)
+    post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
 
     all_posts.append(post_container)
 
@@ -169,7 +176,7 @@
 
  
     async function reply_post(username, replying_to, original_content, reply_content, unique_post_id ) {
-
+    
     
 
     await fetch("http://localhost:3000/add-reply", {
@@ -184,8 +191,8 @@
     const response = await fetch(`http://localhost:3000/replies/${id}`);
     const replies = await response.json();
     all_posts = document.getElementsByClassName('all_posts')[0]
-    
-
+    const response_post = await fetch(`http://localhost:3000/post/${id}`);
+    const post = await response_post.json()
     replies.forEach(reply => {
 
         
@@ -210,7 +217,7 @@
         // Date
         const datePost = document.createElement("p");
         datePost.classList.add("date_post");
-        datePost.textContent = new Date().toLocaleDateString();
+        datePost.textContent = reply.date
         iconNameDate.append(profile,name,datePost)
         
         //Content
@@ -228,6 +235,12 @@
     
         const replying_paragraph = document.createElement("p")
         replying_paragraph.innerHTML = reply.original_content
+        if(replying_paragraph.innerText.includes("(edited)")) {
+          replying_paragraph.innerHTML = replying_paragraph.innerText.replace("(edited)", "")
+          const strongEdited = document.createElement("strong")
+          strongEdited.innerHTML = " (edited)"
+          replying_paragraph.append(strongEdited)
+        }
         replying_to_container.append(span_reply, br1, br2, replying_paragraph)
         const user_reply = document.createElement("p") //The reply paragraph div
         user_reply.classList.add("description_short_post")
@@ -236,10 +249,11 @@
 
         //Check if it is edited
         if(reply.is_edited) {
-  
-            const strongEdited = document.createElement("strong")
-            strongEdited.innerHTML = " (edited)"
-            user_reply.append(strongEdited)
+          user_reply.innerHTML = user_reply.innerText.replace("(edited)", "")
+          const strongEdited = document.createElement("strong")
+          strongEdited.innerHTML = " (edited)"
+          user_reply.append(strongEdited)
+
         }
         post_contents.append(replying_to_container)
         post_contents.append(user_reply)
@@ -257,7 +271,8 @@
 
         const total_likes = document.createElement('p')
         total_likes.classList.add('like_counter')
-        total_likes.innerText = 0
+       
+        total_likes.innerText = reply.total_likes
         like.append(i, total_likes)
 
         const dislike = document.createElement('div')
@@ -310,8 +325,8 @@
         delete_image.classList.add('fa-regular', 'fa-trash-can')
         delete_button.append(delete_image, delete_text)
         delete_button.addEventListener("click", function(){
-            alert(reply_id)
             deleteReply(reply_id)
+            
         })
 
 
@@ -333,7 +348,7 @@
 
   
 
-
+  
         userPost.append(iconNameDate,post_contents, interaction_container)
         all_posts.append(userPost)
         
@@ -343,31 +358,50 @@
     }
 
 async function deleteReply(id) {
-  alert("backend deletion")
+ 
   await fetch(`http://localhost:3000/reply/${id}`, {
     method: "DELETE"
   });
 
 }
 
-async function addReply(username, replying_to, original_content, reply_content, unique_post_id) {
-  const is_edited = false
-  const zero = 0
+async function addReply(username, replying_to, original_content, reply_content, unique_post_id, parent_reply_id) {
+  const total_likes = 0
+  const date = new Date().toLocaleDateString();
   await fetch("http://localhost:3000/add-reply", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, replying_to, original_content, reply_content, unique_post_id,zero, is_edited})
+    body: JSON.stringify({ 
+      username, 
+      replying_to, 
+      original_content, 
+      reply_content, 
+      unique_post_id, 
+      total_likes,         
+      is_edited: false, 
+      parent_reply_id,
+      date
+
+    })
   });
-
- 
-
 }
 
 
-async function updateReply(id, reply_content, is_edited) {
+async function updateReply(id, reply_content, is_edited, original_content) {
+   ;
+
   await fetch(`http://localhost:3000/reply/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ reply_content, is_edited})
+    body: JSON.stringify({ reply_content, is_edited, original_content})
+  });
+ 
+}
+
+async function updateReplyLikes(id, increment) {
+  await fetch(`http://localhost:3000/reply/${id}/likes`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
   });
 }
