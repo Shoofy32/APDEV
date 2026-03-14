@@ -119,23 +119,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     updatePostLikes(parentPost.id, 1)
                 }
-            //When dislike is pressed subtrafct 1 like
+            //When dislike is pressed add 1 dislike
             else {
                 
-                    updatePostLikes(parentPost.id, -1)
+                    updatePostDislikes(parentPost.id, 1)
                 }
             }
             //Check if it is a reply
             if(parentPost.classList.contains("reply")) {
                 //When like is pressed add 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
-                    
+                   
                     updateReplyLikes(parentPost.id, 1)
                 }
             //When dislike is pressed subtrafct 1 like
-            else {
-                
-                    updateReplyLikes(parentPost.id, -1)
+                else {
+                   
+                    updateReplyLikes(parentPost.id, 1)
                 }
             }
            
@@ -151,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if(parentPost.classList.contains("post")) {
                 //When like is pressed again subtract 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
-                   
-                    updateReplyLikes(parentPost.id, -1)
+                    alert("test")
+                    updatePostLikes(parentPost.id, -1)
                 }
             //When dislike is pressed again add 1 like
                 else {
-                    updateReplyLikes(parentPost.id, 1)
+                    updatePostDislikes(parentPost.id, -1)
                 }
 
             }
@@ -168,9 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
                    
                     updateReplyLikes(parentPost.id, -1)
                 }
-            //When dislike is pressed again add 1 like
+                //When dislike is pressed again add 1 like
                 else {
-                    updateReplyLikes(parentPost.id, 1)
+                    updateReplyLikes(parentPost.id, -1)
                 }
 
             }
@@ -443,6 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 id,
                 replyPostId  //if replying to a post the parent id is added
             );
+            updateTotalComments(id, 1)
                 
        
 
