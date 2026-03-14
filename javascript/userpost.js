@@ -76,7 +76,10 @@
     post_body.innerText = post.post_content
     //Check if it is edited
     if(post.is_edited === true) {
-      post_body.innerText = post_body.innerText + " (edited)"
+      post_body.innerText = post_body.innerText
+      const strongEdited = document.createElement("strong")
+      strongEdited.innerHTML = " (edited)"
+      post_body.append(strongEdited)
     }
     
     //Interaction Container (likes, dislikes, reply)
@@ -236,6 +239,7 @@
         const replying_paragraph = document.createElement("p")
         replying_paragraph.innerHTML = reply.original_content
         if(replying_paragraph.innerText.includes("(edited)")) {
+         
           replying_paragraph.innerHTML = replying_paragraph.innerText.replace("(edited)", "")
           const strongEdited = document.createElement("strong")
           strongEdited.innerHTML = " (edited)"

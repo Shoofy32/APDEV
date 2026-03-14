@@ -179,7 +179,7 @@ app.put("/update-user/:id", async (req, res) => {
 app.put("/post/:id", async (req, res) => {
   try {
     const { post_content, is_edited, total_likes } = req.body;
-    //Allows us to pick which fields we want
+
     const updateFields = {};
     if (post_content !== undefined) updateFields.post_content = post_content;
     if (is_edited !== undefined)    updateFields.is_edited = is_edited;
@@ -187,11 +187,11 @@ app.put("/post/:id", async (req, res) => {
 
     await Post.findByIdAndUpdate(req.params.id, { $set: updateFields });
 
-    // Only cascade if content was actually edited
+    // ONE cascade only
     if (post_content !== undefined) {
       await Reply.updateMany(
         { unique_post_id: req.params.id },
-        { $set: { original_content: post_content } }
+        { $set: { original_content: post_content + " (edited)" } } // always edited if content changed
       );
     }
 
@@ -220,16 +220,16 @@ app.put("/post/:id/likes", async (req, res) => {
 app.put("/reply/:id", async (req, res) => {
   try {
     const { reply_content, is_edited, original_content } = req.body;
-    
+
     await Reply.findByIdAndUpdate(
-      req.params.id, 
+      req.params.id,
       { $set: { reply_content, is_edited, original_content } }
     );
 
-    // Cascade: if someone replied to this reply, update their original_content
+    // ONE cascade only
     await Reply.updateMany(
       { parent_reply_id: req.params.id },
-      { $set: { original_content: reply_content } }
+      { $set: { original_content: reply_content + " (edited)" } }
     );
 
     res.json({ message: "Reply updated" });

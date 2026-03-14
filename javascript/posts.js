@@ -479,6 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var textarea = document.getElementById("editArea");
         var save = document.getElementById("Save");
 
+       
         save.addEventListener("click", async function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -489,12 +490,12 @@ document.addEventListener("DOMContentLoaded", () => {
         //Save to backend in background
         if(parent_div.classList.contains("post")) {
             await updatePost(parent_id, textarea.value, true);
-            location.reload(); // reload after save so all cascaded replies update too
+            location.reload(); // reload after update so all cascaded replies update too without need for refresh
             }
         else if(parent_div.classList.contains("reply")) {
-            await updateReply(parent_id, textarea.value, true);
-            location.reload();
-            }
+            await updateReply(parent_id, textarea.value, true); 
+            location.reload(); 
+        }
 
         });
 
