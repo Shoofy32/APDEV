@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     tag_container = document.getElementById('tag_container');
     postTag = document.getElementById('postTag')
     addTags = document.getElementById('addTags')
-    alert(tag_add)
+  
 
     add_tag.addEventListener("click", function(e) {
       e.preventDefault()
@@ -56,21 +56,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 async function addPost() {
-
+  
   const username = "TheNiggaDude"
   const params = new URLSearchParams(window.location.search);
   const forum_name = params.get("forum");
+
   const post_title = document.getElementById('title').value
   const post_content = document.getElementById('content').value
   const total_likes = 0
   const is_edited = false
   const date = new Date().toLocaleDateString();
+  const total_dislikes = 0
+  const total_comments = 0
   await fetch("http://localhost:3000/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date})
+    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments})
   });
 
+ window.location.href = `forum.html?forum=${forum_name}`;
  
 
 }
