@@ -53,7 +53,7 @@ async function loadPosts(name) {
 
         const datePost = document.createElement("p");
         datePost.classList.add("date_post");
-        datePost.textContent = new Date().toLocaleDateString();
+        datePost.textContent = post.date
 
         const title = document.createElement("h3");
         title.classList.add("title_post");
@@ -75,6 +75,7 @@ async function loadPosts(name) {
         description.classList.add("description_short_post");
         description.innerText = post.post_content;
         if(post.is_edited === true) {
+            description.innerText = post.post_content.replace("(edited)", "")
             const strongEdited = document.createElement("strong")
             strongEdited.innerHTML = " (edited)"
             description.append(strongEdited)
@@ -95,7 +96,7 @@ async function loadPosts(name) {
 
         const total_likes = document.createElement('p')
         total_likes.classList.add('like_counter')
-        total_likes.innerText = 0
+        total_likes.innerText = post.total_likes
         like.append(i, total_likes)
 
         const dislike = document.createElement('div')
@@ -242,5 +243,13 @@ async function updatePost(id, post_content, is_edited) {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ post_content, is_edited})
+  });
+}
+
+async function updatePostLikes(id, increment) {
+  await fetch(`http://localhost:3000/post/${id}/likes`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
   });
 }

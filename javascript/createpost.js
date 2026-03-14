@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 async function addPost() {
-  alert(tags)
+
   const username = "TheNiggaDude"
   const params = new URLSearchParams(window.location.search);
   const forum_name = params.get("forum");
@@ -64,11 +64,11 @@ async function addPost() {
   const post_content = document.getElementById('content').value
   const total_likes = 0
   const is_edited = false
-  
+  const date = new Date().toLocaleDateString();
   await fetch("http://localhost:3000/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited})
+    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date})
   });
 
  

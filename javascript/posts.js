@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
         //Fixes loadPosts happening before loadPost
       (async () => {
         await loadPost(id);
+       
         loadPosts(id);
       })();
 
     }
+
 
     // Add eventlistener to the post container
     const all_posts = document.getElementsByClassName("all_posts")[0];
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if(challengeButton)
             openChallenge();
         else if(editButton)
+        
            editDescription(editButton);
         else if(deleteButton){
 
@@ -77,9 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function updates the like and dislike counter when pressed (increment or decrement)
     function updateCounter(buttonElement, divElement){
-
+        const parentPost = divElement.parentElement
         var counterElement = buttonElement.nextElementSibling; // Get the counter element
-
         var countValue = parseInt(counterElement.textContent); // Get the integer value of the counter element
 
         
@@ -89,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // If condition gets the other button Depending on which buttonElement is in th parameter
         if(buttonElement.classList.contains("fa-thumbs-up"))
             var otherButton = divElement.getElementsByClassName("fa-thumbs-down")[0]; // Get the thumbs down button
+
         else
             var otherButton = divElement.getElementsByClassName("fa-thumbs-up")[0]; // Get the thumbs up button
 
@@ -108,8 +111,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
             countValue++;
             buttonElement.dataset.clicked = "true"; // Switch clicked data- to true
-            
             buttonElement.style.color = "coral";
+            //Check if it is a post
+            if(parentPost.classList.contains("post")) {
+                //When like is pressed add 1 like
+                if(otherButton.classList.contains("fa-thumbs-down")) {
+                    
+                    updatePostLikes(parentPost.id, 1)
+                }
+            //When dislike is pressed subtrafct 1 like
+            else {
+                
+                    updatePostLikes(parentPost.id, -1)
+                }
+            }
+            //Check if it is a reply
+            if(parentPost.classList.contains("reply")) {
+                //When like is pressed add 1 like
+                if(otherButton.classList.contains("fa-thumbs-down")) {
+                    
+                    updateReplyLikes(parentPost.id, 1)
+                }
+            //When dislike is pressed subtrafct 1 like
+            else {
+                
+                    updateReplyLikes(parentPost.id, -1)
+                }
+            }
+           
 
         }
         else if(isClicked == true && otherButtonClicked == false){
@@ -118,6 +147,34 @@ document.addEventListener("DOMContentLoaded", () => {
             buttonElement.dataset.clicked = "false"; // Switch clicked data- to false
 
             buttonElement.style.color = "white";
+            //Check if post
+            if(parentPost.classList.contains("post")) {
+                //When like is pressed again subtract 1 like
+                if(otherButton.classList.contains("fa-thumbs-down")) {
+                   
+                    updateReplyLikes(parentPost.id, -1)
+                }
+            //When dislike is pressed again add 1 like
+                else {
+                    updateReplyLikes(parentPost.id, 1)
+                }
+
+            }
+
+            //Check if reply
+            if(parentPost.classList.contains("reply")) {
+                //When like is pressed again subtract 1 like
+                if(otherButton.classList.contains("fa-thumbs-down")) {
+                   
+                    updateReplyLikes(parentPost.id, -1)
+                }
+            //When dislike is pressed again add 1 like
+                else {
+                    updateReplyLikes(parentPost.id, 1)
+                }
+
+            }
+          
 
         }
 
@@ -243,17 +300,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Store global variables for the name and description of the that was replied to 
     let userToReplyTo;
     let userReplyToDescription;
-
+    let replyPostId //parent reply id
     // Function creates the reply container to be added in the posts container
     function createReply(divElement){
-
+    
     userToReplyTo = divElement.getElementsByClassName("name_post")[0]; // Name of the user replying to
     userReplyToDescription = divElement.getElementsByClassName("description_short_post")[0]; // Description of the user replying to
-
+    replyPostId = divElement.id;
     // Reply HTML
     const newReplyContainer = `<div class = "create_reply_container">
 
-                                <div class = "closeReply" onclick = " replyPost(this.parentElement.parentElement); event.stopPropagation()">
+                                <div class = "closeReply" onclick = "document.getElementsByClassName('create_reply_container')[0].remove(); event.stopPropagation()"> 
                                     <i class = "fa-regular fa-circle-xmark fa-2xl"></i>
                                 </div> 
 
@@ -268,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <div>
 
                                 <div class = "confirm_post_container">
-                                    <button class = "confirm_post" onclick = "uploadReply()">Post</button> 
+                                    <button class = "confirm_post" onclick = "uploadReply(${replyPostId.id})">Post</button> 
                                 </div>
                                 
 
@@ -283,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function creates the reply after pressing the enter button on the reply container
     window.uploadReply = function uploadReply(divElement){
-    alert("test")
+    console.log("replyPostId:", replyPostId)
 
     const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
     
@@ -291,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const replyContainer = document.getElementsByClassName("create_reply_container")[0]; // Reply container
 
     const replyError = document.getElementsByClassName("reply_error")[0]; // Reply error
-
+    const date = new Date().toLocaleDateString();
     // Show error if input is empty
     if(replyContent.value === "")
         replyError.innerHTML = `<strong>Reply can't be empty!</strong>`;
@@ -307,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <img src="../resources/users/kirk.jfif">
                 <h5 class="name_post">StefanHates</h5>
-                <p class="date_post">3/13/2026</p>
+                <p class="date_post">${date}</p>
 
             </div>
 
@@ -377,14 +434,17 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`;
 
         //Add reply to backend
-        addReply(
-            "StefanHates",
-            userToReplyTo.textContent,
-            userReplyToDescription.innerText,
-            replyContent.value,  
-            id,
-            0
-        );
+        
+            addReply(
+                "StefanHates",
+                userToReplyTo.textContent,
+                userReplyToDescription.innerText,
+                replyContent.value,  
+                id,
+                replyPostId  //if replying to a post the parent id is added
+            );
+                
+       
 
         // Insert post to the very end of the posts container
         postContainer.insertAdjacentHTML("beforeend", postReplyContainer);
@@ -408,6 +468,8 @@ document.addEventListener("DOMContentLoaded", () => {
         var contents = parent_div.querySelector(".description_short_post")
         var current_content = contents.innerText;
         var parent_id = parent_div.id
+        if(current_content.includes("(edited)"))
+           current_content = current_content.replace("(edited)", "")
         contents.innerHTML = 
         `<textarea id="editArea"> ${current_content}</textarea>
         <div id="edit_container">
@@ -417,27 +479,28 @@ document.addEventListener("DOMContentLoaded", () => {
         var textarea = document.getElementById("editArea");
         var save = document.getElementById("Save");
 
-        save.addEventListener("click", function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            contents.innerHTML = `<p>${textarea.value} <strong>(edited)</strong></p>`
-            //If its a post use updatePost
-           
-            if(parent_div.classList.contains("post")) {
-                updatePost(parent_id, textarea.value, true)
+       
+        save.addEventListener("click", async function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        //Update UI instantly
+        contents.innerHTML = `<p>${textarea.value} <strong>(edited)</strong></p>`;
+
+        //Save to backend in background
+        if(parent_div.classList.contains("post")) {
+            await updatePost(parent_id, textarea.value, true);
+            location.reload(); // reload after update so all cascaded replies update too without need for refresh
             }
+        else if(parent_div.classList.contains("reply")) {
+            await updateReply(parent_id, textarea.value, true); 
+            location.reload(); 
+        }
 
-
-
-            else if(parent_div.classList.contains("reply")) {
-                updateReply(parent_id, textarea.value, true)
-            }
         });
-
 
     }
 
 });
-
 
 
