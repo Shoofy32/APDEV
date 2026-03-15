@@ -316,6 +316,21 @@ app.put("/reply/:id/likes", async (req, res) => {
   }
 });
 
+app.put("/reply/:id/dislikes", async (req, res) => {
+  try {
+    const { increment } = req.body; 
+
+    await Reply.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { total_dislikes: increment } } 
+    );
+
+    res.json({ message: "dislikes updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 
 
