@@ -72,7 +72,6 @@ const replySchema = new mongoose.Schema({
 // Create the model for post and users
 const Post = mongoose.model("Post", postSchema);
 const User = mongoose.model("User", userSchema);
-
 const Reply = mongoose.model("Reply", replySchema);
 
 
@@ -324,6 +323,8 @@ app.put("/reply/:id/likes", async (req, res) => {
 
 
 // READ
+
+
 app.get("/posts", async (req, res) => {
   const users = await Post.find();
   res.json(users);

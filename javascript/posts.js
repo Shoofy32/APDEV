@@ -1,21 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-
+    const all_posts = document.getElementsByClassName("all_posts")[0];
     // Check if userpost to avoid loading backend in forum page
-    if(window.location.pathname != "/html/forum.html" && window.location.pathname != "/html/homepage.html"){
+    if((!window.location.pathname.endsWith("forum.html")) && (!window.location.pathname.endsWith("homepage.html"))){
 
-        //Fixes loadPosts happening before loadPost
-      (async () => {
+    
+    (async () => {  
         await loadPost(id);
-       
         loadPosts(id);
-      })();
+    })();
 
     }
 
-
     // Add eventlistener to the post container
-    const all_posts = document.getElementsByClassName("all_posts")[0];
+   
 
     const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
     const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
@@ -54,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
         // If post reply is clicked, and user is not in userpost and clicked on an edit area, open the post and load userpost.html
-        else if(post_reply && window.location.pathname != "/html/userpost.html" && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
+        else if(post_reply && !(window.location.pathname.endsWith("userpost.html")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
            
             openPost(post_reply.id);
 
@@ -377,13 +375,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Function creates the reply after pressing the enter button on the reply container
-    window.uploadReply = function uploadReply(divElement){
+  window.uploadReply = function uploadReply(divElement){
     console.log("replyPostId:", replyPostId)
 
-        const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
-        
-        const replyContent = document.getElementsByClassName("reply_content")[0]; // Reply content
-        const replyContainer = document.getElementsByClassName("create_reply_container")[0]; // Reply container
+    const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
+    
+    const replyContent = document.getElementsByClassName("reply_content")[0]; // Reply content
+    const replyContainer = document.getElementsByClassName("create_reply_container")[0]; // Reply container
 
     const replyError = document.getElementsByClassName("reply_error")[0]; // Reply error
     const date = new Date().toLocaleDateString();
@@ -392,82 +390,84 @@ document.addEventListener("DOMContentLoaded", () => {
         replyError.innerHTML = `<strong>Reply can't be empty!</strong>`;
     else{
 
-            // Reply Post HTML
-            replyError.innerHTML = ``;
+        // Reply Post HTML
+        replyError.innerHTML = ``;
 
-            const postReplyContainer = 
-            ` <div class="post">
+        const postReplyContainer = 
+        ` <div class="post">
 
-                <div class="icon_name_date_post">
+            <div class="icon_name_date_post">
 
                 <img src="../resources/users/kirk.jfif">
                 <h5 class="name_post">StefanHates</h5>
                 <p class="date_post">${date}</p>
 
-                </div>
+            </div>
 
-                <!-- Description of post replied to -->
-                <div class="replying_to_container"><span class = "user_repliedto">${userToReplyTo.innerText} said:</span><br><br>
-                    <p>
-                        ${userReplyToDescription.innerText}
-                    </p>
-                </div>
-
-                <!-- Short Description of Post -->
-                <p class = "description_short_post"> 
-                    ${replyContent.value}
+            <!-- Description of post replied to -->
+            <div class="replying_to_container"><span class = "user_repliedto">${userToReplyTo.innerText} said:</span><br><br>
+                <p>
+                    ${userReplyToDescription.innerText}
                 </p>
+            </div>
+
+            <!-- Short Description of Post -->
+            <p class = "description_short_post"> 
+                ${replyContent.value}
+            </p>
 
 
-                <div class="stats_post">
+            <div class="stats_post">
 
-                    <div class="counter_container">
+                <div class="counter_container">
 
-                        <i class="fa-regular fa-thumbs-up"></i>
-                        <p class="like_counter">0</p>
-
-                    </div>
-
-                    <div class="counter_container">
-
-                        <i class="fa-regular fa-thumbs-down"></i>
-                        <p class="like_counter">0</p>
-
-                    </div>
-
-                    <div class="reply_button">
-
-                        <i class="fa-regular fa-comment"></i>
-                        <p class="comment_counter">Reply</p>
-                        
-                    </div>
-                    
-                    <div class="challenge_button">
-
-                        <i class="fa-solid fa-bullseye"></i>
-                        <p class="challenge_text">Challenge</p>
-
-                    </div>
-                    
-                    <div class="delete_edit_container">
-
-                        <button class="delete_button">
-
-                            <i class="fa-regular fa-trash-can"></i>
-                            <h4>Delete</h4>
-
-                        </button>
-
-                        <button class="edit_button">
-
-                            <i class="fa-solid fa-pen-to-square">
-                            </i><h4>Edit</h4>
-
-                        </button>
-
-                    </div>
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <p class="like_counter">0</p>
 
                 </div>
+
+                <div class="counter_container">
+
+                    <i class="fa-regular fa-thumbs-down"></i>
+                    <p class="like_counter">0</p>
+
+                </div>
+
+                <div class="reply_button">
+
+                    <i class="fa-regular fa-comment"></i>
+                    <p class="comment_counter">Reply</p>
+                    
+                </div>
+                
+                <div class="challenge_button">
+
+                    <i class="fa-solid fa-bullseye"></i>
+                    <p class="challenge_text">Challenge</p>
+
+                </div>
+                
+                <div class="delete_edit_container">
+
+                    <button class="delete_button">
+
+                        <i class="fa-regular fa-trash-can"></i>
+                        <h4>Delete</h4>
+
+                    </button>
+
+                    <button class="edit_button">
+
+                        <i class="fa-solid fa-pen-to-square">
+                        </i><h4>Edit</h4>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>`;
 
         //Add reply to backend
         
@@ -483,26 +483,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 
        
 
-            //Add reply to backend
-            addReply(
-                "StefanHates",
-                userToReplyTo.textContent,
-                userReplyToDescription.innerText,
-                replyContent.value,  
-                id,
-                0
-            );
-
-            // Insert post to the very end of the posts container
-            postContainer.insertAdjacentHTML("beforeend", postReplyContainer);
-            
-            // Empty input box and remove reply
-            replyContent.value = "";
-            replyContainer.remove();
+        // Insert post to the very end of the posts container
+        postContainer.insertAdjacentHTML("beforeend", postReplyContainer);
+        
+        // Empty input box and remove reply
+        replyContent.value = "";
+        replyContainer.remove();
 
 
 
-        }
+    }
+
 
 
     }
@@ -547,14 +538,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-
-    // Make functions globally accessible
-    window.uploadReply = uploadReply;
-    window.openChallenge = openChallenge;
-    window.rollD20 = rollD20;
-    window.timer = timer;
-
-});
-
-
+})

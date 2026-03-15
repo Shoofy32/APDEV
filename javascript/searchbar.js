@@ -1,5 +1,5 @@
 import {showSearchResults} from "../javascript/searchresults.js"; // Import showSearchResults function
-
+import {tester} from "../javascript/searchresults.js"; // Import showSearchResults function
 // Make searchPost Global
 window.searchPost = searchPost;
 
@@ -22,7 +22,7 @@ function searchPost(searchElement, event){
 
             // Update localStorage and Refresh SearchResults
             localStorage.setItem("search-content", searchContent);
-            showSearchResults();
+            
 
         }
 
