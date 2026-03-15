@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //When dislike is pressed subtrafct 1 like
                 else {
                    
-                    updateReplyLikes(parentPost.id, 1)
+                    updateReplyDislikes(parentPost.id, 1)
                 }
             }
            
@@ -169,9 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
                    
                     updateReplyLikes(parentPost.id, -1)
                 }
-                //When dislike is pressed again add 1 like
+                //When dislike is pressed again remove 1 like
                 else {
-                    updateReplyLikes(parentPost.id, -1)
+                    updateReplyDislikes(parentPost.id, -1)
                 }
 
             }

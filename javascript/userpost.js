@@ -107,7 +107,7 @@
 
     const total_dislikes = document.createElement('p')
     total_dislikes.classList.add('like_counter')
-    total_dislikes.innerText = 0
+    total_dislikes.innerText = post.total_dislikes
     dislike.append(i2, total_dislikes)
 
     const comment = document.createElement('div')
@@ -288,7 +288,7 @@
 
         const total_dislikes = document.createElement('p')
         total_dislikes.classList.add('like_counter')
-        total_dislikes.innerText = 0
+        total_dislikes.innerText = reply.total_dislikes
         dislike.append(i2, total_dislikes)
 
         const comment = document.createElement('div')
@@ -404,6 +404,14 @@ async function updateReply(id, reply_content, is_edited, original_content) {
 
 async function updateReplyLikes(id, increment) {
   await fetch(`http://localhost:3000/reply/${id}/likes`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
+  });
+}
+
+async function updateReplyDislikes(id, increment) {
+  await fetch(`http://localhost:3000/reply/${id}/dislikes`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
