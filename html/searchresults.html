@@ -21,7 +21,7 @@
         <link rel= "stylesheet" type = "text/css" href = "../css/searchresults_style.css">
 
         <!-- Link CSS File for header css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/header_style.css">
+        <link rel= "stylesheet" type = "text/css" href = "../css/log_reg_header_style.css">
 
         <!-- Link CSS File for sidebar css design-->
         <link rel= "stylesheet" type = "text/css" href = "../css/sidebar_style.css">
@@ -85,12 +85,12 @@
         </article>
 
 
-       <!-- Contains the side bar -->
+        <!-- Contains the side bar -->
         <div class = "side_bar" id = "side_bar"> 
 
 
             <!-- Contains the clickable button that opens up the side bar-->
-            <div class = "clickable_container" id = "sidebar_button_container" onclick = "showSideBar()">
+            <div class = "clickable_container" id = "sidebar_button_container">
 
                 <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
 
@@ -102,7 +102,7 @@
                 <!-- Contains the home, trending, and your threads buttons -->
                 <div class = "side_bar_home">
 
-                    <button onclick = "window.open('homepage.html', '_self')"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;" onclick = ></i>
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i>
                          <span> Home </span> 
                     </button>
 
@@ -119,7 +119,7 @@
                 <!-- Contains the different topics you can search in the website -->
                 <div class = "side_bar_topics"> 
 
-                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+                    <div class = "side_bar_title_container">
 
                         <p class = "side_bar_title"> Popular Topics </p>
 
@@ -133,24 +133,24 @@
 
                         <div class = "spacing"> </div>
 
-                        <button onclick = "goToForum('Announcements')"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
-                            <span> Announcements </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
                         </button>
 
-                        <button onclick = "goToForum('Creative Writing')"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
-                            <span> Creative Writing </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Creative Writing </span> 
                         </button>
 
-                        <button onclick = "goToForum('Technology')"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
-                            <span> Technology </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
                         </button>
 
-                        <button> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
-                            <span> General Fiction </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Fiction </span> 
                         </button>
 
-                        <button> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
-                            <span> Q&A </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Q&A </span> 
                         </button>
                         
          
@@ -170,7 +170,7 @@
                 <!-- Contains the different resources you can search in the website -->
                 <div class = "side_bar_topics"> 
 
-                    <div class = "side_bar_title_container" onclick = "showSideBarContent(this)">
+                    <div class = "side_bar_title_container">
 
                         <p class = "side_bar_title"> Resources </p>
 
@@ -184,7 +184,9 @@
 
                         <div class = "spacing"> </div>
 
-                        <button> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> <span>  </span> Rules </button>
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  Rules </span> 
+                        </button>
 
                     </div>
 
@@ -195,6 +197,7 @@
             </div>
 
         </div>
+
 
 
         <div class = "search_results_general_container">

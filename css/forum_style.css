@@ -27,53 +27,6 @@ body {
 
 }
 
-
-.announcement_container {
-   
-   position: relative;
-   width: 300px;
-   left: 200px;
-   display: flex;
-   background-color: #3E5058;
-  
-     background-color: #8AB0AB;
-
-    border: 2px solid #3E5058;
-    border-radius: 3px;
-
-
-  
-}
-.announcement_head_container {
-    display: flex;
-    
-    
-    
-}
-.announcement_head_container img {
-   left: 30;
-    
-}
-.announcement_head {
-      width: 100%;
-    height: 50px;
-    
-    background-color: #26413C;
-
-    border-bottom: 2px solid #3E5058;
-    
-}
-.announcement {
-   padding-top: 20px;
-   padding-left: 10px;
-}
-
-.announcement_head h5 {
-
-    font-size: 20px;
-    color: white;
-
-}
 .thread_head_img {
 
     position: relative;
@@ -83,8 +36,12 @@ body {
 
 .thread_head_img img{
 
-    width: 850px;
-    height: 350px;
+    width: 91vw;
+    height: 200px;
+    object-fit: cover; 
+    object-position: center;
+
+    margin-left: -290px;
 
 }
 
@@ -139,11 +96,14 @@ body {
     margin-top: 5px;
     border-radius: 5px;
 }
-#forum_head> h5 {
+#forum_head > h5 {
 
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 50px;
+    font-weight: 800;
     color: coral;
+
+    margin: 0px;
+    margin-left: -40px;
 
 }
 .thread_head_container h5 {
@@ -152,8 +112,13 @@ body {
    
 }
 .thread_head_container p {
-    text-align: center;
+
+    font-size: 20px;
+    font-weight: 600;
     color: white;
+
+    margin-left: -120px;
+
 }
 .content_container {
     padding-top: 55px;
@@ -172,10 +137,9 @@ hr :not(.side_bar_content) {
     display: flex;
     flex-direction: column;
 
-    width: 850px;
+    width: 1150px;
 
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 80px;
 
 }
 
@@ -266,9 +230,14 @@ hr :not(.side_bar_content) {
 
 
 #forum_head {
+
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+
+    margin-left: -140px;
+    margin-top: 20px;
+
 }
 #forum_head button {
    position: relative;
@@ -296,26 +265,41 @@ hr :not(.side_bar_content) {
   border: 5px solid red;
   border-radius: 10px;
 }
-#post_button {
-  background: #ff7a3d;          
-  color: white;
-  margin-top: 10px;
+#forum_head #post_button {
 
-  border: none;
-  border-radius: 8px;
 
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 600;
+    position: absolute;
 
-  cursor: pointer;
+    left: 560px;
+    
+    width: 150px;
+    height: 50px;
 
-  box-shadow: 0 3px 8px rgba(0,0,0,.35);
-  transition: all .15s ease;
+    background: #ff7a3d;          
+    color: white;
+
+    margin-top: 10px;
+    margin-left: 520px;
+
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.35);
+    transition: all .15s ease;
+
 }
 #post_button:hover {
+
   background: #ff8c55;
   transform: translateY(-1px);
+
 }
 
 .Challenge {
@@ -468,5 +452,157 @@ hr :not(.side_bar_content) {
     border-color: orange;
 
     cursor: pointer;
+
+}
+
+
+
+/* CHANGED SIDE CONTENT FOR ANNOUNCEMENTS*/
+
+.home_side_content{
+
+    position: absolute;
+    height: 1000px;
+    width: 300px;
+
+    margin-left: auto;
+
+    left: 1325px;
+    top: 340px;
+
+}
+
+/* Home Side Content - Post and Threads Buttons Div */
+.home_side_content .post_and_threads_buttons{
+
+    display: flex;
+    align-items: center;
+
+    margin-left: 10px;
+
+}
+
+/* Home Side Content - Post and Threads Buttons*/
+/* Buttons */
+.home_side_content .post_and_threads_buttons button{
+
+    
+    height: 30px;
+    width: 125px;
+
+    font-size: small;
+    font-family: "Inter", Arial;
+    text-align: center;
+
+    margin-left: 10px;
+    margin-bottom: 30px;
+
+    color: white;
+    background-color: coral;
+    border: 2px solid #8AB0AB;
+    border-radius: 10px;
+
+}
+
+/* Home Side Content - Post and Threads Buttons*/
+/* Button On Hover */
+.home_side_content .post_and_threads_buttons button:hover{
+
+    background-color: rgb(227, 101, 54);
+
+    border-color: #3E5058;
+
+    cursor: pointer;
+
+}
+
+
+/* Home Side Content - Side Bar Divs */
+.home_side_content .recent_announcements, .statistics{
+
+    position: inline-block;
+
+    background-color: #8AB0AB;
+
+    border: 2px solid #3E5058;
+    border-radius: 3px;
+
+
+}
+
+/* Home Side Content - Recent Announcements Div */
+.home_side_content .recent_announcements{
+
+    height: 250px;
+
+}
+
+.recent_announcements p{
+
+    font-family: "Inter", Arial;
+    font-weight: 600;
+    font-size: 16px;
+    color: #3E5058;
+    margin-left: 10px;
+
+    text-decoration: underline;
+
+
+}
+
+.recent_announcements p:hover{
+
+    cursor: pointer;
+    color: #526c77;
+
+}
+
+
+/* Home Side Content - Statistics Div */
+.home_side_content .statistics{
+
+    height: 200px;
+
+    margin-top: 30px;
+
+}
+
+/* Home Side Content - Side Bar Title */
+.home_side_content .side_bar_title{
+    
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+
+    background-color: #26413C;
+
+    border-bottom: 2px solid #3E5058;
+
+}
+
+/* Home Side Content - Side Bar Title */
+/* h3 Title */
+.home_side_content .side_bar_title h3{
+    
+    font-size: 16px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+    float: left;
+
+}
+
+/* Home Side Content - Side Bar Title*/
+/* Icon */
+.home_side_content .side_bar_title i{
+   
+    margin-right: 10px;
+    margin-left: 10px;
+
+    float: left;
 
 }

@@ -2,6 +2,20 @@ a {
   text-decoration: none;
 }
 
+
+.all_posts{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
 /* Posts - Div Container that contains PFP, Username, and Date of Post */
 .icon_name_date_post{
 
