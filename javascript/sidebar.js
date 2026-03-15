@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add eventlistener to sidebar home button to open homepage.html
     sideBarHome.addEventListener("click" , () => {
-
-        window.location.pathname = "/html/homepage.html";
+        
+        window.location.pathname = "./html/homepage.html";
 
     });
 

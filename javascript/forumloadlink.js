@@ -4,18 +4,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // If current html is forum.html, load the forum information
-    if(window.location.pathname === "/html/forum.html")
+   if(window.location.pathname.endsWith("/forum.html")) {
         loadForum();
+    }
+        
+        
 
     // If current html is homepage.html, obtain the dropdownTitles and add event listeners to them to moveToForum
-    if(window.location.pathname === "/html/homepage.html"){
+    if(window.location.pathname.endsWith("/homepage.html")){
 
         const dropdownTitles = document.getElementsByClassName("forum_title"); // Dropdown titles
 
 
         for(let i = 0; i < dropdownTitles.length; i++)
             dropdownTitles[i].addEventListener("click", () => {
-        
+                
                 moveToForum(dropdownTitles[i].textContent.trim());
         
             });
@@ -35,45 +38,30 @@ document.addEventListener("DOMContentLoaded", () => {
 // ------------------ FUNCTIONS ------------------ //
 
 
-    // Function gets information from forumTitle and loadForum() and stores it to sessionStorage before opening forum.html
-    // Used by forum.html to load the needed information
+    
+    // Used by forum.html to load the needed information based on the title
     function moveToForum(forumTitle){
-
-        // Obtain image and description of forum by calling forumInformation
-        const [forumImage, forumDescription] = forumInformation(forumTitle);
-
-        // Add title, image, and description information to session storage
-        sessionStorage.setItem("forumTitle", forumTitle);
-        sessionStorage.setItem("forumImage", forumImage);
-        sessionStorage.setItem("forumDescription", forumDescription);
-
-        window.location.href = "forum.html";
-
+        window.location.href = `forum.html?forum=${encodeURIComponent(forumTitle)}`;
     }
 
 
-    // Function loads the forum type if inside forum.html. Information is obtained from sessionStorage
+    // Function loads the forum type if inside forum.html. Check the URL to determine title
     function loadForum(){
+        const forumTitle = decodeURIComponent(new URLSearchParams(window.location.search).get("forum"));
+        const [forumImage, forumDescription] = forumInformation(forumTitle);
+        //Static components
+        document.getElementsByClassName("forum_title")[0].textContent = forumTitle;
+        document.getElementsByClassName("forum_image")[0].src = forumImage;
+        document.getElementsByClassName("forum_description")[0].textContent = forumDescription;
 
-        // Get the forum information
-        const forumTitle = sessionStorage.getItem("forumTitle");
-        const forumImage = sessionStorage.getItem("forumImage");
-        const forumDescription = sessionStorage.getItem("forumDescription");
-
-        // Get corresponding elements to update for the forum
-        const forumTitleContainer = document.getElementsByClassName("forum_title")[0];
-        const forumImageContainer = document.getElementsByClassName("forum_image")[0];
-        const forumDescriptionContainer = document.getElementsByClassName("forum_description")[0];
-
-        // Update containers with the obtained forumInformation from sessionStorage
-        forumTitleContainer.textContent = forumTitle;
-        forumImageContainer.src = forumImage;
-        forumDescriptionContainer.textContent = forumDescription;
-
+        loadPosts(forumTitle);
+        //Event listener for post button
+        const post = document.getElementById("post_button");
+        if (post) post.addEventListener("click", () => openPostPage(forumTitle));
     }
 
 
-    // Function loads the forum type if inside forum.html. Information is obtained from sessionStorage
+    // Function loads the forum type if inside forum.html. Information is URL
     function forumInformation(type){
 
         var forumImage, forumDescription; // Stores image and description of forum

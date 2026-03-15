@@ -14,54 +14,155 @@ window.onload = function(){
         showSearchResults();
 
 }
-
+export async function tester() {
+    alert("test")
+}
 
 // Function that showsSearchResults Based on Search Result (Has Export so searchbar.js can utilize it)
-export function showSearchResults(){
+export async function showSearchResults(){
 
-    // Get the value of search-content in localStorage
     searchResult = localStorage.getItem("search-content");
-
-    // Obtain all Posts
-    var post = document.getElementsByClassName("post");
-    
-    // Obtain Query Counter Display and Query Result
+    var query_counter = 0;
     var query_counter_display = document.getElementsByClassName("query_counter")[0];
     var query_result = document.getElementsByClassName("search_query")[0];
-
-    var query_counter = 0; // Counter that Contains Number of Post with Similar Search Result
-
-    // Update search bar value to have searchResult
-    document.getElementsByClassName("search_bar")[0].value = searchResult;
-
-    // Change query result to the searchResult found in searchbar
     query_result.textContent = searchResult;
+    
 
-    // Loop thorugh the post elements
-    for(var i = 0; i < post.length; i++){
 
-        // Get Post Title of Post
-        var title_post = post[i].getElementsByClassName("title_post")[0];
 
-        // If title_post Contains the Text searchResults
-        if(title_post.textContent.includes(searchResult)){
+    const response = await fetch("http://localhost:3000/posts");
+    const posts = await response.json();
 
-            post[i].style.display = "block"; // Display Post
-            query_counter++; // Update Counter
+    const all_posts = document.getElementsByClassName('search_container')[0]
+    //Clear it first
+    const existingPosts = all_posts.getElementsByClassName("post");
+    while(existingPosts.length > 0)
+        existingPosts[0].remove();
+    
+    
+    posts.forEach(post => {
+        
+        if(post.post_title.includes(searchResult)) {
+            query_counter++;
+            const userPost = document.createElement("div");
+            userPost.id = post._id
+            userPost.classList.add("post");
 
-            highlightText(title_post, searchResult); // Call Highlight Text Function
+            const iconNameDate = document.createElement("div");
+            iconNameDate.classList.add("icon_name_date_post");
+
+            const profile = document.createElement("img");
+            profile.src = "../resources/users/kirk.jfif";
+
+            const namePost = document.createElement("p");
+            namePost.classList.add("name_post");
+            namePost.textContent = post.username;
+
+            const datePost = document.createElement("p");
+            datePost.classList.add("date_post");
+            datePost.textContent = post.date
+
+            const title = document.createElement("h3");
+            title.classList.add("title_post");
+            title.innerText = post.post_title;
+
+            const tags_post = document.createElement('div')
+            tags_post.classList.add("tags_post")
+            let tags = post.tags
+            for(let tag of tags) {
+                const p_tag = document.createElement('p')
+                p_tag.classList.add('tag')
+                p_tag.add
+                p_tag.innerText = tag
+                tags_post.append(p_tag)
+            }
+        
+
+            const description = document.createElement("p");
+            description.classList.add("description_short_post");
+            description.innerText = post.post_content;
+            if(post.is_edited === true) {
+                description.innerText = post.post_content.replace("(edited)", "")
+                const strongEdited = document.createElement("strong")
+                strongEdited.innerHTML = " (edited)"
+                description.append(strongEdited)
+            }
+
+            iconNameDate.append(profile, namePost, datePost);
+
+            //Interaction Containers
+            const interaction_container = document.createElement("div")
+            interaction_container.classList.add("stats_post")
+
+            const like = document.createElement('div')
+            like.classList.add('counter_container')
+
+            const i = document.createElement('i')
+            i.classList.add('fa-regular')
+            i.classList.add('fa-thumbs-up')
+
+            const total_likes = document.createElement('p')
+            total_likes.classList.add('like_counter')
+            total_likes.innerText = post.total_likes
+            like.append(i, total_likes)
+
+            const dislike = document.createElement('div')
+            dislike.classList.add('counter_container')
+
+            const i2 = document.createElement('i')
+            i2.classList.add('fa-regular')
+            i2.classList.add('fa-thumbs-down')
+
+            const total_dislikes = document.createElement('p')
+            total_dislikes.classList.add('like_counter')
+            total_dislikes.innerText = post.total_dislikes
+            dislike.append(i2, total_dislikes)
+
+            const comment = document.createElement('div')
+            comment.classList.add('comment_container')
+
+            const i3 = document.createElement('i')
+            i3.classList.add('fa-regular')
+            i3.classList.add('fa-comment')
+
+            const reply = document.createElement('p')
+            reply.classList.add('comment_counter')
+            reply.innerText = post.total_comments
+            comment.append(i3, reply)
+
+
+            const challenge = document.createElement('div')
+            challenge.classList.add('challenge_button')
+
+            const i4 = document.createElement('i')
+            i4.classList.add('fa-solid')
+            i4.classList.add('fa-bullseye')
+
+            const challenge_text = document.createElement('p')
+            challenge_text.classList.add('challenge_text')
+            challenge_text.innerText = "Challenge"
+
+            
+            challenge.append(i4, challenge_text)
+
+
+            interaction_container.append(like,dislike, comment, challenge)
+
+
+
+
+            userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+
+            all_posts.append(userPost);
+            highlightText(title, searchResult);
+            
+
 
         }
-        else{
+        query_counter_display.textContent = query_counter;
+        
 
-            post[i].style.display = "none"; // Don't Display Post
-
-        }
-
-    }
-
-    query_counter_display.textContent = query_counter;
-
+    })
 }
 
 
@@ -113,53 +214,164 @@ function updateTagSelection(inputElement, event){
 
 
 // Function Searches Posts with Inputted Tag/s and Shows Them. Also Highlights the Tag and Hides Post that don't have the Tag
-function filterByTags(){
-    
-    // Obtain all Posts
-    var post = document.getElementsByClassName("post");
+async function filterByTags(){
 
-    // Obtain All Inputted Filter Tags
+    var query_counter = 0;
+    var query_counter_display = document.getElementsByClassName("query_counter")[0];
+    var query_result = document.getElementsByClassName("search_query")[0];
+    query_result.innerHTML = ""
+
+    
+
+
+
+    const response = await fetch("http://localhost:3000/posts");
+    const posts = await response.json();
+
+    //Clear it first
+     
+    const all_posts = document.getElementsByClassName('search_container')[0]
+    const existingPosts = all_posts.getElementsByClassName("post");
+    while(existingPosts.length > 0)
+        existingPosts[0].remove();
+
+
+    
     var filterTags = JSON.parse(localStorage.getItem("filter_result"));
     
-    // Obtain Query Counter Display and Query Result
-    var query_counter_display = document.getElementsByClassName("query_counter")[0];
-
-    var query_counter = 0; // Counter that Contains Number of Post with Similar Search Result
-
-    // Loop thorugh the post elements
-    for(var i = 0; i < post.length; i++){
-
-        // Get Post Title of Post
-        var post_tags = post[i].getElementsByClassName("tag");
-
-        var hasTag = false;
-
-        for(var j = 0; j < post_tags.length; j++){
-
-            // Get Post Title of Post
-            var title_post = post[i].getElementsByClassName("title_post")[0];
-
-            if(filterTags.includes(post_tags[j].textContent.trim()) && title_post.textContent.includes(searchResult)){
-
-
-                post[i].style.display = "block"; // Display Post
-                query_counter++; // Update Counter
-
-                highlightText(post_tags[j], post_tags[j]); // Call Highlight Text Function
-
-                hasTag = true;
-
-            }
-
+   
+    
+    posts.forEach(post => {
+        var post_tags = post.tags;
+        let matches;
+        if(filterTags && filterTags.length > 0) {
+            matches = filterTags.every(tag => post_tags.includes(tag))
         }
 
-        if(!hasTag)
-            post[i].style.display = "none"; // Don't Display Post
+        if(matches) {
+            query_counter++;
+            const userPost = document.createElement("div");
+            userPost.id = post._id
+            userPost.classList.add("post");
 
-    }
+            const iconNameDate = document.createElement("div");
+            iconNameDate.classList.add("icon_name_date_post");
 
-    query_counter_display.textContent = query_counter;
+            const profile = document.createElement("img");
+            profile.src = "../resources/users/kirk.jfif";
 
+            const namePost = document.createElement("p");
+            namePost.classList.add("name_post");
+            namePost.textContent = post.username;
+
+            const datePost = document.createElement("p");
+            datePost.classList.add("date_post");
+            datePost.textContent = post.date
+
+            const title = document.createElement("h3");
+            title.classList.add("title_post");
+            title.innerText = post.post_title;
+
+            const tags_post = document.createElement('div')
+            tags_post.classList.add("tags_post")
+            let tags = post.tags
+            for(let tag of tags) {
+                const p_tag = document.createElement('p')
+                p_tag.classList.add('tag')
+                p_tag.add
+                p_tag.innerText = tag
+                if(filterTags.includes(tag))  
+                    highlightText(p_tag, tag); 
+                tags_post.append(p_tag)
+            }
+        
+
+            const description = document.createElement("p");
+            description.classList.add("description_short_post");
+            description.innerText = post.post_content;
+            if(post.is_edited === true) {
+                description.innerText = post.post_content.replace("(edited)", "")
+                const strongEdited = document.createElement("strong")
+                strongEdited.innerHTML = " (edited)"
+                description.append(strongEdited)
+            }
+
+            iconNameDate.append(profile, namePost, datePost);
+
+            //Interaction Containers
+            const interaction_container = document.createElement("div")
+            interaction_container.classList.add("stats_post")
+
+            const like = document.createElement('div')
+            like.classList.add('counter_container')
+
+            const i = document.createElement('i')
+            i.classList.add('fa-regular')
+            i.classList.add('fa-thumbs-up')
+
+            const total_likes = document.createElement('p')
+            total_likes.classList.add('like_counter')
+            total_likes.innerText = post.total_likes
+            like.append(i, total_likes)
+
+            const dislike = document.createElement('div')
+            dislike.classList.add('counter_container')
+
+            const i2 = document.createElement('i')
+            i2.classList.add('fa-regular')
+            i2.classList.add('fa-thumbs-down')
+
+            const total_dislikes = document.createElement('p')
+            total_dislikes.classList.add('like_counter')
+            total_dislikes.innerText = post.total_dislikes
+            dislike.append(i2, total_dislikes)
+
+            const comment = document.createElement('div')
+            comment.classList.add('comment_container')
+
+            const i3 = document.createElement('i')
+            i3.classList.add('fa-regular')
+            i3.classList.add('fa-comment')
+
+            const reply = document.createElement('p')
+            reply.classList.add('comment_counter')
+            reply.innerText = post.total_comments
+            comment.append(i3, reply)
+
+
+            const challenge = document.createElement('div')
+            challenge.classList.add('challenge_button')
+
+            const i4 = document.createElement('i')
+            i4.classList.add('fa-solid')
+            i4.classList.add('fa-bullseye')
+
+            const challenge_text = document.createElement('p')
+            challenge_text.classList.add('challenge_text')
+            challenge_text.innerText = "Challenge"
+
+            
+            challenge.append(i4, challenge_text)
+
+
+            interaction_container.append(like,dislike, comment, challenge)
+
+
+
+
+            userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+
+            all_posts.append(userPost);
+           
+           
+          
+
+
+        }
+        query_counter_display.textContent = query_counter;
+        
+
+    })
 }
 
 

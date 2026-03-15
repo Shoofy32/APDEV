@@ -3,24 +3,6 @@ let post;
 let forum_name
 
 
-// ===== MAIN INITIALIZATION =====
-document.addEventListener("DOMContentLoaded", () => {
-
-    const post = document.getElementById("post_button");
-    const forumTitle = document.querySelector("#forum_head h5");
-   
-    
-    if (forumTitle && post) {
-        const forum_name = forumTitle.innerText;
-        post.addEventListener("click", () => openPostPage(forum_name));
-    }
-        
-        loadPosts(forumTitle.innerText);   
-    
-
-});
-
-
 // ===== NAVIGATION =====
 function openPostPage(name) {
     window.location.href = `createpost.html?forum=${name}`;
@@ -37,6 +19,7 @@ async function loadPosts(name) {
     
     posts.forEach(post => {
         if(post.forum_name === name) {
+        
         const userPost = document.createElement("div");
         userPost.id = post._id
         userPost.classList.add("post");
