@@ -24,7 +24,10 @@ const postSchema = new mongoose.Schema({
   forum_name: String,
   tags: [String],
   total_likes : Number,
-  is_edited :Boolean
+  is_edited :Boolean,
+  date: String,
+  total_dislikes: Number,
+  total_comments: Number
   
   
 });
@@ -56,8 +59,11 @@ const replySchema = new mongoose.Schema({
   original_content:String,
   reply_content: String,
   unique_post_id: String,
-  likes: Number,
-  is_edited: Boolean
+  total_likes: Number,
+  is_edited: Boolean,
+  parent_reply_id: String,
+  date: String,
+  total_dislikes: Number
  
   
 });
@@ -129,6 +135,36 @@ function hash(password) {
 
 // ------ ------ Post backend ------ ------
 
+
+
+// CREATE
+app.post("/add-post", async (req, res) => {
+ 
+  const {username, post_title,post_content, forum_name, tags, 
+    total_likes, is_edited,date, total_dislikes, total_comments } = req.body;
+
+
+  const newPost = new Post({ username,post_title, post_content, forum_name, tags, 
+    total_likes, is_edited,date, total_dislikes, total_comments});
+
+    
+  console.log(res)
+  await newPost.save();
+  
+  res.json({ message: "User added" });
+});
+
+app.post("/add-reply", async (req, res) => {
+  console.log("req.body:", req.body);
+  const {username, replying_to, original_content, reply_content, unique_post_id, total_likes, is_edited, 
+    parent_reply_id, date,total_dislikes} = req.body;
+  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id, total_likes, 
+    is_edited, parent_reply_id,date, total_dislikes});
+  await newReply.save();
+  res.json({ message: "Reply added" });
+});
+
+
 // READ
 app.get("/users", async (req, res) => {
 
@@ -175,9 +211,71 @@ app.put("/update-user/:id", async (req, res) => {
 
 app.put("/post/:id", async (req, res) => {
   try {
-    const { post_content, is_edited } = req.body;
-    await Post.findByIdAndUpdate(req.params.id, { post_content, is_edited});
+    const { post_content, is_edited, total_likes } = req.body;
+
+    const updateFields = {};
+    if (post_content !== undefined) updateFields.post_content = post_content;
+    if (is_edited !== undefined)    updateFields.is_edited = is_edited;
+    if (total_likes !== undefined)  updateFields.total_likes = total_likes;
+
+    await Post.findByIdAndUpdate(req.params.id, { $set: updateFields });
+
+    // ONE cascade only
+    if (post_content !== undefined) {
+      await Reply.updateMany(
+        { unique_post_id: req.params.id },
+        { $set: { original_content: post_content + " (edited)" } } // always edited if content changed
+      );
+    }
+
     res.json({ message: "Post updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//Update likes
+app.put("/post/:id/likes", async (req, res) => {
+  try {
+    const { increment } = req.body; 
+
+    await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { total_likes: increment } } 
+    );
+
+    res.json({ message: "Likes updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//Update dislikes
+app.put("/post/:id/dislikes", async (req, res) => {
+  try {
+    const { increment } = req.body; 
+
+    await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { total_dislikes: increment } } 
+    );
+
+    res.json({ message: "Likes updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put("/post/:id/total_comments", async (req, res) => {
+  try {
+    const { increment } = req.body; 
+
+    await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { total_comments: increment } } 
+    );
+
+    res.json({ message: "Likes updated" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -185,27 +283,44 @@ app.put("/post/:id", async (req, res) => {
 
 app.put("/reply/:id", async (req, res) => {
   try {
-    const { reply_content, is_edited } = req.body;
-    await Reply.findByIdAndUpdate(req.params.id, { reply_content, is_edited});
-    res.json({ message: "Post updated" });
+    const { reply_content, is_edited, original_content } = req.body;
+
+    await Reply.findByIdAndUpdate(
+      req.params.id,
+      { $set: { reply_content, is_edited, original_content } }
+    );
+
+    // ONE cascade only
+    await Reply.updateMany(
+      { parent_reply_id: req.params.id },
+      { $set: { original_content: reply_content + " (edited)" } }
+    );
+
+    res.json({ message: "Reply updated" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-// CREATE
-app.post("/add-post", async (req, res) => {
-  const {username, post_title,post_content, forum_name, tags, total_likes, is_edited } = req.body;
-  const newPost = new Post({ username,post_title, post_content, forum_name, tags, total_likes, is_edited});
-  await newPost.save();
-  res.json({ message: "User added" });
+
+app.put("/reply/:id/likes", async (req, res) => {
+  try {
+    const { increment } = req.body; 
+
+    await Reply.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { total_likes: increment } } 
+    );
+
+    res.json({ message: "Likes updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.post("/add-reply", async (req, res) => {
-  const {username, replying_to, original_content, reply_content, unique_post_id, likes, is_edited} = req.body;
-  const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id, likes, is_edited });
-  await newReply.save();
-  res.json({ message: "Reply added" });
-});
+
+
+
+
 
 
 // READ
