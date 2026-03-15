@@ -27,240 +27,6 @@ body {
 
 }
 
-
-/* Homepage Header CSS properties */
-header {
-
-
-    display: flex;
-    align-items: center;
-
-    position: fixed; /* Sticks to the page while scrolling */
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 60px;
-
-    background-color: #3E5058;
-
-    border-bottom: 2px solid orange;
-
-    overflow: hidden; /* Hide elements if doesn't fit*/
-
-    z-index: 3;
-
-
-}
-
-
-
-/* Homepage Header - Logo */
-header .logo img{
-
-    position: relative;
-
-    width: 325px;
-    height: 65px;
-
-
-}
-
-
-
-/* Homepage Header - Search Bar */
-header .search_bar{
-
-    display: flex;
-    align-items: center;
-
-    width: 500px;
-    height: 40px;
-
-    background-color: #324248;
-
-    margin-left:  15%;
-
-    border: 2px solid coral;
-    border-radius: 25px;
-
-
-
-}
-
-/* Homepage Header - Search Bar */
-/* Logo */
-header i{
-
-    margin-left: 10px;
-
-}
-
-/* Homepage Header - Search Bar */
-/* Input Text */
-header .search_bar input{
-
-    width: 400px;
-    height: 40px;
-
-    margin-left: 5px;
-
-    font-family: "Inter", Arial;
-    font-weight: 400;
-
-    color: white;
-    background-color: #32424800;
-
-    border: 0px;
-
-    font-size: medium;
-
-}
-
-/* Homepage Header - Search Bar */
-/* Placeholder */
-header .search_bar input::placeholder{
-
-    font-family: "Inter", Arial;
-    font-weight: 400;
-
-    color: lightgray;
-
-}
-
-/* Homepage Header - Search Bar */
-/* Focus */
-header .search_bar input:focus{
-
-    outline: none;
-
-}
-
-/* Homepage Header - Search Bar */
-/* Search Bar On Hover */
-header .search_bar:hover{
-
-    background-color: #3d5057;
-    
-    border-color: orange;
-
-}
-
-/* Homepage Header - Search Bar */
-/* Placeholder When Search Bar On Hover */
-header .search_bar:hover input::placeholder{
-
-    color: white;
-
-}
-
-/* Homepage Header - Search Bar */
-/* Change Search Bar When Actively Typing */
-header .search_bar:has(input:focus){
-
-    background-color: #3d5057;
-
-    border-color: white;
-
-}
-
-
-/* Homepage Header - Log in & Sign Up Buttons */
-header .log_sign_in{
-
-    margin-left: auto;
-    margin-right: 20px;
-
-}
-
-/* Homepage Header - Log in & Sign Up Buttons */
-/* Buttons */
-header .log_sign_in button{
-
-    height: 40px;
-    width: 65px;
-
-    font-family: "Inter", Arial;
-    font-size: 13.33px;
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
-
-
-}
-
-/* Homepage Header - Log in & Sign Up Buttons */
-/* Button On Hover */
-header .log_sign_in button:hover{
-
-    color: white;
-    background-color: #37474f;
-
-    border-color: orange;
-
-    cursor: pointer;
-
-
-}
-
-
-#header_dropdown_space{
-
-    display: inline-block;
-
-    margin-top: 85px;
-
-
-}
-
-.announcement_container {
-   
-   position: relative;
-   width: 300px;
-   left: 200px;
-   display: flex;
-   background-color: #3E5058;
-  
-     background-color: #8AB0AB;
-
-    border: 2px solid #3E5058;
-    border-radius: 3px;
-
-
-  
-}
-.announcement_head_container {
-    display: flex;
-    
-    
-    
-}
-.announcement_head_container img {
-   left: 30;
-    
-}
-.announcement_head {
-      width: 100%;
-    height: 50px;
-    
-    background-color: #26413C;
-
-    border-bottom: 2px solid #3E5058;
-    
-}
-.announcement {
-   padding-top: 20px;
-   padding-left: 10px;
-}
-
-.announcement_head h5 {
-
-    font-size: 20px;
-    color: white;
-
-}
 .thread_head_img {
 
     position: relative;
@@ -270,8 +36,12 @@ header .log_sign_in button:hover{
 
 .thread_head_img img{
 
-    width: 850px;
-    height: 350px;
+    width: 91vw;
+    height: 200px;
+    object-fit: cover; 
+    object-position: center;
+
+    margin-left: -290px;
 
 }
 
@@ -326,11 +96,14 @@ header .log_sign_in button:hover{
     margin-top: 5px;
     border-radius: 5px;
 }
-#forum_head> h5 {
+#forum_head > h5 {
 
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 50px;
+    font-weight: 800;
     color: coral;
+
+    margin: 0px;
+    margin-left: -40px;
 
 }
 .thread_head_container h5 {
@@ -339,8 +112,13 @@ header .log_sign_in button:hover{
    
 }
 .thread_head_container p {
-    text-align: center;
+
+    font-size: 20px;
+    font-weight: 600;
     color: white;
+
+    margin-left: -120px;
+
 }
 .content_container {
     padding-top: 55px;
@@ -359,10 +137,9 @@ hr :not(.side_bar_content) {
     display: flex;
     flex-direction: column;
 
-    width: 850px;
+    width: 1150px;
 
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 80px;
 
 }
 
@@ -453,9 +230,14 @@ hr :not(.side_bar_content) {
 
 
 #forum_head {
+
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+
+    margin-left: -140px;
+    margin-top: 20px;
+
 }
 #forum_head button {
    position: relative;
@@ -483,26 +265,41 @@ hr :not(.side_bar_content) {
   border: 5px solid red;
   border-radius: 10px;
 }
-#post_button {
-  background: #ff7a3d;          
-  color: white;
-  margin-top: 10px;
+#forum_head #post_button {
 
-  border: none;
-  border-radius: 8px;
 
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 600;
+    position: absolute;
 
-  cursor: pointer;
+    left: 560px;
+    
+    width: 150px;
+    height: 50px;
 
-  box-shadow: 0 3px 8px rgba(0,0,0,.35);
-  transition: all .15s ease;
+    background: #ff7a3d;          
+    color: white;
+
+    margin-top: 10px;
+    margin-left: 520px;
+
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.35);
+    transition: all .15s ease;
+
 }
 #post_button:hover {
+
   background: #ff8c55;
   transform: translateY(-1px);
+
 }
 
 .Challenge {
@@ -655,5 +452,157 @@ hr :not(.side_bar_content) {
     border-color: orange;
 
     cursor: pointer;
+
+}
+
+
+
+/* CHANGED SIDE CONTENT FOR ANNOUNCEMENTS*/
+
+.home_side_content{
+
+    position: absolute;
+    height: 1000px;
+    width: 300px;
+
+    margin-left: auto;
+
+    left: 1325px;
+    top: 340px;
+
+}
+
+/* Home Side Content - Post and Threads Buttons Div */
+.home_side_content .post_and_threads_buttons{
+
+    display: flex;
+    align-items: center;
+
+    margin-left: 10px;
+
+}
+
+/* Home Side Content - Post and Threads Buttons*/
+/* Buttons */
+.home_side_content .post_and_threads_buttons button{
+
+    
+    height: 30px;
+    width: 125px;
+
+    font-size: small;
+    font-family: "Inter", Arial;
+    text-align: center;
+
+    margin-left: 10px;
+    margin-bottom: 30px;
+
+    color: white;
+    background-color: coral;
+    border: 2px solid #8AB0AB;
+    border-radius: 10px;
+
+}
+
+/* Home Side Content - Post and Threads Buttons*/
+/* Button On Hover */
+.home_side_content .post_and_threads_buttons button:hover{
+
+    background-color: rgb(227, 101, 54);
+
+    border-color: #3E5058;
+
+    cursor: pointer;
+
+}
+
+
+/* Home Side Content - Side Bar Divs */
+.home_side_content .recent_announcements, .statistics{
+
+    position: inline-block;
+
+    background-color: #8AB0AB;
+
+    border: 2px solid #3E5058;
+    border-radius: 3px;
+
+
+}
+
+/* Home Side Content - Recent Announcements Div */
+.home_side_content .recent_announcements{
+
+    height: 250px;
+
+}
+
+.recent_announcements p{
+
+    font-family: "Inter", Arial;
+    font-weight: 600;
+    font-size: 16px;
+    color: #3E5058;
+    margin-left: 10px;
+
+    text-decoration: underline;
+
+
+}
+
+.recent_announcements p:hover{
+
+    cursor: pointer;
+    color: #526c77;
+
+}
+
+
+/* Home Side Content - Statistics Div */
+.home_side_content .statistics{
+
+    height: 200px;
+
+    margin-top: 30px;
+
+}
+
+/* Home Side Content - Side Bar Title */
+.home_side_content .side_bar_title{
+    
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+
+    background-color: #26413C;
+
+    border-bottom: 2px solid #3E5058;
+
+}
+
+/* Home Side Content - Side Bar Title */
+/* h3 Title */
+.home_side_content .side_bar_title h3{
+    
+    font-size: 16px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+    float: left;
+
+}
+
+/* Home Side Content - Side Bar Title*/
+/* Icon */
+.home_side_content .side_bar_title i{
+   
+    margin-right: 10px;
+    margin-left: 10px;
+
+    float: left;
 
 }

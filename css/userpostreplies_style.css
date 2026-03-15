@@ -2,6 +2,20 @@ a {
   text-decoration: none;
 }
 
+
+.all_posts{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
 /* Posts - Div Container that contains PFP, Username, and Date of Post */
 .icon_name_date_post{
 
@@ -207,7 +221,7 @@ a {
 
     position: absolute;
 
-    top: 180px;
+    top: 200px;
 
     font-size: 40px;
     font-family: "Inter", Arial;
@@ -582,6 +596,77 @@ a {
     cursor: pointer;
 
 }
+
+/* CHALLENGER VERSION */
+
+#challenge_container .challenger_stats_container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    height: 50px;
+    width: 100%;
+
+
+    font-family: 'Inter', Arial;
+    font-size: 18px;
+    color: white;
+
+
+}
+
+/* Challenge - Image Challenger */
+#challenge_container .challenger_icon{
+
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+
+    margin-right: 10px;
+
+}
+
+#challenge_container .challenger_rolls_likes_container{
+
+    display: flex;
+    align-items: center;
+
+    margin-left: 45px;
+
+}
+
+
+#challenge_container i{
+
+    color: white;
+
+}
+
+#challenge_container .challenger_rolled_number, #challenge_container .challenger_bet_likes{
+
+    font-size: 20px;
+    font-weight: 700;
+    color: salmon;
+
+    margin-left: 5px;
+    margin-right: 10px;
+
+}
+
+#challenge_container .postBet:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+}
+
+
 
 
 
