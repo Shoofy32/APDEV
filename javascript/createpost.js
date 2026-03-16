@@ -74,7 +74,7 @@ async function addPost() {
     body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments})
   });
 
- window.location.href = `forum.html?forum=${forum_name}`;
+ window.location.href = `forum.html?forum=${forum_name}&page=1`;
  
 
 }

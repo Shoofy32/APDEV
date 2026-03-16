@@ -41,21 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Used by forum.html to load the needed information based on the title
     function moveToForum(forumTitle){
-        window.location.href = `forum.html?forum=${encodeURIComponent(forumTitle)}`;
+        window.location.href = `forum.html?forum=${encodeURIComponent(forumTitle)}&page=1`;
     }
 
 
     // Function loads the forum type if inside forum.html. Check the URL to determine title
     function loadForum(){
-        const forumTitle = decodeURIComponent(new URLSearchParams(window.location.search).get("forum"));
+        const params = new URLSearchParams(window.location.search);
+        const forumTitle = decodeURIComponent(params.get("forum")).split("?")[0]; 
+        const page = parseInt(params.get("page")) || 1; // ← reads page number
+
         const [forumImage, forumDescription] = forumInformation(forumTitle);
-        //Static components
         document.getElementsByClassName("forum_title")[0].textContent = forumTitle;
         document.getElementsByClassName("forum_image")[0].src = forumImage;
         document.getElementsByClassName("forum_description")[0].textContent = forumDescription;
 
-        loadPosts(forumTitle);
-        //Event listener for post button
+        loadPosts(forumTitle, page); // ← pass page
         const post = document.getElementById("post_button");
         if (post) post.addEventListener("click", () => openPostPage(forumTitle));
     }

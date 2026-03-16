@@ -1,4 +1,25 @@
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
+    const page_url = window.location.href;
+    const index = page_url.indexOf("page=");
+    const raw_page = index !== -1 ? page_url.substring(index + 5).split("&")[0] : "";
+    const page_number = parseInt(raw_page);
+
+    const params = new URLSearchParams(window.location.search);
+    const forumTitle = decodeURIComponent(params.get("forum")).split("?")[0];
+    const page = parseInt(params.get("page")) || 1;
+
+    const invalidPage = !page_url.includes("page=") || !/^\d+$/.test(raw_page) || page_number < 1;
+
+    if(invalidPage && page_url.includes("forum")) {
+        window.location.href = `forum.html?forum=${encodeURIComponent(forumTitle)}&page=1`;
+    }
+
+    if(invalidPage && page_url.includes("userpost")) {
+        window.location.href = `userpost.html?id=${id}&page=1`;
+    }
 
     const all_posts = document.getElementsByClassName("all_posts")[0];
     // Check if userpost to avoid loading backend in forum page
@@ -6,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
     (async () => {  
-        await loadPost(id);
-        loadPosts(id);
+        await loadPost(id,page);
+        loadPosts(id, page);
     })();
 
     }
@@ -133,9 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
                    
                     updateReplyLikes(parentPost.id, 1)
                 }
-            //When dislike is pressed subtrafct 1 like
+            //When dislike is pressed increment 1 like
                 else {
-                   
                     updateReplyDislikes(parentPost.id, 1)
                 }
             }
@@ -187,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function opens User Post Page
     function openPost(id){
 
-        window.location.href = `userpost.html?id=${id}`;
+        window.location.href = `userpost.html?id=${id}&page=1`;
 
     }
 
@@ -477,7 +497,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 userReplyToDescription.innerText,
                 replyContent.value,  
                 id,
-                replyPostId  //if replying to a post the parent id is added
+                0,
+                false,
+                replyPostId,
+                date,
+                0
             );
             updateTotalComments(id, 1)
                 
