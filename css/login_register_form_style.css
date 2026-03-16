@@ -24,6 +24,17 @@ a:active {
     
 }
 
+.form {
+    display: grid;
+    width: 100%;
+   
+    position: flex;
+    
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .mainbox {
     display: grid;
     margin-top: 10%;
