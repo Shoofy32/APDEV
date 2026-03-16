@@ -17,7 +17,7 @@ header {
 
     border-bottom: 2px solid orange;
 
-    z-index: 3;
+    z-index: 6;
 
 
 }
@@ -225,9 +225,12 @@ header .log_sign_in1{
 
     width: 190px;
 
-    display: center;
+    display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: flex-end;
+
+    padding-bottom: 30px;
+
 
 }
 

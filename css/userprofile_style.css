@@ -1,0 +1,997 @@
+/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    background-color: #1A1D1A;;
+
+    margin: 0px;
+
+    font-family: 'Inter', Arial;
+    
+}
+
+header .log_sign_in .log_sign_in1{
+
+    padding-bottom: 55px;
+    margin-left: -50px;
+
+
+
+}
+
+.mainbox{
+  
+    position: absolute;
+
+}
+
+
+
+.banner_image{
+
+    height: 20vh;
+    width: 92vw;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    object-fit: cover;
+
+}
+
+.pfp {
+
+    position: absolute;
+
+    top: 180px;
+    left: 150px;
+
+    height: 175px;
+    width: 175px;
+
+    object-fit: fill;
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    z-index: 2;
+
+}
+
+
+.infobox{
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10vh;
+    gap: 30px;
+
+    height: 400px;
+
+    margin-left: 80px;
+
+    background-color: #3E5058;
+
+    border-radius: 5px;
+
+}
+
+.info_containers{
+
+    display: flex;
+
+}
+.left_side_info_container{
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.right_side_info_container{
+
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+
+    width: 400px;
+
+    margin-top: -10px;
+    margin-left: 30px;
+    
+}
+
+.name {
+
+    height: 150px;
+
+    margin-left: 90px;
+    margin-top: 40px;
+
+
+}
+
+.username{
+
+    color: salmon;
+    font-size: 35px;
+    font-weight: 800;
+
+
+}
+
+.bio{
+
+    font-size: 20px;
+    font-weight: 500;
+
+
+    width: 1000px;
+
+    margin-top: -10px;
+
+    color: white;
+
+}
+
+.right_side_stats_container{
+
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+
+    gap: 4vw;
+}
+
+.stats_container{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 45px;
+}
+
+.stats_label{
+
+    font-size: 20px;
+    font-weight: 500;
+    color: white; 
+
+
+}
+
+.stats_container p:first-child{
+
+    font-size: 35px;
+    font-weight: 800;
+    color: salmon;  
+
+    margin: 0px;
+    margin-top: -20px;
+
+}
+
+
+
+.edit_profile_button{
+
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+    width: 40px;
+
+    background: none;
+    border: none;
+
+}
+
+.edit_profile_button i{
+
+    color: white;
+
+}
+
+.edit_profile_button i:hover{
+
+    color: salmon;
+    cursor: pointer;
+    
+}
+
+.user_posts_replies_notifications_container{
+
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 80px;
+
+    height:1000px;
+    width: 1150px;
+    
+
+    margin-top: 40px;
+
+    background-color: #28363b;
+
+    border: 3px solid #3E5058;
+    border-radius: 5px;
+
+}
+
+.post_reply_notifications_buttons_container{
+
+    display: flex;
+    border-bottom: 3px solid #3E5058;
+
+}
+
+.post_reply_notifications_buttons_container button{
+
+    height: 50px;
+    width: 120px;
+
+    font-size: 15px;
+    font-weight: 700;
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+
+    border-right: 3px solid #3E5058;
+    border-top: 0px;
+    border-left: 0px;
+    border-bottom: 0px;
+
+    float: left;
+
+}
+
+.post_reply_notifications_buttons_container button:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    cursor: pointer;
+
+
+}
+
+.post_reply_notifications_buttons_container .posts_button{
+
+    border-top-left-radius: 3px;
+    
+}
+
+.all_posts, .all_replies, .all_notifications{
+
+    display: none;
+    flex-direction: column;
+
+    width: 1100px;
+
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.display_visible{
+
+    display:flex;
+
+}
+
+.challenge_stats_container{
+
+    position: absolute;
+
+    top: 58vh;
+    left: 75.5vw;
+
+    height: 30vh;
+    width: 21vw;
+
+    background-color: #28363b;
+
+    border: 3px solid #3E5058;
+    border-radius: 5px;
+
+}
+
+.challenge_stats_container p{
+
+    margin-left: 15px;
+
+}
+
+.challenge_stats_container hr{
+
+    border: 2px solid #3E5058;
+
+}
+
+.stats_container_title{
+
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+
+    margin: 0px;
+    margin-top: 15px;
+
+}
+
+.side_stats_container{
+
+    display: flex;
+    align-items: center;
+
+    margin-top: -10px;
+
+}
+
+.stats_container_label{
+
+    font-size: 22px;
+    font-weight: 600;
+    color: salmon;
+
+    width: 100px;
+
+
+
+}
+
+.side_challenge_wins_counter, .side_challenge_losses_counter, .side_challenge_ties_counter{
+
+
+    font-size: 24px;
+    font-weight: 600;
+
+    text-align: right;    
+    min-width: 200px;   
+    
+
+}
+
+.side_challenge_wins_counter{
+
+    color: rgba(122, 185, 72, 1);
+
+}
+
+.side_challenge_losses_counter{
+
+    color: rgb(227, 0, 0);
+
+}
+
+.side_challenge_ties_counter{
+
+    color: whitesmoke;
+
+}
+
+
+.challenge_profile_button{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 6vh;
+    width: 21vw;
+
+    margin-top: 3vh;
+
+    font-size: 20px;
+    font-family: "Inter", Arial;
+    font-weight: 700;
+
+    color: whitesmoke;
+    background-color: coral;
+    border: 1px solid orangered;
+    border-radius: 5px;
+
+}
+
+.challenge_profile_button:hover{
+
+    color: white;
+    background-color: rgb(251, 102, 47);
+
+    border-color: coral;
+
+    cursor: pointer;
+
+
+}
+
+
+
+.delete_edit_container {
+
+    margin-left: auto;
+    margin-right: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    
+}
+
+.delete_button {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    border: none;
+    background-color: #394b53;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;
+    right: 300px;   
+
+}
+
+.edit_button {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    border: none;
+    background-color: #394b53;
+    height: 30px;
+    border-radius: 5px;
+    width:100px;   
+
+}
+
+.delete_button:hover{
+
+    cursor: pointer;
+    background-color: #495d65;
+
+}
+
+.edit_button:hover{
+
+    cursor: pointer;
+    background-color: #495d65;
+
+}
+
+.delete_button > h4, .edit_button > h4{
+
+    font-family: "Inter", Arial;
+    font-weight: 600;
+    font-size: 14px;
+
+
+    color: white;
+
+}
+
+/* Posts - Div Container that Contains a Button and its Counter */
+.counter_container, .challenge_button, .reply_button{
+
+    display: flex;
+    align-items: center;
+
+    background-color: #3E5058;
+
+    height: 30px;
+    width: auto;
+
+    padding-left: 15px;
+
+    border-radius: 5px;
+
+}
+
+.reply_button{
+
+    margin-left: 20px;
+
+}
+
+.counter_container:hover, .challenge_button:hover, .reply_button:hover{
+
+    background-color: #495d65;
+    cursor: pointer;
+
+}
+
+.challenge_button p, .reply_button p{
+
+    font-weight: 500;
+
+    transform: translateX(-5px);
+
+}
+
+#Save {
+    background-color:#8AB0AB;
+    
+}
+#edit_container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+#editArea{
+
+    width: 95%;
+    height: 140px;
+
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+
+    padding-left: 5px;
+    padding-top: 5px;
+
+    background-color: lightgray;
+
+    border: 2px solid salmon;
+    border-radius: 5px;
+
+    font-family: "Inter", Arial;
+    font-size: 17px;
+
+    resize: none;
+
+
+}
+
+#editArea::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 500;
+
+}
+
+#Save{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 95px;
+
+    font-family: "Inter", Arial;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+}
+
+#Save:hover{
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+}
+
+
+/* Reply container and replies Section */
+
+.all_replies .replying_to_container {
+
+    width: 800px;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    padding: 15px;
+
+    background-color: #314047;
+
+    border-left: solid coral 3px;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    
+}
+
+.all_replies .reply{
+
+    width: auto;
+    height: auto;
+
+    margin-top: 10px;
+
+    padding-left: 20px;
+    padding-top: 15px;
+
+    background-color: #3E5058;
+    border-radius: 5px;
+
+}
+
+.all_replies .reply h3{
+
+    font-size: 22px;
+    font-family: "Inter", Arial;
+    font-weight: 600;
+
+    margin-top: 20px;
+    color: coral;
+
+}
+
+.all_replies .reply .description_short_post{
+
+    width: 95%;
+
+    margin-top: 0px;
+
+    font-size: 15px;
+    font-family: "Inter", Arial;
+    font-weight: 400;
+
+    color: white;
+
+    overflow: hidden;
+
+}
+
+
+.all_replies .replying_to_container p{
+
+    margin-top: 0px;
+
+    color: white;
+
+}
+
+
+.all_replies .replying_to_container .user_repliedto{
+    position: relative;
+    color: coral;
+
+
+    font-weight: 700;
+    font-size: 17px;
+
+
+}
+
+
+
+/* Notifications Container and Notifications Section */
+
+.all_notifications .challenge_notification{
+
+    display: flex;
+    align-items: center;
+
+    height: 10vh;
+
+    margin-bottom: 20px;
+
+    background-color: #3E5058;
+
+    border-radius: 5px;
+
+}
+
+
+.all_notifications .accept_deny_container{
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+
+    margin-right: 2vw;
+
+    gap: 20px;
+
+
+
+
+}
+
+
+.all_notifications .accept_challenge, .all_notifications .deny_challenge{
+
+    height: 20px;
+    width: 30px;
+
+    background: none;
+    border: none;
+
+    transform: scale(1.7, 1.7);
+
+    color: white;
+
+}
+
+.all_notifications .accept_challenge:hover, .all_notifications .deny_challenge:hover{
+
+    color: salmon;
+
+    cursor: pointer;
+
+}
+
+.all_notifications img{
+
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    margin-left: 10px;
+
+}
+
+.all_notifications .icon_name_challenge_container{
+
+    display: flex;
+
+    margin-left: 1vw;
+
+
+}
+
+.all_notifications .icon_name_challenge_container p{
+
+    font-size: 20px;
+    margin-left: 10px;
+
+    color: white;
+
+}
+
+.all_notifications .challenger_name{
+
+    font-weight: 700;
+}
+
+.all_notifications .roll_likes_container{
+
+    display: flex;
+
+    margin-left: auto;
+    margin-right: 5vw;
+
+    gap: 2vw;
+
+}
+
+.all_notifications .roll_likes_container i{
+
+    color: white;
+
+}
+
+.all_notifications .roll_likes_container p{
+
+    font-size: 20px;
+
+    color: salmon;
+    font-weight: 700;
+
+
+}
+
+
+/* Edit Bio Section */
+.edit_profile_container{
+
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 40vw;
+    height: 65vh;
+
+    border-radius: 10px;
+
+    color: coral;
+    background-color: #3e5058b9;
+
+    z-index: 7;
+
+
+}
+
+.edit_profile_show{
+
+    display: flex;
+
+}
+
+.edit_profile_container .close_edit_profile {
+
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+    left: 94%;
+    top: 1px;
+    width: 40px;
+    height: 40px;
+
+
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: rgb(59, 73, 80);
+}
+
+.edit_profile_container .close_edit_profile i {
+
+    background-color: rgb(59, 73, 80);
+    transform: scale(2, 2);
+
+}
+
+.edit_profile_container .close_edit_profile:hover{
+
+    background-color: rgb(69, 85, 93);
+    cursor: pointer;
+
+}
+
+.main_edit_section_container{
+
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+
+}
+
+.edit_section_container{
+
+    display: flex;
+    align-items: center;
+
+}
+
+.edit_section_main_title{
+
+    font-weight: 800;
+    font-size: 32px;
+    
+    margin: 0px;
+}
+
+.edit_section_title{
+
+    margin-left: auto;
+    margin-right: auto;
+    
+    font-weight: 700;
+    font-size: 22px;
+    text-decoration: underline;
+
+    text-align: center;
+
+
+}
+
+.edit_section_container .upload_button, .edit_section_container .edit_bio_button{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+
+    height: 50px;
+    width: 200px;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: coral;
+    background-color: rgb(59, 73, 80);
+    border: 1px solid coral;
+    border-radius: 10px;
+
+}
+
+.edit_section_container .upload_button:hover , .edit_section_container .edit_bio_button:hover{
+
+
+
+    color: white;
+    background-color: #37474f;
+
+    border-color: orange;
+
+    cursor: pointer;
+
+}
+
+.banner_image_edit{
+
+    height: 10vh;
+    width: 350px;
+
+    border-radius: 5px;
+
+    object-fit: cover;
+
+
+}
+
+.pfp_edit{
+
+    height: 12vh;
+    width: 12vh;
+
+    margin-left: 18%;
+
+    object-fit: fill;
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    z-index: 2;
+
+}
+
+
+.edit_bio_area{
+
+    width: 350px;
+    height: 100px;
+
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+
+    padding-left: 5px;
+    padding-top: 5px;
+
+    background-color: lightgray;
+
+    border: 2px solid salmon;
+    border-radius: 5px;
+
+    font-family: "Inter", Arial;
+    font-size: 17px;
+
+    resize: none;
+
+
+}
+
+.edit_bio_area::placeholder{
+
+    font-family: "Inter", Arial;
+    font-weight: 500;
+
+}

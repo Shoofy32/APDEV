@@ -28,45 +28,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const denyChallengeButton = event.target.closest(".deny_challenge"); // Deny challenge button
 
         // If conditions check for which button was clicked and calls the function corresponding to that button
-        if(acceptChallengeButton){
+        if(acceptChallengeButton)
+            acceptUserChallenge(event);
+        else if(denyChallengeButton)
+            closeUserChallenge(event.target.closest(".deny_challenge")); // Get the closest deny_challenge associated with the click
 
-            // Add temporary event listener for postBet to call the rollAndGetWinner function.
-            const betChallengeButton = document.getElementsByClassName("postBet")[0]; // bet likes button
-
-            const challengerContainer = event.target.closest(".challenge_notification"); // Challenge notification container
-
-
-            // CHANGE FOR BACKEND (ACCOUNT OF WHO CHALLENGED) (NAME AND IMAGE OF USER)
-            let name = "CCS_GodXX";
-            let image = "../resources/users/discordmod.jpg";
-            let rollNumber = parseInt(challengerContainer.getElementsByClassName("notification_challenger_roll")[0].textContent); 
-            let betLikes = parseInt(challengerContainer.getElementsByClassName("notification_challenger_likes")[0].textContent);
-
-
-            // Call challenge user which opens challenge container with stats of the person challenging them
-            challengeUser(name, image, rollNumber, betLikes);
-
-            // Set dataset flag to true to avoid both event listeners in notification and posts js from running at once
-            betChallengeButton.dataset.challengeFromNotification = "true"; // Notification challenge
-
-            // Function wrapper for event listener removal and to pass index
-            function rollAndGetWinnerWrapper(){
-
-                // Get the closest accept_challenge associated with the click
-                rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper)
-
-            }
-
-            // Call function wrapper for rollAndGetWinner
-            betChallengeButton.addEventListener("click", rollAndGetWinnerWrapper);
-
-        }
-        else if(denyChallengeButton){
-
-            // Get the closest deny_challenge associated with the click
-            closeUserChallenge(event.target.closest(".deny_challenge"));
-
-        }
+        
 
     });
 
@@ -79,7 +46,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         const notificationContainer = document.getElementsByClassName("notification_content_container")[0];
 
-        // CHANGE FOR BACKEND (ACCOUNT OF WHO CHALLENGED)
+        // OBTAIN FROM SESSION
         // CHANGE FOR BACKEND (ACCOUNT OF WHO CHALLENGED)
         let name = "CCS_GodXX";
         let image = "../resources/users/discordmod.jpg";
@@ -125,6 +92,48 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // -- NOTIFICATIONS INTERACTION FUNCTIONS -- //
 
+    // Async function performs the actions for user challenge if user accepts it
+    async function acceptUserChallenge(event){
+
+        // Add temporary event listener for postBet to call the rollAndGetWinner function.
+        const betChallengeButton = document.getElementsByClassName("postBet")[0]; // bet likes button
+
+        const challengerContainer = event.target.closest(".challenge_notification"); // Challenge notification container
+
+
+        // CHANGE FOR BACKEND (ACCOUNT OF WHO CHALLENGED) (NAME AND IMAGE OF USER)
+        let name = "CCS_GodXX";
+        let image = "../resources/users/discordmod.jpg";
+        let rollNumber = parseInt(challengerContainer.getElementsByClassName("notification_challenger_roll")[0].textContent); 
+        let betLikes = parseInt(challengerContainer.getElementsByClassName("notification_challenger_likes")[0].textContent);
+
+
+        // Call challenge user which opens challenge container with stats of the person challenging them
+        challengeUser(name, image, rollNumber, betLikes);
+
+        // Set dataset flag to true to avoid both event listeners in notification and posts js from running at once
+        betChallengeButton.dataset.challengeFromNotification = "true"; // Notification challenge
+
+        // Create a new Promise object, storing the results of rollAndGetWinner (resolved) when completed.
+        let succesfulRoll = new Promise((resolve) => {
+
+            // Function wrapper for event listener removal and to pass index
+            function rollAndGetWinnerWrapper(){
+
+                // Get the closest accept_challenge associated with the click and then get the eventual resolve of promise after function is done
+                rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper).then(resolve)
+
+            }
+
+            // Call function wrapper for rollAndGetWinner
+            betChallengeButton.addEventListener("click", rollAndGetWinnerWrapper);
+
+        });
+
+        return succesfulRoll; // Return Promise
+
+    }
+
     // Function opens the challenge container with the challenger stats
     function challengeUser(name, image, rollNumber, betLikes){
 
@@ -157,6 +166,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Function rolls D20 and updates the user's likes depending on result
     async function rollAndGetWinner(buttonElement, wrapper){
+
+        // FOR BACKEND STORE THE RESULTS TO THE DATABASE
+        // STORE whoWon, whoLost, rollOfUser, LikesExchanged
+        // Additionally, UPDATE USER'S LIKES AFTER WIN/LOSS
+
 
         // Bet challenge button
         const betChallengeButton = document.getElementsByClassName("postBet")[0];
@@ -211,18 +225,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Function closes the user challenge and removes the notification, and challenger in the roll D20 display
     function closeUserChallenge(buttonElement){
 
+        // FOR BACKEND, DELETE FROM DB WHEN REMOVED
+
+
+
+
+        // Check if buttonElement null, return if it is
+        if(!buttonElement)
+            return;
+
         // Find the challenge notification of the chosen accept challenge index
         const challengeContainer = buttonElement.closest(".challenge_notification");
+
+        // Check if challengeContainer null, return if it is
+        if(!challengeContainer)
+            return;
+
         challengeContainer.remove(); // Remove said challenge notification from the notification list
 
         // Obtain the challenge stats container and make the stats container empty
         const challenger_stats_container = document.getElementsByClassName("challenger_stats_container")[0];
         challenger_stats_container.innerHTML = `<div class = "challenger_stats_container"></div>`
 
+
+        // If current location is userprofile.html, then send a new custom event to the document to load notifications in userprofile
+        if(window.location.pathname.endsWith("userprofile.html"))
+            document.dispatchEvent(new CustomEvent("updateUserProfileNotifications"));
+
     }
 
     
     // Make functions globally accessible
     window.createChallengeNotification = createChallengeNotification;
+    window.acceptUserChallenge = acceptUserChallenge;
+    window.closeUserChallenge = closeUserChallenge;
 
 });
