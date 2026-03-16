@@ -149,6 +149,10 @@
     delete_image.classList.add('fa-regular', 'fa-trash-can')
 
     delete_button.append(delete_image, delete_text)
+    delete_button.addEventListener("click", function(e) {
+            deletePost(post._id)
+    })
+
 
     const edit_button = document.createElement('button')
     edit_button.classList.add("edit_button")
@@ -190,12 +194,13 @@
     }
 
 
-    async function loadPosts(id) {
-    const response = await fetch(`http://localhost:3000/replies/${id}`);
+    async function loadPosts(id, page=1) {
+    const response = await fetch(`http://localhost:3000/replies/${id}/${page}`);
     const replies = await response.json();
     all_posts = document.getElementsByClassName('all_posts')[0]
-    const response_post = await fetch(`http://localhost:3000/post/${id}`);
-    const post = await response_post.json()
+
+
+    
     replies.forEach(reply => {
 
         
@@ -381,10 +386,11 @@ async function addReply(username, replying_to, original_content, reply_content, 
       original_content, 
       reply_content, 
       unique_post_id, 
-      total_likes,         
+      total_likes: 0,         
       is_edited: false, 
       parent_reply_id,
-      date
+      date,
+      total_dislikes: 0
 
     })
   });

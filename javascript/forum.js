@@ -10,9 +10,9 @@ function openPostPage(name) {
 
 
 // ===== LOAD POSTS =====
-async function loadPosts(name) {
+async function loadPosts(name, page = 1) {
 
-    const response = await fetch("http://localhost:3000/posts");
+    const response = await fetch(`http://localhost:3000/posts/${page}`);
     const posts = await response.json();
 
     const all_posts = document.querySelector(".all_posts");

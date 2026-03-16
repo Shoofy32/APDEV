@@ -1,4 +1,25 @@
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const url = window.location.href
+    const index = url.indexOf("page=")
+    const raw_page = index !== -1 ? url.substring(index + 5).split("&")[0] : "";
+    const page_number = parseInt(url.substring(index + 5))
+    const invalidPage = !url.includes("page=") || !/^\d+$/.test(raw_page) || page_number < 1;
+    //Checks if page is greater than zero, defaults otherwise   
+    if(invalidPage) {
+        window.onload = function() {
+    
+        window.location.href = 'homepage.html?page=1'
+        };
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const page = parseInt(params.get("page")) || 1
+   
+    loadPosts(page)
+
+})
 // Function opens or closes dropdown menu
 function showDropdownContent(divElement){
 
@@ -31,3 +52,135 @@ function showDropdownContent(divElement){
     
 
 }
+
+async function loadPosts(page = 1) {
+
+
+    const response = await fetch(`http://localhost:3000/posts/${page}`);
+    const posts = await response.json();
+
+    const all_posts = document.querySelector(".all_posts");
+    
+    posts.forEach(post => {
+         
+        
+        const userPost = document.createElement("div");
+        userPost.id = post._id
+        userPost.classList.add("post");
+
+        const iconNameDate = document.createElement("div");
+        iconNameDate.classList.add("icon_name_date_post");
+
+        const profile = document.createElement("img");
+        profile.src = "../resources/users/kirk.jfif";
+
+        const namePost = document.createElement("p");
+        namePost.classList.add("name_post");
+        namePost.textContent = post.username;
+
+        const datePost = document.createElement("p");
+        datePost.classList.add("date_post");
+        datePost.textContent = post.date
+
+        const title = document.createElement("h3");
+        title.classList.add("title_post");
+        title.innerText = post.post_title;
+
+        const tags_post = document.createElement('div')
+        tags_post.classList.add("tags_post")
+        let tags = post.tags
+        for(let tag of tags) {
+            const p_tag = document.createElement('p')
+            p_tag.classList.add('tag')
+            p_tag.add
+            p_tag.innerText = tag
+            tags_post.append(p_tag)
+        }
+    
+
+        const description = document.createElement("p");
+        description.classList.add("description_short_post");
+        description.innerText = post.post_content;
+        if(post.is_edited === true) {
+            description.innerText = post.post_content.replace("(edited)", "")
+            const strongEdited = document.createElement("strong")
+            strongEdited.innerHTML = " (edited)"
+            description.append(strongEdited)
+        }
+
+        iconNameDate.append(profile, namePost, datePost);
+
+        //Interaction Containers
+        const interaction_container = document.createElement("div")
+        interaction_container.classList.add("stats_post")
+
+        const like = document.createElement('div')
+        like.classList.add('counter_container')
+
+        const i = document.createElement('i')
+        i.classList.add('fa-regular')
+        i.classList.add('fa-thumbs-up')
+
+        const total_likes = document.createElement('p')
+        total_likes.classList.add('like_counter')
+        total_likes.innerText = post.total_likes
+        like.append(i, total_likes)
+
+        const dislike = document.createElement('div')
+        dislike.classList.add('counter_container')
+
+        const i2 = document.createElement('i')
+        i2.classList.add('fa-regular')
+        i2.classList.add('fa-thumbs-down')
+
+        const total_dislikes = document.createElement('p')
+        total_dislikes.classList.add('like_counter')
+        total_dislikes.innerText = post.total_dislikes
+        dislike.append(i2, total_dislikes)
+
+        const comment = document.createElement('div')
+        comment.classList.add('comment_container')
+
+        const i3 = document.createElement('i')
+        i3.classList.add('fa-regular')
+        i3.classList.add('fa-comment')
+
+        const reply = document.createElement('p')
+        reply.classList.add('comment_counter')
+        reply.innerText = post.total_comments
+        comment.append(i3, reply)
+
+
+        const challenge = document.createElement('div')
+        challenge.classList.add('challenge_button')
+
+        const i4 = document.createElement('i')
+        i4.classList.add('fa-solid')
+        i4.classList.add('fa-bullseye')
+
+        const challenge_text = document.createElement('p')
+        challenge_text.classList.add('challenge_text')
+        challenge_text.innerText = "Challenge"
+
+        
+        challenge.append(i4, challenge_text)
+
+
+        interaction_container.append(like,dislike, comment, challenge)
+
+
+
+
+        userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+
+        all_posts.append(userPost);
+
+        
+        
+
+    });
+
+    // Setup buttons AFTER posts exist
+  
+}
+
