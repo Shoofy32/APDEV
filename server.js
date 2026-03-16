@@ -1,13 +1,88 @@
+//all the stuff we're gonna need
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const crypto = require("crypto");
-
+const hbs = require("hbs");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded( {extended: true})); // files consist of more than strings
 
+const path = require("path");
+
+app.use(express.static(path.join(__dirname)));
+
+app.set('view engine', 'hbs');
+
+//Session objects
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: false,
+    /*cookie: { 
+      secure: false, 
+      httpOnly: true, 
+      maxAge: 24 * 60 * 60 * 1000
+    }*/
+  })
+);
+
+app.use(cookieParser())
+
+//authentication checker
+const isAuthenticated = (req,res,next) => {
+  if(req.session.user) {
+    console.log("authenticated");
+    next();
+  }
+  else{
+    console.log("wadahel");
+    res.redirect('/login');
+  }   
+}
+
+//webpage routing
+app.get('/login', (req,res) =>{
+  if (req.session.user){
+    res.redirect("/");
+  }
+  else{
+    res.sendFile(__dirname + "/html/login.html")
+  }
+});
+
+app.get('/register', (req,res)=> {
+  if (req.session.user){
+    res.redirect("/");
+  }
+  else{
+    res.sendFile(__dirname + "/html/registration.html")
+  }
+});
+
+app.get("/", (req,res)=> {
+  res.sendFile(__dirname + "/html/homepage.html");
+});
+
+app.get("/regErr", (req,res) => {
+  res.sendFile(__dirname + "/html/regErr.html");
+});
+
+app.get("/logErr", (req,res)=> {
+  res.sendFile(__dirname + "/html/logErr.html");
+});
+
+//dummy route, you can change the hbs file this leads to
+app.get("/profile", isAuthenticated, (req, res) =>{
+  console.log("session started");
+  const userData = req.session.user;
+  res.render('user',{userData});
+});
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/myapp")
@@ -35,13 +110,11 @@ const postSchema = new mongoose.Schema({
 const likedPosts = new mongoose.Schema({
   username: String,
   liked_posts_id : [String]
-
-  
-  
 });
 
 
 
+// User login and registration Schema
 const userSchema = new mongoose.Schema({
 
     username: String,
@@ -75,7 +148,7 @@ const Reply = mongoose.model("Reply", replySchema);
 
 
 // ------ ------ User backend ------ ------
-app.post("/register", async (req, res) => {
+app.post("/registerUser", async (req, res) => {
     
     try {
         const { email, username, password } = req.body;
@@ -94,11 +167,26 @@ app.post("/register", async (req, res) => {
           });
 
           await newUser.save();
-          return res.status(201).json({ success: true, message: "Registration successful!" });
-        }
+          //assigning session user
+          req.session.user = {
+            username: newUser.username,
+            email: newUser.email,
+            bio: newUser.bio,
+            likes: newUser.likes
+          };
+          
+          //saving session info
+         req.session.save((err)=>{
+          if (err) {
+            console.log("broken");
+            return res.status(409).json({ success: false, message: "broken" });
+          }
+          res.redirect("/profile");
+        });     
 
+        }
         else{
-          return res.status(409).json({ success: false, message: "Username or email already exists." });
+          res.redirect("/regErr");
         }
         
     } catch (err) {
@@ -106,18 +194,32 @@ app.post("/register", async (req, res) => {
     }
 });
 
-app.post("/login", async (req,res) => {
+app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
 
   try {
     const {username, password} = req.body;
-
-    const found = await User.find({ $and: [{username: username},{password: hash(password)}]});
+    console.log(username);
+    console.log(password);
+    const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
 
     if(found){
-      return res.status(201).json({success: true, message: "Login successful, welcome back!"});
+      req.session.user = {
+            username: found.username,
+            email: found.email,
+            bio: found.bio,
+            likes: found.likes
+      };
+      console.log(req.session.user);
+      req.session.save((err)=>{
+        if (err) {
+          console.log("broken");
+          res.redirect("/profile");
+        }
+        return res.status(201).json({ success: true});
+      });     
     }
     else{
-      return res.status(409).json({ success: false, message: "Incorrect username or password." });
+      res.redirect("/logErr");
     }
   }
   catch (err){
@@ -125,17 +227,25 @@ app.post("/login", async (req,res) => {
   }
 });
 
+//hashing function for passwords
 function hash(password) {
   const hash = crypto.createHash('sha256');
   hash.update(password);
   return hash.digest('hex');
 }
 
-// ------ ------ Post backend ------ ------
+//log out route
+app.get("/logout", (req,res)=>{
+  req.session.destroy(() =>{
+  res.clearCookie("sessionId");
+  res.redirect("/login");
+  });
+})
 
-//CREATE
+// ------ ------ Post backend ------ ------s
+// CREATE
 app.post("/add-post", async (req, res) => {
- 
+
   const {username, post_title,post_content, forum_name, tags, 
     total_likes, is_edited,date, total_dislikes, total_comments } = req.body;
 
