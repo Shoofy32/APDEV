@@ -1,13 +1,53 @@
+//all the stuff we're gonna need
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const crypto = require("crypto");
-
+const hbs = require("hbs");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.set('view engines', 'hbs');
 
+//Session objects
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+      secure: false, 
+      httpOnly: true, 
+      maxAge: 24 * 60 * 60 * 1000
+    }
+  })
+);
+
+app.use(cookieParser())
+
+//authentication checker
+const isAuthenticated = (req,res,next) => {
+  if(req.session.user) {
+    console.log("authenticated");
+    next();
+  }
+  else{
+    console.log("wadahel");
+    res.redirect('/login');
+  }   
+}
+
+app.get('/login', (req,res) =>{
+  if (req.session.user){
+
+  }
+  else{
+    res.sendFile(__dirname + "\\html\\login.html\\")
+  }
+});
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/myapp")
@@ -35,12 +75,7 @@ const postSchema = new mongoose.Schema({
 const likedPosts = new mongoose.Schema({
   username: String,
   liked_posts_id : [String]
-
-  
-  
 });
-
-
 
 // User login and registration Schema
 const userSchema = new mongoose.Schema({
@@ -95,7 +130,21 @@ app.post("/register", async (req, res) => {
           });
 
           await newUser.save();
-          return res.status(201).json({ success: true, message: "Registration successful!" });
+          //assigning session user
+          req.session.user = {
+            username: newUser.username,
+            email: newUser.email,
+            bio: newUser.bio
+          };
+          
+          //saving session info
+          req.session.save();
+
+          console.log(req.session.user);
+          res.cookie("sessionId",req.sessionID);
+
+          res.redirect("/profile");
+          //return res.status(201).json({ success: true, message: "Registration successful!" });
         }
 
         else{
@@ -107,15 +156,27 @@ app.post("/register", async (req, res) => {
     }
 });
 
-app.post("/login", async (req,res) => {
+app.post("/logUser", async (req, res) => {
 
   try {
     const {username, password} = req.body;
 
-    const found = await User.find({ $and: [{username: username},{password: hash(password)}]});
+    const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
 
     if(found){
-      return res.status(201).json({success: true, message: "Login successful, welcome back!"});
+      req.session.user = {
+            username: found.username,
+            email: found.email,
+            bio: found.bio,
+      };
+      console.log(req.session.user);
+      req.session.save((err)=>{
+        if (err) {
+          console.log("broken");
+          return res.status(409).json({ success: false, message: "broken" });
+        }
+        return res.status(201).json({success: true, message: "Login successful, welcome back!"});
+      });     
     }
     else{
       return res.status(409).json({ success: false, message: "Incorrect username or password." });
@@ -126,11 +187,24 @@ app.post("/login", async (req,res) => {
   }
 });
 
+//hashing function for passwords
 function hash(password) {
   const hash = crypto.createHash('sha256');
   hash.update(password);
   return hash.digest('hex');
 }
+
+app.get("/profile", isAuthenticated, (req, res) =>{
+  console.log("session started");
+  const userData = req.session.user;
+  res.render('user',{userData});
+});
+
+app.get("/logout", (req,res)=>{
+  req.session.destroy(() =>{
+  res.clearCookie("sessionId");
+  });
+})
 
 // ------ ------ Post backend ------ ------
 
@@ -138,7 +212,7 @@ function hash(password) {
 
 // CREATE
 app.post("/add-post", async (req, res) => {
- 
+
   const {username, post_title,post_content, forum_name, tags, 
     total_likes, is_edited,date, total_dislikes, total_comments } = req.body;
 
@@ -332,14 +406,7 @@ app.put("/reply/:id/dislikes", async (req, res) => {
 });
 
 
-
-
-
-
-
 // READ
-
-
 app.get("/posts", async (req, res) => {
   const users = await Post.find();
   res.json(users);

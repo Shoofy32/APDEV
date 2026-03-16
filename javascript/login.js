@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     button.addEventListener('click', login);
 
     async function logUser(username, password) {
-        const response = await fetch("http://localhost:3000/login", {
+        const response = await fetch("http://localhost:3000/logUser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -31,9 +31,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const data = await response.json();
 
         if (data.success) {
-            alert(data.message); // or update a UI element
-        } else {
-            alert(data.message); // show the error to the user
+            window.location.href = "http://localhost:3000/profile"
+        } 
+        else{
+            alert(data.message);
         }
     }
 });
