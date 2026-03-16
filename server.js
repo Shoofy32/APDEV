@@ -16,7 +16,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/myapp")
 
 
 
-// Post Schema
+// Schemas
 const postSchema = new mongoose.Schema({
   username: String,
   post_title: String,
@@ -42,7 +42,6 @@ const likedPosts = new mongoose.Schema({
 
 
 
-// User login and registration Schema
 const userSchema = new mongoose.Schema({
 
     username: String,
@@ -69,7 +68,7 @@ const replySchema = new mongoose.Schema({
 });
 
 
-// Create the model for post and users
+//Models
 const Post = mongoose.model("Post", postSchema);
 const User = mongoose.model("User", userSchema);
 const Reply = mongoose.model("Reply", replySchema);
@@ -134,9 +133,7 @@ function hash(password) {
 
 // ------ ------ Post backend ------ ------
 
-
-
-// CREATE
+//CREATE
 app.post("/add-post", async (req, res) => {
  
   const {username, post_title,post_content, forum_name, tags, 
@@ -153,6 +150,8 @@ app.post("/add-post", async (req, res) => {
   res.json({ message: "User added" });
 });
 
+
+
 app.post("/add-reply", async (req, res) => {
   console.log("req.body:", req.body);
   const {username, replying_to, original_content, reply_content, unique_post_id, total_likes, is_edited, 
@@ -164,50 +163,72 @@ app.post("/add-reply", async (req, res) => {
 });
 
 
-// READ
-app.get("/users", async (req, res) => {
 
-    const users = await Post.find();
-    res.json(users);
+//READ
+app.get("/posts/:page", async (req, res) => {
+  const page = parseInt(req.params.page);
+  const limit = 15;
 
-});
-
-// DELETE
-app.delete("/delete-user/:id", async (req, res) => {
-
-    await User.findByIdAndDelete(req.params.id);
-    res.json({ message: "User deleted" });
-
-});
-
-app.delete("/post/:id", async (req, res) => {
   try {
-    await Post.findByIdAndDelete(req.params.id);
-    res.json({ message: "Post deleted" });
+    const posts = await Post.find({})
+      .sort({_id: -1})
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
 
-app.delete("/reply/:id", async (req, res) => {
+app.get("/replies/:postId/:page", async (req, res) => {
+  const page = parseInt(req.params.page);
+  const postId = req.params.postId;
+  const limit = 15;
+
   try {
-    await Reply.findByIdAndDelete(req.params.id);
-    res.json({ message: "Reply deleted" });
+    const replies = await Reply.find({unique_post_id: postId})
+      .sort({_id: 1})
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.status(200).json(replies);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// UPDATE
-app.put("/update-user/:id", async (req, res) => {
 
-    const { name, age } = req.body;
-    await User.findByIdAndUpdate(req.params.id, { name, age });
-    res.json({ message: "User updated" });
+app.get("/replies/:postId", async (req, res) => {
+
+  const postId = req.params.postId;
+
+  const replies = await Reply.find({ unique_post_id: postId });
+
+  res.json(replies);
 
 });
+app.get("/post/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
+app.get("/reply/:id", async (req, res) => {
+  try {
+    const post = await Reply.findById(req.params.id);
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+//UPDATE
 app.put("/post/:id", async (req, res) => {
   try {
     const { post_content, is_edited, total_likes } = req.body;
@@ -233,7 +254,7 @@ app.put("/post/:id", async (req, res) => {
   }
 });
 
-//Update likes
+
 app.put("/post/:id/likes", async (req, res) => {
   try {
     const { increment } = req.body; 
@@ -249,7 +270,7 @@ app.put("/post/:id/likes", async (req, res) => {
   }
 });
 
-//Update dislikes
+
 app.put("/post/:id/dislikes", async (req, res) => {
   try {
     const { increment } = req.body; 
@@ -289,7 +310,6 @@ app.put("/reply/:id", async (req, res) => {
       { $set: { reply_content, is_edited, original_content } }
     );
 
-    // ONE cascade only
     await Reply.updateMany(
       { parent_reply_id: req.params.id },
       { $set: { original_content: reply_content + " (edited)" } }
@@ -333,56 +353,40 @@ app.put("/reply/:id/dislikes", async (req, res) => {
 
 
 
-
-
-
-
-// READ
-
-
-app.get("/posts", async (req, res) => {
-  const users = await Post.find();
-  res.json(users);
-});
-app.get("/replies", async (req, res) => {
-  const users = await Reply.find();
-  res.json(users);
-});
-
-app.get("/replies/:postId", async (req, res) => {
-
-  const postId = req.params.postId;
-
-  const replies = await Reply.find({ unique_post_id: postId });
-
-  res.json(replies);
-
-});
-app.get("/post/:id", async (req, res) => {
+//DELETE
+app.delete("/post/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-    res.json(post);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get("/reply/:id", async (req, res) => {
-  try {
-    const post = await Reply.findById(req.params.id);
-    res.json(post);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
-app.listen(3000, () => {
-
-    console.log("Server running on port 3000");
+    await Post.findByIdAndDelete(req.params.id);
+    const result = await Reply.deleteMany({ unique_post_id: req.params.id });
     
+   
+    res.json({ message: "Post deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
+
+app.delete("/reply/:id", async (req, res) => {
+  try {
+    await Reply.findByIdAndDelete(req.params.id);
+    res.json({ message: "Reply deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put("/update-user/:id", async (req, res) => {
+
+    const { name, age } = req.body;
+    await User.findByIdAndUpdate(req.params.id, { name, age });
+    res.json({ message: "User updated" });
+
+});
+
+
+
+//DEBUGGING TO DELETE ALL
 app.get("/delete-all", async (req, res) => {
   await Post.deleteMany({});
   await Reply.deleteMany({})
@@ -394,4 +398,13 @@ app.get("/delete-all-rep", async (req, res) => {
   await Reply.deleteMany({})
   res.json({ message: "All posts deleted" });
 });
+
+
+
+app.listen(3000, () => {
+
+    console.log("Server running on port 3000");
+    
+});
+
 
