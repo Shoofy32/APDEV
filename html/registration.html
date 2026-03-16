@@ -35,25 +35,26 @@
         <h4> Sign up and register for free!</h4>
         <h6> Signing up for an account allows you to interact with posts</h6>
 
-        <h6> Already have an account? <a href="login.html" >Login</a></h6>
+        <h6> Already have an account? <a href="/login" >Login</a></h6>
+        <form action="/registerUser" method="post">
+            <div class="mb-3">
+            <input class="form-control" type="text" id="user" placeholder="Username" aria-label="default input example" name="username">
+            </div>
+            
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email address" name="email">
+            </div>
 
-        <div class="mb-3">
-        <input class="form-control" type="text" id="user" placeholder="Username" aria-label="default input example">
-        </div>
+            <div class="mb-3">
+                <input type="password" id="pass" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Password" name="password">
+            </div>
+            
+            <div class="mb-3">
+                <input type="password" id="passconfirm" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Confirm Password">
+            </div>
         
-        <div class="mb-3">
-            <input type="email" class="form-control" id="email" placeholder="Email address">
-        </div>
-
-        <div class="mb-3">
-            <input type="password" id="pass" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Password">
-        </div>
-        
-        <div class="mb-3">
-            <input type="password" id="passconfirm" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Confirm Password">
-        </div>
-    
-        <button type="button" class="btn btn-success" id="register">Register</button>
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
         </div>
         
     </body>

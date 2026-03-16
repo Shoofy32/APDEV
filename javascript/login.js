@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     
-    const button = document.getElementById("login")
+    /*const button = document.getElementById("login")
     
     function login (){
         
@@ -36,5 +36,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         else{
             alert(data.message);
         }
-    }
+    }*/
 });

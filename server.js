@@ -10,7 +10,13 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.set('view engines', 'hbs');
+app.use(express.urlencoded( {extended: true})); // files consist of more than strings
+
+const path = require("path");
+
+app.use(express.static(path.join(__dirname)));
+
+app.set('view engine', 'hbs');
 
 //Session objects
 app.use(
@@ -18,11 +24,11 @@ app.use(
     secret: "secret-key",
     resave: false,
     saveUninitialized: false,
-    cookie: { 
+    /*cookie: { 
       secure: false, 
       httpOnly: true, 
       maxAge: 24 * 60 * 60 * 1000
-    }
+    }*/
   })
 );
 
@@ -40,13 +46,42 @@ const isAuthenticated = (req,res,next) => {
   }   
 }
 
+//webpage routing
 app.get('/login', (req,res) =>{
   if (req.session.user){
-
+    res.redirect("/");
   }
   else{
-    res.sendFile(__dirname + "\\html\\login.html\\")
+    res.sendFile(__dirname + "/html/login.html")
   }
+});
+
+app.get('/register', (req,res)=> {
+  if (req.session.user){
+    res.redirect("/");
+  }
+  else{
+    res.sendFile(__dirname + "/html/registration.html")
+  }
+});
+
+app.get("/", (req,res)=> {
+  res.sendFile(__dirname + "/html/homepage.html");
+});
+
+app.get("/regErr", (req,res) => {
+  res.sendFile(__dirname + "/html/regErr.html");
+});
+
+app.get("/logErr", (req,res)=> {
+  res.sendFile(__dirname + "/html/logErr.html");
+});
+
+//dummy route, you can change the hbs file this leads to
+app.get("/profile", isAuthenticated, (req, res) =>{
+  console.log("session started");
+  const userData = req.session.user;
+  res.render('user',{userData});
 });
 
 // Connect to MongoDB
@@ -111,7 +146,7 @@ const Reply = mongoose.model("Reply", replySchema);
 
 
 // ------ ------ User backend ------ ------
-app.post("/register", async (req, res) => {
+app.post("/registerUser", async (req, res) => {
     
     try {
         const { email, username, password } = req.body;
@@ -134,21 +169,22 @@ app.post("/register", async (req, res) => {
           req.session.user = {
             username: newUser.username,
             email: newUser.email,
-            bio: newUser.bio
+            bio: newUser.bio,
+            likes: newUser.likes
           };
           
           //saving session info
-          req.session.save();
-
-          console.log(req.session.user);
-          res.cookie("sessionId",req.sessionID);
-
+         req.session.save((err)=>{
+          if (err) {
+            console.log("broken");
+            return res.status(409).json({ success: false, message: "broken" });
+          }
           res.redirect("/profile");
-          //return res.status(201).json({ success: true, message: "Registration successful!" });
-        }
+        });     
 
+        }
         else{
-          return res.status(409).json({ success: false, message: "Username or email already exists." });
+          res.redirect("/regErr");
         }
         
     } catch (err) {
@@ -156,11 +192,12 @@ app.post("/register", async (req, res) => {
     }
 });
 
-app.post("/logUser", async (req, res) => {
+app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
 
   try {
     const {username, password} = req.body;
-
+    console.log(username);
+    console.log(password);
     const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
 
     if(found){
@@ -168,18 +205,19 @@ app.post("/logUser", async (req, res) => {
             username: found.username,
             email: found.email,
             bio: found.bio,
+            likes: found.likes
       };
       console.log(req.session.user);
       req.session.save((err)=>{
         if (err) {
           console.log("broken");
-          return res.status(409).json({ success: false, message: "broken" });
+          res.redirect("/profile");
         }
-        return res.status(201).json({success: true, message: "Login successful, welcome back!"});
+        return res.status(201).json({ success: true});
       });     
     }
     else{
-      return res.status(409).json({ success: false, message: "Incorrect username or password." });
+      res.redirect("/logErr");
     }
   }
   catch (err){
@@ -194,22 +232,15 @@ function hash(password) {
   return hash.digest('hex');
 }
 
-app.get("/profile", isAuthenticated, (req, res) =>{
-  console.log("session started");
-  const userData = req.session.user;
-  res.render('user',{userData});
-});
-
+//log out route
 app.get("/logout", (req,res)=>{
   req.session.destroy(() =>{
   res.clearCookie("sessionId");
+  res.redirect("/login");
   });
 })
 
-// ------ ------ Post backend ------ ------
-
-
-
+// ------ ------ Post backend ------ ------s
 // CREATE
 app.post("/add-post", async (req, res) => {
 
