@@ -4,7 +4,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const notificationContentContainer = document.getElementsByClassName("notification_content_container")[0];
 
     const notificationButton = document.getElementsByClassName("notification_button")[0];
-    
+
+
+    notificationButtonDisplay(); // Call function to display ! or not beside bell icon
+
 
     // Add event listener for notificationButton
     notificationButton.addEventListener("click", () => {
@@ -33,7 +36,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         else if(denyChallengeButton)
             closeUserChallenge(event.target.closest(".deny_challenge")); // Get the closest deny_challenge associated with the click
 
-        
+
+        notificationButtonDisplay(); // Call function to display ! or not beside bell icon
 
     });
 
@@ -83,8 +87,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         </div>`;
 
         notificationContainer.insertAdjacentHTML("beforeend", challengeContainer);
-
-
+        
+        notificationButtonDisplay(); // Call function to display ! or not beside bell icon
     }
 
 
@@ -228,8 +232,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // FOR BACKEND, DELETE FROM DB WHEN REMOVED
 
 
-
-
         // Check if buttonElement null, return if it is
         if(!buttonElement)
             return;
@@ -251,6 +253,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // If current location is userprofile.html, then send a new custom event to the document to load notifications in userprofile
         if(window.location.pathname.endsWith("userprofile.html"))
             document.dispatchEvent(new CustomEvent("updateUserProfileNotifications"));
+
+    }
+
+
+    // Function updates the notificationButton whether to add alert text(!) or not depending if there are pending notifications
+    function notificationButtonDisplay(){
+
+        const currentNotifications = document.getElementsByClassName("challenge_notification"); // Challenge notifications
+
+        const notificationAlert = notificationButton.getElementsByClassName("notification_alert")[0]; // Notification Alert (!)
+
+
+        // Check if there are current notifications and alert is null, if so insertHTML for adding the alert
+        if(currentNotifications.length > 0 && !notificationAlert)
+            notificationButton.insertAdjacentHTML("beforeend", '<span class="notification_alert">!</span>');
+        // Else if there are no notifications and alert is not null, remove notification alert
+        else if(currentNotifications.length === 0 && notificationAlert != null)
+            notificationAlert.remove();
 
     }
 

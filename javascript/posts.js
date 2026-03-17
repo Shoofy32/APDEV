@@ -316,16 +316,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    let previousPostReply;
+
     // Function controls whether to open the reply container or remove it based if the container already exists
-    function replyPost(divElement){
+    function replyPost(divElement,){
+
+
 
         let replyContainer = document.getElementsByClassName("create_reply_container"); // Reply container
 
+        console.log(previousPostReply);
+
         // Check if the reply container exists by checking length
-        if(replyContainer.length === 0)
-            createReply(divElement); // Call function to create the container
-        else
+        if(replyContainer.length === 0){
+
+            createReply(divElement);
+            previousPostReply = divElement;
+            console.log("1");
+
+        }
+        else if(previousPostReply != divElement && replyContainer.length > 0){
+
             replyContainer[0].remove(); // Remove the container
+            createReply(divElement); // Call function to create the container
+            previousPostReply = divElement;
+            console.log("2");
+
+        }
+        else if(previousPostReply === divElement && replyContainer.length > 0){
+
+            replyContainer[0].remove(); // Remove the container   
+            console.log("3");
+
+        }
+
+
 
     }
 
