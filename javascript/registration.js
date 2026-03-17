@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
-    const button = document.getElementById("register")
+    /*const button = document.getElementById("register")
     
     function register (){
 
@@ -35,8 +35,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         if (data.success) {
             alert(data.message); // or update a UI element
-        } else {
-            alert(data.message); // show the error to the user
+        } 
+        else if (data.message === "nouser"){
+            window.location.href="../html/login.html"
         }
-    }
+        else{
+            alert(data.message);
+        }
+    }*/
 });
