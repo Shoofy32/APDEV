@@ -145,10 +145,12 @@ hr :not(.side_bar_content) {
 
 
 .timestamp  {
+
   padding-top: 6px;
   color: white;
   opacity: 0.6;
   font-size: 9px;
+
   
 }
 
@@ -174,6 +176,7 @@ hr :not(.side_bar_content) {
   display: block;
   text-decoration: none;
   color: inherit;
+  
 }
 .link:hover {
     background-color: #3E5058;
@@ -604,5 +607,14 @@ hr :not(.side_bar_content) {
     margin-left: 10px;
 
     float: left;
+
+}
+
+
+/* Forum Load Link - On Hover */
+.return_forum_link:hover{
+
+    cursor: pointer;
+    text-decoration: underline;
 
 }

@@ -21,9 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = `userpost.html?id=${id}&page=1`;
     }
 
+
     const all_posts = document.getElementsByClassName("all_posts")[0];
+    const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
+    const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
+ 
     // Check if userpost to avoid loading backend in forum page
-    if((!window.location.pathname.endsWith("forum.html")) && (!window.location.pathname.endsWith("homepage.html"))){
+    if((!window.location.pathname.endsWith("forum.html")) && (!window.location.pathname.endsWith("homepage.html") 
+        && !window.location.pathname.endsWith("userprofile.html"))){
 
     
     (async () => {  
@@ -32,12 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 
     }
-
-    // Add eventlistener to the post container
-   
-
-    const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
-    const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
 
     // Add event listener on all posts for event delegating
     all_posts.addEventListener("click", function(event) {
@@ -53,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const challengeButton = event.target.closest(".challenge_button"); // Challenge button
         const editButton = event.target.closest(".edit_button"); // Edit button
         const deleteButton = event.target.closest(".delete_button"); // Delete button
+        const postNameLinks = event.target.closest(".name_post"); // Username posts
 
         
         // If conditions check for which button was clicked and calls the function corresponding to that button
@@ -65,21 +65,17 @@ document.addEventListener("DOMContentLoaded", () => {
         else if(challengeButton)
             openChallenge();
         else if(editButton)
-        
            editDescription(editButton);
-        else if(deleteButton){
-
+        else if(deleteButton)
             deleteButton.closest(".post, .reply").remove();
-
-        }
+        else if(postNameLinks)
+            window.location.pathname = "/html/userprofile.html"; // Added path to userpost.html
         // If post reply is clicked, and user is not in userpost and clicked on an edit area, open the post and load userpost.html
         else if(post_reply && !(window.location.pathname.endsWith("userpost.html")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
-           
             openPost(post_reply.id);
 
 
     });
-
 
 
     // If pressed, open challenge container
@@ -94,6 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
             rollD20(betChallengeButton.closest(".challenge"), true);
 
     });
+
+
 
 
 
@@ -339,16 +337,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    let previousPostReply;
+
     // Function controls whether to open the reply container or remove it based if the container already exists
-    function replyPost(divElement){
+    function replyPost(divElement,){
+
+
 
         let replyContainer = document.getElementsByClassName("create_reply_container"); // Reply container
 
+        console.log(previousPostReply);
+
         // Check if the reply container exists by checking length
-        if(replyContainer.length === 0)
-            createReply(divElement); // Call function to create the container
-        else
+        if(replyContainer.length === 0){
+
+            createReply(divElement);
+            previousPostReply = divElement;
+            console.log("1");
+
+        }
+        else if(previousPostReply != divElement && replyContainer.length > 0){
+
             replyContainer[0].remove(); // Remove the container
+            createReply(divElement); // Call function to create the container
+            previousPostReply = divElement;
+            console.log("2");
+
+        }
+        else if(previousPostReply === divElement && replyContainer.length > 0){
+
+            replyContainer[0].remove(); // Remove the container   
+            console.log("3");
+
+        }
+
+
 
     }
 
@@ -561,5 +584,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     }
+
+
+    // Make function globally accessible
+    window.openChallenge = openChallenge;
+    window.rollD20 = rollD20;
+    window.timer = timer;
 
 })
