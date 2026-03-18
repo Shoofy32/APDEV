@@ -213,9 +213,9 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
       req.session.save((err)=>{
         if (err) {
           console.log("broken");
-          res.redirect("/profile");
+          return res.status(201).json({ success: false, message: broken});
         }
-        return res.status(201).json({ success: true});
+        res.redirect("/profile");
       });     
     }
     else{
