@@ -44,6 +44,8 @@
         <!-- Link JS File for forum load link interaction -->
         <script src = "../javascript/forumloadlink.js"></script>
 
+        <!-- Link JS File for logins -->
+        <script src = "../javascript/log_reg_header.js"></script>
 
     </head>
 
@@ -57,28 +59,117 @@
             <header>
 
                 <!-- Logo -->
-                <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+                <a class = "logo"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
 
                 
                 <!-- Search bar -->
-                 <div class = "search_bar">
+                <div class = "search_bar">
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
                     <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
 
-                 </div>
-
-
-                <!-- Log In and Sign Up Buttons -->
-                <div class = "log_sign_in">
-
-                    <button onclick = "window.open('../log_regpage/login.html', '_self')"> Log In </button>
-                    <button onclick = "window.open('../log_regpage/registration.html', '_self')"> Sign Up </button>
-
                 </div>
 
+                <!-- Like Container for showing current likes user has -->
+                <div class = "likes_container">
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i>
+                    <p class = "like_amount"></p>
+                </div>
 
+                <!-- Notification Container for challenge notifications from other users -->
+                <div class = "notification_container">
+                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
+
+                    <div class = "notification_dropdown">
+
+                        <p class = "notifications_header"> Notifications </p>
+
+                        <div class = "notification_content_container">
+
+                            <div class = "challenge_notification">
+
+
+                                <div class = "icon_name_challenge_container">
+
+                                    <img src = "../resources/users/discordmod.jpg">
+                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
+
+                                </div>
+
+
+                                <div class = "roll_likes_container">
+
+                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  15 </p>
+                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 25 </p>
+
+                                </div>
+
+                                <div class = "accept_deny_container">
+
+                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
+                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "challenge_notification">
+
+
+                                <div class = "icon_name_challenge_container">
+
+                                    <img src = "../resources/users/discordmod.jpg">
+                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
+
+                                </div>
+
+                                <div class = "roll_likes_container">
+
+                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  12 </p>
+                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 18 </p>
+
+                                </div>
+
+                                <div class = "accept_deny_container">
+
+                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
+                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
+
+                                </div>
+
+                            </div>                            
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="log_sign_in" id="topright">
+
+
+
+                    <div class = "log_sign_in2" id = "user">
+
+                        <img class = "header_pfp" src = "">
+                        <p id = "username" class="username"></p>
+
+                        <button id = "logout" > Log out </button>
+
+                    </div>
+
+                    <!-- Log In and Sign Up Buttons -->
+                    <div class = "log_sign_in1" id = "anon">
+
+                        <button onclick = "window.location.href = '/login'"> Log In </button>
+                        <button onclick = "window.location.href = '/register'"> Sign Up </button>
+
+                    </div>
+
+                
+
+
+
+                </div>
             </header>
 
 
@@ -229,7 +320,7 @@
             <div class = search_container>
 
                 <h2 class = "query_result_display"> <span class = "query_counter"> 0 </span> Search Result(s) for: <span class = "search_query"> Blank </span></h2>
-                    <div class = "search_results_container">
+                    <div class = "search_results_container all_posts">
 
                         <div class = "post" onclick = "openPost()">
 

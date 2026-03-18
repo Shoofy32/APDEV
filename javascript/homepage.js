@@ -1,6 +1,5 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
+    
     const url = window.location.href
     const index = url.indexOf("page=")
     const raw_page = index !== -1 ? url.substring(index + 5).split("&")[0] : "";
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(invalidPage) {
         window.onload = function() {
     
-        window.location.href = 'homepage.html?page=1'
+        window.location.href = '/?page=1'
         };
     }
 

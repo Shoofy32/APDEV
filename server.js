@@ -5,7 +5,6 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const crypto = require("crypto");
-const hbs = require("hbs");
 const app = express();
 
 app.use(cors());
@@ -15,8 +14,6 @@ app.use(express.urlencoded( {extended: true})); // files consist of more than st
 const path = require("path");
 
 app.use(express.static(path.join(__dirname)));
-
-app.set('view engine', 'hbs');
 
 //Session objects
 app.use(
@@ -77,11 +74,29 @@ app.get("/logErr", (req,res)=> {
   res.sendFile(__dirname + "/html/logErr.html");
 });
 
+app.get("/forum", (req,res)=> {
+
+    res.sendFile(__dirname + "/html/forum.html");
+    
+});
+
 //dummy route, you can change the hbs file this leads to
 app.get("/profile", isAuthenticated, (req, res) =>{
-  console.log("session started");
-  const userData = req.session.user;
-  res.render('user',{userData});
+
+    res.sendFile(__dirname + "/html/userprofile.html");
+
+});
+
+app.get("/userpost", isAuthenticated, (req, res) =>{
+
+    res.sendFile(__dirname + "/html/userpost.html");
+    
+});
+
+app.get("/userprofile", isAuthenticated, (req, res) =>{
+
+    res.sendFile(__dirname + "/html/userprofile.html");
+    
 });
 
 // Connect to MongoDB
@@ -147,6 +162,17 @@ const User = mongoose.model("User", userSchema);
 const Reply = mongoose.model("Reply", replySchema);
 
 
+// ------------- Obtain Login Info ---------------
+app.get("/user-login", (req, res) => {
+
+    if(req.session.user)
+        res.json({user: req.session.user, userLoggedIn: true});
+    else
+        res.json({userLoggedIn: false});      
+
+});
+
+
 // ------ ------ User backend ------ ------
 app.post("/registerUser", async (req, res) => {
     
@@ -162,7 +188,7 @@ app.post("/registerUser", async (req, res) => {
               email: email,
               password: hash(password),
               bio: "Describe yourself...",
-              likes: 0
+              likes: 20
 
           });
 
@@ -181,7 +207,7 @@ app.post("/registerUser", async (req, res) => {
             console.log("broken");
             return res.status(409).json({ success: false, message: "broken" });
           }
-          res.redirect("/profile");
+          res.redirect("/");
         });     
 
         }
@@ -215,7 +241,7 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
           console.log("broken");
           return res.status(201).json({ success: false, message: broken});
         }
-        res.redirect("/profile");
+        res.redirect("/");
       });     
     }
     else{
@@ -236,10 +262,14 @@ function hash(password) {
 
 //log out route
 app.get("/logout", (req,res)=>{
-  req.session.destroy(() =>{
-  res.clearCookie("sessionId");
-  res.redirect("/login");
+
+    req.session.destroy(() =>{
+    res.clearCookie("sessionId");
+    // Changes so that it will redirect user to the page where they logged out. Also added /login if redirect fails
+    res.redirect(req.headers.referer || "/login"); 
+
   });
+
 })
 
 // ------ ------ Post backend ------ ------s
@@ -461,8 +491,6 @@ app.put("/reply/:id/dislikes", async (req, res) => {
   }
 });
 
-
-
 //DELETE
 app.delete("/post/:id", async (req, res) => {
   try {
@@ -508,6 +536,64 @@ app.get("/delete-all-rep", async (req, res) => {
   await Reply.deleteMany({})
   res.json({ message: "All posts deleted" });
 });
+
+
+
+
+// NEW: User Updating route
+app.put("/user-update", async (req, res) => {
+
+    try {
+        
+        const {newBio, newLikes} = req.body;
+        const username = req.session.user.username;
+
+        let updatedInfo = {};
+
+        // Check if requested bio has data or not
+        if(newBio !== undefined){
+
+            req.session.user.bio = newBio; // Update session
+            updatedInfo.bio = newBio;
+
+        }
+
+        // Check if requested likes has data or not
+        if(newLikes !== undefined){
+
+            req.session.user.likes = newLikes; // Update session
+            updatedInfo.likes = newLikes;
+
+
+        }
+
+        // Find user in database and update likes
+        await User.findOneAndUpdate(
+            
+            {username: username},
+            {$set: updatedInfo}
+
+        );
+
+        // Force immideiate save of data
+        req.session.save((err) => {
+
+            if (err) 
+                res.status(500).json({ error: err.message });
+            else
+                res.json({ message: "Successful Update"});
+
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ error: err.message }); // Send error of PUT request
+
+    }
+
+
+});
+
 
 
 

@@ -35,7 +35,11 @@ header .logo img{
 
 }
 
+header .logo img:hover{
 
+    cursor: pointer;
+
+}
 
 /* Homepage Header - Search Bar */
 header .search_bar{
@@ -43,7 +47,7 @@ header .search_bar{
     display: flex;
     align-items: center;
 
-    width: 500px;
+    min-width: 500px;
     height: 40px;
 
     background-color: #324248;
@@ -173,11 +177,20 @@ header .username{
     align-items: center;
 
     font-family: "Inter", Arial;
+    font-size: 15px;
+    font-weight: 700;
 
     color: coral;
     background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
+
+}
+
+header .username:hover{
+
+    color: rgb(224, 106, 63);
+    text-decoration: underline;
+    cursor: pointer;
+
 }
 
 /* Homepage Header - Log in & Sign Up Buttons */
@@ -221,39 +234,75 @@ header .log_sign_in button:hover{
 
 }
 
+
 header .log_sign_in1{
 
     width: 190px;
 
-    display: flex;
+    display: none;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 
-    padding-bottom: 30px;
+    margin-right: 15px;
 
+    gap: 15px;
 
 }
 
+header .log_sign_in2{
 
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+header .header_pfp{
+
+    transform: scale(1.2, 1.2);
+    object-fit: cover;
+
+    margin-left: -50px;
+
+}
+
+header .header_pfp:hover{
+
+    cursor: pointer;
+
+}
+
+header #logout{
+
+    position: absolute;
+
+    right: 3.3vw;
+
+}
 
 
 /* Added for likes and notifications */
 header .likes_container{
 
-    display: flex;
+    display: none;
     align-items: center;
 
 
     width: 100px;
 
-    margin-left: 14%;
-    margin-right: 10px;
+    margin-left: 8%;
     
 }
 
 header .notification_container{
 
+    display: none;
+
     position: relative;
+
+    margin-left: -0.5%;
 
 }
 
@@ -285,6 +334,8 @@ header .likes_container i{
 }
 
 header .likes_container p{
+
+    width: 30px; 
 
     margin-left: 5px;
 

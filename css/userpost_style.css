@@ -37,6 +37,7 @@ a {
     height: 25px;
     width: 25px;
     border-radius: 50%;
+    object-fit: cover;
 
 }
 
@@ -132,7 +133,7 @@ a {
 
 
 /* Posts - Div Container that Contains the Like and Dislike Buttons */
-.stats_post{
+.all_posts .stats_post{
 
     display: flex;
     align-items: center;
@@ -167,7 +168,7 @@ a {
 }
 
 /* Posts (Counter) - Icon of Button */
-.stats_post i{
+.all_posts .stats_post i{
 
     color: white;
 
@@ -177,7 +178,7 @@ a {
 }
 
 /* Posts (Counter) - Counter of Button */
-.stats_post p{
+.all_posts .stats_post p{
 
 
     font-size: 14px;
@@ -194,7 +195,7 @@ a {
 
 /* Posts (Counter) - Icon of Button */
 /* On Hover */
-.stats_post i:hover{
+.all_posts .stats_post i:hover{
 
     color: coral;
 
