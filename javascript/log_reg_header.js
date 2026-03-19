@@ -147,9 +147,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    async function updateBanner(image){
+
+        await fetch("/user-update",{
+
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ newBanner: image })
+        });
+    }
+
     // Make functions globally accessible
     window.updateLikes = updateLikes;
     window.updateBio = updateBio;
     window.updateProfile = updateProfile;
+    window.updateBanner = updateBanner;
 
 });
