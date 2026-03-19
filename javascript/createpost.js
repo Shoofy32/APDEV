@@ -59,8 +59,6 @@ async function addPost() {
   const authentication = await fetch("/user-login")
   const info = await authentication.json()
   if(info.userLoggedIn) {
-    alert(info.user.username)
-
     const username = info.user.username
     const params = new URLSearchParams(window.location.search);
     const forum_name = params.get("forum");
@@ -72,12 +70,20 @@ async function addPost() {
     const date = new Date().toLocaleDateString();
     const total_dislikes = 0
     const total_comments = 0
-    const profile = info.user.profile;
-    await fetch("http://localhost:3000/add-post", {
+    const poster_id = info.user.id
+    alert(poster_id)
+    const response = await fetch("http://localhost:3000/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,profile})
+    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
+    
     });
+    
+    const data = await response.json();
+    const postId = data.postId; 
+
+    updatePosts(poster_id, postId)
+   
 
     window.location.href = `forum?forum=${forum_name}&page=1`;
     }
@@ -87,4 +93,13 @@ async function addPost() {
   
  
 
+}
+
+async function updatePosts(userId, postId) {
+
+  await fetch(`/user/addPost/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ posts: postId })
+  });
 }

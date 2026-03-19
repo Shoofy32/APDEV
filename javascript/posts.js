@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const page = parseInt(params.get("page")) || 1;
 
     const invalidPage = !page_url.includes("page=") || !/^\d+$/.test(raw_page) || page_number < 1;
-
+    
     if(invalidPage && page_url.includes("forum")) {
         window.location.href = `/forum?forum=${encodeURIComponent(forumTitle)}&page=1`;
     }
@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         && !window.location.pathname.endsWith("userprofile.html"))){
 
     
-    (async () => {  
+    (async () => {
+      
         await loadPost(id,page);
         loadPosts(id, page);
     })();
@@ -96,11 +97,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Function updates the like and dislike counter when pressed (increment or decrement)
-    function updateCounter(buttonElement, divElement){
+    async function updateCounter(buttonElement, divElement){
         const parentPost = divElement.parentElement
         var counterElement = buttonElement.nextElementSibling; // Get the counter element
         var countValue = parseInt(counterElement.textContent); // Get the integer value of the counter element
-
+        const response = await fetch("/user-login"); // Fetch from route
+        const info = await response.json() // Convert to object
         
         // Boolean that checks whether button is true or false
         var isClicked = buttonElement.style.color === "coral"
@@ -133,8 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if(parentPost.classList.contains("post")) {
                 //When like is pressed add 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
-                    
+                    updateUserLikedPosts(info.user.id, parentPost.id)
                     updatePostLikes(parentPost.id, 1)
+                    updateUserLikes(parentPost.id,1)
+                    console.log(info.user.liked_posts_id)
+                    
                 }
             //When dislike is pressed add 1 dislike
             else {
@@ -167,8 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if(parentPost.classList.contains("post")) {
                 //When like is pressed again subtract 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
-                    alert("test")
                     updatePostLikes(parentPost.id, -1)
+                    removeUserLikedPosts(info.user.id, parentPost.id)
+                    updateUserLikes(parentPost.id,-1)
                 }
             //When dislike is pressed again add 1 like
                 else {

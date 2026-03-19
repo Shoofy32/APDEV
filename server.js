@@ -73,6 +73,14 @@ app.get("/forum", (req,res)=> {
     
 });
 
+
+app.get("/createpost", (req,res)=> {
+
+    res.sendFile(__dirname + "/html/createpost.html");
+    
+});
+
+
 //dummy route, you can change the hbs file this leads to
 app.get("/profile", isAuthenticated, (req, res) =>{
 
@@ -110,16 +118,11 @@ const postSchema = new mongoose.Schema({
   is_edited :Boolean,
   date: String,
   total_dislikes: Number,
-  total_comments: Number
+  total_comments: Number,
+  poster_id: String  
   
   
 });
-
-const likedPosts = new mongoose.Schema({
-  username: String,
-  liked_posts_id : [String]
-});
-
 
 
 // User login and registration Schema
@@ -137,7 +140,11 @@ const userSchema = new mongoose.Schema({
     notifs: [String],
     wins: Number,
     losses: Number,
-    ties: Number
+    ties: Number,
+    liked_posts_id : [String],
+    liked_replies_id : [String],
+    disliked_posts_id : [String],
+    disliked_replies_id : [String]
     
 });
 
@@ -151,7 +158,8 @@ const replySchema = new mongoose.Schema({
   is_edited: Boolean,
   parent_reply_id: String,
   date: String,
-  total_dislikes: Number
+  total_dislikes: Number,
+  poster_id: String  
  
   
 });
@@ -211,7 +219,8 @@ app.post("/registerUser", async (req, res) => {
             banner: newUser.banner,
             wins: newUser.wins,
             losses: newUser.losses,
-            ties: newUser.ties
+            ties: newUser.ties,
+            liked_posts_id : newUser.liked_posts_id
           };
           
           //saving session info
@@ -241,6 +250,7 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
 
     if(found){
       req.session.user = {
+            id: found._id,
             username: found.username,
             email: found.email,
             bio: found.bio,
@@ -249,7 +259,8 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
             banner: found.banner,
             wins: found.wins,
             losses: found.losses,
-            ties: found.ties
+            ties: found.ties,
+            liked_posts_id : found.liked_posts_id
       };
       req.session.save((err)=>{
         if (err) {
@@ -267,6 +278,95 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
     console.error(err);
   }
 });
+
+
+//Update user posts array
+app.put("/user/addPost/:id", async (req, res) => {
+  try {
+    const { posts} = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+       $push: { posts: posts }
+    }, { new: true });
+
+    req.session.user.posts.push(posts);
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+//Update user liked posts (remove)
+app.put("/user/likedPosts/:id", async (req, res) => {
+  try {
+    const { liked_posts_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+       $push: { liked_posts_id: liked_posts_id }
+    }, { new: true });
+
+    req.session.user.liked_posts_id.push(liked_posts_id);
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//Update user liked posts(remove)
+app.put("/user/removeLikedPosts/:id", async (req, res) => {
+  try {
+    const { liked_posts_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+      $pull: { liked_posts_id: liked_posts_id }  
+    });
+
+    req.session.user.liked_posts_id = req.session.user.liked_posts_id.filter(
+      postId => postId !== liked_posts_id 
+    );
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+//Update user's total likes
+app.put("/user/likes/:id", async (req, res) => {
+  try {
+    const { increment } = req.body; 
+
+    await User.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { likes: increment } } 
+    );
+
+    res.json({ message: "Likes updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+//Find user by ID
+app.get("/user/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
 
 //hashing function for passwords
 function hash(password) {
@@ -287,22 +387,23 @@ app.get("/logout", (req,res)=>{
 
 })
 
+
 // ------ ------ Post backend ------ ------s
 // CREATE
 app.post("/add-post", async (req, res) => {
 
   const {username, post_title,post_content, forum_name, tags, 
-    total_likes, is_edited,date, total_dislikes, total_comments } = req.body;
+    total_likes, is_edited,date, total_dislikes, total_comments, poster_id } = req.body;
 
 
   const newPost = new Post({ username,post_title, post_content, forum_name, tags, 
-    total_likes, is_edited,date, total_dislikes, total_comments});
+    total_likes, is_edited,date, total_dislikes, total_comments, poster_id});
 
     
   console.log(res)
   await newPost.save();
   
-  res.json({ message: "User added" });
+  res.json({ message: "User added", postId: newPost._id});
 });
 
 
@@ -622,10 +723,10 @@ app.put("/user-update", async (req, res) => {
 
 
 
+
 app.listen(3000, () => {
 
     console.log("Server running on port 3000");
     
 });
-
 
