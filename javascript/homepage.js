@@ -184,42 +184,12 @@ async function loadPosts(page = 1) {
         
         challenge.append(i4, challenge_text)
 
-        const delete_edit_container = document.createElement('div')
-        delete_edit_container.classList.add('delete_edit_container')
-        const delete_button = document.createElement('button')
-        delete_button.classList.add("delete_button")
-        delete_button.addEventListener("click", function(e) {
-            deletePost(post._id)
-        })
 
-        const delete_text = document.createElement('h4')
-        delete_text.innerText = "Delete"
-
-        const delete_image = document.createElement('i')
-        delete_image.classList.add('fa-regular', 'fa-trash-can')
-
-        delete_button.append(delete_image, delete_text)
-
-        const edit_button = document.createElement('button')
-        edit_button.classList.add("edit_button")
-        const edit_text = document.createElement('h4')
-        edit_text.innerText = "Edit"
-
-        const edit_image = document.createElement('i')
-        edit_image.classList.add('fa-solid', 'fa-pen-to-square')
-
-
-        edit_button.append(edit_image, edit_text)
-       
-        delete_edit_container.append(delete_button, edit_button)
 
         //Check if the user is logged in and give them edit
-        if(info.userLoggedIn && post.username === info.user.username) {
-          interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
-        }
-        else {
-          interaction_container.append(like,dislike, comment, challenge)
-        }
+
+        interaction_container.append(like,dislike, comment, challenge)
+        
         
 
 
