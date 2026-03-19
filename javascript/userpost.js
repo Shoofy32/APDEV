@@ -338,6 +338,13 @@
         total_dislikes.innerText = reply.total_dislikes
         dislike.append(i2, total_dislikes)
 
+
+        if(info.userLoggedIn && info.user.disliked_replies_id.includes(userPost.id)) {
+          i2.style = "color: coral;"
+          i2.dataset.clicked = "true"
+        }
+       
+
         const comment = document.createElement('div')
         comment.classList.add('reply_button')
 
@@ -509,5 +516,33 @@ async function removeUserLikedReplies(userId, postId) {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ liked_replies_id: postId })
+  });
+}
+
+
+async function updateUserDislikedReplies(userId, postId) {
+
+  await fetch(`/user/dislikedReplies/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_replies_id: postId })
+  });
+}
+
+async function removeUserLikedReplies(userId, postId) {
+
+  await fetch(`/user/removeDislikedReplies/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_replies_id: postId })
+  });
+}
+
+async function removeUserDislikedReplies(userId, postId) {
+
+  await fetch(`/user/removeDislikedReplies/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_replies_id: postId })
   });
 }

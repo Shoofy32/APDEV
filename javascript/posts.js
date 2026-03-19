@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if(postNameLinks)
             window.location.href = "/userprofile"; // Added path to userpost.html
         // If post reply is clicked, and user is not in userpost and clicked on an edit area, open the post and load userpost.html
-        else if(post_reply && !(window.location.pathname.endsWith("userpost.html")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
+        else if(post_reply && !(window.location.pathname.includes("userpost")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
             openPost(post_reply.id);
 
 
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log(info.user.liked_posts_id)
                     
                 }
-            //When dislike is pressed add 1 dislike
+
             else {
                     updateUserDislikedPosts(info.user._id, parentPost.id)
                     updatePostDislikes(parentPost.id, 1)
@@ -157,14 +157,16 @@ document.addEventListener("DOMContentLoaded", () => {
             //Check if it is a reply
             if(parentPost.classList.contains("reply")) {
                 //When like is pressed add 1 like
+
                 if(otherButton.classList.contains("fa-thumbs-down")) {
                     updateUserLikedReplies(info.user._id, parentPost.id)
                     updateReplyLikes(parentPost.id, 1)
                     updateUserLikesReply(parentPost.id,1)
                 }
-            //When dislike is pressed increment 1 like
+
                 else {
                     updateReplyDislikes(parentPost.id, 1)
+                    updateUserDislikedReplies(info.user._id, parentPost.id)
                 }
             }
            
@@ -199,9 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateReplyLikes(parentPost.id, -1)
                     removeUserLikedReplies(info.user._id, parentPost.id)
                 }
-                //When dislike is pressed again remove 1 like
+
                 else {
                     updateReplyDislikes(parentPost.id, -1)
+                    removeUserDislikedReplies(info.user._id, parentPost.id)
                 }
 
             }
