@@ -26,152 +26,184 @@
     
     })
     async function loadPost(id) {
-    const response = await fetch(`http://localhost:3000/post/${id}`);
-    const post = await response.json()
-    
-    
-    const post_container = document.createElement('div')
-    post_container.id = post._id
-    post_container.classList.add("post")
-    //Post information(Profile, date, username)
+      const response = await fetch(`http://localhost:3000/post/${id}`);
+      const post = await response.json()
 
-    const post_info = document.createElement('div')
-    post_info.classList.add("icon_name_date_post")
-
-    const profile_picture = document.createElement('img')
-    profile_picture.src = "../resources/users/kirk.jfif"
-
-
-    
-    const userh5 = document.createElement('h5')
-    userh5.classList.add('name_post')
-    userh5.innerText = post.username
-
-  
-    const date_post = document.createElement("p")
-    date_post.classList.add("date_post")
-    date_post.innerHTML = post.date
-    post_info.append(profile_picture, userh5, date_post)
-
-    //Post contents
-    
-    const post_title = document.createElement('h3')
-    post_title.classList.add("title_post")
-    post_title.innerText = post.post_title
-
-    const tags_post = document.createElement('div')
-        tags_post.classList.add("tags_post")
-        let tags = post.tags
-        for(let tag of tags) {
-            const p_tag = document.createElement('p')
-            p_tag.classList.add('tag')
-            p_tag.add
-            p_tag.innerText = tag
-            tags_post.append(p_tag)
-    }
-
-
-    const post_body = document.createElement('p')
-    post_body.classList.add("description_short_post")
-    post_body.innerText = post.post_content
-    //Check if it is edited
-    if(post.is_edited === true) {
-      post_body.innerText = post_body.innerText
-      const strongEdited = document.createElement("strong")
-      strongEdited.innerHTML = " (edited)"
-      post_body.append(strongEdited)
-    }
-    
-    //Interaction Container (likes, dislikes, reply)
-    const interaction_container = document.createElement("div")
-    interaction_container.classList.add("stats_post")
-
-    const like = document.createElement('div')
-    like.classList.add('counter_container')
-
-    const i = document.createElement('i')
-    i.classList.add('fa-regular')
-    i.classList.add('fa-thumbs-up')
-
-    const total_likes = document.createElement('p')
-    total_likes.classList.add('like_counter')
-    total_likes.innerText = post.total_likes
-    like.append(i, total_likes)
-
-    const dislike = document.createElement('div')
-    dislike.classList.add('counter_container')
-
-    const i2 = document.createElement('i')
-    i2.classList.add('fa-regular')
-    i2.classList.add('fa-thumbs-down')
-
-    const total_dislikes = document.createElement('p')
-    total_dislikes.classList.add('like_counter')
-    total_dislikes.innerText = post.total_dislikes
-    dislike.append(i2, total_dislikes)
-
-    const comment = document.createElement('div')
-    comment.classList.add('reply_button')
-
-    const i3 = document.createElement('i')
-    i3.classList.add('fa-regular')
-    i3.classList.add('fa-comment')
-
-    const reply = document.createElement('p')
-    reply.classList.add('comment_counter')
-    reply.innerText = "Reply"
-    comment.append(i3, reply)
+      const authentication = await fetch("/user-login")
+      const info = await authentication.json()
     
 
-    const challenge = document.createElement('div')
-    challenge.classList.add('challenge_button')
+      const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+      const user = await user_info.json();
+      
+      
+      
+      const post_container = document.createElement('div')
+      post_container.id = post._id
+      post_container.classList.add("post")
+      //Post information(Profile, date, username)
 
-    const i4 = document.createElement('i')
-    i4.classList.add('fa-solid')
-    i4.classList.add('fa-bullseye')
+      const post_info = document.createElement('div')
+      post_info.classList.add("icon_name_date_post")
 
-    const challenge_text = document.createElement('p')
-    challenge_text.classList.add('challenge_text')
-    challenge_text.innerText = "Challenge"
+      const profile_picture = document.createElement('img')
+      profile_picture.src = user.profile
+
+
+      
+      const userh5 = document.createElement('h5')
+      userh5.classList.add('name_post')
+      userh5.innerText = post.username
 
     
-    challenge.append(i4, challenge_text)
+      const date_post = document.createElement("p")
+      date_post.classList.add("date_post")
+      date_post.innerHTML = post.date
+      post_info.append(profile_picture, userh5, date_post)
 
-    const delete_edit_container = document.createElement('div')
-    delete_edit_container.classList.add('delete_edit_container')
-    const delete_button = document.createElement('button')
-    delete_button.classList.add("delete_button")
+      //Post contents
+      
+      const post_title = document.createElement('h3')
+      post_title.classList.add("title_post")
+      post_title.innerText = post.post_title
 
-    const delete_text = document.createElement('h4')
-    delete_text.innerText = "Delete"
-
-    const delete_image = document.createElement('i')
-    delete_image.classList.add('fa-regular', 'fa-trash-can')
-
-    delete_button.append(delete_image, delete_text)
-    delete_button.addEventListener("click", function(e) {
-            deletePost(post._id)
-    })
-
-
-    const edit_button = document.createElement('button')
-    edit_button.classList.add("edit_button")
-    const edit_text = document.createElement('h4')
-    edit_text.innerText = "Edit"
-
-    const edit_image = document.createElement('i')
-    edit_image.classList.add('fa-solid', 'fa-pen-to-square')
+      const tags_post = document.createElement('div')
+          tags_post.classList.add("tags_post")
+          let tags = post.tags
+          for(let tag of tags) {
+              const p_tag = document.createElement('p')
+              p_tag.classList.add('tag')
+              p_tag.add
+              p_tag.innerText = tag
+              tags_post.append(p_tag)
+      }
 
 
-    edit_button.append(edit_image, edit_text)
-    delete_edit_container.append(delete_button, edit_button)
+      const post_body = document.createElement('p')
+      post_body.classList.add("description_short_post")
+      post_body.innerText = post.post_content
+      //Check if it is edited
+      if(post.is_edited === true) {
+        post_body.innerText = post_body.innerText
+        const strongEdited = document.createElement("strong")
+        strongEdited.innerHTML = " (edited)"
+        post_body.append(strongEdited)
+      }
+      
+      //Interaction Container (likes, dislikes, reply)
+      const interaction_container = document.createElement("div")
+      interaction_container.classList.add("stats_post")
 
-    interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+      const like = document.createElement('div')
+      like.classList.add('counter_container')
+
+      const i = document.createElement('i')
+      i.classList.add('fa-regular')
+      i.classList.add('fa-thumbs-up')
+
+      if(info.userLoggedIn && info.user.liked_posts_id.includes(post_container.id)) {
+          i.style = "color: coral;"
+          i.dataset.clicked = "true"
+        }
 
 
-    post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
+      const total_likes = document.createElement('p')
+      total_likes.classList.add('like_counter')
+      total_likes.innerText = post.total_likes
+      like.append(i, total_likes)
 
-    all_posts.append(post_container)
+      const dislike = document.createElement('div')
+      dislike.classList.add('counter_container')
+
+      const i2 = document.createElement('i')
+      i2.classList.add('fa-regular')
+      i2.classList.add('fa-thumbs-down')
+
+      if(info.userLoggedIn && info.user.disliked_posts_id.includes(post_container.id)) {
+          i2.style = "color: coral;"
+          i2.dataset.clicked = "true"
+      }
+
+
+      const total_dislikes = document.createElement('p')
+      total_dislikes.classList.add('like_counter')
+      total_dislikes.innerText = post.total_dislikes
+      dislike.append(i2, total_dislikes)
+
+      const comment = document.createElement('div')
+      comment.classList.add('reply_button')
+
+      const i3 = document.createElement('i')
+      i3.classList.add('fa-regular')
+      i3.classList.add('fa-comment')
+
+      const reply = document.createElement('p')
+      reply.classList.add('comment_counter')
+      reply.innerText = "Reply"
+      comment.append(i3, reply)
+      
+
+      const challenge = document.createElement('div')
+      challenge.classList.add('challenge_button')
+
+      const i4 = document.createElement('i')
+      i4.classList.add('fa-solid')
+      i4.classList.add('fa-bullseye')
+
+      const challenge_text = document.createElement('p')
+      challenge_text.classList.add('challenge_text')
+      challenge_text.innerText = "Challenge"
+
+      
+      challenge.append(i4, challenge_text)
+
+      const delete_edit_container = document.createElement('div')
+      delete_edit_container.classList.add('delete_edit_container')
+      const delete_button = document.createElement('button')
+      delete_button.classList.add("delete_button")
+
+      const delete_text = document.createElement('h4')
+      delete_text.innerText = "Delete"
+
+      const delete_image = document.createElement('i')
+      delete_image.classList.add('fa-regular', 'fa-trash-can')
+
+      delete_button.append(delete_image, delete_text)
+      delete_button.addEventListener("click", function(e) {
+              deletePost(post._id)
+      })
+
+
+      const edit_button = document.createElement('button')
+      edit_button.classList.add("edit_button")
+      const edit_text = document.createElement('h4')
+      edit_text.innerText = "Edit"
+
+      const edit_image = document.createElement('i')
+      edit_image.classList.add('fa-solid', 'fa-pen-to-square')
+
+
+      edit_button.append(edit_image, edit_text)
+      delete_edit_container.append(delete_button, edit_button)
+
+      
+      if(info.userLoggedIn && post.username === info.user.username) {
+
+          interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+      }
+
+      else {
+
+        interaction_container.append(like,dislike, comment, challenge)
+        
+      }
+        
+
+
+
+      post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
+
+      all_posts.append(post_container)
 
         
         
@@ -198,11 +230,15 @@
     const response = await fetch(`http://localhost:3000/replies/${id}/${page}`);
     const replies = await response.json();
     all_posts = document.getElementsByClassName('all_posts')[0]
-
+    const authentication = await fetch("/user-login")
+    const info = await authentication.json()
+    
 
     
-    replies.forEach(reply => {
-
+    replies.forEach(async reply => {
+        const user_info = await fetch(`http://localhost:3000/user/${reply.poster_id}`);
+        const user = await user_info.json();
+        console.log(user)
         
         const userPost = document.createElement("div");
         userPost.classList.add("reply");
@@ -215,7 +251,7 @@
 
         // Profile image
         const profile = document.createElement("img");
-        profile.src = "../resources/users/kirk.jfif";
+        profile.src = user.profile;
 
         // Username
         const name = document.createElement("p");
@@ -284,6 +320,12 @@
         total_likes.innerText = reply.total_likes
         like.append(i, total_likes)
 
+        if(info.userLoggedIn && info.user.liked_replies_id.includes(userPost.id)) {
+          i.style = "color: coral;"
+          i.dataset.clicked = "true"
+        }
+
+
         const dislike = document.createElement('div')
         dislike.classList.add('counter_container')
 
@@ -351,7 +393,11 @@
 
 
         edit_button.append(edit_image, edit_text)
-        delete_edit_container.append(delete_button, edit_button)
+        if(info.userLoggedIn && reply.username === info.user.username) {
+           delete_edit_container.append(delete_button, edit_button)
+        }
+        
+       
 
         interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
 
@@ -374,8 +420,7 @@ async function deleteReply(id) {
 
 }
 
-async function addReply(username, replying_to, original_content, reply_content, unique_post_id, parent_reply_id) {
-  const total_likes = 0
+async function addReply(username, replying_to, original_content, reply_content, unique_post_id, parent_reply_id, poster_id) {
   const date = new Date().toLocaleDateString();
   await fetch("http://localhost:3000/add-reply", {
     method: "POST",
@@ -390,7 +435,8 @@ async function addReply(username, replying_to, original_content, reply_content, 
       is_edited: false, 
       parent_reply_id,
       date,
-      total_dislikes: 0
+      total_dislikes: 0,
+      poster_id: poster_id
 
     })
   });
@@ -421,5 +467,47 @@ async function updateReplyDislikes(id, increment) {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
+  });
+}
+
+async function updateUserReplies(userId, postId) {
+
+  await fetch(`/user/addPost/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ replies: postId })
+  });
+}
+
+
+
+async function updateUserLikedReplies(userId, postId) {
+
+  await fetch(`/user/likedReplies/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ liked_replies_id: postId })
+  });
+}
+
+async function updateUserLikesReply(id, increment) {
+
+  const response = await fetch(`/reply/${id}`);
+  const reply = await response.json()
+  const user_id = reply.poster_id
+
+  await fetch(`/user/likes/${user_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
+  });
+}
+
+async function removeUserLikedReplies(userId, postId) {
+
+  await fetch(`/user/removeLikedReplies/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ liked_replies_id: postId })
   });
 }
