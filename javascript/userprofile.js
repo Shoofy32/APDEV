@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
     const currentLikes = document.getElementsByClassName("likes_counter")[0];
-
+    const currentWins = document.getElementsByClassName("side_challenge_wins_counter")[0];
+    const currentLosses = document.getElementsByClassName("side_challenge_losses_counter")[0];
+    const currentTies = document.getElementsByClassName("side_challenge_ties_counter")[0];
 
     // Elements of User Profile that can be edited
     const userPfp = document.getElementsByClassName("pfp")[0]; // Pfp image
@@ -53,7 +55,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         currentLikes.textContent = info.user.likes;
         userBio.textContent = info.user.bio;
         userPfp.src = info.user.profile;
-
+        userBanner.src = info.user.banner;
+        currentWins.textContent = info.user.wins;
+        currentLosses.textContent = info.user.losses;
+        currentTies.textContent = info.user.ties;
     }
 
 
@@ -83,13 +88,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // Add event listener when a file is uploaded, changing the user banner to the uploaded image
-    bannerFileUplaod.addEventListener("change", (event) => {
+    bannerFileUplaod.addEventListener("change", async (event) => {
 
         // Obtain the uploaded image
         const uploadedImage = event.target.files[0];
 
+        //constant representing 5mb image file size limit
+        const maxSize = 7 * 1024 * 1024;
+
         // Check if image exists, if it does replace current banner with new image
-        if(uploadedImage){
+        if(uploadedImage && uploadedImage.size < maxSize){
 
             const reader = new FileReader(); // Create a new file reader to read the uploaded image
 
@@ -97,16 +105,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             reader.readAsDataURL(uploadedImage);
 
             // Event handler when reader finishes reading the file to reaplce banner with the read file
-            reader.onload = (function(e){
+            reader.onload = (async function(e){
 
-                // Replace src with the result of the reading (src of image)
-                editBannerImage.src = reader.result;
-                userBanner.src = reader.result;
+                //Update db with new banner 
+                await updateBanner(reader.result);
 
             })
-
+            location.reload();
         }
-
+        else{
+            alert("Banner image should be less than 7mb!");
+        }
     });
 
 
@@ -115,10 +124,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Obtain the uploaded image
         const uploadedImage = event.target.files[0];
 
-        //constant representing 12mb image file size limit
-        const maxSize = 12 * 1024 * 1024;
+        //constant representing 5mb image file size limit
+        const maxSize = 5 * 1024 * 1024;
 
-        // Check if image exists and is less than 12mb then convert it to base64 String and update the db entry
+        // Check if image exists and is less than 5mb then convert it to base64 String and update the db entry
         if(uploadedImage && uploadedImage.size < maxSize){
 
             const reader = new FileReader(); // Create a new file reader to read the uploaded image
@@ -138,7 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             location.reload();
         }
         else{
-            alert("Image should be less than 12mb!");
+            alert("Profile image should be less than 5mb!");
         }
 
     });
