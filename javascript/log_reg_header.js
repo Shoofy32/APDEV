@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Update shown user data in header from info variable
         username.textContent = info.user.username;
-        pfp.src = "../resources/users/noprofilepic.jpg";
+        pfp.src = info.user.profile;
         likes.textContent = info.user.likes;
 
 
@@ -137,9 +137,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     }
 
+    async function updateProfile(image){
+
+        await fetch("/user-update",{
+
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ newProfile: image })
+        });
+    }
 
     // Make functions globally accessible
     window.updateLikes = updateLikes;
     window.updateBio = updateBio;
+    window.updateProfile = updateProfile;
 
 });
