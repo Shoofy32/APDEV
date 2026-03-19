@@ -5,15 +5,19 @@ let forum_name
 
 // ===== NAVIGATION =====
 function openPostPage(name) {
-    window.location.href = `createpost.html?forum=${name}`;
+    window.location.href = `createpost?forum=${name}`;
 }
 
 
 // ===== LOAD POSTS =====
 async function loadPosts(name, page = 1) {
-
     const response = await fetch(`http://localhost:3000/posts/${page}`);
     const posts = await response.json();
+
+    const authentication = await fetch("/user-login")
+    const info = await authentication.json()
+    
+
 
     const all_posts = document.querySelector(".all_posts");
     
@@ -28,7 +32,7 @@ async function loadPosts(name, page = 1) {
         iconNameDate.classList.add("icon_name_date_post");
 
         const profile = document.createElement("img");
-        profile.src = "../resources/users/kirk.jfif";
+        profile.src = post.profile;
 
         const namePost = document.createElement("p");
         namePost.classList.add("name_post");
@@ -149,8 +153,13 @@ async function loadPosts(name, page = 1) {
         edit_button.append(edit_image, edit_text)
        
         delete_edit_container.append(delete_button, edit_button)
-
-        interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+        if(info.userLoggedIn && post.username === info.user.username) {
+          interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+        }
+        else {
+          interaction_container.append(like,dislike, comment, challenge)
+        }
+        
 
 
 

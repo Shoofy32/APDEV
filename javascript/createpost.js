@@ -56,25 +56,35 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 async function addPost() {
-  
-  const username = "TheNiggaDude"
-  const params = new URLSearchParams(window.location.search);
-  const forum_name = params.get("forum");
+  const authentication = await fetch("/user-login")
+  const info = await authentication.json()
+  if(info.userLoggedIn) {
+    alert(info.user.username)
 
-  const post_title = document.getElementById('title').value
-  const post_content = document.getElementById('content').value
-  const total_likes = 0
-  const is_edited = false
-  const date = new Date().toLocaleDateString();
-  const total_dislikes = 0
-  const total_comments = 0
-  await fetch("http://localhost:3000/add-post", {
+    const username = info.user.username
+    const params = new URLSearchParams(window.location.search);
+    const forum_name = params.get("forum");
+
+    const post_title = document.getElementById('title').value
+    const post_content = document.getElementById('content').value
+    const total_likes = 0
+    const is_edited = false
+    const date = new Date().toLocaleDateString();
+    const total_dislikes = 0
+    const total_comments = 0
+    const profile = info.user.profile;
+    await fetch("http://localhost:3000/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments})
-  });
+    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,profile})
+    });
 
- window.location.href = `forum.html?forum=${forum_name}&page=1`;
+    window.location.href = `forum?forum=${forum_name}&page=1`;
+    }
+  else {
+    alert("LOGIN NIGGA!")
+  }
+  
  
 
 }
