@@ -58,10 +58,18 @@ async function loadPosts(page = 1) {
     const response = await fetch(`http://localhost:3000/posts/${page}`);
     const posts = await response.json();
 
+    const authentication = await fetch("/user-login")
+    const info = await authentication.json()
+    
+
+
     const all_posts = document.querySelector(".all_posts");
     
-    posts.forEach(post => {
-         
+    posts.forEach(async post => {
+        
+        //Get user information
+        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user = await user_info.json();
         
         const userPost = document.createElement("div");
         userPost.id = post._id
@@ -71,7 +79,7 @@ async function loadPosts(page = 1) {
         iconNameDate.classList.add("icon_name_date_post");
 
         const profile = document.createElement("img");
-        profile.src = "../resources/users/kirk.jfif";
+        profile.src = user.profile;
 
         const namePost = document.createElement("p");
         namePost.classList.add("name_post");
@@ -119,11 +127,18 @@ async function loadPosts(page = 1) {
         const i = document.createElement('i')
         i.classList.add('fa-regular')
         i.classList.add('fa-thumbs-up')
+      
 
         const total_likes = document.createElement('p')
         total_likes.classList.add('like_counter')
         total_likes.innerText = post.total_likes
         like.append(i, total_likes)
+
+
+        if(info.userLoggedIn && info.user.liked_posts_id.includes(userPost.id)) {
+          i.style = "color: coral;"
+          i.dataset.clicked = "true"
+        }
 
         const dislike = document.createElement('div')
         dislike.classList.add('counter_container')
@@ -131,6 +146,11 @@ async function loadPosts(page = 1) {
         const i2 = document.createElement('i')
         i2.classList.add('fa-regular')
         i2.classList.add('fa-thumbs-down')
+
+        if(info.userLoggedIn && info.user.disliked_posts_id.includes(userPost.id)) {
+          i2.style = "color: coral;"
+          i2.dataset.clicked = "true"
+        }
 
         const total_dislikes = document.createElement('p')
         total_dislikes.classList.add('like_counter')
@@ -164,8 +184,43 @@ async function loadPosts(page = 1) {
         
         challenge.append(i4, challenge_text)
 
+        const delete_edit_container = document.createElement('div')
+        delete_edit_container.classList.add('delete_edit_container')
+        const delete_button = document.createElement('button')
+        delete_button.classList.add("delete_button")
+        delete_button.addEventListener("click", function(e) {
+            deletePost(post._id)
+        })
 
-        interaction_container.append(like,dislike, comment, challenge)
+        const delete_text = document.createElement('h4')
+        delete_text.innerText = "Delete"
+
+        const delete_image = document.createElement('i')
+        delete_image.classList.add('fa-regular', 'fa-trash-can')
+
+        delete_button.append(delete_image, delete_text)
+
+        const edit_button = document.createElement('button')
+        edit_button.classList.add("edit_button")
+        const edit_text = document.createElement('h4')
+        edit_text.innerText = "Edit"
+
+        const edit_image = document.createElement('i')
+        edit_image.classList.add('fa-solid', 'fa-pen-to-square')
+
+
+        edit_button.append(edit_image, edit_text)
+       
+        delete_edit_container.append(delete_button, edit_button)
+
+        //Check if the user is logged in and give them edit
+        if(info.userLoggedIn && post.username === info.user.username) {
+          interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+        }
+        else {
+          interaction_container.append(like,dislike, comment, challenge)
+        }
+        
 
 
 
@@ -176,10 +231,102 @@ async function loadPosts(page = 1) {
 
         
         
+        
 
     });
 
-    // Setup buttons AFTER posts exist
   
 }
 
+async function deletePost(id) {
+
+  await fetch(`http://localhost:3000/post/${id}`, {
+    method: "DELETE"
+  });
+
+}
+
+async function updatePost(id, post_content, is_edited) {
+  await fetch(`http://localhost:3000/post/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ post_content, is_edited})
+  });
+}
+
+async function updatePostLikes(id, increment) {
+  await fetch(`http://localhost:3000/post/${id}/likes`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
+  });
+}
+
+async function updatePostDislikes(id, increment) {
+  await fetch(`http://localhost:3000/post/${id}/dislikes`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
+  });
+}
+
+async function updateTotalComments(id, increment) {
+  await fetch(`http://localhost:3000/post/${id}/total_comments`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
+  });
+}
+
+async function updateUserLikedPosts(userId, postId) {
+
+  await fetch(`/user/likedPosts/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ liked_posts_id: postId })
+  });
+}
+
+async function removeUserLikedPosts(userId, postId) {
+
+  await fetch(`/user/removeLikedPosts/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ liked_posts_id: postId })
+  });
+}
+
+
+async function updateUserDislikedPosts(userId, postId) {
+
+  await fetch(`/user/dislikedPosts/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_posts_id: postId })
+  });
+}
+
+async function removeUserDislikedPosts(userId, postId) {
+
+  await fetch(`/user/removeDislikedPosts/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_posts_id: postId })
+  });
+}
+
+async function updateUserLikesPost(id, increment) {
+
+  const response = await fetch(`http://localhost:3000/post/${id}`);
+  const post = await response.json()
+  const user_id = post.poster_id
+
+  await fetch(`/user/likes/${user_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ increment })
+  });
+}
+
+
+  

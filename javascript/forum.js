@@ -106,6 +106,11 @@ async function loadPosts(name, page = 1) {
         i2.classList.add('fa-regular')
         i2.classList.add('fa-thumbs-down')
 
+        if(info.userLoggedIn && info.user.disliked_posts_id.includes(userPost.id)) {
+          i2.style = "color: coral;"
+          i2.dataset.clicked = "true"
+        }
+
         const total_dislikes = document.createElement('p')
         total_dislikes.classList.add('like_counter')
         total_dislikes.innerText = post.total_dislikes
@@ -295,7 +300,26 @@ async function removeUserLikedPosts(userId, postId) {
   });
 }
 
-async function updateUserLikes(id, increment) {
+
+async function updateUserDislikedPosts(userId, postId) {
+
+  await fetch(`/user/dislikedPosts/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_posts_id: postId })
+  });
+}
+
+async function removeUserDislikedPosts(userId, postId) {
+
+  await fetch(`/user/removeDislikedPosts/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ disliked_posts_id: postId })
+  });
+}
+
+async function updateUserLikesPost(id, increment) {
 
   const response = await fetch(`http://localhost:3000/post/${id}`);
   const post = await response.json()

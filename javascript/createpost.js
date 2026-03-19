@@ -70,7 +70,7 @@ async function addPost() {
     const date = new Date().toLocaleDateString();
     const total_dislikes = 0
     const total_comments = 0
-    const poster_id = info.user.id
+    const poster_id = info.user._id
     alert(poster_id)
     const response = await fetch("http://localhost:3000/add-post", {
     method: "POST",
@@ -78,7 +78,6 @@ async function addPost() {
     body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
     
     });
-    
     const data = await response.json();
     const postId = data.postId; 
 
@@ -97,7 +96,7 @@ async function addPost() {
 
 async function updatePosts(userId, postId) {
 
-  await fetch(`/user/addPost/${userId}`, {
+  await fetch(`/user/addReply/${userId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ posts: postId })

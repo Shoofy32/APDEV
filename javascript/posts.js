@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+    var response;
+    var info;
+    (async () => {
+        response = await fetch("/user-login"); // Fetch from route
+        info = await response.json() // Convert to object
+    })();
     const page_url = window.location.href;
     const index = page_url.indexOf("page=");
     const raw_page = index !== -1 ? page_url.substring(index + 5).split("&")[0] : "";
@@ -101,8 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const parentPost = divElement.parentElement
         var counterElement = buttonElement.nextElementSibling; // Get the counter element
         var countValue = parseInt(counterElement.textContent); // Get the integer value of the counter element
-        const response = await fetch("/user-login"); // Fetch from route
-        const info = await response.json() // Convert to object
+        
         
         // Boolean that checks whether button is true or false
         var isClicked = buttonElement.style.color === "coral"
@@ -135,24 +140,27 @@ document.addEventListener("DOMContentLoaded", () => {
             if(parentPost.classList.contains("post")) {
                 //When like is pressed add 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
-                    updateUserLikedPosts(info.user.id, parentPost.id)
+                    updateUserLikedPosts(info.user._id, parentPost.id)
                     updatePostLikes(parentPost.id, 1)
-                    updateUserLikes(parentPost.id,1)
+                    updateUserLikesPost(parentPost.id,1)
                     console.log(info.user.liked_posts_id)
                     
                 }
             //When dislike is pressed add 1 dislike
             else {
-                
+                    updateUserDislikedPosts(info.user._id, parentPost.id)
                     updatePostDislikes(parentPost.id, 1)
+                   
+
                 }
             }
             //Check if it is a reply
             if(parentPost.classList.contains("reply")) {
                 //When like is pressed add 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
-                   
+                    updateUserLikedReplies(info.user._id, parentPost.id)
                     updateReplyLikes(parentPost.id, 1)
+                    updateUserLikesReply(parentPost.id,1)
                 }
             //When dislike is pressed increment 1 like
                 else {
@@ -173,12 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 //When like is pressed again subtract 1 like
                 if(otherButton.classList.contains("fa-thumbs-down")) {
                     updatePostLikes(parentPost.id, -1)
-                    removeUserLikedPosts(info.user.id, parentPost.id)
-                    updateUserLikes(parentPost.id,-1)
+                    removeUserLikedPosts(info.user._id, parentPost.id)
+                    updateUserLikesPost(parentPost.id,-1)
                 }
-            //When dislike is pressed again add 1 like
                 else {
                     updatePostDislikes(parentPost.id, -1)
+                    removeUserDislikedPosts(info.user._id, parentPost.id)
                 }
 
             }
@@ -189,6 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(otherButton.classList.contains("fa-thumbs-down")) {
                    
                     updateReplyLikes(parentPost.id, -1)
+                    removeUserLikedReplies(info.user._id, parentPost.id)
                 }
                 //When dislike is pressed again remove 1 like
                 else {
@@ -448,8 +457,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="icon_name_date_post">
 
-                <img src="../resources/users/kirk.jfif">
-                <h5 class="name_post">StefanHates</h5>
+                <img src="${info.user.profile}">
+                <h5 class="name_post">${info.user.username}</h5>
                 <p class="date_post">${date}</p>
 
             </div>
@@ -522,17 +531,16 @@ document.addEventListener("DOMContentLoaded", () => {
         //Add reply to backend
         
             addReply(
-                "StefanHates",
-                userToReplyTo.textContent,
-                userReplyToDescription.innerText,
-                replyContent.value,  
-                id,
-                0,
-                false,
-                replyPostId,
-                date,
-                0
+            info.user.username,
+            userToReplyTo.textContent,
+            userReplyToDescription.innerText,
+            replyContent.value,
+            id,           // unique_post_id
+            replyPostId,  // parent_reply_id
+            info.user._id // poster_id
             );
+
+
             updateTotalComments(id, 1)
                 
        

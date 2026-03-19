@@ -192,7 +192,7 @@ app.post("/registerUser", async (req, res) => {
 
         if (!found){
           const newUser = new User({
-
+            
               username: username,
               email: email,
               password: hash(password),
@@ -211,6 +211,7 @@ app.post("/registerUser", async (req, res) => {
           await newUser.save();
           //assigning session user
           req.session.user = {
+             _id: newUser._id.toString(),
             username: newUser.username,
             email: newUser.email,
             bio: newUser.bio,
@@ -220,7 +221,10 @@ app.post("/registerUser", async (req, res) => {
             wins: newUser.wins,
             losses: newUser.losses,
             ties: newUser.ties,
-            liked_posts_id : newUser.liked_posts_id
+            liked_posts_id : newUser.liked_posts_id,
+            liked_replies_id: newUser.liked_replies_id,
+            disliked_posts_id : newUser.disliked_posts_id,
+            disliked_replies_id : newUser.disliked_replies_id,
           };
           
           //saving session info
@@ -250,7 +254,7 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
 
     if(found){
       req.session.user = {
-            id: found._id,
+            _id: found._id.toString(),
             username: found.username,
             email: found.email,
             bio: found.bio,
@@ -260,7 +264,10 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
             wins: found.wins,
             losses: found.losses,
             ties: found.ties,
-            liked_posts_id : found.liked_posts_id
+            liked_posts_id : found.liked_posts_id,
+            liked_replies_id: found.liked_replies_id,
+            disliked_posts_id : found.disliked_posts_id,
+            disliked_replies_id : found.disliked_replies_id
       };
       req.session.save((err)=>{
         if (err) {
@@ -298,7 +305,10 @@ app.put("/user/addPost/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-//Update user liked posts (remove)
+
+
+
+//Update user liked posts 
 app.put("/user/likedPosts/:id", async (req, res) => {
   try {
     const { liked_posts_id } = req.body;
@@ -337,6 +347,114 @@ app.put("/user/removeLikedPosts/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+
+//Update disliked Posts
+app.put("/user/dislikedPosts/:id", async (req, res) => {
+  try {
+    const { disliked_posts_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+       $push: { disliked_posts_id: disliked_posts_id }
+    }, { new: true });
+
+    req.session.user.disliked_posts_id.push(disliked_posts_id);
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
+app.put("/user/removeDislikedPosts/:id", async (req, res) => {
+  try {
+    const { disliked_posts_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+      $pull: { disliked_posts_id: disliked_posts_id }  
+    });
+
+    req.session.user.disliked_posts_id = req.session.user.disliked_posts_id.filter(
+      postId => postId !== disliked_posts_id 
+    );
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+app.put("/user/addReply/:id", async (req, res) => {
+  try {
+    const { replies} = req.body;
+    const id = req.params.id;
+
+    await Reply.findByIdAndUpdate(id, {
+       $push: { replies: replies }
+    }, { new: true });
+
+    req.session.user.replies.push(replies);
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+app.put("/user/likedReplies/:id", async (req, res) => {
+  try {
+    const { liked_replies_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+       $push: { liked_replies_id: liked_replies_id }
+    }, { new: true });
+
+    req.session.user.liked_replies_id.push(liked_replies_id);
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+app.put("/user/removeLikedReplies/:id", async (req, res) => {
+  try {
+    const { liked_replies_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+      $pull: { liked_replies_id: liked_replies_id }  
+    });
+
+    req.session.user.liked_replies_id = req.session.user.liked_replies_id.filter(
+      postId => postId !== liked_replies_id
+    );
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
 //Update user's total likes
 app.put("/user/likes/:id", async (req, res) => {
   try {
@@ -346,6 +464,11 @@ app.put("/user/likes/:id", async (req, res) => {
       req.params.id,
       { $inc: { likes: increment } } 
     );
+
+    if (req.session.user && req.session.user._id.toString() === req.params.id.toString()) {
+      req.session.user.likes += increment;
+      req.session.save();
+    }
 
     res.json({ message: "Likes updated" });
   } catch (err) {
@@ -411,9 +534,11 @@ app.post("/add-post", async (req, res) => {
 app.post("/add-reply", async (req, res) => {
   console.log("req.body:", req.body);
   const {username, replying_to, original_content, reply_content, unique_post_id, total_likes, is_edited, 
-    parent_reply_id, date,total_dislikes} = req.body;
+    parent_reply_id, date,total_dislikes,poster_id} = req.body;
+
   const newReply = new Reply({ username,replying_to, original_content, reply_content, unique_post_id, total_likes, 
-    is_edited, parent_reply_id,date, total_dislikes});
+    is_edited, parent_reply_id,date, total_dislikes, poster_id});
+
   await newReply.save();
   res.json({ message: "Reply added" });
 });
