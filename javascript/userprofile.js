@@ -1,9 +1,15 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
 
     // ADD BACKEND FOR LOADING USER INFO WHEN LOADING USERPAGE
     // NAME, BANNER IMAGE, PFP IMAGE, BIO, LIKES, NUMBER OF POSTS, AND CHALLENGE STATS
+    const response = await fetch("/user-login");
+    const info = await response.json()
 
+
+    // Elements of User Profile that will be loaded via session
+    const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
+    const currentLikes = document.getElementsByClassName("likes_counter")[0];
 
 
     // Elements of User Profile that can be edited
@@ -38,6 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const allPostsContainer = document.getElementsByClassName("all_posts")[0]; // Container for posts
     const allRepliesContainer = document.getElementsByClassName("all_replies")[0]; // Container for replies
     const allNotificationsContainer = document.getElementsByClassName("all_notifications")[0]; // Container for notifications
+
+
+    // If user clicked their pfp or name with a active session, show the contents of their pfp.
+    if (info.userLoggedIn){
+
+        username.textContent = info.user.username;
+        currentLikes.textContent = info.user.likes;
+        userBio.textContent = info.user.bio;
+        userPfp.src = "../resources/users/noprofilepic.jpg";
+
+    }
+
 
 
     // Add classList to post container to show posts when userpage is first loaded
@@ -122,9 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Add event listener to bio edit butten to change the bio to the one in the text area
-    bioEditButton.addEventListener("click", () =>{
+    bioEditButton.addEventListener("click", async () =>{
 
         userBio.textContent = editBioArea.value.trim();
+        await updateBio(editBioArea.value.trim());
 
     })
 
@@ -267,7 +286,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    // Make function globally accessible
+
+
+
+
+    // Make functions and requests globally accessible
     window.updateHeaderNotifications = updateHeaderNotifications;
+
 
 });

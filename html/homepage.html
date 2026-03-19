@@ -64,7 +64,7 @@
             <header>
 
                 <!-- Logo -->
-                <a class = "logo" href = "homepage.html"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+                <a class = "logo"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
 
                 
                 <!-- Search bar -->
@@ -79,7 +79,7 @@
                 <!-- Like Container for showing current likes user has -->
                 <div class = "likes_container">
                     <i class="fa-regular fa-thumbs-up fa-xl"></i>
-                    <p class = "like_amount">25</p>
+                    <p class = "like_amount"></p>
                 </div>
 
                 <!-- Notification Container for challenge notifications from other users -->
@@ -153,22 +153,27 @@
 
 
 
-                    <div class = "log_sign_in2" id="user">
+                    <div class = "log_sign_in2" id = "user">
 
-                        <p id="username" class="username">hello</p>
-                        <button id="logout" > Log out </button>
+                        <img class = "header_pfp" src = "">
+                        <p id = "username" class="username"></p>
+
+                        <button id = "logout" > Log out </button>
 
                     </div>
 
                     <!-- Log In and Sign Up Buttons -->
-                    <div class = "log_sign_in1" id="anon">
+                    <div class = "log_sign_in1" id = "anon">
 
-                        <button onclick = "window.open('login.html', '_self')"> Log In </button>
-                        <button onclick = "window.open('registration.html', '_self')"> Sign Up </button>
+                        <button onclick = "window.location.href = '/login'"> Log In </button>
+                        <button onclick = "window.location.href = '/register'"> Sign Up </button>
 
                     </div>
 
                 
+
+
+
                 </div>
             </header>
 

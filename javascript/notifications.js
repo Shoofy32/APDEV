@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             function rollAndGetWinnerWrapper(){
 
                 // Get the closest accept_challenge associated with the click and then get the eventual resolve of promise after function is done
-                rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper).then(resolve)
+                rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper, betLikes).then(resolve)
 
             }
 
@@ -169,11 +169,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
     // Function rolls D20 and updates the user's likes depending on result
-    async function rollAndGetWinner(buttonElement, wrapper){
+    async function rollAndGetWinner(buttonElement, wrapper, betLikes){
 
         // FOR BACKEND STORE THE RESULTS TO THE DATABASE
         // STORE whoWon, whoLost, rollOfUser, LikesExchanged
-        // Additionally, UPDATE USER'S LIKES AFTER WIN/LOSS
+        // Additionally, UPDATE USER'S LIKES AFTER WIN/LOSS (DONE)
 
 
         // Bet challenge button
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // If win, add current likes with the bet likes of the challenger. If lost, subtract likes with the amount the user betted with
         if(challengerNumber < userNumber)
-            userCurrentLikes.textContent = parseInt(userCurrentLikes.textContent) + challengerNumber;
+            userCurrentLikes.textContent = parseInt(userCurrentLikes.textContent) + betLikes;
         else if(challengerNumber > userNumber)
             userCurrentLikes.textContent = parseInt(userCurrentLikes.textContent) - likesValue;
 
@@ -215,6 +215,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Call openChallenge to close the challenge page
         await timer(2000);
         openChallenge();
+
+
+        // Check if user is logged in, and if so, update their like counter in the session and database
+        if(window.userLoggedIn){
+
+            const updatedLikes =  parseInt(userCurrentLikes.textContent);
+
+            await updateLikes(updatedLikes);
+
+        }
 
 
         // Delete dataset flag to avoid both event listeners in notification and posts js from running at once

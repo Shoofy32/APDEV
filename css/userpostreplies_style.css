@@ -27,7 +27,7 @@ a {
 }
 
 /* Latests Posts - Secondary Div Container that contains a post */
-.post, .reply, .create_reply_container{
+ .post, .reply, .create_reply_container{
 
     width: auto;
     height: auto;
@@ -43,11 +43,12 @@ a {
 }
 
 /* Posts - PFP image */
-.icon_name_date_post img{
+.icon_name_date_post img, .reply .icon_name_date_post img{
 
     height: 25px;
     width: 25px;
     border-radius: 50%;
+    object-fit: cover;
 
 }
 
@@ -319,7 +320,7 @@ a {
 }
 
 /* Challenge - Bet Likes Text */
-.bet_container p{
+#challenge_container .bet_container p{
 
     font-size: 18px;
     font-family: "Inter", Arial;

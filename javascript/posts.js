@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const page_url = window.location.href;
     const index = page_url.indexOf("page=");
@@ -14,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const invalidPage = !page_url.includes("page=") || !/^\d+$/.test(raw_page) || page_number < 1;
 
     if(invalidPage && page_url.includes("forum")) {
-        window.location.href = `forum.html?forum=${encodeURIComponent(forumTitle)}&page=1`;
+        window.location.href = `/forum?forum=${encodeURIComponent(forumTitle)}&page=1`;
     }
 
     if(invalidPage && page_url.includes("userpost")) {
-        window.location.href = `userpost.html?id=${id}&page=1`;
+        window.location.href = `/userpost.html?id=${id}&page=1`;
     }
 
 
@@ -69,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if(deleteButton)
             deleteButton.closest(".post, .reply").remove();
         else if(postNameLinks)
-            window.location.pathname = "/html/userprofile.html"; // Added path to userpost.html
+            window.location.href = "/userprofile"; // Added path to userpost.html
         // If post reply is clicked, and user is not in userpost and clicked on an edit area, open the post and load userpost.html
         else if(post_reply && !(window.location.pathname.endsWith("userpost.html")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
             openPost(post_reply.id);
@@ -205,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function opens User Post Page
     function openPost(id){
 
-        window.location.href = `userpost.html?id=${id}&page=1`;
+        window.location.href = `/userpost?id=${id}&page=1`;
 
     }
 
@@ -289,6 +286,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Subtract bet amount from user's current likes
             userCurrentLikesContainer.textContent = userCurrentLikes - likesValue;
+
+            // Check if user is logged in, and if so, update their like counter in the session and database
+            if(window.userLoggedIn)
+                await updateLikes(userCurrentLikes - likesValue);
 
 
             // Checks if the roll was for challenging a user (false) or for being challenged (true)

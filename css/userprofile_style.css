@@ -13,15 +13,6 @@ body {
     
 }
 
-header .log_sign_in .log_sign_in1{
-
-    padding-bottom: 55px;
-    margin-left: -50px;
-
-
-
-}
-
 .mainbox{
   
     position: absolute;
@@ -115,7 +106,7 @@ header .log_sign_in .log_sign_in1{
 
 }
 
-.username{
+.left_side_info_container .username{
 
     color: salmon;
     font-size: 35px;
