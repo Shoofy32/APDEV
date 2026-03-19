@@ -453,6 +453,45 @@ app.put("/user/removeLikedReplies/:id", async (req, res) => {
 });
 
 
+app.put("/user/dislikedReplies/:id", async (req, res) => {
+  try {
+    const { disliked_replies_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+       $push: { disliked_replies_id: disliked_replies_id }
+    }, { new: true });
+
+    req.session.user.disliked_replies_id.push(disliked_replies_id);
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put("/user/removeDislikedReplies/:id", async (req, res) => {
+  try {
+    const { disliked_replies_id } = req.body;
+    const id = req.params.id;
+
+    await User.findByIdAndUpdate(id, {
+      $pull: { disliked_replies_id: disliked_replies_id }  
+    });
+
+    req.session.user.disliked_replies_id = req.session.user.disliked_replies_id.filter(
+      postId => postId !== disliked_replies_id
+    );
+    req.session.save();
+
+    res.json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 
 
 //Update user's total likes
