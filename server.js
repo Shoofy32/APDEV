@@ -412,9 +412,6 @@ app.put("/user/dislikedPosts/:id", async (req, res) => {
   }
 });
 
-
-
-
 app.put("/user/removeDislikedPosts/:id", async (req, res) => {
   try {
     const { disliked_posts_id } = req.body;
@@ -435,8 +432,6 @@ app.put("/user/removeDislikedPosts/:id", async (req, res) => {
   }
 });
 
-
-
 app.put("/user/addReply/:id", async (req, res) => {
   try {
     const { replies} = req.body;
@@ -454,7 +449,6 @@ app.put("/user/addReply/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 app.put("/user/likedReplies/:id", async (req, res) => {
   try {
@@ -591,6 +585,71 @@ app.get("/logout", (req,res)=>{
   });
 
 })
+
+app.put("/user-update", async (req, res) => {
+
+    try {
+        
+        const {newBio, newLikes, newProfile, newBanner} = req.body;
+        const username = req.session.user.username;
+
+        let updatedInfo = {};
+
+        // Check if requested bio has data or not
+        if(newBio !== undefined){
+
+            req.session.user.bio = newBio; // Update session
+            updatedInfo.bio = newBio;
+
+        }
+
+        // Check if requested likes has data or not
+        if(newLikes !== undefined){
+
+            req.session.user.likes = newLikes; // Update session
+            updatedInfo.likes = newLikes;
+        }
+
+        // Check if requested profile has data or not
+        if(newProfile !== undefined){
+
+            req.session.user.profile = newProfile;
+            updatedInfo.profile = newProfile;
+        }
+
+        // Check if requested banner has data or not
+        if(newBanner !== undefined){
+
+          req.session.user.banner = newBanner;
+          updatedInfo.banner = newBanner;
+        }
+
+        // Find user in database and update likes
+        await User.findOneAndUpdate(
+            
+            {username: username},
+            {$set: updatedInfo}
+
+        );
+
+        // Force immideiate save of data
+        req.session.save((err) => {
+
+            if (err) 
+                res.status(500).json({ error: err.message });
+            else
+                res.json({ message: "Successful Update"});
+
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ error: err.message }); // Send error of PUT request
+
+    }
+
+
+});
 
 
 // ------ ------ Post backend ------ ------s
@@ -1021,79 +1080,6 @@ app.delete("/challenge-notifications-result/:id", async (req, res) => {
     }
 
 });
-
-
-
-
-// NEW: User Updating route
-app.put("/user-update", async (req, res) => {
-
-    try {
-        
-        const {newBio, newLikes, newProfile, newBanner} = req.body;
-        const username = req.session.user.username;
-
-        let updatedInfo = {};
-
-        // Check if requested bio has data or not
-        if(newBio !== undefined){
-
-            req.session.user.bio = newBio; // Update session
-            updatedInfo.bio = newBio;
-
-        }
-
-        // Check if requested likes has data or not
-        if(newLikes !== undefined){
-
-            req.session.user.likes = newLikes; // Update session
-            updatedInfo.likes = newLikes;
-        }
-
-        // Check if requested profile has data or not
-        if(newProfile !== undefined){
-
-            req.session.user.profile = newProfile;
-            updatedInfo.profile = newProfile;
-        }
-
-        // Check if requested banner has data or not
-        if(newBanner !== undefined){
-
-          req.session.user.banner = newBanner;
-          updatedInfo.banner = newBanner;
-        }
-
-        // Find user in database and update likes
-        await User.findOneAndUpdate(
-            
-            {username: username},
-            {$set: updatedInfo}
-
-        );
-
-        // Force immideiate save of data
-        req.session.save((err) => {
-
-            if (err) 
-                res.status(500).json({ error: err.message });
-            else
-                res.json({ message: "Successful Update"});
-
-        });
-
-    } catch (err) {
-
-        res.status(500).json({ error: err.message }); // Send error of PUT request
-
-    }
-
-
-});
-
-
-
-
 
 app.listen(3000, () => {
 
