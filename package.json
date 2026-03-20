@@ -3,9 +3,9 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "crypto": "^1.0.1",
+    "ejs": "^5.0.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "hbs": "^4.2.0",
     "mongoose": "^9.2.3",
     "server.js": "^1.0.0"
   }
