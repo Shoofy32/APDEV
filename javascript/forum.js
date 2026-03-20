@@ -14,9 +14,6 @@ async function loadPosts(name, page = 1) {
     const response = await fetch(`http://localhost:3000/posts/${page}`);
     const posts = await response.json();
 
-    const authentication = await fetch("/user-login")
-    const info = await authentication.json()
-    
 
 
     const all_posts = document.querySelector(".all_posts");

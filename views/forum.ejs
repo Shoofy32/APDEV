@@ -1,0 +1,363 @@
+<html>
+    <head>
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
+
+
+        <!-- Link CSS File for header css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/log_reg_header_style.css">
+
+        <!-- Link CSS File for header css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/sidebar_style.css">
+
+        <!-- Link CSS File for user post css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/userpost_style.css">
+
+        <!-- Link CSS File for forum css design-->
+        <link href="../css/forum_style.css" rel="stylesheet"/>
+
+
+        <!-- EJS user data -->
+        <script>
+
+            const info = <%- JSON.stringify({ 
+                userLoggedIn: user ? true : false, 
+                user: user || null 
+            }) %>;
+
+        </script>
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "../javascript/sidebar.js"></script>
+
+        <!-- Link JS File for searchbar interaction -->
+        <script type = "module" src = "../javascript/searchbar.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script src = "../javascript/posts.js"></script>
+
+        <!-- Link JS File for forum interaction -->
+        <script src = "../javascript/forum.js"></script>
+
+        <!-- Link JS File for forum load link interaction -->
+        <script src = "../javascript/forumloadlink.js"></script>
+
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/notifications.js"></script>
+
+        <!-- Link JS File for logins -->
+        <script src = "../javascript/log_reg_header.js"></script>
+
+    </head>
+
+    <body>
+
+        
+        <article>
+
+
+            <header>
+
+                <!-- Logo -->
+                <a class = "logo"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+
+                
+                <!-- Search bar -->
+                <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+
+                </div>
+
+                <!-- Like Container for showing current likes user has -->
+                <div class = "likes_container">
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i>
+                    <p class = "like_amount"></p>
+                </div>
+
+                <!-- Notification Container for challenge notifications from other users -->
+                <div class = "notification_container">
+                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
+
+                    <div class = "notification_dropdown">
+
+                        <p class = "notifications_header"> Notifications </p>
+
+                        <div class = "notification_content_container">
+                     
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="log_sign_in" id="topright">
+
+
+
+                    <div class = "log_sign_in2" id = "user">
+
+                        <img class = "header_pfp" src = "">
+                        <p id = "username" class="username"></p>
+
+                        <button id = "logout" > Log out </button>
+
+                    </div>
+
+                    <!-- Log In and Sign Up Buttons -->
+                    <div class = "log_sign_in1" id = "anon">
+
+                        <button onclick = "window.location.href = '/login'"> Log In </button>
+                        <button onclick = "window.location.href = '/register'"> Sign Up </button>
+
+                    </div>
+
+                
+
+
+
+                </div>
+            </header>
+
+
+        </article>
+
+
+        <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i>
+                         <span> Home </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                    <hr>
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title"> Popular Topics </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Creative Writing </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Fiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr>
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title"> Resources </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  Rules </span> 
+                        </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        
+        <div class="content_container">
+
+            <div class="visited_container">
+
+                <div class = "breadcrumbs">
+                    <a href = "homepage.html">Blevvit&nbsp; </a>
+                    <span class = "separator">
+                    <h5> - </h5>
+                    </span>
+                     <a class = "return_forum_link">&nbsp;Forums</a>
+            
+                </div>
+               
+
+            </div>
+            
+            <div class="thread_head">
+                <div class="thread_head_container">
+                    <div class="announcement_head_container">
+                        <div class="thread_head_img">
+                            <img src="../resources/images/technology.jpg" class = "forum_image"> <br>
+                        </div>
+                         
+ 
+                    </div>
+                   
+                    <div id = "forum_head">
+                        <h5 class = "forum_title"> Technology </h5>
+                        <button id="post_button">Create Post</button>
+                    </div>
+                    <p class = "forum_description">Anything tech related. You are Iron Man.</p>
+                </div>
+                
+
+            </div>
+
+
+            <!-- Article contains the side content in the home page -->
+            <article class = "home_side_content">
+
+                <!-- Recent Announcements Section -->
+                <div class = "recent_announcements"> 
+
+                    <div class = "side_bar_title">
+
+                        <i class="fa-solid fa-bullhorn fa-xl inner_image" style="color: #ffffff;"></i>
+                        <h3> Recent Announcements </h3>
+
+                    </div>
+
+                    <p onclick = "goToForum('Announcements')"> Blevvit Opening Page </p>
+                    <p onclick = "goToForum('Announcements')"> Remember to read the rules of our site!!</p>
+
+                </div>
+
+                <!-- Statistics -->
+                <div class = "statistics"> 
+
+                    <div class = "side_bar_title">
+
+                        <i class="fa-solid fa-chart-simple fa-lg" style = "color: #ffffff;"></i>
+                        <h3> Statistics </h3>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- Container for the Post, Which When Clicked Opens the Userpost Page -->
+            <div class = "all_posts">
+                 
+            </div>
+               
+                
+        </div>
+
+        
+        <!-- Div contains the challenge container -->
+        <div class = "challenge" id = "challenge_container">
+
+            <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+            <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                <button id = "closeChallenge"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+            </div>
+
+            <h2 class = "roll_20"> Roll D20 </h2>
+
+            <div class = "challenger_stats_container">
+
+            </div>
+
+            <p class = "roll_20_number"></p>
+
+
+            <div class = "dicebg">
+                <img src="../../resources/images/d20.png">
+            </div>
+
+            <p class = "result"> Result </p>
+
+            <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+            <div class = "bet_container">
+
+                <p> Bet Likes </p>
+
+                <!-- stopPropogation prevents button from opening up userpost forum -->
+                <input class = "betLikes" type = "number" placeholder = "0"></input>
+                <button class = "postBet">Bet</button> 
+
+            </div>
+
+        </div>
+        
+    </body>
+
+</html>

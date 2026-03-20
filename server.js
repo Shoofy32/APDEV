@@ -5,13 +5,14 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const crypto = require("crypto");
+const path = require("path");
 const app = express();
-
+const Post = require("./models/Post")
 app.use(cors());
 app.use(express.json({limit: '16mb' }));
-app.use(express.urlencoded({limit: '16mb', extended: true})); // files consist of more than strings
-
-const path = require("path");
+app.use(express.urlencoded({limit: '16mb', extended: true}));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname)));
 
@@ -42,7 +43,7 @@ app.get('/login', (req,res) =>{
     res.redirect("/");
   }
   else{
-    res.sendFile(__dirname + "/html/login.html")
+    res.render("login", { user: null })
   }
 });
 
@@ -51,51 +52,44 @@ app.get('/register', (req,res)=> {
     res.redirect("/");
   }
   else{
-    res.sendFile(__dirname + "/html/registration.html")
+    res.render("registration", { user: null })
   }
 });
 
 app.get("/", (req,res)=> {
-  res.sendFile(__dirname + "/html/homepage.html");
+  res.render("homepage", { user: req.session.user || null });
 });
 
 app.get("/regErr", (req,res) => {
-  res.sendFile(__dirname + "/html/regErr.html");
+  res.render("regErr", { user: req.session.user || null });
 });
 
 app.get("/logErr", (req,res)=> {
-  res.sendFile(__dirname + "/html/logErr.html");
+  res.render("logErr", { user: req.session.user || null });
 });
 
 app.get("/forum", (req,res)=> {
-
-    res.sendFile(__dirname + "/html/forum.html");
-    
+  res.render("forum", { user: req.session.user || null });
 });
 
-
 app.get("/createpost", (req,res)=> {
-
-    res.sendFile(__dirname + "/html/createpost.html");
-    
+  res.render("createpost", { user: req.session.user || null });
 });
 
 app.get("/searchresults", (req,res)=> {
+  res.render("searchresults", { user: req.session.user || null });
+});
 
-    res.sendFile(__dirname + "/html/searchresults.html");
-    
+app.get("/profile", isAuthenticated, (req, res) =>{
+  res.render("userprofile", { user: req.session.user || null });
 });
 
 app.get("/userpost", isAuthenticated, (req, res) =>{
-
-    res.sendFile(__dirname + "/html/userpost.html");
-    
+  res.render("userpost", { user: req.session.user || null });
 });
 
 app.get("/userprofile", isAuthenticated, (req, res) =>{
-
-    res.sendFile(__dirname + "/html/userprofile.html");
-    
+  res.render("userprofile", { user: req.session.user || null });
 });
 
 //variable to store the user to be loaded's data
@@ -103,20 +97,18 @@ let loadedUser;
 
 //dynamically loading userprofiles
 app.get("/userprofile/:user", async (req, res) => {
-  loadedUser = await User.findOne({username: req.params.user})
+  const loadedUser = await User.findOne({username: req.params.user})
   if(req.session.user){
     if(loadedUser.username == req.session.user.username){
-    res.redirect("/userprofile");
+      res.redirect("/userprofile");
     }
     else{
-      res.sendFile(__dirname+"/html/userpage.html")
+      res.render("userpage", { user: req.session.user || null, profileUser: loadedUser })
     }
   }
   else{
-      res.sendFile(__dirname+"/html/userpage.html")
+    res.render("userpage", { user: null, profileUser: loadedUser })
   }
-  
-  
 });
 
 // Connect to MongoDB
@@ -127,21 +119,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/myapp")
 
 
 // Schemas
-const postSchema = new mongoose.Schema({
-  username: String,
-  post_title: String,
-  post_content: String,
-  forum_name: String,
-  tags: [String],
-  total_likes : Number,
-  is_edited :Boolean,
-  date: String,
-  total_dislikes: Number,
-  total_comments: Number,
-  poster_id: String  
-  
-  
-});
 
 
 // User login and registration Schema
@@ -211,7 +188,7 @@ const challlengeNotificationResultSchema = new mongoose.Schema({
 });
 
 //Models
-const Post = mongoose.model("Post", postSchema);
+
 const User = mongoose.model("User", userSchema);
 const Reply = mongoose.model("Reply", replySchema);
 const ChallengeNotif = mongoose.model("ChallengeNotif", challengeNotificationSchema);

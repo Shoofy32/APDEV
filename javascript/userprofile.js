@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // ADD BACKEND FOR LOADING USER INFO WHEN LOADING USERPAGE
     // NAME, BANNER IMAGE, PFP IMAGE, BIO, LIKES, NUMBER OF POSTS, AND CHALLENGE STATS
-    const response = await fetch("/user-login");
-    const info = await response.json()
-
 
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
@@ -239,8 +236,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch(`http://localhost:3000/post/`+postload._id);
             const post = await response.json()
 
-            const authentication = await fetch("/user-login")
-            const info = await authentication.json()
 
             const user_info = await fetch(`http://localhost:3000/user/`+postload.poster_id);
             const user = await user_info.json();
