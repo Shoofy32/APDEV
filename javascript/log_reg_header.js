@@ -59,7 +59,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = "/userprofile";
 
         });
+
+
+        // Call loadChallengeNotifications found in notifications.js, to load the the notifs the user has
+        await loadChallengeNotifications();
+        await loadChallengeResultNotifications();
+        notificationButtonDisplay();
         
+
 
         // Show user display and show the likes and notifications display
         userContainer.style.display = "flex";
@@ -144,12 +151,82 @@ document.addEventListener('DOMContentLoaded', async () => {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ newProfile: image })
+
         });
     }
+
+    async function addChallengeNotification(challenger_roll, challenger_betlikes, challenged_username){
+
+        await fetch("/add-challenge", {
+
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                challenger_username: info.user.username, 
+                challenger_id: info.user._id,
+                challenger_roll: challenger_roll, 
+                challenger_betlikes: challenger_betlikes, 
+                challenged_username: challenged_username})
+        
+        });
+
+    }
+
+    async function removeChallengeNotification(challengeId){
+
+        await fetch(`/challenge-notifications/${challengeId}`, {
+
+            method: "DELETE",
+
+        });
+
+    }
+
+    async function addChallengeNotificationResult(wasRejected, isTie, winner_username, loser_username, winner_roll, loser_roll,
+        challenger_bet_likes, challenged_bet_likes, notification_receiver){
+
+        await fetch("/add-challenge-result", {
+
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+
+                wasRejected: wasRejected, 
+                isTie: isTie,
+                winner_username: winner_username,
+                loser_username: loser_username, 
+                winner_roll: winner_roll, 
+                loser_roll: loser_roll,
+                challenger_bet_likes: challenger_bet_likes,
+                challenged_bet_likes: challenged_bet_likes,
+                challenged_id: info.user._id,
+                notification_receiver: notification_receiver
+
+            })
+        
+        });
+
+    }
+
+    async function removeChallengeNotificationResult(challengeResultId){
+
+        await fetch(`/challenge-notifications-result/${challengeResultId}`, {
+
+            method: "DELETE",
+
+        });
+
+    }
+
+
 
     // Make functions globally accessible
     window.updateLikes = updateLikes;
     window.updateBio = updateBio;
     window.updateProfile = updateProfile;
+    window.addChallengeNotification = addChallengeNotification;
+    window.removeChallengeNotification = removeChallengeNotification;
+    window.addChallengeNotificationResult = addChallengeNotificationResult;
+    window.removeChallengeNotificationResult = removeChallengeNotificationResult;
 
 });
