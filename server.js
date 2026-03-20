@@ -104,12 +104,18 @@ let loadedUser;
 //dynamically loading userprofiles
 app.get("/userprofile/:user", async (req, res) => {
   loadedUser = await User.findOne({username: req.params.user})
-  if(loadedUser.username == req.session.user.username){
+  if(req.session.user){
+    if(loadedUser.username == req.session.user.username){
     res.redirect("/userprofile");
+    }
+    else{
+      res.sendFile(__dirname+"/html/userpage.html")
+    }
   }
   else{
-    res.sendFile(__dirname+"/html/userpage.html")
+      res.sendFile(__dirname+"/html/userpage.html")
   }
+  
   
 });
 
@@ -744,6 +750,7 @@ app.get("/replies/:postId", async (req, res) => {
   res.json(replies);
 
 });
+
 app.get("/post/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -762,6 +769,15 @@ app.get("/reply/:id", async (req, res) => {
   }
 });
 
+app.get("/load-posts/:username", async (req,res)=>{
+  const response = await Post.find({username: req.params.username})
+  res.json(response);
+});
+
+app.get("/load-replies/:username", async (req,res)=>{
+  const response = await Reply.find({username: req.params.username})
+  res.json(response);
+})
 
 //UPDATE
 app.put("/post/:id", async (req, res) => {
