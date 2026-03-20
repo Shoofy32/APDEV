@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
     const currentLikes = document.getElementsByClassName("likes_counter")[0];
+    const currentNumberOfPosts = document.getElementsByClassName("posts_counter")[0];
+    const currentMainDisplayWins = document.getElementsByClassName("challenge_wins_counter")[0];
     const currentWins = document.getElementsByClassName("side_challenge_wins_counter")[0];
     const currentLosses = document.getElementsByClassName("side_challenge_losses_counter")[0];
     const currentTies = document.getElementsByClassName("side_challenge_ties_counter")[0];
@@ -50,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         userBio.textContent = info.user.bio;
         userPfp.src = info.user.profile;
         userBanner.src = info.user.banner;
+        currentMainDisplayWins.textContent = info.user.wins;
         currentWins.textContent = info.user.wins;
         currentLosses.textContent = info.user.losses;
         currentTies.textContent = info.user.ties;
@@ -245,8 +248,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 
-
-
     // -- USERPROFILE LOADING FUNCTIONS -- //
 
     // Function loads the posts of the user to be displayed in the container
@@ -428,7 +429,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
 
             allPostsContainer.append(post_container)
+
+            postCount++;
+            
         });
+
+        // Temp addition to show number of posts
+        currentNumberOfPosts.textContent = posts.length;
+
+
     }
 
     // Function loads the replies of the user to be displayed in the container
@@ -615,6 +624,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             allRepliesContainer.append(userPost)
             
         });
+
+
     }
 
     // Function loads the notifications of the user to be displayed in the container

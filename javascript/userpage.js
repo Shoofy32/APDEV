@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
     const currentLikes = document.getElementsByClassName("likes_counter")[0];
+    const currentNumberOfPosts = document.getElementsByClassName("posts_counter")[0];
+    const currentMainDisplayWins = document.getElementsByClassName("challenge_wins_counter")[0];
     const currentWins = document.getElementsByClassName("side_challenge_wins_counter")[0];
     const currentLosses = document.getElementsByClassName("side_challenge_losses_counter")[0];
     const currentTies = document.getElementsByClassName("side_challenge_ties_counter")[0];
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     userBio.textContent = profileUser.bio;
     userPfp.src = profileUser.profile;
     userBanner.src = profileUser.banner;
+    currentMainDisplayWins.textContent = profileUser.wins;
     currentWins.textContent = profileUser.wins;
     currentLosses.textContent = profileUser.losses;
     currentTies.textContent = profileUser.ties;
@@ -266,6 +269,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             allPostsContainer.append(post_container)
         });
+
+        // Temp addition to show number of posts
+        currentNumberOfPosts.textContent = posts.length;
+
     }
 
     // Function loads the replies of the user to be displayed in the container
