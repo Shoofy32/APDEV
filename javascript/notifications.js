@@ -7,11 +7,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-
-
     // Add event listener for notificationButton
     notificationButton.addEventListener("click", () => {
-
 
         let notificationDropdown = document.getElementsByClassName("notification_dropdown")[0]; // Dropdown container
         let notificationButton = document.getElementsByClassName("notification_button")[0]; // Notification button
@@ -37,7 +34,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         else if(denyChallengeButton)
             rejectChallengeNotification(event.target.closest(".deny_challenge")); // Get the closest deny_challenge associated with the click
         else if(acceptResultButton)
-            getChallengeResultAndClose(acceptResultButton);
+            getChallengeResultAndClose(acceptResultButton); // Call function to accept results notification and close it
 
 
         notificationButtonDisplay(); // Call function to display ! or not beside bell icon
@@ -46,31 +43,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-    // ------------- FUNCTIONS ------------- //
-
-
-
-
     // -- NOTIFICATIONS LOAD FUNCTIONS -- //
 
+
+    // Function loads the challenge notifications by fetching from database
     async function loadChallengeNotifications(){
 
         // Don't continue if theres no user logged in
         if(!window.userLoggedIn)
             return;
 
+        // Fetches challenge notifications information from /challenge-notifications route and converts it to be usuable JS object
         const response = await fetch("/challenge-notifications");
         const challenges = await response.json();
         
 
-
+        // For each challenge notification, create a container for it and end it to display
         for(let i = 0; i < challenges.length; i++){
 
             let currentChallenge = challenges[i];
 
+            // Fetches challenger information from /user/:id route by using the currentChallenge.challenger_id
             const userResponse = await fetch(`/user/${currentChallenge.challenger_id}`);
             const challenger = await userResponse.json();
 
+            // Create the challenge container
             let createdChallengeContainer = challengeContainerLayout(
                 challenger.profile, 
                 currentChallenge.challenger_username, 
@@ -86,24 +83,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
-
+    // Function loads the challenge notifications results by fetching from database
     async function loadChallengeResultNotifications(){
 
         // Don't continue if theres no user logged in
         if(!window.userLoggedIn)
             return;
 
+        // Fetches challenge notifications result information from /challenge-notifications-result route and converts it to be usuable JS object
         const response = await fetch("/challenge-notifications-result");
         const results = await response.json();
         
 
+        // For each challenge notification result, create a container for it and end it to display
         for(let i = 0; i < results.length; i++){
 
             let currentResult = results[i];
 
+            // Fetches challenger information from /user/:id route by using the currentResult.challenger_id
             const userResponse = await fetch(`/user/${currentResult.challenged_id}`);
             const challenged = await userResponse.json();
 
+            // Create the challenge result container
             let createdChallengeResultContainer = challengeContainerResultLayout(
                 currentResult.wasRejected,
                 currentResult.isTie,
@@ -127,6 +128,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // -- NOTIFICATIONS CREATION FUNCTIONS -- //
 
+    // Function creates the challenge container and updates notification button display
     function createChallengeNotification(challengedUser, rolledNumber, betLikes){
 
         addChallengeNotification(rolledNumber, betLikes, challengedUser);
@@ -135,13 +137,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
-    function createChallengeNotification(challengedUser, rolledNumber, betLikes){
-
-        addChallengeNotification(rolledNumber, betLikes, challengedUser);
-
-        notificationButtonDisplay(); // Call function to display ! or not beside bell icon
-    }
-
+    // Function creates and returns the challenge container
     function challengeContainerLayout(image, name, rolledNumber, betLikes, id){
 
         return `
@@ -175,9 +171,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
+    // Function creates and returns the challenge container result based on different conditions
     function challengeContainerResultLayout(wasRejected, isTie, image, name, winner_username, 
         loser_username, winner_roll, loser_roll, challenged_bet_likes, id){
 
+        // Create rejected result version if challenge was rejected
         if(wasRejected === true){
 
             return `                            
@@ -213,7 +211,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
         }
-        else if(isTie === true){
+        else if(isTie === true){ // Create tied result version if challenge was rejected
 
             return `                            
                 <div class = "challenge_results_notification" id = "${id}">
@@ -230,7 +228,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                         <div class = "results_alert_container">
 
-                            <p class = "results_name">${winner_username} roll resulted in a tie!</p>
+                            <p class = "results_name"> The roll resulted in a tie!</p>
                             <p class = "results_alert">Likes will be refunded if you accept notification.</p>
 
                         </div>
@@ -248,7 +246,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
         }
-        else
+        else // Create normal result version if no rejection or tie
             return `                            
                 <div class = "challenge_results_notification" id = "${id}">
 
@@ -305,14 +303,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Add temporary event listener for postBet to call the rollAndGetWinner function.
         const betChallengeButton = document.getElementsByClassName("postBet")[0]; // bet likes button
 
-        const challengerContainer = event.target.closest(".challenge_notification"); // Challenge notification container
+        const challengeContainer = event.target.closest(".challenge_notification"); // Challenge notification container
 
 
         // Get information of the challenge notification
-        let name = challengerContainer.getElementsByClassName("challenger_name")[0].textContent;
-        let image = challengerContainer.querySelector(".icon_name_challenge_container img").src;
-        let rollNumber = parseInt(challengerContainer.getElementsByClassName("notification_challenger_roll")[0].textContent); 
-        let betLikes = parseInt(challengerContainer.getElementsByClassName("notification_challenger_likes")[0].textContent);
+        let name = challengeContainer.getElementsByClassName("challenger_name")[0].textContent;
+        let image = challengeContainer.querySelector(".icon_name_challenge_container img").src;
+        let rollNumber = parseInt(challengeContainer.getElementsByClassName("notification_challenger_roll")[0].textContent); 
+        let betLikes = parseInt(challengeContainer.getElementsByClassName("notification_challenger_likes")[0].textContent);
 
 
         // Call challenge user which opens challenge container with stats of the person challenging them
@@ -328,7 +326,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             function rollAndGetWinnerWrapper(){
 
                 // Get the closest accept_challenge associated with the click and then get the eventual resolve of promise after function is done
-                rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper, betLikes).then(resolve)
+                rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper, betLikes, challengeContainer).then(resolve)
 
             }
 
@@ -372,7 +370,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
     // Function rolls D20 and updates the user's likes depending on result
-    async function rollAndGetWinner(buttonElement, wrapper, betLikes){
+    async function rollAndGetWinner(buttonElement, wrapper, betLikes, challengeContainer){
 
         // Bet challenge button
         const betChallengeButton = document.getElementsByClassName("postBet")[0];
@@ -401,6 +399,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const challengerName = document.getElementsByClassName("challenger_name")[0].textContent;
         const username = document.getElementsByClassName("username")[0].textContent;
 
+        // Variables store who won, lost, of if there was a tie
         let loser;
         let winner;
         let isTie = false;
@@ -423,12 +422,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
         else{
 
+            // If neither won or lost, then it was a tie, and refund likes and set isTie to true
             userCurrentLikes.textContent = parseInt(userCurrentLikes.textContent) + likesValue;
             isTie = true;
 
         }
-
-
 
 
         // Remove temporary event listener
@@ -438,10 +436,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         await timer(2000);
         openChallenge();
 
-
-        // Check if user is logged in, and if so, update their like counter in the session and database
+        // Check if user is logged in, and if so, update the results and send the challenge results to challenger
         if(window.userLoggedIn)
-            updateAndSendChallengeResult(loser, winner ,isTie, challengerNumber, userNumber, betLikes, likesValue, challengerName);
+            await updateAndSendChallengeResult(loser, winner ,isTie, challengerNumber, userNumber, betLikes, likesValue, challengerName, challengeContainer);
 
 
 
@@ -454,22 +451,60 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
-
-
+    // Function updates the likes and challenge statistics of user and challenger based on roll result.
+    // Also makes a challenge notification result to database
     async function updateAndSendChallengeResult(loser, winner, isTie, challengerNumber, userNumber, challengerBetLikes, challengedBetLikes, 
-        notificationReceiver){
+        notificationReceiver, challengeContainer){
 
         if(!window.userLoggedIn)
             return;
 
 
-        // Obtain the container for the amount of likes the user has
-        var userCurrentLikes = document.getElementsByClassName("like_amount")[0];
-        const updatedLikes =  parseInt(userCurrentLikes.textContent);
+        // Get current likes
+        const currentLikesContainer = document.getElementsByClassName("like_amount")[0];
+        const currentLikes = parseInt(currentLikesContainer.textContent);
+        
+        // Fetches session information from /user-login route and converts it to be usuable JS object
+        const response = await fetch("/user-login"); // Fetch from route
+        const info = await response.json() // Convert to object
+
+        // Fetches challenge notification information from /challenge-notifications/:id route and converts it to be usuable JS object
+        const challengerNotifResponse = await fetch(`/challenge-notifications/${challengeContainer.id}`); // Fetch from route
+        const challengerNotifInfo = await challengerNotifResponse.json() // Convert to object
+
+        // Fetches challenger  information from /user/:id route by getting challenger_id from challengerNotifInfo
+        const challengerResponse = await fetch(`/user/${challengerNotifInfo.challenger_id}`); // Fetch from route
+        const challengerInfo = await challengerResponse.json() // Convert to object
 
 
-        await updateLikes(updatedLikes);
+        // Updates counter of both user and enemy depending on win and loss conditions
+        if(isTie){ 
 
+            // If tie, call functions to increment both user and challengers ties count by 1
+            await updateTies(info.user.ties + 1);
+            await updateAnotherUserByID(challengerInfo._id, {newTies: challengerInfo.ties + 1})
+
+        }
+        else if(info.user.username === winner){ 
+
+            // If win, call functions to increment win of user and loss of challenger by 1
+            await updateWins(info.user.wins + 1);
+            await updateAnotherUserByID(challengerInfo._id, {newLosses: challengerInfo.losses + 1})
+
+        }
+        else{
+
+            // If win, call functions to increment loss of user and win of challenger by 1
+            await updateLosses(info.user.losses + 1);
+            await updateAnotherUserByID(challengerInfo._id, {newWins: challengerInfo.wins + 1})
+
+        }
+
+
+        // Call function to update likes in database
+        await updateLikes(currentLikes);
+
+        // Add to database a new challenge notification result 
         addChallengeNotificationResult(
 
             false, 
@@ -487,13 +522,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
+    // Function rejects the challenge notification and creates a variant of notification result of the rejection
     function rejectChallengeNotification(buttonElement){
 
-        const challengerContainer = buttonElement.closest(".challenge_notification"); // Challenge notification container
+        const challengeContainer = buttonElement.closest(".challenge_notification"); // Challenge notification container
 
-        const challengerName = challengerContainer.getElementsByClassName("challenger_name")[0].textContent;
-        const betLikes = parseInt(challengerContainer.getElementsByClassName("notification_challenger_likes")[0].textContent);
-        
+        // Obtain challenger names and the bet likes
+        const challengerName = challengeContainer.getElementsByClassName("challenger_name")[0].textContent;
+        const betLikes = parseInt(challengeContainer.getElementsByClassName("notification_challenger_likes")[0].textContent);
+
+
+        // Add to database a new challenge notification result (isRejected is set to true)
         addChallengeNotificationResult(
 
             true, 
@@ -532,11 +571,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if(!challengeContainer)
             return;
 
-
         // Call function to remove challenge notificaation information from the database
         removeChallengeNotification(challengeContainer.id)
-        challengeContainer.remove(); // Remove said challenge notification from the notification list
 
+
+        // Get the list of challenge containers by passing the id
+        const listOfChallengeContainer = document.querySelectorAll(`[id="${challengeContainer.id}"`);
+
+        // Remove each instance of that id
+        for(let i = 0; i < listOfChallengeContainer.length; i++){
+
+            listOfChallengeContainer[i].remove();
+        }
 
         // Obtain the challenge stats container and make the stats container empty
         const challenger_stats_container = document.getElementsByClassName("challenger_stats_container")[0];
@@ -553,7 +599,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-
+    // Function gets the result from the result notification after a challenge is complete, and closes it
     async function getChallengeResultAndClose(acceptResultButton){
 
         // Obtain the container for the amount of likes the user has and the amount
@@ -567,16 +613,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const response = await fetch("/user-login"); // Fetch from route
         const info = await response.json() // Convert to object
 
-        // Fetch challenger notificationr result from route and convert to object
+        // Fetch challenger notification result information from database via route by using id
         const resultResponse = await fetch(`/challenge-notifications-result/${challengeResultContainer.id}`); // Fetch from route
         const resultInfo = await resultResponse.json() // Convert to object
 
+
+        // Make a variable that will store the updated likes (Default is the current amount of likes)
         let updatedLikes = userCurrentLikes;
 
+        // Checks if result is tie or challenge was rejected, if so, change updateLikes so that it refunds the challenger's bet
         if(resultInfo.isTie === true || resultInfo.wasRejected === true)
             updatedLikes = userCurrentLikes + resultInfo.challenger_bet_likes;
-        else if(resultInfo.winner_username === info.user.username);
+        else if(resultInfo.winner_username === info.user.username) // If win, refund bet and add challenged likes
             updatedLikes = userCurrentLikes + resultInfo.challenged_bet_likes + resultInfo.challenger_bet_likes;
+
 
         // Update like container in header to show result of accepting and update database likes aswell
         userCurrentLikesContainer.textContent = updatedLikes;
@@ -585,7 +635,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Call function to remove challenge result notificaation information from the database
         removeChallengeNotificationResult(challengeResultContainer.id)
-        challengeResultContainer.remove(); // Remove said challenge result notification from the notification list
+
+
+        // Get the list of challenge result containers by passing the id
+        const listOfChallengeResultContainer = document.querySelectorAll(`[id="${challengeResultContainer.id}"`);
+
+        // Remove each instance of that id
+        for(let i = 0; i < listOfChallengeResultContainer.length; i++){
+
+            listOfChallengeResultContainer[i].remove();
+        }
 
         notificationButtonDisplay(); // Call function to display ! or not beside bell icon
 
@@ -612,10 +671,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     }
  
+
     // Make functions globally accessible
     window.createChallengeNotification = createChallengeNotification;
     window.acceptUserChallenge = acceptUserChallenge;
+    window.rejectChallengeNotification = rejectChallengeNotification;
     window.closeUserChallenge = closeUserChallenge;
+    window.getChallengeResultAndClose = getChallengeResultAndClose;
     window.loadChallengeNotifications = loadChallengeNotifications;
     window.loadChallengeResultNotifications = loadChallengeResultNotifications;
     window.notificationButtonDisplay = notificationButtonDisplay;

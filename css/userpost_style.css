@@ -68,7 +68,7 @@ a {
 }
 
 /* Posts - Title of Post */
-.post h3{
+.post h3 ,.reply h3{
 
     font-size: 22px;
     font-family: "Inter", Arial;
@@ -113,7 +113,7 @@ a {
 }
 
 /* Posts - Short Description of Post*/
-.post .description_short_post{
+.post .description_short_post, .reply .description_short_post{
 
 
     width: 95%;
@@ -133,7 +133,7 @@ a {
 
 
 /* Posts - Div Container that Contains the Like and Dislike Buttons */
-.all_posts .stats_post{
+.all_posts .stats_post, .all_replies .stats_post{
 
     display: flex;
     align-items: center;
@@ -168,7 +168,7 @@ a {
 }
 
 /* Posts (Counter) - Icon of Button */
-.all_posts .stats_post i{
+.all_posts .stats_post i, .all_replies .stats_post i{
 
     color: white;
 
@@ -178,7 +178,7 @@ a {
 }
 
 /* Posts (Counter) - Counter of Button */
-.all_posts .stats_post p{
+.all_posts .stats_post p, .all_replies .stats_post p{
 
 
     font-size: 14px;
@@ -195,7 +195,7 @@ a {
 
 /* Posts (Counter) - Icon of Button */
 /* On Hover */
-.all_posts .stats_post i:hover{
+.all_posts .stats_post i:hover, .all_replies .stats_post i:hover{
 
     color: coral;
 
@@ -238,7 +238,7 @@ a {
 }
 
 /* Latests Posts - Secondary Div Container that contains a post */
-.post:not(.stats_post):hover {
+.post:not(.stats_post):hover, .reply:not(.stats_post):hover{
 
 
     background-color: #314147;

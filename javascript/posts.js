@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const all_posts = document.getElementsByClassName("all_posts")[0];
     const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
     const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
-
-    let challengedUser;
  
     // Check if userpost to avoid loading backend in forum page
     if((!window.location.pathname.endsWith("forum.html")) && (!window.location.pathname.endsWith("homepage.html") 
@@ -73,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateCounter(dislikeButton, dislikeButton.closest(".counter_container").parentElement);
         else if(challengeButton){
 
-            challengedUser = post_reply.getElementsByClassName("name_post")[0].textContent;
+            window.challengedUser = post_reply.getElementsByClassName("name_post")[0].textContent;
             openChallenge();
 
         }
@@ -315,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Checks if the roll was for challenging a user (false) or for being challenged (true)
             if(isRollForChallengingUser)
-                createChallengeNotification(challengedUser, roll, likesValue) // Call function to create the challenge for the user who was challenged.
+                createChallengeNotification(window.challengedUser, roll, likesValue) // Call function to create the challenge for the user who was challenged.
 
 
             // Update displayResultElement with Final Value
@@ -606,10 +604,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
     // Make function globally accessible
     window.openChallenge = openChallenge;
     window.rollD20 = rollD20;
     window.timer = timer;
+    
 
 })
