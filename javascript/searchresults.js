@@ -32,8 +32,6 @@ export async function showSearchResults(){
 
     const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
-    const authentication = await fetch("/user-login")
-    const info = await authentication.json()
 
     const all_posts = document.getElementsByClassName('search_results_container')[0]
     //Clear it first

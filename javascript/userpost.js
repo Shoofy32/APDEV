@@ -29,9 +29,6 @@
       const response = await fetch(`http://localhost:3000/post/${id}`);
       const post = await response.json()
 
-      const authentication = await fetch("/user-login")
-      const info = await authentication.json()
-    
 
       const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
       const user = await user_info.json();

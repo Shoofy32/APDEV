@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 async function addPost() {
-  const authentication = await fetch("/user-login")
-  const info = await authentication.json()
   if(info.userLoggedIn) {
     const username = info.user.username
     const params = new URLSearchParams(window.location.search);

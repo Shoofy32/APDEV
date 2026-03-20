@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // ADD BACKEND FOR LOADING USER INFO WHEN LOADING USERPAGE
     // NAME, BANNER IMAGE, PFP IMAGE, BIO, LIKES, NUMBER OF POSTS, AND CHALLENGE STATS
-    const response = await fetch("/user-page");
-    const info = await response.json()
 
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
@@ -36,14 +34,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const allRepliesContainer = document.getElementsByClassName("all_replies")[0]; // Container for replies
     const allNotificationsContainer = document.getElementsByClassName("all_notifications")[0]; // Container for notifications
 
-    username.textContent = info.user.username;
-    currentLikes.textContent = info.user.likes;
-    userBio.textContent = info.user.bio;
-    userPfp.src = info.user.profile;
-    userBanner.src = info.user.banner;
-    currentWins.textContent = info.user.wins;
-    currentLosses.textContent = info.user.losses;
-    currentTies.textContent = info.user.ties;
+    username.textContent = profileUser.username;
+    currentLikes.textContent = profileUser.likes;
+    userBio.textContent = profileUser.bio;
+    userPfp.src = profileUser.profile;
+    userBanner.src = profileUser.banner;
+    currentWins.textContent = profileUser.wins;
+    currentLosses.textContent = profileUser.losses;
+    currentTies.textContent = profileUser.ties;
 
     // Add classList to post container to show posts when userpage is first loaded
     allPostsContainer.classList.toggle("display_visible");
@@ -119,15 +117,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         // GET USERNAME, AND EACH POST THE USER MADE (WITH THE STATS INCLUDED)
         allPostsContainer.innerHTML="";
 
-        let response = await fetch("/load-posts/"+info.user.username);
+
+        let response = await fetch("/load-posts/" + profileUser.username);
         posts = await response.json();
 
         posts.forEach(async (postload)=>{
             const response = await fetch(`http://localhost:3000/post/`+postload._id);
             const post = await response.json()
-
-            const authentication = await fetch("/user-login")
-            const info = await authentication.json()
 
             const user_info = await fetch(`http://localhost:3000/user/`+postload.poster_id);
             const user = await user_info.json();
@@ -303,7 +299,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         allRepliesContainer.innerHTML=""
 
-        let response = await fetch("/load-replies/"+info.user.username);
+        let response = await fetch("/load-replies/" + profileUser.username);
         replies = await response.json();
 
         replies.forEach(async reply => {
