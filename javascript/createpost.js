@@ -87,7 +87,7 @@ async function addPost() {
     window.location.href = `forum?forum=${forum_name}&page=1`;
     }
   else {
-    alert("LOGIN NIGGA!")
+    alert("You must be logged in to post!")
   }
   
  

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+
+    <head>
+
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+            
+        <title> Blevvit - Bio </title>
+
+        <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel = "preconnect" href = "https://fonts.googleapis.com">
+        <link rel = "preconnect" href = "https://fonts.gstatic.com" crossorigin>
+        <link href =" https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href = "../fontawesome/css/all.min.css" rel = "stylesheet"/>
+
+
+        <!-- Link CSS File for userpage css design-->
+        <link rel = "stylesheet" href="../css/userprofile_style.css">
+
+        <!-- Link CSS File for user post css design-->
+        <link rel = "stylesheet" href = "../css/userpost_style.css">
+
+        <!-- Link CSS File for sidebar css design-->
+        <link rel = "stylesheet" type = "text/css" href = "../css/sidebar_style.css">
+
+        <!-- Link CSS File for header css design-->
+        <link rel= "stylesheet" type = "text/css" href = "../css/log_reg_header_style.css">
+
+
+
+
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "../javascript/sidebar.js"></script>
+
+        <!-- Link JS File for forum load link interaction -->
+        <script src = "../javascript/forumloadlink.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script src = "../javascript/posts.js"></script>
+
+        <!-- Link JS File for searchbar interaction -->
+        <script type = "module" src = "../javascript/searchbar.js"></script>
+
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/notifications.js"></script>
+
+        <!-- Link JS File for user profile interaction -->
+        <script src = "../javascript/userpage.js"></script>
+
+        <!-- Link JS File for logins -->
+        <script src = "../javascript/log_reg_header.js"></script>
+
+
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+
+                <!-- Logo -->
+                <a class = "logo"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+
+                
+                <!-- Search bar -->
+                <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+
+                </div>
+
+                <!-- Like Container for showing current likes user has -->
+                <div class = "likes_container">
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i>
+                    <p class = "like_amount"></p>
+                </div>
+
+                <!-- Notification Container for challenge notifications from other users -->
+                <div class = "notification_container">
+                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
+
+                    <div class = "notification_dropdown">
+
+                        <p class = "notifications_header"> Notifications </p>
+
+                        <div class = "notification_content_container">
+
+                            <div class = "challenge_notification">
+
+
+                                <div class = "icon_name_challenge_container">
+
+                                    <img src = "../resources/users/discordmod.jpg">
+                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
+
+                                </div>
+
+
+                                <div class = "roll_likes_container">
+
+                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  15 </p>
+                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 25 </p>
+
+                                </div>
+
+                                <div class = "accept_deny_container">
+
+                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
+                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
+
+                                </div>
+
+                            </div>
+
+                            <div class = "challenge_notification">
+
+
+                                <div class = "icon_name_challenge_container">
+
+                                    <img src = "../resources/users/discordmod.jpg">
+                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
+
+                                </div>
+
+                                <div class = "roll_likes_container">
+
+                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  12 </p>
+                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 18 </p>
+
+                                </div>
+
+                                <div class = "accept_deny_container">
+
+                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
+                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
+
+                                </div>
+
+                            </div>                            
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="log_sign_in" id="topright">
+
+
+
+                    <div class = "log_sign_in2" id = "user">
+
+                        <img class = "header_pfp" src = "">
+                        <p id = "username" class="username"></p>
+
+                        <button id = "logout" > Log out </button>
+
+                    </div>
+
+                    <!-- Log In and Sign Up Buttons -->
+                    <div class = "log_sign_in1" id = "anon">
+
+                        <button onclick = "window.location.href = '/login'"> Log In </button>
+                        <button onclick = "window.location.href = '/register'"> Sign Up </button>
+
+                    </div>
+
+                
+
+
+
+                </div>
+            </header>
+
+
+        </article>
+
+        <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i>
+                         <span> Home </span> 
+                    </button>
+
+                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+
+                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+
+                    <hr>
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title"> Popular Topics </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Creative Writing </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Fiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr>
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title"> Resources </p>
+
+                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  Rules </span> 
+                        </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class = "mainbox" > 
+
+            <div class = "infobox">
+
+                <img src="../resources/images/banner_placeholder.jpg" class = "banner_image"> 
+
+
+                <div class = "info_containers">
+
+
+                    <div class = "left_side_info_container">
+
+                        <img src="../resources/users/noprofilepic.jpg" class = "pfp"> 
+
+                        
+                        <div class = "name">
+                            <h1 class = "username"></h1>
+
+                            <p class = "bio"></p>
+
+                        </div> 
+
+                    </div>
+
+
+
+
+                    <div class = "right_side_info_container">
+
+                        <button class = "edit_profile_button"><i class="fa-solid fa-pen-to-square fa-xl"></i></button>
+
+
+                        <div class = "right_side_stats_container">
+
+                            <div class = "stats_container">
+
+                                <p class = "likes_counter">0</p>
+
+                                <p class = "stats_label">Likes</p>
+
+                            </div>
+
+                            <div class = "stats_container">
+
+                                <p class = "posts_counter">0</p>
+
+                                <p class = "stats_label">Posts</p>
+                            </div>
+
+                            <div class = "stats_container">
+
+                                <p class = "challenge_wins_counter">0</p>
+
+                                <p class = "stats_label">Challenge Wins</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div class = "user_posts_replies_notifications_container">
+
+                <div class = "post_reply_notifications_buttons_container">
+
+                    <button class = "all_posts_button">Posts</button>
+
+                    <button class = "all_reply_button">Replies</button>
+
+                    <button class = "all_notifications_button">Notifications</button>
+                </div>
+
+                <!-- Store for all post replies -->
+                <div class  = "all_posts">
+                            
+                    <div id = "" class = "post">
+
+                        <div class = "icon_name_date_post">
+                            <img src = "../resources/users/discordmod.jpg">
+                            <h5 class = "name_post">CCS_GodXX</h5>
+                            <p class = "date_post">3/15/2026</p>
+                        </div>
+
+                        <h3 class = "title_post">Tests</h3>
+
+                        <div class = "tags_post">
+                            <p class = "tag">Technology</p>
+                        </div>
+
+                        <p class = "description_short_post">Teast body</p>
+
+                        <div class = "stats_post">
+
+                            <div class = "counter_container">
+                                <i class = "fa-regular fa-thumbs-up"></i>
+                                <p class = "like_counter">0</p>
+                            </div>
+
+                            <div class = "counter_container">
+                                <i class = "fa-regular fa-thumbs-down"></i>
+                                <p class = "like_counter">0</p>
+                            </div>
+
+                            <div class = "challenge_button">
+                                <i class = "fa-solid fa-bullseye"></i>
+                                <p class = "challenge_text">Challenge</p>
+                            </div>
+
+                            <div class = "delete_edit_container">
+                                <button class = "delete_button">
+                                    <i class = "fa-regular fa-trash-can"></i>
+                                    <h4>Delete</h4>
+                                </button>
+                                <button class = "edit_button">
+                                    <i class = "fa-solid fa-pen-to-square"></i>
+                                    <h4>Edit</h4>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Store for all user replies -->
+                <div class = "all_replies">
+
+                    <div id = "" class = "reply">
+
+                        <div class = "icon_name_date_post">
+
+                            <img src = "../resources/users/discordmod.jpg">
+                            <p class = "name_post">CCS_GodXX</p>
+                            <p class = "date_post">3/16/2026</p>
+
+                        </div>
+
+                        <div class = "post_contents">
+
+                            <div class = "replying_to_container">
+
+                                <span class="user_repliedto">TheRedactedDude said:</span><br><br>
+                                <p>adddd <strong>(edited)</strong></p>
+
+                            </div>
+
+                            <p class = "description_short_post">Save<strong>(edited)</strong></p>
+
+                        </div>
+
+                        <div class = "stats_post">
+
+                            <div class = "counter_container">
+
+                                <i class = "fa-regular fa-thumbs-up"></i>
+                                <p class = "like_counter">0</p>
+
+                            </div>
+
+                            <div class = "counter_container">
+
+                                <i class = "fa-regular fa-thumbs-down"></i>
+                                <p class = "like_counter"> 0 </p>
+                                
+
+                            </div>
+
+                            <div class="challenge_button">
+
+                                <i class = "fa-solid fa-bullseye"></i>
+                                <p class = "challenge_text">Challenge</p>
+
+                            </div>
+
+                            <div class = "delete_edit_container">
+
+                                <button class = "delete_button">
+
+                                    <i class = "fa-regular fa-trash-can"></i>
+                                    <h4>Delete</h4>
+
+                                </button>
+
+                                <button class = "edit_button">
+
+                                    <i class = "fa-solid fa-pen-to-square"></i>
+                                    <h4>Edit</h4>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Store for all user notifications -->
+                <div class = "all_notifications">
+
+                </div>
+
+
+            </div>
+
+            <div class = challenge_stats_container>
+
+                <p class = "stats_container_title"> Challenge Statistics</p>
+
+                <hr>
+
+                <div class = side_stats_container>
+
+                    <p class = "stats_container_label"> Wins</p>
+                    <p class = "side_challenge_wins_counter">69420</p>
+                </div>
+
+                <div class = side_stats_container>
+
+                    <p class = "stats_container_label"> Losses</p>
+                    <p class = "side_challenge_losses_counter">69420</p>
+
+                </div>
+
+                <div class = side_stats_container>
+
+                    <p class = "stats_container_label"> Ties</p>
+                    <p class = "side_challenge_ties_counter">69420</p>
+                    
+                </div>
+
+
+                <div class = "challenge_profile_button">
+
+                    <i class="fa-solid fa-bullseye"></i>
+                    
+                    <p class = "challenge_text"> Challenge User </p>
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+
+        <!-- Div contains the challenge container -->
+        <div class = "challenge" id = "challenge_container">
+
+            <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+            <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+                <button id = "closeChallenge"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+            </div>
+
+            <h2 class = "roll_20"> Roll D20 </h2>
+
+            <div class = "challenger_stats_container">
+
+            </div>
+
+            <p class = "roll_20_number"></p>
+
+
+            <div class = "dicebg">
+                <img src="../../resources/images/d20.png">
+            </div>
+
+            <p class = "result"> Result </p>
+
+            <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+            <div class = "bet_container">
+
+                <p> Bet Likes </p>
+
+                <!-- stopPropogation prevents button from opening up userpost forum -->
+                <input class = "betLikes" type = "number" placeholder = "0"></input>
+                <button class = "postBet">Bet</button> 
+
+            </div>
+
+        </div>
+
+
+        <!-- Div contains the edit profile container -->
+        <div class = "edit_profile_container">
+
+
+            <button class = "close_edit_profile"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+
+            <p class = "edit_section_main_title">Edit Profile</p>
+
+            <div class = "main_edit_section_container">
+
+                <p class = "edit_section_title">Edit User Banner</p>
+
+                <div class = "edit_section_container">
+
+                    <img src="../resources/images/banner_placeholder.jpg" class = "banner_image_edit"> 
+                    <input type = "file" id = "banner_upload" accept = "image/*" style = "display: none;">
+                    <label for = "banner_upload" class = "upload_button">Upload Banner</label>
+
+                </div>
+                
+                <p class = "edit_section_title">Edit User Profile</p>
+
+                <div class = "edit_section_container">
+
+                    <img src="../resources/users/discordmod.jpg" class = "pfp_edit"> 
+                    <input type = "file" id = "pfp_upload" accept = "image/*" style = "display: none;">
+                    <label for = "pfp_upload" class = "upload_button">Upload Image</label>
+
+                </div>
+
+                <p class = "edit_section_title">Edit Bio</p>
+
+                <div class = "edit_section_container">
+
+                    <textarea class = "edit_bio_area" spellcheck="false" maxlength = "200"></textarea>
+
+                    <button class = "edit_bio_button"> Save Bio </button>
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+    
+</html>

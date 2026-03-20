@@ -100,6 +100,15 @@ app.get("/userprofile", isAuthenticated, (req, res) =>{
     
 });
 
+//variable to store the user to be loaded's data
+let loadedUser;
+
+//dynamically loading userprofiles
+app.get("/userprofile/:user", async (req, res) => {
+  loadedUser = await User.findOne({username: req.params.user})
+  res.sendFile(__dirname+"/html/userpage.html")
+});
+
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/myapp")
   .then(() => console.log("MongoDB Connected"))
@@ -181,6 +190,9 @@ app.get("/user-login", (req, res) => {
 
 });
 
+app.get("/user-page", (req,res)=>{
+  res.json({user: loadedUser});
+});
 
 // ------ ------ User backend ------ ------
 app.post("/registerUser", async (req, res) => {
@@ -629,6 +641,7 @@ app.get("/replies/:postId", async (req, res) => {
   res.json(replies);
 
 });
+
 app.get("/post/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);

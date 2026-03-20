@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Targets the closest elements based on where you clicked
         const post_reply = event.target.closest(".post, .reply");
-
+        const post_user = event.target.closest(".name_post"); //username
         const replyBtn = event.target.closest(".reply_button"); // Reply button
         const likeButton = event.target.closest(".fa-thumbs-up"); // Like button
         const dislikeButton = event.target.closest(".fa-thumbs-down"); // Dislike button
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if(deleteButton)
             deleteButton.closest(".post, .reply").remove();
         else if(postNameLinks)
-            window.location.href = "/userprofile"; // Added path to userpost.html
+            window.location.href = "/userprofile/"+post_user.innerHTML; // Added path to userpost.html
         // If post reply is clicked, and user is not in userpost and clicked on an edit area, open the post and load userpost.html
         else if(post_reply && !(window.location.pathname.includes("userpost")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
             openPost(post_reply.id);
