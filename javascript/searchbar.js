@@ -22,6 +22,7 @@ function searchPost(searchElement, event){
 
             // Update localStorage and Refresh SearchResults
             localStorage.setItem("search-content", searchContent);
+            showSearchResults();
             
 
         }

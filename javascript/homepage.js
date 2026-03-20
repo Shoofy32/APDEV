@@ -187,8 +187,14 @@ async function loadPosts(page = 1) {
 
 
         //Check if the user is logged in and give them edit
+        if(info.userLoggedIn && post.username === info.user.username) {
+           interaction_container.append(like,dislike, comment)
+        }
 
-        interaction_container.append(like,dislike, comment, challenge)
+        else {
+           interaction_container.append(like,dislike, comment, challenge)
+        }
+       
         
         
 
