@@ -86,14 +86,6 @@ app.get("/searchresults", (req,res)=> {
     
 });
 
-
-//dummy route, you can change the hbs file this leads to
-app.get("/profile", isAuthenticated, (req, res) =>{
-
-    res.sendFile(__dirname + "/html/userprofile.html");
-
-});
-
 app.get("/userpost", isAuthenticated, (req, res) =>{
 
     res.sendFile(__dirname + "/html/userpost.html");
@@ -106,6 +98,20 @@ app.get("/userprofile", isAuthenticated, (req, res) =>{
     
 });
 
+//variable to store the user to be loaded's data
+let loadedUser;
+
+//dynamically loading userprofiles
+app.get("/userprofile/:user", async (req, res) => {
+  loadedUser = await User.findOne({username: req.params.user})
+  if(loadedUser.username == req.session.user.username){
+    res.redirect("/userprofile");
+  }
+  else{
+    res.sendFile(__dirname+"/html/userpage.html")
+  }
+  
+});
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/myapp")
@@ -320,6 +326,9 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
   }
 });
 
+app.get("/user-page", (req,res)=>{
+  res.json({user: loadedUser});
+});
 
 //Update user posts array
 app.put("/user/addPost/:id", async (req, res) => {
