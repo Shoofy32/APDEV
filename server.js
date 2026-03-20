@@ -80,14 +80,6 @@ app.get("/createpost", (req,res)=> {
     
 });
 
-
-//dummy route, you can change the hbs file this leads to
-app.get("/profile", isAuthenticated, (req, res) =>{
-
-    res.sendFile(__dirname + "/html/userprofile.html");
-
-});
-
 app.get("/userpost", isAuthenticated, (req, res) =>{
 
     res.sendFile(__dirname + "/html/userpost.html");
