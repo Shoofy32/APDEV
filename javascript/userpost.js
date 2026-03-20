@@ -189,7 +189,7 @@
       
       if(info.userLoggedIn && post.username === info.user.username) {
 
-          interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+          interaction_container.append(like,dislike, comment, delete_edit_container)
       }
 
       else {
@@ -400,13 +400,19 @@
 
 
         edit_button.append(edit_image, edit_text)
-        if(info.userLoggedIn && reply.username === info.user.username) {
-           delete_edit_container.append(delete_button, edit_button)
-        }
+        delete_edit_container.append(delete_button, edit_button)
+       
         
        
+        if(info.userLoggedIn && reply.username === info.user.username) {
+           interaction_container.append(like,dislike, comment, delete_edit_container)
+        }
 
-        interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+        else {
+          interaction_container.append(like,dislike, comment, challenge)
+
+        }
+        
 
   
 

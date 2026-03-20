@@ -32,137 +32,192 @@ export async function showSearchResults(){
 
     const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
+    const authentication = await fetch("/user-login")
+    const info = await authentication.json()
 
-    const all_posts = document.getElementsByClassName('search_container')[0]
+    const all_posts = document.getElementsByClassName('search_results_container')[0]
     //Clear it first
     const existingPosts = all_posts.getElementsByClassName("post");
     while(existingPosts.length > 0)
         existingPosts[0].remove();
     
     
-    posts.forEach(post => {
+    posts.forEach(async post => {
         
+        //Get user information
         if(post.post_title.includes(searchResult)) {
-            query_counter++;
-            const userPost = document.createElement("div");
-            userPost.id = post._id
-            userPost.classList.add("post");
+        query_counter++;
+        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user = await user_info.json();
 
-            const iconNameDate = document.createElement("div");
-            iconNameDate.classList.add("icon_name_date_post");
 
-            const profile = document.createElement("img");
-            profile.src = "../resources/users/kirk.jfif";
-
-            const namePost = document.createElement("p");
-            namePost.classList.add("name_post");
-            namePost.textContent = post.username;
-
-            const datePost = document.createElement("p");
-            datePost.classList.add("date_post");
-            datePost.textContent = post.date
-
-            const title = document.createElement("h3");
-            title.classList.add("title_post");
-            title.innerText = post.post_title;
-
-            const tags_post = document.createElement('div')
-            tags_post.classList.add("tags_post")
-            let tags = post.tags
-            for(let tag of tags) {
-                const p_tag = document.createElement('p')
-                p_tag.classList.add('tag')
-                p_tag.add
-                p_tag.innerText = tag
-                tags_post.append(p_tag)
-            }
         
+        
+        const userPost = document.createElement("div");
+        userPost.id = post._id
+        userPost.classList.add("post");
 
-            const description = document.createElement("p");
-            description.classList.add("description_short_post");
-            description.innerText = post.post_content;
-            if(post.is_edited === true) {
-                description.innerText = post.post_content.replace("(edited)", "")
-                const strongEdited = document.createElement("strong")
-                strongEdited.innerHTML = " (edited)"
-                description.append(strongEdited)
-            }
+        const iconNameDate = document.createElement("div");
+        iconNameDate.classList.add("icon_name_date_post");
 
-            iconNameDate.append(profile, namePost, datePost);
+        const profile = document.createElement("img");
+        profile.src = user.profile;
 
-            //Interaction Containers
-            const interaction_container = document.createElement("div")
-            interaction_container.classList.add("stats_post")
+        const namePost = document.createElement("p");
+        namePost.classList.add("name_post");
+        namePost.textContent = post.username;
 
-            const like = document.createElement('div')
-            like.classList.add('counter_container')
+        const datePost = document.createElement("p");
+        datePost.classList.add("date_post");
+        datePost.textContent = post.date
 
-            const i = document.createElement('i')
-            i.classList.add('fa-regular')
-            i.classList.add('fa-thumbs-up')
+        const title = document.createElement("h3");
+        title.classList.add("title_post");
+        title.innerText = post.post_title;
 
-            const total_likes = document.createElement('p')
-            total_likes.classList.add('like_counter')
-            total_likes.innerText = post.total_likes
-            like.append(i, total_likes)
-
-            const dislike = document.createElement('div')
-            dislike.classList.add('counter_container')
-
-            const i2 = document.createElement('i')
-            i2.classList.add('fa-regular')
-            i2.classList.add('fa-thumbs-down')
-
-            const total_dislikes = document.createElement('p')
-            total_dislikes.classList.add('like_counter')
-            total_dislikes.innerText = post.total_dislikes
-            dislike.append(i2, total_dislikes)
-
-            const comment = document.createElement('div')
-            comment.classList.add('comment_container')
-
-            const i3 = document.createElement('i')
-            i3.classList.add('fa-regular')
-            i3.classList.add('fa-comment')
-
-            const reply = document.createElement('p')
-            reply.classList.add('comment_counter')
-            reply.innerText = post.total_comments
-            comment.append(i3, reply)
-
-
-            const challenge = document.createElement('div')
-            challenge.classList.add('challenge_button')
-
-            const i4 = document.createElement('i')
-            i4.classList.add('fa-solid')
-            i4.classList.add('fa-bullseye')
-
-            const challenge_text = document.createElement('p')
-            challenge_text.classList.add('challenge_text')
-            challenge_text.innerText = "Challenge"
-
-            
-            challenge.append(i4, challenge_text)
-
-
-            interaction_container.append(like,dislike, comment, challenge)
-
-
-
-
-            userPost.append(iconNameDate, title, tags_post, description, interaction_container);
-
-            all_posts.append(userPost);
-            highlightText(title, searchResult);
-            
-
-
+        const tags_post = document.createElement('div')
+        tags_post.classList.add("tags_post")
+        let tags = post.tags
+        for(let tag of tags) {
+            const p_tag = document.createElement('p')
+            p_tag.classList.add('tag')
+            p_tag.add
+            p_tag.innerText = tag
+            tags_post.append(p_tag)
         }
-        query_counter_display.textContent = query_counter;
+    
+
+        const description = document.createElement("p");
+        description.classList.add("description_short_post");
+        description.innerText = post.post_content;
+        if(post.is_edited === true) {
+            description.innerText = post.post_content.replace("(edited)", "")
+            const strongEdited = document.createElement("strong")
+            strongEdited.innerHTML = " (edited)"
+            description.append(strongEdited)
+        }
+
+        iconNameDate.append(profile, namePost, datePost);
+
+        //Interaction Containers
+        const interaction_container = document.createElement("div")
+        interaction_container.classList.add("stats_post")
+
+        const like = document.createElement('div')
+        like.classList.add('counter_container')
+
+        const i = document.createElement('i')
+        i.classList.add('fa-regular')
+        i.classList.add('fa-thumbs-up')
+      
+
+        const total_likes = document.createElement('p')
+        total_likes.classList.add('like_counter')
+        total_likes.innerText = post.total_likes
+        like.append(i, total_likes)
+
+
+        if(info.userLoggedIn && info.user.liked_posts_id.includes(userPost.id)) {
+          i.style = "color: coral;"
+          i.dataset.clicked = "true"
+        }
+
+        const dislike = document.createElement('div')
+        dislike.classList.add('counter_container')
+
+        const i2 = document.createElement('i')
+        i2.classList.add('fa-regular')
+        i2.classList.add('fa-thumbs-down')
+
+        if(info.userLoggedIn && info.user.disliked_posts_id.includes(userPost.id)) {
+          i2.style = "color: coral;"
+          i2.dataset.clicked = "true"
+        }
+
+        const total_dislikes = document.createElement('p')
+        total_dislikes.classList.add('like_counter')
+        total_dislikes.innerText = post.total_dislikes
+        dislike.append(i2, total_dislikes)
+
+        const comment = document.createElement('div')
+        comment.classList.add('comment_container')
+
+        const i3 = document.createElement('i')
+        i3.classList.add('fa-regular')
+        i3.classList.add('fa-comment')
+
+        const reply = document.createElement('p')
+        reply.classList.add('comment_counter')
+        reply.innerText = post.total_comments
+        comment.append(i3, reply)
+
+
+        const challenge = document.createElement('div')
+        challenge.classList.add('challenge_button')
+
+        const i4 = document.createElement('i')
+        i4.classList.add('fa-solid')
+        i4.classList.add('fa-bullseye')
+
+        const challenge_text = document.createElement('p')
+        challenge_text.classList.add('challenge_text')
+        challenge_text.innerText = "Challenge"
+
+        
+        challenge.append(i4, challenge_text)
+
+        const delete_edit_container = document.createElement('div')
+        delete_edit_container.classList.add('delete_edit_container')
+        const delete_button = document.createElement('button')
+        delete_button.classList.add("delete_button")
+        delete_button.addEventListener("click", function(e) {
+            deletePost(post._id)
+        })
+
+        const delete_text = document.createElement('h4')
+        delete_text.innerText = "Delete"
+
+        const delete_image = document.createElement('i')
+        delete_image.classList.add('fa-regular', 'fa-trash-can')
+
+        delete_button.append(delete_image, delete_text)
+
+        const edit_button = document.createElement('button')
+        edit_button.classList.add("edit_button")
+        const edit_text = document.createElement('h4')
+        edit_text.innerText = "Edit"
+
+        const edit_image = document.createElement('i')
+        edit_image.classList.add('fa-solid', 'fa-pen-to-square')
+
+
+        edit_button.append(edit_image, edit_text)
+       
+        delete_edit_container.append(delete_button, edit_button)
+
+        //Check if the user is logged in and give them edit
+        if(info.userLoggedIn && post.username === info.user.username) {
+          interaction_container.append(like,dislike, comment)
+        }
+        else {
+          interaction_container.append(like,dislike, comment, challenge)
+        }
         
 
-    })
+
+
+
+        userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+        highlightText(title, searchResult);
+        all_posts.append(userPost);
+    }   
+        
+        
+    query_counter_display.textContent = query_counter;
+    });
+
+    
+
 }
 
 
@@ -227,151 +282,203 @@ async function filterByTags(){
 
     const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
-
-    //Clear it first
-     
-    const all_posts = document.getElementsByClassName('search_container')[0]
-    const existingPosts = all_posts.getElementsByClassName("post");
-    while(existingPosts.length > 0)
-        existingPosts[0].remove();
+    
+    const authentication = await fetch("/user-login")
+    const info = await authentication.json()
 
 
     
     var filterTags = JSON.parse(localStorage.getItem("filter_result"));
     
    
+
+
+    const all_posts = document.getElementsByClassName('search_results_container')[0]
+    //Clear it first
+    const existingPosts = all_posts.getElementsByClassName("post");
+    while(existingPosts.length > 0)
+        existingPosts[0].remove();
     
-    posts.forEach(post => {
+    
+    posts.forEach(async post => {
         var post_tags = post.tags;
         let matches;
         if(filterTags && filterTags.length > 0) {
             matches = filterTags.every(tag => post_tags.includes(tag))
         }
-
+        //Get user information
         if(matches) {
-            query_counter++;
-            const userPost = document.createElement("div");
-            userPost.id = post._id
-            userPost.classList.add("post");
+        query_counter++;
+        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user = await user_info.json();
 
-            const iconNameDate = document.createElement("div");
-            iconNameDate.classList.add("icon_name_date_post");
 
-            const profile = document.createElement("img");
-            profile.src = "../resources/users/kirk.jfif";
+        
+        
+        const userPost = document.createElement("div");
+        userPost.id = post._id
+        userPost.classList.add("post");
 
-            const namePost = document.createElement("p");
-            namePost.classList.add("name_post");
-            namePost.textContent = post.username;
+        const iconNameDate = document.createElement("div");
+        iconNameDate.classList.add("icon_name_date_post");
 
-            const datePost = document.createElement("p");
-            datePost.classList.add("date_post");
-            datePost.textContent = post.date
+        const profile = document.createElement("img");
+        profile.src = user.profile;
 
-            const title = document.createElement("h3");
-            title.classList.add("title_post");
-            title.innerText = post.post_title;
+        const namePost = document.createElement("p");
+        namePost.classList.add("name_post");
+        namePost.textContent = post.username;
 
-            const tags_post = document.createElement('div')
-            tags_post.classList.add("tags_post")
-            let tags = post.tags
-            for(let tag of tags) {
-                const p_tag = document.createElement('p')
-                p_tag.classList.add('tag')
-                p_tag.add
-                p_tag.innerText = tag
-                if(filterTags.includes(tag))  
+        const datePost = document.createElement("p");
+        datePost.classList.add("date_post");
+        datePost.textContent = post.date
+
+        const title = document.createElement("h3");
+        title.classList.add("title_post");
+        title.innerText = post.post_title;
+
+        const tags_post = document.createElement('div')
+        tags_post.classList.add("tags_post")
+        let tags = post.tags
+        for(let tag of tags) {
+            const p_tag = document.createElement('p')
+            p_tag.classList.add('tag')
+            p_tag.add
+            p_tag.innerText = tag
+              if(filterTags.includes(tag))  
                     highlightText(p_tag, tag); 
-                tags_post.append(p_tag)
-            }
-        
-
-            const description = document.createElement("p");
-            description.classList.add("description_short_post");
-            description.innerText = post.post_content;
-            if(post.is_edited === true) {
-                description.innerText = post.post_content.replace("(edited)", "")
-                const strongEdited = document.createElement("strong")
-                strongEdited.innerHTML = " (edited)"
-                description.append(strongEdited)
-            }
-
-            iconNameDate.append(profile, namePost, datePost);
-
-            //Interaction Containers
-            const interaction_container = document.createElement("div")
-            interaction_container.classList.add("stats_post")
-
-            const like = document.createElement('div')
-            like.classList.add('counter_container')
-
-            const i = document.createElement('i')
-            i.classList.add('fa-regular')
-            i.classList.add('fa-thumbs-up')
-
-            const total_likes = document.createElement('p')
-            total_likes.classList.add('like_counter')
-            total_likes.innerText = post.total_likes
-            like.append(i, total_likes)
-
-            const dislike = document.createElement('div')
-            dislike.classList.add('counter_container')
-
-            const i2 = document.createElement('i')
-            i2.classList.add('fa-regular')
-            i2.classList.add('fa-thumbs-down')
-
-            const total_dislikes = document.createElement('p')
-            total_dislikes.classList.add('like_counter')
-            total_dislikes.innerText = post.total_dislikes
-            dislike.append(i2, total_dislikes)
-
-            const comment = document.createElement('div')
-            comment.classList.add('comment_container')
-
-            const i3 = document.createElement('i')
-            i3.classList.add('fa-regular')
-            i3.classList.add('fa-comment')
-
-            const reply = document.createElement('p')
-            reply.classList.add('comment_counter')
-            reply.innerText = post.total_comments
-            comment.append(i3, reply)
-
-
-            const challenge = document.createElement('div')
-            challenge.classList.add('challenge_button')
-
-            const i4 = document.createElement('i')
-            i4.classList.add('fa-solid')
-            i4.classList.add('fa-bullseye')
-
-            const challenge_text = document.createElement('p')
-            challenge_text.classList.add('challenge_text')
-            challenge_text.innerText = "Challenge"
-
-            
-            challenge.append(i4, challenge_text)
-
-
-            interaction_container.append(like,dislike, comment, challenge)
-
-
-
-
-            userPost.append(iconNameDate, title, tags_post, description, interaction_container);
-
-            all_posts.append(userPost);
-           
-           
-          
-
-
+            tags_post.append(p_tag)
         }
-        query_counter_display.textContent = query_counter;
+    
+
+        const description = document.createElement("p");
+        description.classList.add("description_short_post");
+        description.innerText = post.post_content;
+        if(post.is_edited === true) {
+            description.innerText = post.post_content.replace("(edited)", "")
+            const strongEdited = document.createElement("strong")
+            strongEdited.innerHTML = " (edited)"
+            description.append(strongEdited)
+        }
+
+        iconNameDate.append(profile, namePost, datePost);
+
+        //Interaction Containers
+        const interaction_container = document.createElement("div")
+        interaction_container.classList.add("stats_post")
+
+        const like = document.createElement('div')
+        like.classList.add('counter_container')
+
+        const i = document.createElement('i')
+        i.classList.add('fa-regular')
+        i.classList.add('fa-thumbs-up')
+      
+
+        const total_likes = document.createElement('p')
+        total_likes.classList.add('like_counter')
+        total_likes.innerText = post.total_likes
+        like.append(i, total_likes)
+
+
+        if(info.userLoggedIn && info.user.liked_posts_id.includes(userPost.id)) {
+          i.style = "color: coral;"
+          i.dataset.clicked = "true"
+        }
+
+        const dislike = document.createElement('div')
+        dislike.classList.add('counter_container')
+
+        const i2 = document.createElement('i')
+        i2.classList.add('fa-regular')
+        i2.classList.add('fa-thumbs-down')
+
+        if(info.userLoggedIn && info.user.disliked_posts_id.includes(userPost.id)) {
+          i2.style = "color: coral;"
+          i2.dataset.clicked = "true"
+        }
+
+        const total_dislikes = document.createElement('p')
+        total_dislikes.classList.add('like_counter')
+        total_dislikes.innerText = post.total_dislikes
+        dislike.append(i2, total_dislikes)
+
+        const comment = document.createElement('div')
+        comment.classList.add('comment_container')
+
+        const i3 = document.createElement('i')
+        i3.classList.add('fa-regular')
+        i3.classList.add('fa-comment')
+
+        const reply = document.createElement('p')
+        reply.classList.add('comment_counter')
+        reply.innerText = post.total_comments
+        comment.append(i3, reply)
+
+
+        const challenge = document.createElement('div')
+        challenge.classList.add('challenge_button')
+
+        const i4 = document.createElement('i')
+        i4.classList.add('fa-solid')
+        i4.classList.add('fa-bullseye')
+
+        const challenge_text = document.createElement('p')
+        challenge_text.classList.add('challenge_text')
+        challenge_text.innerText = "Challenge"
+
+        
+        challenge.append(i4, challenge_text)
+
+        const delete_edit_container = document.createElement('div')
+        delete_edit_container.classList.add('delete_edit_container')
+        const delete_button = document.createElement('button')
+        delete_button.classList.add("delete_button")
+        delete_button.addEventListener("click", function(e) {
+            deletePost(post._id)
+        })
+
+        const delete_text = document.createElement('h4')
+        delete_text.innerText = "Delete"
+
+        const delete_image = document.createElement('i')
+        delete_image.classList.add('fa-regular', 'fa-trash-can')
+
+        delete_button.append(delete_image, delete_text)
+
+        const edit_button = document.createElement('button')
+        edit_button.classList.add("edit_button")
+        const edit_text = document.createElement('h4')
+        edit_text.innerText = "Edit"
+
+        const edit_image = document.createElement('i')
+        edit_image.classList.add('fa-solid', 'fa-pen-to-square')
+
+
+        edit_button.append(edit_image, edit_text)
+       
+        delete_edit_container.append(delete_button, edit_button)
+
+        //Check if the user is logged in and give them edit
+        if(info.userLoggedIn && post.username === info.user.username) {
+          interaction_container.append(like,dislike, comment)
+        }
+        else {
+          interaction_container.append(like,dislike, comment, challenge)
+        }
         
 
-    })
+
+
+
+        userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+        highlightText(title, searchResult);
+        all_posts.append(userPost);
+    }   
+        
+        
+    query_counter_display.textContent = query_counter;
+    });
 }
 
 

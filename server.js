@@ -80,6 +80,20 @@ app.get("/createpost", (req,res)=> {
     
 });
 
+app.get("/searchresults", (req,res)=> {
+
+    res.sendFile(__dirname + "/html/searchresults.html");
+    
+});
+
+
+//dummy route, you can change the hbs file this leads to
+app.get("/profile", isAuthenticated, (req, res) =>{
+
+    res.sendFile(__dirname + "/html/userprofile.html");
+
+});
+
 app.get("/userpost", isAuthenticated, (req, res) =>{
 
     res.sendFile(__dirname + "/html/userpost.html");
@@ -92,14 +106,6 @@ app.get("/userprofile", isAuthenticated, (req, res) =>{
     
 });
 
-//variable to store the user to be loaded's data
-let loadedUser;
-
-//dynamically loading userprofiles
-app.get("/userprofile/:user", async (req, res) => {
-  loadedUser = await User.findOne({username: req.params.user})
-  res.sendFile(__dirname+"/html/userpage.html")
-});
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/myapp")
@@ -209,9 +215,6 @@ app.get("/user-login", (req, res) => {
 
 });
 
-app.get("/user-page", (req,res)=>{
-  res.json({user: loadedUser});
-});
 
 // ------ ------ User backend ------ ------
 app.post("/registerUser", async (req, res) => {
@@ -633,6 +636,19 @@ app.get("/posts/:page", async (req, res) => {
 });
 
 
+app.get("/posts", async (req, res) => {
+
+
+  try {
+    const Posts = await Post.find();
+    res.json(Posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
 app.get("/replies/:postId/:page", async (req, res) => {
   const page = parseInt(req.params.page);
   const postId = req.params.postId;
@@ -660,7 +676,6 @@ app.get("/replies/:postId", async (req, res) => {
   res.json(replies);
 
 });
-
 app.get("/post/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
