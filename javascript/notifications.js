@@ -571,30 +571,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const resultResponse = await fetch(`/challenge-notifications-result/${challengeResultContainer.id}`); // Fetch from route
         const resultInfo = await resultResponse.json() // Convert to object
 
-        // Add these to check what's coming back
-        console.log("resultInfo:", resultInfo);
-        console.log("isTie:", resultInfo.isTie);
-        console.log("wasRejected:", resultInfo.wasRejected);
-        console.log("winner_username:", resultInfo.winner_username);
-        console.log("info.user.username:", info.user.username);
-
         let updatedLikes = userCurrentLikes;
 
-        if(resultInfo.isTie === true || resultInfo.wasRejected === true){
-
-            console.log("REFUND");
+        if(resultInfo.isTie === true || resultInfo.wasRejected === true)
             updatedLikes = userCurrentLikes + resultInfo.challenger_bet_likes;
-
-        }
-        else if(resultInfo.winner_username === info.user.username){
-
-            console.log("NO!");
+        else if(resultInfo.winner_username === info.user.username);
             updatedLikes = userCurrentLikes + resultInfo.challenged_bet_likes + resultInfo.challenger_bet_likes;
-
-        }
-
-        
-        console.log("WTF!");    
 
         // Update like container in header to show result of accepting and update database likes aswell
         userCurrentLikesContainer.textContent = updatedLikes;
@@ -637,5 +619,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     window.loadChallengeNotifications = loadChallengeNotifications;
     window.loadChallengeResultNotifications = loadChallengeResultNotifications;
     window.notificationButtonDisplay = notificationButtonDisplay;
+
 
 });
