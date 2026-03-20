@@ -446,6 +446,16 @@ header .challenge_notification{
 }
 
 
+header .challenge_results_notification{
+
+    background-color: #1A1D1A;
+    border-left: 4px solid orange;
+
+    margin-bottom: 20px;
+
+}
+
+
 header .accept_deny_container{
 
     display: flex;
@@ -460,7 +470,7 @@ header .accept_deny_container{
 }
 
 
-header .accept_challenge, header .deny_challenge{
+header .accept_challenge, header .deny_challenge, header .accept_result{
 
     display: flex;
     justify-content: center;
@@ -518,4 +528,64 @@ header .roll_likes_container p{
 
 }
 
+header .results_display_container{
 
+    display: flex;
+    align-items: center;
+
+    margin-left: 10px;
+
+}
+
+header .results_alert_container{
+
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 10px;
+
+}
+
+header .results_alert_container p {
+
+    margin: 0px;
+    margin-top: 10px;
+
+}
+
+
+header .results_name{
+
+    width: 185px;
+
+    color: white;
+    font-weight: 700;
+
+    gap: 5px;
+
+}
+
+header .results_alert{
+
+    width: 250px;
+
+    color: coral;
+    font-weight: 500;
+
+}
+
+header .number_result, header .number_result_betlikes{
+
+    color: salmon;
+    font-weight: 700;
+
+
+}
+
+header .number_result i, header .number_result_betlikes i{
+
+    color: white;
+
+    padding-right: 5px;
+
+}
