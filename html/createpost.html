@@ -1,5 +1,18 @@
 <html>
+
     <head>
+
+        <title> Blevvit </title>
+
+        <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
+        
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
         <!-- Link CSS File for create post css design-->
         <link href="../css/createpost_style.css" rel="stylesheet"/>
@@ -20,7 +33,12 @@
         <!-- Link JS File for logins -->
         <script src = "../javascript/log_reg_header.js"></script>
 
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/notifications.js"></script>
+
+
     </head>
+
     <body>
 
         
@@ -45,7 +63,7 @@
                 <!-- Like Container for showing current likes user has -->
                 <div class = "likes_container">
                     <i class="fa-regular fa-thumbs-up fa-xl"></i>
-                    <p class = "like_amount">25</p>
+                    <p class = "like_amount"></p>
                 </div>
 
                 <!-- Notification Container for challenge notifications from other users -->
@@ -57,59 +75,7 @@
                         <p class = "notifications_header"> Notifications </p>
 
                         <div class = "notification_content_container">
-
-                            <div class = "challenge_notification">
-
-
-                                <div class = "icon_name_challenge_container">
-
-                                    <img src = "../resources/users/discordmod.jpg">
-                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
-
-                                </div>
-
-
-                                <div class = "roll_likes_container">
-
-                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  15 </p>
-                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 25 </p>
-
-                                </div>
-
-                                <div class = "accept_deny_container">
-
-                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
-                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
-
-                                </div>
-
-                            </div>
-
-                            <div class = "challenge_notification">
-
-
-                                <div class = "icon_name_challenge_container">
-
-                                    <img src = "../resources/users/discordmod.jpg">
-                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
-
-                                </div>
-
-                                <div class = "roll_likes_container">
-
-                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  12 </p>
-                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 18 </p>
-
-                                </div>
-
-                                <div class = "accept_deny_container">
-
-                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
-                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
-
-                                </div>
-
-                            </div>                            
+                  
                         </div>
 
                     </div>

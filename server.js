@@ -164,12 +164,39 @@ const replySchema = new mongoose.Schema({
   
 });
 
+// New challenge notification schema
+const challengeNotificationSchema = new mongoose.Schema({
+
+    challenger_username: String,
+    challenger_id: String,
+    challenger_roll: Number,
+    challenger_betlikes: Number,
+    challenged_username: String
+
+});
+
+const challlengeNotificationResultSchema = new mongoose.Schema({
+
+    wasRejected: Boolean,
+    isTie: Boolean,
+    winner_username: String,
+    loser_username: String,
+    winner_roll: Number,
+    loser_roll: Number,
+    challenger_bet_likes: Number,
+    challenged_bet_likes: Number,
+    challenged_id: String,
+    notification_receiver: String,
+
+
+});
 
 //Models
 const Post = mongoose.model("Post", postSchema);
 const User = mongoose.model("User", userSchema);
 const Reply = mongoose.model("Reply", replySchema);
-
+const ChallengeNotif = mongoose.model("ChallengeNotif", challengeNotificationSchema);
+const ResultNotif = mongoose.model("ResultNotif", challlengeNotificationResultSchema);
 
 // ------------- Obtain Login Info ---------------
 app.get("/user-login", (req, res) => {
@@ -819,6 +846,155 @@ app.get("/delete-all-rep", async (req, res) => {
 
 
 
+// ------ ------ Challenge Notification backend ------ ------
+
+// CREATE
+app.post("/add-challenge", async (req, res) => {
+
+    try{
+
+        const {challenger_username, challenger_id, challenger_roll, challenger_betlikes, challenged_username} = req.body;
+
+        const newChallengeNotification = new ChallengeNotif({ 
+            challenger_username, 
+            challenger_id,
+            challenger_roll, 
+            challenger_betlikes, 
+            challenged_username
+        });
+
+        await newChallengeNotification.save();
+        
+        res.json({ message: "Challenge Notification added"});
+
+    }catch(err){
+
+        res.status(500).json({ error: err.message }); // Send error of ADD request
+
+    }
+
+});
+
+
+app.get("/challenge-notifications", async (req, res) => {
+
+    try {
+
+        const replies = await ChallengeNotif.find({challenged_username: req.session.user.username})
+        
+        res.json(replies);
+
+    } catch (err) {
+
+        res.status(500).json({ error: err.message }); // Send error of GET request
+
+    }
+
+
+});
+
+
+app.delete("/challenge-notifications/:id", async (req, res) => {
+
+    try {
+
+        await ChallengeNotif.findByIdAndDelete(req.params.id);        
+    
+        res.json({ message: "Challenge Notification Deleted" });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+
+});
+
+
+// ------ ------ Challenge Result Backend ------ ------
+
+
+// CREATE
+app.post("/add-challenge-result", async (req, res) => {
+
+    try{
+
+        const {wasRejected, isTie, winner_username, loser_username, winner_roll, loser_roll, challenger_bet_likes, challenged_bet_likes, challenged_id, notification_receiver} = req.body;
+
+        const newChallengeNotificationResult = new ResultNotif({ 
+            wasRejected, 
+            isTie,
+            winner_username,
+            loser_username, 
+            winner_roll, 
+            loser_roll,
+            challenger_bet_likes,
+            challenged_bet_likes,
+            challenged_id,
+            notification_receiver
+        });
+
+        await newChallengeNotificationResult.save();
+        
+        res.json({ message: "Challenge Notification Result added"});
+
+    }catch(err){
+
+        res.status(500).json({ error: err.message }); // Send error of ADD request
+
+    }
+
+});
+
+
+app.get("/challenge-notifications-result", async (req, res) => {
+
+    try {
+
+        const results = await ResultNotif.find({notification_receiver: req.session.user.username})
+        
+        res.json(results);
+
+    } catch (err) {
+
+        res.status(500).json({ error: err.message }); // Send error of GET request
+
+    }
+
+
+});
+
+
+app.get("/challenge-notifications-result/:id", async (req, res) => {
+
+    try {
+
+        const result = await ResultNotif.findById(req.params.id);        
+    
+        res.json(result);
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+
+
+});
+
+
+app.delete("/challenge-notifications-result/:id", async (req, res) => {
+
+    try {
+
+        await ResultNotif.findByIdAndDelete(req.params.id);        
+    
+        res.json({ message: "Challenge Notification Result Deleted" });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+
+});
+
+
+
 
 // NEW: User Updating route
 app.put("/user-update", async (req, res) => {
@@ -845,12 +1021,14 @@ app.put("/user-update", async (req, res) => {
             updatedInfo.likes = newLikes;
         }
 
+        // Check if requested profile has data or not
         if(newProfile !== undefined){
 
             req.session.user.profile = newProfile;
             updatedInfo.profile = newProfile;
         }
 
+        // Check if requested banner has data or not
         if(newBanner !== undefined){
 
           req.session.user.banner = newBanner;

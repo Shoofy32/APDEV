@@ -1,10 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     var response;
     var info;
+
     (async () => {
         response = await fetch("/user-login"); // Fetch from route
         info = await response.json() // Convert to object
     })();
+
     const page_url = window.location.href;
     const index = page_url.indexOf("page=");
     const raw_page = index !== -1 ? page_url.substring(index + 5).split("&")[0] : "";
@@ -28,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const all_posts = document.getElementsByClassName("all_posts")[0];
     const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
     const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
+
+    let challengedUser;
  
     // Check if userpost to avoid loading backend in forum page
     if((!window.location.pathname.endsWith("forum.html")) && (!window.location.pathname.endsWith("homepage.html") 
@@ -66,8 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
             updateCounter(likeButton, likeButton.closest(".counter_container").parentElement);
         else if(dislikeButton)
             updateCounter(dislikeButton, dislikeButton.closest(".counter_container").parentElement);
-        else if(challengeButton)
+        else if(challengeButton){
+
+            challengedUser = post_reply.getElementsByClassName("name_post")[0].textContent;
             openChallenge();
+
+        }
+
         else if(editButton)
            editDescription(editButton);
         else if(deleteButton)
@@ -233,22 +243,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Obtain the Roll 20 Number and the Result Text Elements
         var displayResultNumberElement = document.getElementsByClassName("roll_20_number")[0];
+  
         var displayResultElement = document.getElementsByClassName("result")[0];
 
-        // Obtain ClassList, and Toggle or Untoggle if it Contains "open" or not.
-        if(!challengeElement.classList.contains("open"))
-            challengeElement.classList.add("open");
-        else{
+        // Empty the Roll 20 Number and Result Text Elements When Closing
+        displayResultNumberElement.textContent = "";
+        displayResultElement.textContent = "Result";
 
-            challengeElement.classList.remove("open");
-
-            // Empty the Roll 20 Number and Result Text Elements When Closing
-            displayResultNumberElement.textContent = "";
-            displayResultElement.textContent = "Result";
-
-        }
-
-
+        
+        challengeElement.classList.toggle("open");
 
     }
 
@@ -312,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Checks if the roll was for challenging a user (false) or for being challenged (true)
             if(isRollForChallengingUser)
-                createChallengeNotification(roll, likesValue) // Call function to create the challenge for the user who was challenged.
+                createChallengeNotification(challengedUser, roll, likesValue) // Call function to create the challenge for the user who was challenged.
 
 
             // Update displayResultElement with Final Value
@@ -437,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Function creates the reply after pressing the enter button on the reply container
-  window.uploadReply = function uploadReply(divElement){
+    window.uploadReply = function uploadReply(divElement){
     console.log("replyPostId:", replyPostId)
 
     const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
