@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
     const currentLikes = document.getElementsByClassName("likes_counter")[0];
-
+    const currentWins = document.getElementsByClassName("side_challenge_wins_counter")[0];
+    const currentLosses = document.getElementsByClassName("side_challenge_losses_counter")[0];
+    const currentTies = document.getElementsByClassName("side_challenge_ties_counter")[0];
 
     // Elements of User Profile that can be edited
     const userPfp = document.getElementsByClassName("pfp")[0]; // Pfp image
@@ -49,6 +51,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentLikes.textContent = info.user.likes;
     userBio.textContent = info.user.bio;
     userPfp.src = info.user.profile;
+    userBanner.src = info.user.banner;
+    currentWins.textContent = info.user.wins;
+    currentLosses.textContent = info.user.losses;
+    currentTies.textContent = info.user.ties;
 
     // Add classList to post container to show posts when userpage is first loaded
     allPostsContainer.classList.toggle("display_visible");

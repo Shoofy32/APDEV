@@ -155,6 +155,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    async function updateBanner(image){
+
+        await fetch("/user-update",{
+
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ newBanner: image })
+        });
+    }
+    
     async function addChallengeNotification(challenger_roll, challenger_betlikes, challenged_username){
 
         await fetch("/add-challenge", {
@@ -224,9 +234,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.updateLikes = updateLikes;
     window.updateBio = updateBio;
     window.updateProfile = updateProfile;
+    window.updateBanner = updateBanner;
     window.addChallengeNotification = addChallengeNotification;
     window.removeChallengeNotification = removeChallengeNotification;
     window.addChallengeNotificationResult = addChallengeNotificationResult;
     window.removeChallengeNotificationResult = removeChallengeNotificationResult;
-
+    
 });
