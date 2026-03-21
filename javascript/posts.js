@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
  
     // Check if userpost to avoid loading backend in forum page
-    if((!window.location.pathname.endsWith("forum.html")) && (!window.location.pathname.endsWith("homepage.html") 
-        && !window.location.pathname.endsWith("userprofile.html"))){
+    if((window.location.href.includes("userpost"))){
 
     
     (async () => {
@@ -139,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         If isClicked is true = Decrement counter and update color of button to white
         Also checks if the other button has been clicked to prevent both like and dislike being active
         */
-        if(isClicked == false && otherButtonClicked == false){
+        if(isClicked == false && otherButtonClicked == false && info.userLoggedIn){
 
             countValue++;
             buttonElement.dataset.clicked = "true"; // Switch clicked data- to true
@@ -151,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateUserLikedPosts(info.user._id, parentPost.id)
                     updatePostLikes(parentPost.id, 1)
                     updateUserLikesPost(parentPost.id,1)
-                    console.log(info.user.liked_posts_id)
                     
                 }
 
@@ -180,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
            
 
         }
-        else if(isClicked == true && otherButtonClicked == false){
+        else if(isClicked == true && otherButtonClicked == false && info.userLoggedIn){
 
             countValue--;
             buttonElement.dataset.clicked = "false"; // Switch clicked data- to false
