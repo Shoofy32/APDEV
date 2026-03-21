@@ -41,6 +41,10 @@
             }) %>;
             const profileUser = <%- JSON.stringify(profileUser) %>;
         </script>
+
+        <!-- Link JS File for routes interaction -->
+        <script type = "module" src = "../javascript/routes.js"></script>
+
         <!-- Link JS File for sidebar interaction -->
         <script src = "../javascript/sidebar.js"></script>
 
@@ -99,59 +103,7 @@
                         <p class = "notifications_header"> Notifications </p>
 
                         <div class = "notification_content_container">
-
-                            <div class = "challenge_notification">
-
-
-                                <div class = "icon_name_challenge_container">
-
-                                    <img src = "../resources/users/discordmod.jpg">
-                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
-
-                                </div>
-
-
-                                <div class = "roll_likes_container">
-
-                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  15 </p>
-                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 25 </p>
-
-                                </div>
-
-                                <div class = "accept_deny_container">
-
-                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
-                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
-
-                                </div>
-
-                            </div>
-
-                            <div class = "challenge_notification">
-
-
-                                <div class = "icon_name_challenge_container">
-
-                                    <img src = "../resources/users/discordmod.jpg">
-                                    <p><span class = "challenger_name">CCS_GodXX</span> has challenged you! </p>
-
-                                </div>
-
-                                <div class = "roll_likes_container">
-
-                                    <p class = "notification_challenger_roll"><i class="fa-solid fa-dice-d20 fa-lg"></i>  12 </p>
-                                    <p class = "notification_challenger_likes"><i class="fa-solid fa-thumbs-up fa-lg"></i> 18 </p>
-
-                                </div>
-
-                                <div class = "accept_deny_container">
-
-                                    <button class = "accept_challenge"><i class="fa-solid fa-circle-check fa-lg"></i></button>
-                                    <button class = "deny_challenge"><i class="fa-solid fa-circle-xmark fa-lg"></i></button>
-
-                                </div>
-
-                            </div>                            
+                     
                         </div>
 
                     </div>
@@ -372,137 +324,16 @@
 
                     <button class = "all_reply_button">Replies</button>
 
-                    <button class = "all_notifications_button">Notifications</button>
                 </div>
 
                 <!-- Store for all post replies -->
                 <div class  = "all_posts">
                             
-                    <div id = "" class = "post">
-
-                        <div class = "icon_name_date_post">
-                            <img src = "../resources/users/discordmod.jpg">
-                            <h5 class = "name_post">CCS_GodXX</h5>
-                            <p class = "date_post">3/15/2026</p>
-                        </div>
-
-                        <h3 class = "title_post">Tests</h3>
-
-                        <div class = "tags_post">
-                            <p class = "tag">Technology</p>
-                        </div>
-
-                        <p class = "description_short_post">Teast body</p>
-
-                        <div class = "stats_post">
-
-                            <div class = "counter_container">
-                                <i class = "fa-regular fa-thumbs-up"></i>
-                                <p class = "like_counter">0</p>
-                            </div>
-
-                            <div class = "counter_container">
-                                <i class = "fa-regular fa-thumbs-down"></i>
-                                <p class = "like_counter">0</p>
-                            </div>
-
-                            <div class = "challenge_button">
-                                <i class = "fa-solid fa-bullseye"></i>
-                                <p class = "challenge_text">Challenge</p>
-                            </div>
-
-                            <div class = "delete_edit_container">
-                                <button class = "delete_button">
-                                    <i class = "fa-regular fa-trash-can"></i>
-                                    <h4>Delete</h4>
-                                </button>
-                                <button class = "edit_button">
-                                    <i class = "fa-solid fa-pen-to-square"></i>
-                                    <h4>Edit</h4>
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
 
                 </div>
 
                 <!-- Store for all user replies -->
                 <div class = "all_replies">
-
-                    <div id = "" class = "reply">
-
-                        <div class = "icon_name_date_post">
-
-                            <img src = "../resources/users/discordmod.jpg">
-                            <p class = "name_post">CCS_GodXX</p>
-                            <p class = "date_post">3/16/2026</p>
-
-                        </div>
-
-                        <div class = "post_contents">
-
-                            <div class = "replying_to_container">
-
-                                <span class="user_repliedto">TheRedactedDude said:</span><br><br>
-                                <p>adddd <strong>(edited)</strong></p>
-
-                            </div>
-
-                            <p class = "description_short_post">Save<strong>(edited)</strong></p>
-
-                        </div>
-
-                        <div class = "stats_post">
-
-                            <div class = "counter_container">
-
-                                <i class = "fa-regular fa-thumbs-up"></i>
-                                <p class = "like_counter">0</p>
-
-                            </div>
-
-                            <div class = "counter_container">
-
-                                <i class = "fa-regular fa-thumbs-down"></i>
-                                <p class = "like_counter"> 0 </p>
-                                
-
-                            </div>
-
-                            <div class="challenge_button">
-
-                                <i class = "fa-solid fa-bullseye"></i>
-                                <p class = "challenge_text">Challenge</p>
-
-                            </div>
-
-                            <div class = "delete_edit_container">
-
-                                <button class = "delete_button">
-
-                                    <i class = "fa-regular fa-trash-can"></i>
-                                    <h4>Delete</h4>
-
-                                </button>
-
-                                <button class = "edit_button">
-
-                                    <i class = "fa-solid fa-pen-to-square"></i>
-                                    <h4>Edit</h4>
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Store for all user notifications -->
-                <div class = "all_notifications">
 
                 </div>
 

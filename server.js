@@ -535,8 +535,6 @@ app.put("/user/likes/:id", async (req, res) => {
   }
 });
 
-
-
 //Find user by ID
 app.get("/user/:id", async (req, res) => {
   try {
@@ -547,33 +545,12 @@ app.get("/user/:id", async (req, res) => {
   }
 });
 
-
-
-
-//hashing function for passwords
-function hash(password) {
-  const hash = crypto.createHash('sha256');
-  hash.update(password);
-  return hash.digest('hex');
-}
-
-//log out route
-app.get("/logout", (req,res)=>{
-
-    req.session.destroy(() =>{
-    res.clearCookie("sessionId");
-    // Changes so that it will redirect user to the page where they logged out. Also added /login if redirect fails
-    res.redirect(req.headers.referer || "/login"); 
-
-  });
-
-})
-
+// Route updates the user information based on what is passed
 app.put("/user-update", async (req, res) => {
 
     try {
         
-        const {newBio, newLikes, newProfile, newBanner} = req.body;
+        const {newBio, newLikes, newProfile, newBanner, newWins, newLosses, newTies} = req.body;
         const username = req.session.user.username;
 
         let updatedInfo = {};
@@ -607,6 +584,34 @@ app.put("/user-update", async (req, res) => {
           updatedInfo.banner = newBanner;
         }
 
+
+        // Check if requested wins has data or not
+        if(newWins !== undefined){
+
+            req.session.user.wins = newWins;
+            updatedInfo.wins = newWins;
+
+        }
+
+
+        // Check if requested losses has data or not
+        if(newLosses !== undefined){
+
+            req.session.user.losses = newLosses;
+            updatedInfo.losses = newLosses;
+
+        }
+
+
+        // Check if requested ties has data or not
+        if(newTies !== undefined){
+
+            req.session.user.ties = newTies;
+            updatedInfo.ties = newTies;
+
+        }
+
+
         // Find user in database and update likes
         await User.findOneAndUpdate(
             
@@ -633,6 +638,70 @@ app.put("/user-update", async (req, res) => {
 
 
 });
+
+// Route updates the chosen user information with the given id
+app.put("/user-update/:id", async (req, res) => {
+
+    try {
+        
+        const {newWins, newLosses, newTies} = req.body;
+        const userID = req.params.id;
+
+        let updatedInfo = {};
+
+        // Check if requested wins has data or not
+        if(newWins !== undefined)
+            updatedInfo.wins = newWins;
+
+        // Check if requested losses has data or not
+        if(newLosses !== undefined)
+            updatedInfo.losses = newLosses;
+
+        // Check if requested ties has data or not
+        if(newTies !== undefined)
+            updatedInfo.ties = newTies;
+
+        // Find user in database via id and update likes
+        await User.findByIdAndUpdate( userID, {$set: updatedInfo});
+
+        // Force immideiate save of data
+        req.session.save((err) => {
+
+            if (err) 
+                res.status(500).json({ error: err.message });
+            else
+                res.json({ message: "Successful Update"});
+
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ error: err.message }); // Send error of PUT request
+
+    }
+
+
+});
+
+
+//hashing function for passwords
+function hash(password) {
+  const hash = crypto.createHash('sha256');
+  hash.update(password);
+  return hash.digest('hex');
+}
+
+//log out route
+app.get("/logout", (req,res)=>{
+
+    req.session.destroy(() =>{
+    res.clearCookie("sessionId");
+    // Changes so that it will redirect user to the page where they logged out. Also added /login if redirect fails
+    res.redirect(req.headers.referer || "/login"); 
+
+  });
+
+})
 
 
 // ------ ------ Post backend ------ ------s
@@ -927,9 +996,9 @@ app.get("/delete-all-rep", async (req, res) => {
 
 
 
-// ------ ------ Challenge Notification backend ------ ------
+// ------------- Challenge Notification backend ------------- //
 
-// CREATE
+// Route creates the challenge notification information inside of the database
 app.post("/add-challenge", async (req, res) => {
 
     try{
@@ -956,7 +1025,7 @@ app.post("/add-challenge", async (req, res) => {
 
 });
 
-
+// Route gets the challenge notification information based on the current logged in user
 app.get("/challenge-notifications", async (req, res) => {
 
     try {
@@ -974,7 +1043,23 @@ app.get("/challenge-notifications", async (req, res) => {
 
 });
 
+// Route gets the challenge notification information via an id
+app.get("/challenge-notifications/:id", async (req, res) => {
 
+    try {
+
+        const result = await ChallengeNotif.findById(req.params.id);        
+    
+        res.json(result);
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+
+
+});
+
+// Route deletes the challenge notification information via an id
 app.delete("/challenge-notifications/:id", async (req, res) => {
 
     try {
@@ -990,10 +1075,9 @@ app.delete("/challenge-notifications/:id", async (req, res) => {
 });
 
 
-// ------ ------ Challenge Result Backend ------ ------
+// ------------- Challenge Result Backend ------------- //
 
-
-// CREATE
+// Route creates the challenge result information inside of the database
 app.post("/add-challenge-result", async (req, res) => {
 
     try{
@@ -1025,7 +1109,7 @@ app.post("/add-challenge-result", async (req, res) => {
 
 });
 
-
+// Route gets the challenge results based on the current logged in user
 app.get("/challenge-notifications-result", async (req, res) => {
 
     try {
@@ -1043,7 +1127,7 @@ app.get("/challenge-notifications-result", async (req, res) => {
 
 });
 
-
+// Route gets the challenge result information via an id
 app.get("/challenge-notifications-result/:id", async (req, res) => {
 
     try {
@@ -1059,7 +1143,7 @@ app.get("/challenge-notifications-result/:id", async (req, res) => {
 
 });
 
-
+// Route deletes the challenge result information via an id
 app.delete("/challenge-notifications-result/:id", async (req, res) => {
 
     try {
@@ -1073,6 +1157,9 @@ app.delete("/challenge-notifications-result/:id", async (req, res) => {
     }
 
 });
+
+
+
 
 app.listen(3000, () => {
 

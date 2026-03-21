@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Elements of User Profile that will be loaded via session
     const username = document.getElementsByClassName("name")[0].getElementsByClassName("username")[0];
     const currentLikes = document.getElementsByClassName("likes_counter")[0];
+    const currentNumberOfPosts = document.getElementsByClassName("posts_counter")[0];
+    const currentMainDisplayWins = document.getElementsByClassName("challenge_wins_counter")[0];
     const currentWins = document.getElementsByClassName("side_challenge_wins_counter")[0];
     const currentLosses = document.getElementsByClassName("side_challenge_losses_counter")[0];
     const currentTies = document.getElementsByClassName("side_challenge_ties_counter")[0];
@@ -15,9 +17,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const userPfp = document.getElementsByClassName("pfp")[0]; // Pfp image
     const userBanner = document.getElementsByClassName("banner_image")[0]; // User banner image
     const userBio = document.getElementsByClassName("bio")[0]; // User bio
-
-    // Profile Challenge bet button
-    const profileBetChallengeButton = document.getElementsByClassName("challenge_profile_button")[0]; 
 
     // Elements for editing profile
     const editProfileButton = document.getElementsByClassName("edit_profile_button")[0]; // Open edit profile button
@@ -53,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         userBio.textContent = info.user.bio;
         userPfp.src = info.user.profile;
         userBanner.src = info.user.banner;
+        currentMainDisplayWins.textContent = info.user.wins;
         currentWins.textContent = info.user.wins;
         currentLosses.textContent = info.user.losses;
         currentTies.textContent = info.user.ties;
@@ -83,9 +83,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         editProfileContainer.classList.toggle("edit_profile_show");
 
     });
-
-    //Add event listener to open challenge when clicked
-    profileBetChallengeButton.addEventListener("click", openChallenge);
 
 
     // Add event listener when a file is uploaded, changing the user banner to the uploaded image
@@ -209,6 +206,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     })
 
+        
+
+
 
     // Custon event listener for user profile to load notifications again, whenever challenge in header notifications were updates
     document.addEventListener("updateUserProfileNotifications", () => {
@@ -220,6 +220,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 
+
+    // Add event listener on all notification container for event delegating
+    allNotificationsContainer.addEventListener("click", (event) => {
+
+        // Targets the closest elements based on where you clicked
+        const acceptChallengeButton = event.target.closest(".accept_challenge"); // Accept challenge button
+        const denyChallengeButton = event.target.closest(".deny_challenge"); // Deny challenge button
+        const acceptResultButton = event.target.closest(".accept_result");
+
+        // If conditions check for which button was clicked and calls the function corresponding to that button
+        if(acceptChallengeButton){
+
+            console.log("EAFAEF");
+            acceptUserChallenge(event);
+
+        }
+
+        else if(denyChallengeButton)
+            rejectChallengeNotification(event.target.closest(".deny_challenge")); // Get the closest deny_challenge associated with the click
+        else if(acceptResultButton)
+            getChallengeResultAndClose(acceptResultButton);
+
+
+        notificationButtonDisplay(); // Call function to display ! or not beside bell icon
+
+    });
 
 
     // -- USERPROFILE LOADING FUNCTIONS -- //
@@ -403,7 +429,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
 
             allPostsContainer.append(post_container)
+
+            postCount++;
+            
         });
+
+        // Temp addition to show number of posts
+        currentNumberOfPosts.textContent = posts.length;
+
+
     }
 
     // Function loads the replies of the user to be displayed in the container
@@ -590,6 +624,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             allRepliesContainer.append(userPost)
             
         });
+
+
     }
 
     // Function loads the notifications of the user to be displayed in the container
@@ -600,25 +636,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Update by copying the innerHTML of the container passed with notificationContentContainer
         container.innerHTML = notificationContentContainer.innerHTML;
-
-        // Add event listener on container for event delegating
-        container.addEventListener("click", async (event) => {
-
-            // Targets the closest elements based on where you clicked
-            const acceptChallengeButton = event.target.closest(".accept_challenge"); // Accept challenge button
-            const denyChallengeButton = event.target.closest(".deny_challenge"); // Deny challenge button
-
-
-            // If conditions check for which button was clicked. Afterwards, update the header notifications
-            if(acceptChallengeButton)
-                await acceptUserChallenge(event); // Use await to complete the challenge before proceeding to updating 
-            else if(denyChallengeButton){}
-                closeUserChallenge(event.target.closest(".deny_challenge")); // Get the closest deny_challenge associated with the click
-
-            // Update header notifications once process is complete
-            updateHeaderNotifications(event.target.closest(".challenge_notification"))
-
-        });
 
     }
 
