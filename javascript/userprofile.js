@@ -429,8 +429,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
 
             allPostsContainer.append(post_container)
-
-            postCount++;
             
         });
 
