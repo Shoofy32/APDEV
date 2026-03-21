@@ -10,7 +10,7 @@ window.onload = function(){
     localStorage.removeItem("filter_result");
 
     // If opened page is saerchresults.html, show the results of the searchbar
-    if(window.location.pathname.includes("searchresults.html"))
+    if(window.location.href.includes("searchresults"))
         showSearchResults();
 
 }
