@@ -91,24 +91,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Obtain the uploaded image
         const uploadedImage = event.target.files[0];
 
+        //constant representing 12mb image file size limit
+        const maxSize = 7 * 1024 * 1024;
+
         // Check if image exists, if it does replace current banner with new image
-        if(uploadedImage){
+         if(uploadedImage && uploadedImage.size < maxSize){
 
             const reader = new FileReader(); // Create a new file reader to read the uploaded image
 
             // Convert read file to a Base-64 encoded string to use for src
             reader.readAsDataURL(uploadedImage);
 
-            // Event handler when reader finishes reading the file to reaplce banner with the read file
-            reader.onload = (function(e){
+            console.log(reader.result);
 
-                // Replace src with the result of the reading (src of image)
-                editBannerImage.src = reader.result;
-                userBanner.src = reader.result;
+            // Event handler when reader finishes reading the file to reaplce pfp image with the read file
+            reader.onload = (async function(e){
+
+                // Update db with new profile picture
+                await updateBanner(reader.result);
 
             })
-
+            location.reload();
         }
+        else{
+            alert("Image should be less than 7mb!");
+        }
+
 
     });
 
@@ -119,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const uploadedImage = event.target.files[0];
 
         //constant representing 12mb image file size limit
-        const maxSize = 12 * 1024 * 1024;
+        const maxSize = 5 * 1024 * 1024;
 
         // Check if image exists and is less than 12mb then convert it to base64 String and update the db entry
         if(uploadedImage && uploadedImage.size < maxSize){
@@ -141,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             location.reload();
         }
         else{
-            alert("Image should be less than 12mb!");
+            alert("Image should be less than 5mb!");
         }
 
     });
