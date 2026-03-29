@@ -1086,11 +1086,11 @@ app.delete("/challenge-notifications-result/:id", async (req, res) => {
 });
 
 
+var port = process.env.PORT || 3000
 
+app.listen(port, () => {
 
-app.listen(3000 || process.env.PORT, () => {
-
-    console.log("Server running on port 3000 or " + process.env.PORT);
+    console.log("Server running");
     
 });
 
