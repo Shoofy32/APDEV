@@ -70,7 +70,7 @@ async function addPost() {
     const total_comments = 0
     const poster_id = info.user._id
     alert(poster_id)
-    const response = await fetch("http://localhost:3000/add-post", {
+    const response = await fetch("https://blevvit.onrender.com/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})

@@ -55,7 +55,7 @@ function showDropdownContent(divElement){
 async function loadPosts(page = 1) {
 
 
-    const response = await fetch(`http://localhost:3000/posts/${page}`);
+    const response = await fetch(`https://blevvit.onrender.com/posts/${page}`);
     const posts = await response.json();
 
     const all_posts = document.querySelector(".all_posts");
@@ -63,7 +63,7 @@ async function loadPosts(page = 1) {
     posts.forEach(async post => {
         
         //Get user information
-        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
         const user = await user_info.json();
         
         const userPost = document.createElement("div");
@@ -211,14 +211,14 @@ async function loadPosts(page = 1) {
 
 async function deletePost(id) {
 
-  await fetch(`http://localhost:3000/post/${id}`, {
+  await fetch(`https://blevvit.onrender.com/post/${id}`, {
     method: "DELETE"
   });
 
 }
 
 async function updatePost(id, post_content, is_edited) {
-  await fetch(`http://localhost:3000/post/${id}`, {
+  await fetch(`https://blevvit.onrender.com/post/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ post_content, is_edited})
@@ -226,7 +226,7 @@ async function updatePost(id, post_content, is_edited) {
 }
 
 async function updatePostLikes(id, increment) {
-  await fetch(`http://localhost:3000/post/${id}/likes`, {
+  await fetch(`https://blevvit.onrender.com/post/${id}/likes`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
@@ -234,7 +234,7 @@ async function updatePostLikes(id, increment) {
 }
 
 async function updatePostDislikes(id, increment) {
-  await fetch(`http://localhost:3000/post/${id}/dislikes`, {
+  await fetch(`https://blevvit.onrender.com/post/${id}/dislikes`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
@@ -242,7 +242,7 @@ async function updatePostDislikes(id, increment) {
 }
 
 async function updateTotalComments(id, increment) {
-  await fetch(`http://localhost:3000/post/${id}/total_comments`, {
+  await fetch(`https://blevvit.onrender.com/post/${id}/total_comments`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
@@ -288,7 +288,7 @@ async function removeUserDislikedPosts(userId, postId) {
 
 async function updateUserLikesPost(id, increment) {
 
-  const response = await fetch(`http://localhost:3000/post/${id}`);
+  const response = await fetch(`https://blevvit.onrender.com/post/${id}`);
   const post = await response.json()
   const user_id = post.poster_id
 

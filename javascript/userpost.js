@@ -26,11 +26,11 @@
     
     })
     async function loadPost(id) {
-      const response = await fetch(`http://localhost:3000/post/${id}`);
+      const response = await fetch(`https://blevvit.onrender.com/post/${id}`);
       const post = await response.json()
 
 
-      const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+      const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
       const user = await user_info.json();
       
       
@@ -215,7 +215,7 @@
     
     
 
-    await fetch("http://localhost:3000/add-reply", {
+    await fetch("https://blevvit.onrender.com/add-reply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username,replying_to, original_content, reply_content, unique_post_id })
@@ -224,7 +224,7 @@
 
 
     async function loadPosts(id, page=1) {
-    const response = await fetch(`http://localhost:3000/replies/${id}/${page}`);
+    const response = await fetch(`https://blevvit.onrender.com/replies/${id}/${page}`);
     const replies = await response.json();
     all_posts = document.getElementsByClassName('all_posts')[0]
     const authentication = await fetch("/user-login")
@@ -233,7 +233,7 @@
 
     
     replies.forEach(async reply => {
-        const user_info = await fetch(`http://localhost:3000/user/${reply.poster_id}`);
+        const user_info = await fetch(`https://blevvit.onrender.com/user/${reply.poster_id}`);
         const user = await user_info.json();
         console.log(user)
         
@@ -424,7 +424,7 @@
 
 async function deleteReply(id) {
  
-  await fetch(`http://localhost:3000/reply/${id}`, {
+  await fetch(`https://blevvit.onrender.com/reply/${id}`, {
     method: "DELETE"
   });
 
@@ -432,7 +432,7 @@ async function deleteReply(id) {
 
 async function addReply(username, replying_to, original_content, reply_content, unique_post_id, parent_reply_id, poster_id) {
   const date = new Date().toLocaleDateString();
-  await fetch("http://localhost:3000/add-reply", {
+  await fetch("https://blevvit.onrender.com/add-reply", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ 
@@ -456,7 +456,7 @@ async function addReply(username, replying_to, original_content, reply_content, 
 async function updateReply(id, reply_content, is_edited, original_content) {
    ;
 
-  await fetch(`http://localhost:3000/reply/${id}`, {
+  await fetch(`https://blevvit.onrender.com/reply/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ reply_content, is_edited, original_content})
@@ -465,7 +465,7 @@ async function updateReply(id, reply_content, is_edited, original_content) {
 }
 
 async function updateReplyLikes(id, increment) {
-  await fetch(`http://localhost:3000/reply/${id}/likes`, {
+  await fetch(`https://blevvit.onrender.com/reply/${id}/likes`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
@@ -473,7 +473,7 @@ async function updateReplyLikes(id, increment) {
 }
 
 async function updateReplyDislikes(id, increment) {
-  await fetch(`http://localhost:3000/reply/${id}/dislikes`, {
+  await fetch(`https://blevvit.onrender.com/reply/${id}/dislikes`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ increment })
