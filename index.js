@@ -115,12 +115,11 @@ app.get("/userprofile/:user", async (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/myapp")
+const uri = "mongodb://stefan:stefuser@ac-ttwdtop-shard-00-00.thjutfo.mongodb.net:27017,ac-ttwdtop-shard-00-01.thjutfo.mongodb.net:27017,ac-ttwdtop-shard-00-02.thjutfo.mongodb.net:27017/?ssl=true&replicaSet=atlas-8w3g7c-shard-0&authSource=admin&appName=Cluster0";
+
+mongoose.connect(uri)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
-
-
-
 
 // ------------- Obtain Login Info ---------------
 app.get("/user-login", (req, res) => {
@@ -1089,9 +1088,9 @@ app.delete("/challenge-notifications-result/:id", async (req, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(3000 || process.env.PORT, () => {
 
-    console.log("Server running on port 3000");
+    console.log("Server running on port 3000 or " + process.env.PORT);
     
 });
 
