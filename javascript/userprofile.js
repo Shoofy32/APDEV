@@ -109,9 +109,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Update db with new profile picture
                 await updateBanner(reader.result);
-                alert(reader.result)
+                location.reload();
             })
-            location.reload();
+            
         }
         else{
             alert("Image should be less than 7mb!");
@@ -144,10 +144,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Update db with new profile picture
                 await updateProfile(reader.result);
-                alert(reader.result)
-
+                location.reload();
             })
-            location.reload();
+            
         }
         else{
             alert("Image should be less than 5mb!");
