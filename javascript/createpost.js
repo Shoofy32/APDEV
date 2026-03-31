@@ -69,7 +69,7 @@ async function addPost() {
     const total_dislikes = 0
     const total_comments = 0
     const poster_id = info.user._id
-    alert(poster_id)
+    alert("Post made successfully!")
     const response = await fetch("https://blevvit.onrender.com/add-post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

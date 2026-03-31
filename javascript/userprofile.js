@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Update db with new profile picture
                 await updateBanner(reader.result);
-
+                alert(reader.result)
             })
             location.reload();
         }
@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Update db with new profile picture
                 await updateProfile(reader.result);
+                alert(reader.result)
 
             })
             location.reload();
