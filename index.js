@@ -25,6 +25,10 @@ app.use(
     secret: "secret-key",
     resave: false,
     saveUninitialized: false,
+    //setting cookie duration for three weeks
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 21
+    }
   })
 );
 
@@ -134,9 +138,9 @@ app.get("/user-login", (req, res) => {
 
 // ------ ------ User backend ------ ------
 app.post("/registerUser", async (req, res) => {
-    
-    try {
-        const { email, username, password } = req.body;
+    if(!req.cookies.user){
+      try {
+        const { email, username, password, remember } = req.body;
 
         const found = await User.findOne({ $or: [{ username: username }, { email: email }] });
 
@@ -178,6 +182,9 @@ app.post("/registerUser", async (req, res) => {
           };
           
           //saving session info
+          if (remember === 'on'){
+            res.cookie('user', newUser);
+          }
          req.session.save((err)=>{
           if (err) {
             console.log("broken");
@@ -191,45 +198,61 @@ app.post("/registerUser", async (req, res) => {
           res.redirect("/regErr");
         }
         
-    } catch (err) {
-        console.error(err);
+        } catch (err) {
+            console.error(err);
+        }
+    } else{
+      req.session.user = req.cookies.user;
+      //resetting cookie duration upon next login
+      res.cookie('user', req.session.user);
     }
+    
 });
 
 app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
 
   try {
-    const {username, password} = req.body;
+    const {username, password, remember} = req.body;
     const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
-
-    if(found){
-      req.session.user = {
-            _id: found._id.toString(),
-            username: found.username,
-            email: found.email,
-            bio: found.bio,
-            likes: found.likes,
-            profile: found.profile,
-            banner: found.banner,
-            wins: found.wins,
-            losses: found.losses,
-            ties: found.ties,
-            liked_posts_id : found.liked_posts_id,
-            liked_replies_id: found.liked_replies_id,
-            disliked_posts_id : found.disliked_posts_id,
-            disliked_replies_id : found.disliked_replies_id
-      };
-      req.session.save((err)=>{
-        if (err) {
-          console.log("broken");
-          return res.status(201).json({ success: false, message: broken});
-        }
+    if(!req.cookies.user){
+        if(found){
+        req.session.user = {
+              _id: found._id.toString(),
+              username: found.username,
+              email: found.email,
+              bio: found.bio,
+              likes: found.likes,
+              profile: found.profile,
+              banner: found.banner,
+              wins: found.wins,
+              losses: found.losses,
+              ties: found.ties,
+              liked_posts_id : found.liked_posts_id,
+              liked_replies_id: found.liked_replies_id,
+              disliked_posts_id : found.disliked_posts_id,
+              disliked_replies_id : found.disliked_replies_id
+        };
+        if (remember === 'on'){
+              res.cookie('user', req.session.user);
+            }
+        req.session.save((err)=>{
+          if (err) {
+            console.log("broken");
+            return res.status(201).json({ success: false, message: broken});
+          }
         res.redirect("/");
       });     
+      }
+      else{
+        res.redirect("/logErr");
+      }
     }
     else{
-      res.redirect("/logErr");
+      req.session.user = req.cookies.user;
+      //resetting cookie duration upon next login
+      res.cookie('user', req.session.user);
     }
+  
   }
   catch (err){
     console.error(err);
@@ -258,8 +281,6 @@ app.put("/user/addPost/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 
 //Update user liked posts 
 app.put("/user/likedPosts/:id", async (req, res) => {
