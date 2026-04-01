@@ -204,7 +204,7 @@ async function loadPosts(page = 1) {
         
         
 
-    });
+    };
 
   
 }

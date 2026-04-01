@@ -417,7 +417,7 @@
         userPost.append(iconNameDate,post_contents, interaction_container)
         all_posts.append(userPost)
         
-    });
+    };
 
 
     }
