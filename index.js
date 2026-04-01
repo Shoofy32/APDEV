@@ -703,6 +703,22 @@ app.get("/posts/:page", async (req, res) => {
   }
 });
 
+app.get("/posts/Top3/:page", async (req, res) => {
+    const page = parseInt(req.params.page);
+    const limit = 15;
+
+  try {
+    const posts = await Post.find({})
+      .sort({total_likes: 'desc'})
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 app.get("/posts", async (req, res) => {
 
