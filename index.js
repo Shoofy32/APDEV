@@ -185,6 +185,7 @@ app.post("/registerUser", async (req, res) => {
               liked_replies_id: newUser.liked_replies_id,
               disliked_posts_id : newUser.disliked_posts_id,
               disliked_replies_id : newUser.disliked_replies_id,
+              isModerator : newUser.isModerator
             };
             
             //saving session info
@@ -241,7 +242,8 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
               liked_posts_id : found.liked_posts_id,
               liked_replies_id: found.liked_replies_id,
               disliked_posts_id : found.disliked_posts_id,
-              disliked_replies_id : found.disliked_replies_id
+              disliked_replies_id : found.disliked_replies_id,
+              isModerator : found.isModerator
         };
         if (remember === 'on'){
               res.cookie('user', req.session.user);
@@ -1151,4 +1153,3 @@ app.listen(port, () => {
     console.log("Server running");
     
 });
-
