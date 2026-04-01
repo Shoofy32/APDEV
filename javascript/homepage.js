@@ -15,9 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("page")) || 1
-   
-    loadPosts(page)
-
+    (async () => {
+      
+        await loadPosts(page);
+    })();
+    
 })
 // Function opens or closes dropdown menu
 function showDropdownContent(divElement){
