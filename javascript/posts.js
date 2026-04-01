@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const all_posts = document.getElementsByClassName("all_posts")[0];
+    const all_posts_popular = document.getElementsByClassName("all_posts_popular")[0];
     const closeChallengeButton = document.getElementById("closeChallenge"); // Close challenge button
     const betChallengeButton = document.getElementsByClassName("postBet")[0]; //  Challenge bet button
  
@@ -46,6 +47,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add event listener on all posts for event delegating
     all_posts.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        // Targets the closest elements based on where you clicked
+        const post_reply = event.target.closest(".post, .reply");
+        const post_user = event.target.closest(".name_post"); //username
+        const replyBtn = event.target.closest(".reply_button"); // Reply button
+        const likeButton = event.target.closest(".fa-thumbs-up"); // Like button
+        const dislikeButton = event.target.closest(".fa-thumbs-down"); // Dislike button
+        const challengeButton = event.target.closest(".challenge_button"); // Challenge button
+        const editButton = event.target.closest(".edit_button"); // Edit button
+        const deleteButton = event.target.closest(".delete_button"); // Delete button
+        const postNameLinks = event.target.closest(".name_post"); // Username posts
+
+        
+        // If conditions check for which button was clicked and calls the function corresponding to that button
+        if(replyBtn)
+            replyPost(replyBtn.closest(".post, .reply"));
+        else if(likeButton)
+            updateCounter(likeButton, likeButton.closest(".counter_container").parentElement);
+        else if(dislikeButton)
+            updateCounter(dislikeButton, dislikeButton.closest(".counter_container").parentElement);
+        else if(challengeButton){
+
+            window.challengedUser = post_reply.getElementsByClassName("name_post")[0].textContent;
+            openChallenge();
+
+        }
+
+        else if(editButton)
+           editDescription(editButton);
+        else if(deleteButton)
+            deleteButton.closest(".post, .reply").remove();
+        else if(postNameLinks)
+            window.location.href = "/userprofile/"+post_user.innerHTML; // Added path to userpost.html
+        // If post reply is clicked, and user is not in userpost and clicked on an edit area, open the post and load userpost.html
+        else if(post_reply && !(window.location.pathname.includes("userpost")) && !event.target.closest("#editArea") && !event.target.closest("#edit_container"))
+            openPost(post_reply.id);
+
+
+    });
+
+    all_posts_popular.addEventListener("click", function(event) {
 
         event.stopPropagation();
 
