@@ -188,7 +188,7 @@ async function loadPosts(name, page = 1) {
         }
         
 
-    });
+    };
 
     // Setup buttons AFTER posts exist
     setupButtons();
