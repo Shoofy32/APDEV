@@ -645,6 +645,7 @@ function hash(password) {
   return hash.digest('hex');
 }
 
+//validation checker for passwords
 function validate(password) {
   var small = /[a-z]/g;
   var capital = /[A-Z]/g;
