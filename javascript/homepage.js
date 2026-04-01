@@ -215,15 +215,15 @@ async function loadPosts(page = 1) {
 async function loadPopularPosts(page = 1) {
 
 
-    const response = await fetch(`http://localhost:3000/posts/${page}`);
+    const response = await fetch(`https://blevvit.onrender.com/posts/Top3/${page}`);
     const posts = await response.json();
 
     const all_posts_popular = document.querySelector(".all_posts_popular");
     
-    posts.forEach(async post => {
+     for (const post of posts) {
         
         //Get user information
-        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
         const user = await user_info.json();
         
         const userPost = document.createElement("div");
@@ -358,7 +358,7 @@ async function loadPopularPosts(page = 1) {
         
 
 
-    });
+    };
 
   
 }
