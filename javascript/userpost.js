@@ -401,7 +401,7 @@
        
         
        
-        if((info.userLoggedIn && post.username === info.user.username) || info.user.isModerator)  {
+        if((info.userLoggedIn && reply.username === info.user.username) || info.user.isModerator)  {
            interaction_container.append(like,dislike, comment, delete_edit_container)
         }
 
