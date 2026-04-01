@@ -18,7 +18,7 @@ async function loadPosts(name, page = 1) {
 
     const all_posts = document.querySelector(".all_posts");
     
-    posts.forEach(async post => {
+    for (const post of posts) {
         
         //Get user information
         const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
@@ -188,7 +188,7 @@ async function loadPosts(name, page = 1) {
         }
         
 
-    });
+    };
 
     // Setup buttons AFTER posts exist
     setupButtons();

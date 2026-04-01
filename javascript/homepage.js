@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("page")) || 1
-   
+    
     loadPosts(page)
 
 })
@@ -60,7 +60,7 @@ async function loadPosts(page = 1) {
 
     const all_posts = document.querySelector(".all_posts");
     
-    posts.forEach(async post => {
+    for (const post of posts) {
         
         //Get user information
         const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
@@ -204,7 +204,7 @@ async function loadPosts(page = 1) {
         
         
 
-    });
+    };
 
   
 }

@@ -232,7 +232,7 @@
     
 
     
-    replies.forEach(async reply => {
+   for (const reply of replies) {
         const user_info = await fetch(`https://blevvit.onrender.com/user/${reply.poster_id}`);
         const user = await user_info.json();
         console.log(user)
@@ -417,7 +417,7 @@
         userPost.append(iconNameDate,post_contents, interaction_container)
         all_posts.append(userPost)
         
-    });
+    };
 
 
     }
