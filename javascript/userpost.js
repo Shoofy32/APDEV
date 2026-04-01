@@ -101,7 +101,7 @@
       if(info.userLoggedIn && info.user.liked_posts_id.includes(post_container.id)) {
           i.style = "color: coral;"
           i.dataset.clicked = "true"
-        }
+       }
 
 
       const total_likes = document.createElement('p')
@@ -184,7 +184,7 @@
       delete_edit_container.append(delete_button, edit_button)
 
       
-      if(info.userLoggedIn && post.username === info.user.username) {
+      if((info.userLoggedIn && post.username === info.user.username) || info.user.isModerator) {
 
           interaction_container.append(like,dislike, comment, delete_edit_container)
       }
@@ -401,7 +401,7 @@
        
         
        
-        if(info.userLoggedIn && reply.username === info.user.username) {
+        if((info.userLoggedIn && post.username === info.user.username) || info.user.isModerator)  {
            interaction_container.append(like,dislike, comment, delete_edit_container)
         }
 
