@@ -56,7 +56,6 @@ a:active {
 }
 
 .btn.btn-success{
-    margin-top: 2%;
     align-items: center;
     justify-content: center;
     margin-left: auto;
@@ -112,4 +111,17 @@ header .logo img{
     height: 65px;
 
 
+}
+
+
+.remember{
+    display: flex;
+    align-items: baseline;
+    position: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.remtext{
+    color: aliceblue;
 }

@@ -16,8 +16,8 @@ function searchPost(searchElement, event){
         localStorage.setItem("search-content", searchContent);
 
         // If Current Path Location is not Search Results, then Send Data of LocalStorage to Search Results and Open It
-        if(window.location.pathname != "/html/searchresults.html")
-            window.location.href = "../html/searchresults.html";
+        if(window.location.pathname != "/searchresults")
+            window.location.href = "/searchresults";
         else{ // Already in Search Results and Instead Update Search Content and Search Results
 
             // Update localStorage and Refresh SearchResults

@@ -32,11 +32,14 @@
 ## Tools
 - HTML, CSS, Javascript
 - MongoDB
+- Node
 
 ---
 ## Installation and Running
 1. Clone or download repository 
-2. Open index.html
+2. Open cmd within the directory and run "npm install" to intsall all dependecie and packages
+3. Ensure your MongoDB server is running
+4. Open your web browser and type in "localhost:3000/" to be directed to the homepage
 
 ---
 

@@ -1,4 +1,4 @@
-//all the stuff we're gonna need
+
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -8,12 +8,15 @@ const crypto = require("crypto");
 const path = require("path");
 const app = express();
 const Post = require("./models/Post")
+const User = require("./models/user")
+const Reply = require("./models/Reply")
+const ChallengeNotif = require("./models/ChallengeNotif")
+const ResultNotif = require("./models/ResultNotif")
 app.use(cors());
 app.use(express.json({limit: '16mb' }));
 app.use(express.urlencoded({limit: '16mb', extended: true}));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 app.use(express.static(path.join(__dirname)));
 
 //Session objects
@@ -22,6 +25,10 @@ app.use(
     secret: "secret-key",
     resave: false,
     saveUninitialized: false,
+    //setting cookie duration for three weeks
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 21
+    }
   })
 );
 
@@ -112,87 +119,11 @@ app.get("/userprofile/:user", async (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/myapp")
+const uri = "mongodb://stefan:stefuser@ac-ttwdtop-shard-00-00.thjutfo.mongodb.net:27017,ac-ttwdtop-shard-00-01.thjutfo.mongodb.net:27017,ac-ttwdtop-shard-00-02.thjutfo.mongodb.net:27017/?ssl=true&replicaSet=atlas-8w3g7c-shard-0&authSource=admin&appName=Cluster0";
+
+mongoose.connect(uri)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
-
-
-
-// Schemas
-
-
-// User login and registration Schema
-const userSchema = new mongoose.Schema({
-
-    username: String,
-    email: String,
-    password: String,
-    bio: String,
-    likes: Number,
-    profile: String,
-    banner: String,
-    posts: [String],
-    replies: [String],
-    notifs: [String],
-    wins: Number,
-    losses: Number,
-    ties: Number,
-    liked_posts_id : [String],
-    liked_replies_id : [String],
-    disliked_posts_id : [String],
-    disliked_replies_id : [String]
-    
-});
-
-const replySchema = new mongoose.Schema({
-  username: String,
-  replying_to: String,
-  original_content:String,
-  reply_content: String,
-  unique_post_id: String,
-  total_likes: Number,
-  is_edited: Boolean,
-  parent_reply_id: String,
-  date: String,
-  total_dislikes: Number,
-  poster_id: String  
- 
-  
-});
-
-// New challenge notification schema
-const challengeNotificationSchema = new mongoose.Schema({
-
-    challenger_username: String,
-    challenger_id: String,
-    challenger_roll: Number,
-    challenger_betlikes: Number,
-    challenged_username: String
-
-});
-
-const challlengeNotificationResultSchema = new mongoose.Schema({
-
-    wasRejected: Boolean,
-    isTie: Boolean,
-    winner_username: String,
-    loser_username: String,
-    winner_roll: Number,
-    loser_roll: Number,
-    challenger_bet_likes: Number,
-    challenged_bet_likes: Number,
-    challenged_id: String,
-    notification_receiver: String,
-
-
-});
-
-//Models
-
-const User = mongoose.model("User", userSchema);
-const Reply = mongoose.model("Reply", replySchema);
-const ChallengeNotif = mongoose.model("ChallengeNotif", challengeNotificationSchema);
-const ResultNotif = mongoose.model("ResultNotif", challlengeNotificationResultSchema);
 
 // ------------- Obtain Login Info ---------------
 app.get("/user-login", (req, res) => {
@@ -207,9 +138,9 @@ app.get("/user-login", (req, res) => {
 
 // ------ ------ User backend ------ ------
 app.post("/registerUser", async (req, res) => {
-    
-    try {
-        const { email, username, password } = req.body;
+    if(!req.cookies.user){
+      try {
+        const { email, username, password, remember } = req.body;
 
         const found = await User.findOne({ $or: [{ username: username }, { email: email }] });
 
@@ -251,6 +182,9 @@ app.post("/registerUser", async (req, res) => {
           };
           
           //saving session info
+          if (remember === 'on'){
+            res.cookie('user', newUser);
+          }
          req.session.save((err)=>{
           if (err) {
             console.log("broken");
@@ -264,45 +198,61 @@ app.post("/registerUser", async (req, res) => {
           res.redirect("/regErr");
         }
         
-    } catch (err) {
-        console.error(err);
+        } catch (err) {
+            console.error(err);
+        }
+    } else{
+      req.session.user = req.cookies.user;
+      //resetting cookie duration upon next login
+      res.cookie('user', req.session.user);
     }
+    
 });
 
 app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
 
   try {
-    const {username, password} = req.body;
+    const {username, password, remember} = req.body;
     const found = await User.findOne({ $and: [{username: username},{password: hash(password)}]});
-
-    if(found){
-      req.session.user = {
-            _id: found._id.toString(),
-            username: found.username,
-            email: found.email,
-            bio: found.bio,
-            likes: found.likes,
-            profile: found.profile,
-            banner: found.banner,
-            wins: found.wins,
-            losses: found.losses,
-            ties: found.ties,
-            liked_posts_id : found.liked_posts_id,
-            liked_replies_id: found.liked_replies_id,
-            disliked_posts_id : found.disliked_posts_id,
-            disliked_replies_id : found.disliked_replies_id
-      };
-      req.session.save((err)=>{
-        if (err) {
-          console.log("broken");
-          return res.status(201).json({ success: false, message: broken});
-        }
+    if(!req.cookies.user){
+        if(found){
+        req.session.user = {
+              _id: found._id.toString(),
+              username: found.username,
+              email: found.email,
+              bio: found.bio,
+              likes: found.likes,
+              profile: found.profile,
+              banner: found.banner,
+              wins: found.wins,
+              losses: found.losses,
+              ties: found.ties,
+              liked_posts_id : found.liked_posts_id,
+              liked_replies_id: found.liked_replies_id,
+              disliked_posts_id : found.disliked_posts_id,
+              disliked_replies_id : found.disliked_replies_id
+        };
+        if (remember === 'on'){
+              res.cookie('user', req.session.user);
+            }
+        req.session.save((err)=>{
+          if (err) {
+            console.log("broken");
+            return res.status(201).json({ success: false, message: broken});
+          }
         res.redirect("/");
       });     
+      }
+      else{
+        res.redirect("/logErr");
+      }
     }
     else{
-      res.redirect("/logErr");
+      req.session.user = req.cookies.user;
+      //resetting cookie duration upon next login
+      res.cookie('user', req.session.user);
     }
+  
   }
   catch (err){
     console.error(err);
@@ -331,8 +281,6 @@ app.put("/user/addPost/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 
 //Update user liked posts 
 app.put("/user/likedPosts/:id", async (req, res) => {
@@ -1159,11 +1107,11 @@ app.delete("/challenge-notifications-result/:id", async (req, res) => {
 });
 
 
+var port = process.env.PORT || 3000
 
+app.listen(port, () => {
 
-app.listen(3000, () => {
-
-    console.log("Server running on port 3000");
+    console.log("Server running");
     
 });
 

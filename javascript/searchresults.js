@@ -10,7 +10,7 @@ window.onload = function(){
     localStorage.removeItem("filter_result");
 
     // If opened page is saerchresults.html, show the results of the searchbar
-    if(window.location.pathname.includes("searchresults.html"))
+    if(window.location.href.includes("searchresults"))
         showSearchResults();
 
 }
@@ -30,7 +30,7 @@ export async function showSearchResults(){
 
 
 
-    const response = await fetch("http://localhost:3000/posts");
+    const response = await fetch("https://blevvit.onrender.com/posts");
     const posts = await response.json();
 
     const all_posts = document.getElementsByClassName('search_results_container')[0]
@@ -45,7 +45,7 @@ export async function showSearchResults(){
         //Get user information
         if(post.post_title.includes(searchResult)) {
         query_counter++;
-        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
         const user = await user_info.json();
 
 
@@ -278,7 +278,7 @@ async function filterByTags(){
 
 
 
-    const response = await fetch("http://localhost:3000/posts");
+    const response = await fetch("https://blevvit.onrender.com/posts");
     const posts = await response.json();
     
     const authentication = await fetch("/user-login")
@@ -307,7 +307,7 @@ async function filterByTags(){
         //Get user information
         if(matches) {
         query_counter++;
-        const user_info = await fetch(`http://localhost:3000/user/${post.poster_id}`);
+        const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
         const user = await user_info.json();
 
 

@@ -99,10 +99,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         posts = await response.json();
 
         posts.forEach(async (postload)=>{
-            const response = await fetch(`http://localhost:3000/post/`+postload._id);
+            const response = await fetch(`https://blevvit.onrender.com/post/`+postload._id);
             const post = await response.json()
 
-            const user_info = await fetch(`http://localhost:3000/user/`+postload.poster_id);
+            const user_info = await fetch(`https://blevvit.onrender.com/user/`+postload.poster_id);
             const user = await user_info.json();
             
             const post_container = document.createElement('div')
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         replies = await response.json();
 
         replies.forEach(async reply => {
-            const user_info = await fetch(`http://localhost:3000/user/${reply.poster_id}`);
+            const user_info = await fetch(`https://blevvit.onrender.com/user/${reply.poster_id}`);
             const user = await user_info.json();
             console.log(user)
             
