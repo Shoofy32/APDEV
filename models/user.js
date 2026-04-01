@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
     liked_posts_id : [String],
     liked_replies_id : [String],
     disliked_posts_id : [String],
-    disliked_replies_id : [String]
+    disliked_replies_id : [String],
+    isModerator: {type: Boolean, default: false}
     
 });
 
