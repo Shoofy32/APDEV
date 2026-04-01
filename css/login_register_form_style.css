@@ -1,3 +1,9 @@
+body{
+
+    zoom: 90%;
+
+}
+
 a:link {
   color:orange; /* Unvisited link color */
 }
