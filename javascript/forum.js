@@ -170,8 +170,12 @@ async function loadPosts(name, page = 1) {
         delete_edit_container.append(delete_button, edit_button)
 
         //Check if the user is logged in and give them edit
-        if((info.userLoggedIn && post.username === info.user.username) || info.user.isModerator)  {
+        if((info.userLoggedIn && post.username === info.user.username))  {
           interaction_container.append(like,dislike, comment, delete_edit_container)
+        }
+        else if(info.user.isModerator !== null && info.user.isModerator && post.username !== info.user.username) {
+           interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+
         }
         else {
           interaction_container.append(like,dislike, comment, challenge)

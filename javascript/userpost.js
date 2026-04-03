@@ -184,10 +184,14 @@
       delete_edit_container.append(delete_button, edit_button)
 
       
-      if((info.userLoggedIn && post.username === info.user.username) || info.user.isModerator) {
+      if((info.userLoggedIn && post.username === info.user.username)) {
 
           interaction_container.append(like,dislike, comment, delete_edit_container)
       }
+        else if(info.user.isModerator !== null && info.user.isModerator && post.username !== info.user.username) {
+           interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+
+        }
 
       else {
 
@@ -401,8 +405,12 @@
        
         
        
-        if((info.userLoggedIn && reply.username === info.user.username) || info.user.isModerator)  {
+        if((info.userLoggedIn && reply.username === info.user.username))  {
            interaction_container.append(like,dislike, comment, delete_edit_container)
+        }
+        else if(info.user.isModerator !== null && info.user.isModerator && reply.username !== info.user.username) {
+           interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
+
         }
 
         else {
