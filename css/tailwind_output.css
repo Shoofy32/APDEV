@@ -2374,7 +2374,6 @@
   }
   .user_posts_replies_notifications_container .all_posts, .all_replies, .all_notifications {
     margin-top: calc(var(--spacing) * 5);
-    display: none;
     width: calc(var(--spacing) * 275);
     flex-direction: column;
     justify-content: center;

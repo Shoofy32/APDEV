@@ -191,7 +191,7 @@
 
     .user_posts_replies_notifications_container .all_posts, .all_replies, .all_notifications{
 
-        @apply hidden
+        @apply 
                 flex-col
                 justify-center
                 w-275
