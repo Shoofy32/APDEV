@@ -1,1 +1,97 @@
 @import "tailwindcss";
+
+/* Importing other CSS Files to Tailwind */
+@import "./createpost_style.css";
+@import "./forum_style.css";
+@import "./homepage_style.css";
+@import "./log_reg_header_style.css";
+@import "./header_userstats_style.css";
+@import "./login_register_form_style.css";
+@import "./searchresults_style.css";
+@import "./sidebar_style.css";
+@import "./userpostreplies_style.css";
+@import "./challenge_user_style.css";
+@import "./userprofile_style.css";
+@import "./pagination_style.css";
+
+
+@layer utilities{
+
+    .spacing{
+
+        @apply m-2.5;
+
+    }
+
+    .spacing_small{
+
+        @apply m-1.25;
+
+    }
+
+}
+
+/* Added here due to bootstrap conflicts*/
+body{
+
+    @apply bg-[#1A1D1A] 
+            m-0
+            font-[Inter];
+    zoom: 90%;
+            
+}
+
+
+
+/* Base Layer Styles */
+@layer base{
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    header{
+
+        @apply flex 
+                items-center
+                fixed
+                top-0
+                left-0
+                w-full
+                h-15
+                bg-[#3E5058]
+                border-b-2
+                border-[orange]
+                z-10;
+
+    }
+
+    p, h1, h2, h3, h4{
+
+        @apply m-0
+                select-none
+                text-white;
+
+    }
+
+    a {
+        @apply no-underline;
+    }
+
+    i{
+
+        @apply text-white;
+
+    }
+
+
+}
+
+
+
+
+
+
+
+

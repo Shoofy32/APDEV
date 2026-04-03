@@ -1,620 +1,175 @@
-/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
-* {
-    box-sizing: border-box;
-}
+@layer components{
 
-body {
+    .content_container .all_posts{
 
-    background-color: #1A1D1A;;
+        @apply mr-auto
+                ml-auto
+                w-200;
 
-    margin: 0px;
+    }
 
-    font-family: "Inter", Arial;
+    .forum_content_container .all_posts{
+
+        @apply w-287.5
+                min-h-175
+                ml-21.25
+                mr-0;
+
+
+    }
+
+    .thread_head_img {
+
+        @apply relative
+                left-37.5;
+    }
+
+    .thread_head_img img{
+
+        @apply w-[91vw]
+                h-50
+                object-cover
+                object-center
+                -ml-72.5;
+
+    }
+
+    .account_button {
+
+        @apply flex
+                justify-between
+                items-center
+                gap-2.25
+                ml-auto
+                mr-2.5;
+
+    }
     
-}
-
-/* Div - Add Spacing */
-.spacing{
-
-    margin: 10px;
-
-}
-
-/* Div - Add Spacing but Small */
-.spacing_small{
-
-    margin: 5px;
-
-}
-
-.thread_head_img {
-
-    position: relative;
-    left: 150px;
-
-}
-
-.thread_head_img img{
-
-    width: 91vw;
-    height: 200px;
-    object-fit: cover; 
-    object-position: center;
-
-    margin-left: -290px;
-
-}
-
-
-.account_button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 9px;
-    margin-left: auto;
-    margin-right: 10px;
-}
-.header .username {
-    font-size: 20px;
-    color: aqua;
-}
-.visited_container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #1A1D1A;
-    margin-left: 30px;
-    
-    
-}
-
-.separator {
-
-    color:  coral;
-    margin-top: -20px;
-
-}
-.breadcrumbs{
-    display: flex;
-    margin-top: 10px;
-    padding-left: 15px;
-    color:  coral;
-
-}
-.breadcrumbs a {
-     color:  coral;
-}
-.thread_head {
-    display: flex;
-    justify-content: center;
-    
-    background: #1A1D1A;
-    
-    
-}
-.thread_head_container img {
-    margin-top: 5px;
-    border-radius: 5px;
-}
-#forum_head > h5 {
-
-    font-size: 50px;
-    font-weight: 800;
-    color: coral;
-
-    margin: 0px;
-    margin-left: -40px;
-
-}
-.thread_head_container h5 {
-    margin-top: 7px;
-    text-align: center;
-   
-}
-.thread_head_container p {
-
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-
-    margin-left: -120px;
-
-}
-.content_container {
-    padding-top: 55px;
-   min-height: 100vh;
-    background-color:  #1A1D1A;
-    min-width: 500px;
-}
-
-hr :not(.side_bar_content) {
-    color: red;
-}
-
-.all_posts{
-
-
-    display: flex;
-    flex-direction: column;
-
-    width: 1150px;
-
-    margin-left: 80px;
-
-}
-
-
-.timestamp  {
-
-  padding-top: 6px;
-  color: white;
-  opacity: 0.6;
-  font-size: 9px;
-
-  
-}
-
-.post_contents {
-    position: relative;
-    bottom: 9px;
-    color: white;
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
-
-.post_contents h3 {
-    font-size: 19px;
-    color: coral;
-}
-
-.post_contents p {
-    font-size: 14px;
-}
-
-.link {
-   
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  
-}
-.link:hover {
-    background-color: #3E5058;
-}
-
-.interaction_container {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    z-index: 3;
-}
-
-.like_button {
-    border: none;
-    background-color: #8AB0AB;;
-    height: 30px;
-    border-radius: 5px;
-    width:60px;
-}
-.like_button img {
-    float: left;
-    padding-top: 4px;
-    padding-left: 5;
-}
-.like_button p {
-    float: left;
-    
-    padding-left: 5;
-}
-.dislike_button {
-    border: none;
-    background-color: #8AB0AB;;
-    height: 30px;
-    border-radius: 5px;
-    width:60px;
-}
-.dislike_button img {
-    float: left;
-    padding-top: 4px;
-    padding-left: 5;
-}
-.dislike_button p {
-    float: left;
-    padding-left: 5;
-}
-.Challenge {
-    border: none;
-    background-color: #8AB0AB;;
-    height: 30px;
-    border-radius: 5px;
-    width:100px;
-}
-
-
-
-#forum_head {
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    margin-left: -140px;
-    margin-top: 20px;
-
-}
-#forum_head button {
-   position: relative;
-   left: 300px;
-}
-#forum_head h5 {
-   position: relative;
-   left: 50px;
-}
-
-.view_post {
-
-  text-decoration: none;
-  color: inherit;
-  width: fit-content;
-  display: block;
-  height: fit-content;
-  
-}
-
-.view_post:hover  {
-  background-color: red; /* slightly lighter than post bg */
-  border-color: #8AB0AB;
-  cursor: pointer;
-  border: 5px solid red;
-  border-radius: 10px;
-}
-#forum_head #post_button {
-
-
-    position: absolute;
-
-    left: 560px;
-    
-    width: 150px;
-    height: 50px;
-
-    background: #ff7a3d;          
-    color: white;
-
-    margin-top: 10px;
-    margin-left: 520px;
-
-
-    border: none;
-    border-radius: 8px;
-
-    padding: 8px 16px;
-    font-size: 18px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    box-shadow: 0 3px 8px rgba(0,0,0,.35);
-    transition: all .15s ease;
-
-}
-#post_button:hover {
-
-  background: #ff8c55;
-  transform: translateY(-1px);
-
-}
-
-.Challenge {
-    border: none;
-    background-color: #8AB0AB;;
-    height: 30px;
-    border-radius: 5px;
-    width:100px;
-}
-
-
-.delete_edit_container {
-
-    margin-left: auto;
-    margin-right: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    
-}
-
-.delete_button {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: auto;
-    border: none;
-    background-color: #394b53;
-    height: 30px;
-    border-radius: 5px;
-    width:100px;
-    right: 300px;   
-
-}
-
-.edit_button {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: auto;
-    border: none;
-    background-color: #394b53;
-    height: 30px;
-    border-radius: 5px;
-    width:100px;   
-
-}
-
-.delete_button:hover{
-
-    cursor: pointer;
-    background-color: #495d65;
-
-}
-
-.edit_button:hover{
-
-    cursor: pointer;
-    background-color: #495d65;
-
-}
-
-.delete_button > h4, .edit_button > h4{
-
-    font-family: "Inter", Arial;
-    font-weight: 600;
-    font-size: 14px;
-
-
-    color: white;
-
-}
-
-#editArea {
-    width: 750px;
-    height: 300px;
-}
-#Save {
-    background-color:#8AB0AB;
-    
-}
-#edit_container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin-top: 5px;
-}
-
-#editArea{
-
-    width: 95%;
-    height: 140px;
-
-    margin-top: 15px;
-    margin-bottom: 25px;
-    margin-left: 10px;
-
-    padding-left: 5px;
-    padding-top: 5px;
-
-    background-color: lightgray;
-
-    border: 2px solid salmon;
-    border-radius: 5px;
-
-    font-family: "Inter", Arial;
-    font-size: 17px;
-
-    resize: none;
-
-
-}
-
-#editArea::placeholder{
-
-    font-family: "Inter", Arial;
-    font-weight: 500;
-
-}
-
-#Save{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 40px;
-    width: 95px;
-
-    font-family: "Inter", Arial;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
-
-}
-
-#Save:hover{
-
-    color: white;
-    background-color: #37474f;
-
-    border-color: orange;
-
-    cursor: pointer;
-
-}
-
-
-
-/* CHANGED SIDE CONTENT FOR ANNOUNCEMENTS*/
-
-.home_side_content{
-
-    position: absolute;
-    height: 1000px;
-    width: 300px;
-
-    margin-left: auto;
-
-    left: 1325px;
-    top: 340px;
+    .visited_container{
 
-}
-
-/* Home Side Content - Post and Threads Buttons Div */
-.home_side_content .post_and_threads_buttons{
-
-    display: flex;
-    align-items: center;
-
-    margin-left: 10px;
-
-}
-
-/* Home Side Content - Post and Threads Buttons*/
-/* Buttons */
-.home_side_content .post_and_threads_buttons button{
-
-    
-    height: 30px;
-    width: 125px;
-
-    font-size: small;
-    font-family: "Inter", Arial;
-    text-align: center;
-
-    margin-left: 10px;
-    margin-bottom: 30px;
-
-    color: white;
-    background-color: coral;
-    border: 2px solid #8AB0AB;
-    border-radius: 10px;
-
-}
+        @apply flex
+                flex-row
+                items-center
+                bg-[#1A1D1A]
+                ml-7.5;
+        
+    }
 
-/* Home Side Content - Post and Threads Buttons*/
-/* Button On Hover */
-.home_side_content .post_and_threads_buttons button:hover{
+    .separator {
 
-    background-color: rgb(227, 101, 54);
+        @apply text-[coral]
+                -mt-5;
 
-    border-color: #3E5058;
+    }
+    .breadcrumbs{
 
-    cursor: pointer;
-
-}
+        @apply flex
+                mt-2.5
+                pl-3.75;
 
 
-/* Home Side Content - Side Bar Divs */
-.home_side_content .recent_announcements, .statistics{
+    }
+    .breadcrumbs a {
 
-    position: inline-block;
+        @apply text-[coral];
 
-    background-color: #8AB0AB;
+        @apply hover:cursor-pointer
+                hover:underline;
 
-    border: 2px solid #3E5058;
-    border-radius: 3px;
+    }
 
+    #forum_head {
+        
+        @apply flex
+            justify-start
+            items-center
+            -ml-35
+            mt-5;
 
-}
+    }
 
-/* Home Side Content - Recent Announcements Div */
-.home_side_content .recent_announcements{
+    #forum_head button {
 
-    height: 250px;
+        @apply relative
+                left-75;
 
-}
+    }
 
-.recent_announcements p{
+    #forum_head h5 {
 
-    font-family: "Inter", Arial;
-    font-weight: 600;
-    font-size: 16px;
-    color: #3E5058;
-    margin-left: 10px;
+        @apply relative
+                left-12.5
+                text-5xl
+                font-extrabold
+                text-[coral]
+                m-0
+                -ml-10;
 
-    text-decoration: underline;
 
+    }
 
-}
+    .thread_head_container .forum_description{
 
-.recent_announcements p:hover{
+        @apply text-xl
+                font-semibold
+                -ml-30;
 
-    cursor: pointer;
-    color: #526c77;
 
-}
+    }
 
+    .content_container, .forum_content_container {
 
-/* Home Side Content - Statistics Div */
-.home_side_content .statistics{
+        @apply pt-13.75
+                min-h-screen
+                min-w-125
+                bg-[#1A1D1A];
 
-    height: 200px;
+    }
 
-    margin-top: 30px;
+    #forum_head #post_button {
 
-}
+        @apply absolute
+                left-140
+                w-37.5
+                h-12.5
+                bg-[#ff7a3d]
+                text-white
+                mt-2.5
+                ml-130
+                border-0
+                rounded-lg
+                cursor-pointer
+                text-xl
+                font-semibold;
 
-/* Home Side Content - Side Bar Title */
-.home_side_content .side_bar_title{
-    
-    display: flex;
-    align-items: center;
+        box-shadow: 0 3px 8px rgba(0,0,0,.35);
+        transition: all .15s ease;
 
-    width: 100%;
-    height: 50px;
+        @apply hover:bg-[#ff8c55]
+                hover:scale-[1.1];
 
-    background-color: #26413C;
+    }
 
-    border-bottom: 2px solid #3E5058;
+    .recent_announcements{
 
-}
+        @apply w-83
+                min-h-100
+                -ml-7
+                text-base;
 
-/* Home Side Content - Side Bar Title */
-/* h3 Title */
-.home_side_content .side_bar_title h3{
-    
-    font-size: 16px;
-    font-family: "Inter", Arial;
-    font-weight: 400;
+    }
 
-    color: white;
+    .statistics{
 
-    float: left;
+        @apply w-83
+                -ml-7
+                mt-5
+                min-h-100;
 
-}
+    }
 
-/* Home Side Content - Side Bar Title*/
-/* Icon */
-.home_side_content .side_bar_title i{
-   
-    margin-right: 10px;
-    margin-left: 10px;
 
-    float: left;
 
 }
-
 
-/* Forum Load Link - On Hover */
-.return_forum_link:hover{
 
-    cursor: pointer;
-    text-decoration: underline;
-
-}

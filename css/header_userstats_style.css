@@ -1,0 +1,335 @@
+@layer components{
+
+    header .username{
+
+        @apply flex
+                justify-center
+                items-center
+                text-sm
+                font-bold
+                text-[coral];
+
+        @apply hover:text-[coral]
+                hover:underline
+                hover:cursor-pointer;
+
+    }
+
+
+    .log_sign_in_button{
+
+        @apply h-10
+                w-16.25
+                text-[coral]
+                bg-[#3b4950]
+                border
+                border-[#coral]
+                rounded-[10px]
+                text-sm;
+
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:border-[orange]
+                hover:cursor-pointer;
+
+
+    }
+
+    .log_sign_in1{
+
+        @apply w-47.5
+                hidden
+                justify-center
+                items-center
+                mr-3.75
+                gap-3.75;
+
+    }
+
+    .log_sign_in2{
+
+        @apply justify-center
+                items-center
+                hidden
+                gap-2.5;
+
+    }
+
+    .header_pfp{
+
+        @apply  w-8.75
+                h-8.75
+                object-cover
+                -ml-12.5
+                rounded-[50%];
+
+        @apply hover:cursor-pointer;
+
+
+    }
+
+    #logout{
+
+        @apply absolute
+                right-[3.3vw];
+
+    }
+
+    .likes_container{
+
+        @apply  items-center
+                absolute
+                right-90
+                hidden
+                w-25
+                ml-[8%];
+
+        @apply hover:cursor-pointer;
+    }
+
+    .likes_container p{
+
+        @apply ml-2.5;
+
+    }
+
+    .notification_container{
+
+        @apply absolute
+                hidden
+                right-80;
+
+        @apply hover:text-[salmon];
+
+    }
+
+    .notification_container .fa-bell{
+
+        @apply group-hover:text-[salmon]
+                scale-[0.8];
+
+    }
+
+    .likes_container i{
+
+        @apply hover:text-[salmon];
+
+    }
+
+    .notification_button{
+
+        @apply flex
+                items-center
+                gap-2.5
+                pr-5
+                font-normal
+                bg-[#00000000]
+                border-0
+                text-xl
+                h-14.5
+                pl-1.25
+                rounded-none
+                text-white;
+
+        @apply hover:text-[salmon]
+                hover:cursor-pointer;
+
+    }
+
+    .notification_active{
+
+        @apply text-[#364650];
+
+    }
+
+    .notification_dropdown{
+
+        @apply absolute
+                h-50
+                max-h-100
+                w-75
+                top-15
+                right-0
+                border-2
+                border-[#1A1D1A]
+                bg-[#37474f]
+                z-20
+                invisible
+                overflow-y-auto;
+
+        box-shadow: 0px 5px 10px #26413C;
+
+    }
+
+    .notification_container.reveal_hidden .notification_dropdown{
+        
+        @apply visible;
+
+    }
+
+    .notification_container.reveal_hidden .fa-bell{
+        
+        @apply text-[salmon];
+
+    }
+
+    .notification_container.reveal_hidden .notification_alert{
+        
+        @apply text-[salmon];
+
+    }
+
+    .notifications_header{
+
+        @apply text-xl
+                font-bold
+                text-[salmon]
+                pl-2.5
+                pb-2.5
+                border-b
+                border-b-[#1A1D1A];
+    }
+
+    .icon_name_challenge_container{
+
+        @apply flex
+                justify-start
+                items-center
+                flex-nowrap
+                pt-2
+                ml-2;
+  
+    }
+
+    .challenge_notification, .challenge_results_notification{
+
+        @apply bg-[#1A1D1A]
+                border-l-4
+                border-l-[coral]
+                mb-5;
+
+    }
+
+    .challenge_results_notification .challenge_results_container{
+
+        @apply mt-2.5;
+
+    }
+
+    .accept_deny_container{
+
+        @apply flex
+                justify-end
+                ml-auto
+                mr-3
+                pt-2
+                w-12.5;
+
+        @apply hover:cursor-pointer
+                text-[salmon];
+
+    }
+
+    .accept_challenge, .deny_challenge, .accept_result{
+
+        @apply flex
+                justify-end
+                ml-1.25
+                h-7.5
+                w-5;
+
+    }
+
+    .accept_challenge i, .deny_challenge i, .accept_result i{
+
+        @apply hover:text-[salmon]
+                    hover:cursor-pointer;
+
+    }
+
+    .icon_name_challenge_container p{
+
+        @apply ml-2.5;
+
+    }
+
+    .icon_name_challenge_container img{
+
+        @apply w-7.5
+                h-7.5
+                rounded-[50%];
+
+    }
+
+    .challenger_name{
+
+        @apply font-bold;
+
+    }
+
+    .roll_likes_container{
+
+        @apply flex
+                mt-5
+                -mb-5
+                ml-2
+                gap-2.5;
+
+    }
+
+    .roll_likes_container p{
+
+        @apply text-[salmon]
+                font-bold;
+                
+
+    }
+
+    .results_display_container, .results_alert_container{
+
+        @apply flex
+                items-center
+                ml-2.5
+                pb-1.25;
+
+    }
+
+    .results_alert_container p{
+
+        @apply mt-2.5;
+
+    }
+
+    .results_name{
+
+        @apply w-46.25
+                font-bold
+                gap-1.25;
+
+    }
+
+    .results_alert{
+
+        @apply w-62.5
+                text-[coral]
+                font-medium;
+
+    }
+
+    header .number_result, header .number_result_betlikes{
+
+        @apply text-[coral]
+                font-bold;
+
+    }
+
+    header .number_result i, header .number_result_betlikes i{
+
+        @apply pr-1.25;
+
+    }
+
+
+
+}
+

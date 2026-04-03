@@ -10,17 +10,8 @@
         <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
 
-        <!-- Link CSS File for header css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/log_reg_header_style.css">
-
-        <!-- Link CSS File for header css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/sidebar_style.css">
-
-        <!-- Link CSS File for user post css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/userpost_style.css">
-
-        <!-- Link CSS File for forum css design-->
-        <link href="../css/forum_style.css" rel="stylesheet"/>
+        <!-- Link CSS File for tailwind-->
+        <link rel= "stylesheet" href = "../css/tailwind_output.css">
 
 
         <!-- EJS user data -->
@@ -57,6 +48,9 @@
         <!-- Link JS File for logins -->
         <script src = "../javascript/log_reg_header.js"></script>
 
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/pagination.js"></script>
+
     </head>
 
     <body>
@@ -68,7 +62,7 @@
             <header>
 
                 <!-- Logo -->
-                <a class = "logo"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+                <img class = "logo" src = "../resources/images/Blevvit_Logo.png">
 
                 
                 <!-- Search bar -->
@@ -87,7 +81,7 @@
                 </div>
 
                 <!-- Notification Container for challenge notifications from other users -->
-                <div class = "notification_container">
+                <div class = "notification_container group">
                     <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
 
                     <div class = "notification_dropdown">
@@ -95,7 +89,9 @@
                         <p class = "notifications_header"> Notifications </p>
 
                         <div class = "notification_content_container">
-                     
+
+
+
                         </div>
 
                     </div>
@@ -110,15 +106,15 @@
                         <img class = "header_pfp" src = "">
                         <p id = "username" class="username"></p>
 
-                        <button id = "logout" > Log out </button>
+                        <button class = "log_sign_in_button" id = "logout" > Log out </button>
 
                     </div>
 
                     <!-- Log In and Sign Up Buttons -->
                     <div class = "log_sign_in1" id = "anon">
 
-                        <button onclick = "window.location.href = '/login'"> Log In </button>
-                        <button onclick = "window.location.href = '/register'"> Sign Up </button>
+                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/login'"> Log In </button>
+                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/register'"> Sign Up </button>
 
                     </div>
 
@@ -154,11 +150,15 @@
                          <span> Home </span> 
                     </button>
 
-                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Trending </span> 
+                    </button>
 
-                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Your Threads </span> 
+                    </button>
 
-                    <hr>
+                    <hr class = "sidebar_border">
          
                 </div>
 
@@ -169,9 +169,9 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title"> Popular Topics </p>
+                        <p class = "side_bar_title_section"> Popular Topics </p>
 
-                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
                     </div>
 
@@ -211,7 +211,7 @@
 
                 <div class = "spacing_small"> </div>
 
-               <hr>
+               <hr class = "sidebar_border">
 
                <div class = "spacing_small"> </div>
 
@@ -220,9 +220,9 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title"> Resources </p>
+                        <p class = "side_bar_title_section"> Resources </p>
 
-                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
                     </div>
 
@@ -247,34 +247,34 @@
         </div>
 
         
-        <div class="content_container">
+        <div class = "forum_content_container">
 
             <div class="visited_container">
 
                 <div class = "breadcrumbs">
-                    <a href = "homepage.html">Blevvit&nbsp; </a>
+                    <a class = "text-[coral]" href = "homepage.html">Blevvit&nbsp; </a>
                     <span class = "separator">
                     <h5> - </h5>
                     </span>
-                     <a class = "return_forum_link">&nbsp;Forums</a>
+                     <a class = "return_forum_link text-[coral]">&nbsp;Forums</a>
             
                 </div>
                
 
             </div>
             
-            <div class="thread_head">
-                <div class="thread_head_container">
+            <div class="thread_head flex mr-33.75 justify-center">
+                <div class="thread_head_container w-275">
                     <div class="announcement_head_container">
-                        <div class="thread_head_img">
-                            <img src="../resources/images/technology.jpg" class = "forum_image"> <br>
+                        <div class="thread_head_img w-287.5">
+                            <img class = "forum_image mt-1.25 rounded-md" src="../resources/images/technology.jpg"> <br>
                         </div>
                          
  
                     </div>
                    
                     <div id = "forum_head">
-                        <h5 class = "forum_title"> Technology </h5>
+                        <h5 class = "forum_title mt-1.75 text-center"> Technology </h5>
                         <button id="post_button">Create Post</button>
                     </div>
                     <p class = "forum_description">Anything tech related. You are Iron Man.</p>
@@ -284,46 +284,75 @@
             </div>
 
 
-            <!-- Article contains the side content in the home page -->
-            <article class = "home_side_content">
-
-                <!-- Recent Announcements Section -->
-                <div class = "recent_announcements"> 
-
-                    <div class = "side_bar_title">
-
-                        <i class="fa-solid fa-bullhorn fa-xl inner_image" style="color: #ffffff;"></i>
-                        <h3> Recent Announcements </h3>
-
-                    </div>
-
-                    <p onclick = "goToForum('Announcements')"> Blevvit Opening Page </p>
-                    <p onclick = "goToForum('Announcements')"> Remember to read the rules of our site!!</p>
-
-                </div>
-
-                <!-- Statistics -->
-                <div class = "statistics"> 
-
-                    <div class = "side_bar_title">
-
-                        <i class="fa-solid fa-chart-simple fa-lg" style = "color: #ffffff;"></i>
-                        <h3> Statistics </h3>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
             <!-- Container for the Post, Which When Clicked Opens the Userpost Page -->
             <div class = "all_posts">
                  
-            </div>
-               
+
                 
+                
+
+
+
+
+
+            </div>
+              
+            <div class = "pagination_container w-287.5 ml-21.25 mr-0">
+
+                <i class = "fa-solid fa-chevron-left fa-2xl arrow"></i>
+
+                <p class = "pagination_number">1</p>
+                <p class = "pagination_number">2</p>
+                <p class = "pagination_number">3</p>
+                <p class = "pagination_number">...</p>
+
+                <i class = "fa-solid fa-chevron-right fa-2xl arrow"></i>
+
+            </div>
+
+
+
         </div>
+
+        <!-- Article contains the side content in the home page -->
+        <article class = "home_side_content">
+
+            <!-- New Posts and Create Thread Buttons -->
+            <div class = "post_and_threads_buttons">
+
+                <button onclick= "window.location.href = '../forumpage/post.html';"> <i class = "fa-solid fa-bolt" style = "color: #ffffff;"></i> New Posts </button>
+                <button onclick= "window.location.href = '../forumpage/post.html';"> <i class = "fa-solid fa-square-pen fa-lg" style = "color: #ffffff;"></i> Post Thread </button>
+
+            </div>
+
+            <!-- Recent Announcements Section -->
+            <div class = "recent_announcements  "> 
+
+                <div class = "side_bar_title">
+
+                    <i class="text-white fa-solid fa-bullhorn fa-xl"></i>
+                    <h3> Recent Announcements </h3>
+
+                </div>
+
+                <p onclick = "goToForum('Announcements')"> Blevvit Opening Page </p>
+                <p onclick = "goToForum('Announcements')"> Remember to read the rules of our site!!</p>
+
+            </div>
+
+            <!-- Statistics -->
+            <div class = "statistics"> 
+
+                <div class = "side_bar_title">
+
+                    <i class="fa-solid fa-chart-simple fa-lg" style = "color: #ffffff;"></i>
+                    <h3> Statistics </h3>
+
+                </div>
+
+            </div>
+
+        </article>
 
         
         <!-- Div contains the challenge container -->

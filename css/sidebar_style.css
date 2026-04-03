@@ -1,253 +1,187 @@
-/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
-* {
-    box-sizing: border-box;
+@layer components{
+
+    .side_bar{
+
+        @apply fixed
+                w-7.5
+                h-full
+                pt-30
+                bg-[#3E5058]
+                border-2
+                border-[orange]
+                float-left
+                z-4;
+
+    }
+
+    .clickable_container{
+
+        @apply absolute
+                w-6.25
+                h-5
+                left-3.75
+                top-25
+                bg-[#3E5058]
+                z-5;
+
+    }
+
+    .clickable{
+
+        @apply absolute
+                top-2.5
+                text-[orange]
+                scale-[1.5];
+
+        @apply hover:text-[coral] 
+                hover:cursor-pointer;
+
+    }
+
+    .sidebar_border{
+
+        @apply w-[140%]
+               border
+               border-[#314249];
+
+    }
+
+
+    .side_bar_content{
+
+        @apply flex 
+                flex-col
+                h-50
+                w-37.5
+                ml-5
+                -translate-y-7.5
+                invisible;
+
+    }
+
+    .side_bar_home{
+
+        @apply flex 
+                flex-col
+                relative
+                w-[95%];
+
+    }
+
+    .sidebar_home_button, .sidebar_topic_button{
+
+
+        @apply flex 
+                items-center
+                h-10
+                w-[150%]
+                -ml-1.25
+                pl-5
+                font-light
+                text-white
+                bg-[#3E5058]
+                border-0
+                border-r-[10];
+
+        @apply hover:bg-[#2e3c42]
+                hover:cursor-pointer;
+
+    }
+
+    .side_bar_home i, .side_bar_dropdown i{
+
+        @apply scale-[1.2];
+
+    }
+
+    .side_bar_home span, .side_bar_dropdown span{
+
+        @apply ml-3.75
+                text-[15px]
+                text-white;
+
+    }
+
+    .side_bar_topics{
+
+        @apply flex
+                items-center
+                flex-col
+                w-[90%];
+
+    }
+
+    .side_bar_topics p{
+
+        @apply text-sm
+                font-medium
+                text-[#78939e];
+
+    }
+
+    .side_bar_title_container{
+
+        @apply flex
+                items-center
+                ml-13.75
+                pl-5
+                w-[150%]
+                h-10;
+
+        @apply hover:bg-[#4b616a]
+                hover:rounded-sm
+                hover:cursor-pointer;
+
+    }
+
+
+    .side_bar_title_section{
+
+        @apply text-lg
+                font-medium
+              text-[#78939e];                
+
+    }
+
+    .side_bar_dropdown{
+
+        @apply inline-block
+                w-full
+                h-25
+                mb-30;
+
+    }
+
+    .side_bar_content_slice{
+
+        @apply flex
+                items-center;
+
+    }
+
+    .side_bar_content_slice p{
+
+        @apply  ml-3.75
+                text-white;
+
+    }
+
 }
 
 
-/* Div - Add Spacing */
-.spacing{
 
-    margin: 10px;
 
-}
 
-/* Div - Add Spacing but Small */
-.spacing_small{
 
-    margin: 5px;
 
-}
 
 
 
-/* Sidebar */
-.side_bar{
 
-    position: fixed; /* Sticks to the page while scrolling */
 
-    width: 30px;
-    height: 100%;
 
-    padding-top: 120px;
 
-    background-color: #3E5058;
 
-    border-right: 2px solid orange;
 
-    float: left;
 
-    z-index: 4;
 
-}
-
-/* Sidebar - Div Container for Clickable Button */
-.side_bar .clickable_container{
-
-    position: absolute;
-
-    width: 25px;
-    height: 20px;
-
-    left: 15px;
-    top: 100px;
-
-    background-color: #3E5058;
-
-    z-index: 5;
-
-}
-
-/* Sidebar - Clickable Button */
-.side_bar .clickable{
-
-    position: absolute;
-
-    top: 10px;
-
-    color: orange;
-
-    transform: scale(1.5, 1.5);
-
-}
-
-/* Sidebar - Divider Line */
-.side_bar hr{
-
-    width: 140%;
-
-
-    border: 1px solid #314249;
-
-}
-
-/* Sidebar - Clickable Button */
-/* Button on Hover */
-.side_bar .clickable:hover{
-
-    color: coral;
-
-    cursor: pointer;
-
-}
-
-/* Sidebar - Div Container for Content */
-.side_bar_content{
-
-    display: flex;
-    flex-direction: column;
-
-
-    height: 200px;
-    width: 150px;
-
-    margin-left: 20px;
-
-    transform: translateY(-30px);
-
-    visibility: hidden;
-}
-
-/* Sidebar - Div Container for Home Section */
-.side_bar_home{
-
-    display: flex;
-    flex-direction: column;
-
-    position: relative;
-
-    width: 95%;
-
-}
-
-/* Sidebar - Home Section Buttons */
-.side_bar_home button, .side_bar_dropdown button{
-
-    display: flex;
-    align-items: center;
-
-    height: 40px;
-    width: 150%;
-
-    margin-left: -5px;
-
-    padding-left: 20px;
-
-    font-family: "Inter", Arial;
-    font-weight: 300;
-
-    color: white;
-    background-color: #3E5058;
-
-    border: 0px;
-    border-radius: 10px;
-
-}
-
-/* Sidebar - Home Section Content Image */
-.side_bar_home i, .side_bar_dropdown i{
-
-    transform: scale(1.2, 1.2);
-
-}
-
-/* Sidebar - Home Section Content Titles */
-.side_bar_home button span, .side_bar_dropdown span{
-
-    margin-left: 15px; 
-
-    font-size: 14px;
-
-
-}
-
-/* Sidebar - Home Section Buttons */
-/* Buttons on Hover */
-.side_bar_home button:hover, .side_bar_dropdown button:hover{
-
-    background-color: #2e3c42;
-
-    cursor: pointer;
-    
-
-}
-
-
-
-/* Sidebar Topics Section - Div Container for Title and the Topics in Dropdown  */
-.side_bar_topics{
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    width: 90%;
-    
-
-}
-
-/* Sidebar Topics Section - Text */
-.side_bar_topics p{
-
-    font-family: "Inter", Arial;
-    font-size: 14px;
-    font-weight: 500;
-
-    color: #78939e;
-
-
-}
-
-/* Sidebar Topics Section - Title and Caret Icon Container for Dropdown */
-.side_bar_title_container{
-
-    display: flex;
-    align-items: center;
-
-    margin-left: 55px;
-
-    padding-left: 20px;
-
-    width: 150%;
-    height: 40px;
-
-}
-
-/* Sidebar Topics Section - Title and Caret Icon Container */
-/* Container on Hover */
-.side_bar_title_container:hover{
-
-    background-color: #4b616a;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-
-}
-
-/* Sidebar Topics Section - Div Container for the Actual Dropdown Content */
-.side_bar_dropdown{
-
-    display: inline-block;
-
-    width: 105%;
-    height: 100px;
-
-    margin-bottom: 120px;
-
-}
-
-.side_bar_content_slice{
-
-    display: flex;
-    align-items: center;
-
-}
-
-.side_bar_content_slice p{
-
-    margin-left: 15px; 
-
-    color: white;
-
-}

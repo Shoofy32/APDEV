@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownTitles[i].addEventListener("click", () => {
                 
                 moveToForum(dropdownTitles[i].textContent.trim());
+                sessionStorage.clear();
         
             });
 
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sideBarButtons[i].addEventListener("click", () => {
     
             moveToForum(sideBarButtons[i].textContent.trim());
+            sessionStorage.clear();
     
         });
 

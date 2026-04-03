@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Add event listener for notificationButton
     notificationButton.addEventListener("click", () => {
 
-        let notificationDropdown = document.getElementsByClassName("notification_dropdown")[0]; // Dropdown container
+        let notificationContainer = document.getElementsByClassName("notification_container")[0]; // notification container
         let notificationButton = document.getElementsByClassName("notification_button")[0]; // Notification button
 
         // Toggle classes for dropdown functionality
-        notificationDropdown.classList.toggle("reveal_hidden");
+        notificationContainer.classList.toggle("reveal_hidden");
         notificationButton.classList.toggle("notification_active");
 
     });
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         `<div class = "challenger_stats_container">
 
             <img src = ${image} class = "challenger_icon">
-            <p><span class = "challenger_name"><strong>${name}</strong></span></p>
+            <p><span class = "challenger_name">${name}</span></p>
             
             <div class = "challenger_rolls_likes_container">
 

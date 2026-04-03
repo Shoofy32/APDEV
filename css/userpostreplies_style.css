@@ -1,674 +1,344 @@
-a {
-  text-decoration: none;
-}
+@layer components{
 
+    .all_posts{
 
-.all_posts{
+        @apply flex
+                flex-col
+                justify-start
+                ml-auto
+                mr-auto;
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    }
 
-    width: 850px;
+    /* Posts - Div Container that contains PFP, Username, and Date of Post */
+    .icon_name_date_post{
 
-    margin-left: auto;
-    margin-right: auto;
-    
-}
+        @apply flex
+                items-center
+                h-5
 
-/* Posts - Div Container that contains PFP, Username, and Date of Post */
-.icon_name_date_post{
+    }
 
-    display: flex;
-    align-items: center;
+    /* Latests Posts - Secondary Div Container that contains a post */
+    .post, .reply, .create_reply_container{
 
-    height: 20px;
+        @apply w-auto      
+                h-auto
+                mt-2.5
+                pl-5
+                pt-3.75
+                bg-[#3E5058]
+                rounded-md;
 
-}
+        @apply hover:cursor-pointer;
 
-/* Latests Posts - Secondary Div Container that contains a post */
- .post, .reply, .create_reply_container{
+    }
 
-    width: auto;
-    height: auto;
+    /* Posts - PFP image */
+    .icon_name_date_post img, .reply .icon_name_date_post img{
 
-    margin-top: 10px;
+        @apply h-6.25
+                w-6.25
+                rounded-[50%]
+                object-cover;
 
-    padding-left: 20px;
-    padding-top: 15px;
+    }
 
-    background-color: #3E5058;
-    border-radius: 5px;
+    /* Posts - Username */
+    .icon_name_date_post .name_post{
 
-}
+        @apply text-sm
+                font-normal
+                text-[#57cbb8]
+                ml-2.5;
 
-/* Posts - PFP image */
-.icon_name_date_post img, .reply .icon_name_date_post img{
+        @apply hover:underline;
 
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    object-fit: cover;
+    }
 
-}
+    /* Posts - Date of Post */
+    .icon_name_date_post .date_post{
 
-/* Posts - Username */
-.icon_name_date_post .name_post{
+        @apply text-[11px]
+                font-normal
+                text-[lightgray]
+                ml-2.5;
 
-    font-size: 14px;
-    font-family: "Inter", Arial;
-    font-weight: 400;
+    }
 
-    color: #57cbb8;
+    /* Posts - Title of Post */
+    .post .title_post, .reply .title_post{
 
-    margin-left: 10px;
+        @apply text-2xl
+                font-semibold
+                mt-3
+                text-[coral];
 
-}
+    }
 
-/* Posts - Date of Post */
-.icon_name_date_post .date_post{
+    /* Posts - Div Container that Contains the Tags of the Post */
+    .tags_post{
 
-    font-size: 11px;
-    font-family: "Inter", Arial;
-    font-weight: 400;
+        @apply flex
+                items-center
+                mt-1
+                mb-2
+                h-3.5
 
-    color: lightgray;
+    }
 
-    margin-left: 10px;
-    
-}
+    /* Posts - Text of Tags */
+    .tags_post p{
 
-/* Posts - Title of Post */
-.post h3, .reply h3{
+        @apply w-auto
+                h-3.5
+                ml-1
+                pl-0.5
+                pr-0.5
+                text-[10px]
+                font-semibold
+                text-[gray]
+                bg-[lightgray]
+                rounded-sm;
 
-    font-size: 22px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
+    }
 
-    margin-top: 20px;
-    color: coral;
+    /* Posts - Short Description of Post*/
+    .post .description_short_post, .reply .description_short_post{
 
-}
+        @apply w-[95%]
+                mt-0
+                mb-5
+                text-base
+                font-normal
+                overflow-hidden;
 
-/* Posts - Div Container that Contains the Tags of the Post */
-.tags_post{
+    }
 
-    display: flex;
-    align-items: center;
+    /* Posts - Div Container that Contains the Like and Dislike Buttons */
+    .stats_post{
 
-}
+        @apply flex
+                items-center
+                h-10
+                -mt-2.5;
 
-/* Posts - Text of Tags */
-.tags_post p{
+    }
 
-    width: auto;
-    height: 14px;
+    /* Posts - Div Container that Contains a Button and its Counter */
+    .counter_container, .challenge_button, .reply_button, .comment_container{
 
-    margin-top: -15px;
-    margin-left: 4px;
+        @apply flex
+                items-center
+                bg-[#3E5058]
+                h-7.5
+                w-auto
+                pl-3.75
+                rounded-md;
 
-    padding-left: 2px;
-    padding-right: 2px;
+        @apply hover:bg-[#495d65]
+                hover:cursor-pointer;
 
-    font-size: 10px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
+    }
 
-    color: grey;
-    background-color: lightgrey;
+    /* Posts - Div Container that Contains a Reply Button */
+    .reply_button{
 
-    border-radius: 2px;
+        @apply ml-5;
 
-}
 
-/* Posts - Short Description of Post*/
-.post .description_short_post, .reply .description_short_post{
+    }
 
-    width: 95%;
+    /* Posts (Counter) - Icon of Button */
+    .stats_post i{
 
-    margin-top: 0px;
+        @apply pr-3.75;
 
-    font-size: 15px;
-    font-family: "Inter", Arial;
-    font-weight: 400;
+        @apply hover:text-[coral]
+                hover:cursor-pointer;
+        
+    }
 
-    color: white;
+    /* Posts (Counter) - Counter of Button */
+    .stats_post p{
 
-    overflow: hidden;
+        @apply text-sm
+                font-normal
+                mr-5
+                pl-1.25;
 
-}
+    }
 
-/* Posts - Div Container that Contains the Like and Dislike Buttons */
-.stats_post{
+    /* Latests Posts - Challenge Button Text */
+    .challenge_button p, .reply_button p{
 
-    display: flex;
-    align-items: center;
+        @apply font-medium
+                -translate-x-1.25;
 
-    height: 40px;
-    
-    margin-top: -10px;
-}
+    }
 
-/* Posts - Div Container that Contains a Button and its Counter */
-.counter_container, .challenge_button, .reply_button{
+    .replying_to_container {
 
-    display: flex;
-    align-items: center;
+        @apply w-192.5
+                mt-5
+                mb-7.5
+                p-3.75
+                bg-[#314047]
+                border-4
+                border-[coral]
+                rounded-xl;
+        
+    }
 
-    background-color: #3E5058;
+    .replying_to_container p{
 
-    height: 30px;
-    width: auto;
+        @apply mt-0;
 
-    padding-left: 15px;
+    }
 
-    border-radius: 5px;
 
-}
+    .replying_to_container .user_repliedto{
 
-/* Posts - Div Container that Contains a Reply Button */
-.reply_button{
+        @apply relative
+                text-[coral]
+                font-bold
+                text-lg;
 
-    margin-left: 20px;
+    }
 
-}
+    .create_reply_container{
 
-/* Posts (Counter) - Icon of Button */
-.stats_post i{
+        @apply relative;
 
-    color: white;
+    }
 
-    padding-right: 15px;
-    
-}
+    .closeReply{
 
-/* Posts (Counter) - Counter of Button */
-.stats_post p{
+        @apply flex
+                absolute
+                right-6.25
+                top-7.5;
 
-    font-size: 14px;
-    font-family: "Inter", Arial;
-    font-weight: 400;
+        @apply hover:cursor-pointer;
 
-    margin-right: 20px;
 
-    padding-left: 5px;
-    
-    color: white;
+    }
 
-}
+    .closeReply i{
 
+        @apply text-[coral];
 
-/* Posts (Counter) - Icon of Button */
-/* On Hover */
-.stats_post i:hover{
+        @apply hover:text-[#e06a3f];
 
-    color: coral;
+    }
 
-    cursor: pointer;
+    .reply_to{
 
-}
+        @apply text-xl
+                font-medium
+                text-[salmon];
+    }
 
-/* Posts - Div Container that Contains a Button and its Counter */
-/* On Hover */
-.counter_container:hover, .challenge_button:hover, .reply_button:hover{
+    .reply_content{
 
-    background-color: #495d65;
-    cursor: pointer;
+        @apply w-[95%]
+                h-35
+                mt-3.75
+                mb-6.25
+                ml-2.5
+                pl-1.25
+                pt-1.25
+                bg-[lightgray]
+                border-2
+                border-[salmon]
+                rounded-md
+                text-lg
+                resize-none;
 
-}
+        @apply placeholder:font-semibold;
 
-/* Latests Posts - Text Result of Roll */
-.roll_20_number{
 
-    position: absolute;
+    }
 
-    top: 200px;
 
-    font-size: 40px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
+    .confirm_post_container{
 
-    color: rgb(255, 149, 110);
+        @apply flex
+                justify-end
+                mr-[4%]
+                mb-5;
 
-}
+    }
 
-/* Latests Posts - Text Result of Roll */
-.result{
+    .confirm_post{
 
-    font-size: 18px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
+        @apply flex
+                justify-center
+                items-center
+                h-10
+                w-23.75
+                text-[coral]
+                bg-[#3b4950]
+                border-2
+                border-[coral]
+                rounded-xl;
 
-    color: rgb(255, 149, 110);
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:border-[orange]
+                hover:cursor-pointer;
 
-}
+    }
 
-/* Latests Posts - Challenge Button Text */
-.challenge_button p, .reply_button p{
+    #edit_container {
 
-    font-weight: 500;
+        @apply flex
+                items-end
+                justify-end
+                mt-1.25;
 
-    transform: translateX(-5px);
+    }
 
-}
+    #editArea{
 
-/* Challenge - Div Container for Challenge*/
-#challenge_container{
+        @apply w-[95%]
+                h-35
+                mt-3.75
+                mb-6.25
+                ml-2.5
+                pl-1.25
+                pt-1.25
+                bg-[lightgray]
+                border-2
+                border-[salmon]
+                rounded-md
+                text-lg
+                resize-none
+                placeholder:font-medium;
 
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-    width: 500px;
-    height: 550px;
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    }
 
-    border: 3px solid #584d3e;
-    border-radius: 10px;
-    opacity: 0;
-    z-index: -999;
-    transition: all 0.3s ease-in-out;
-    gap: 3px;
+    #Save{
 
-    cursor: default;
+        @apply flex
+                justify-center
+                items-center
+                h-10
+                w-23.75
+                text-[coral]
+                bg-[#3b4950]
+                border-2
+                border-[coral]
+                rounded-xl;
 
-}
-
-/* Challenge - Roll 20 Title */
-.roll_20{
-
-    font-size: 40px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
-
-    margin: 0px;
-    color: white;
-
-}
-
-.dicebg{
-
-    display: flex;
-    justify-content: center;
-
-}
-
-/* Challenge - Challenge Container on Visible State */
-#challenge_container.open {
-    opacity: 1;
-    z-index: 999;
-    background: none;
-    border: 0;
-
-    background-color: #3e5058b9;
-}
-
-/* Latests Posts - Container Storing Input and Button */
-.bet_container{
-
-    display: flex;
-    justify-content: center;
-
-    width: 100%;
-    height: 50px;
-
-}
-
-/* Challenge - Bet Likes Text */
-#challenge_container .bet_container p{
-
-    font-size: 18px;
-    font-family: "Inter", Arial;
-    font-weight: 800;
-
-    transform: translateY(-8px);
-
-    color: white;
-
-}
-
-/* Challenge - Bet Container Button */
-.bet_container button{
-
-    font-family: "Inter", Arial;
-    font-size: 18px;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:border-[orange]
+                hover:cursor-pointer;
+    }
 
 }
-
-/* Challenge - Input Likes Container */
-#challenge_container input{
-
-    width: 50px;
-    height: 40px;
-    background-color: #1A1D1A;
-    color: #8AB0AB;
-
-    margin-left: 10px;
-    margin-bottom: 10px;
-
-    font-size: 16px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
-
-    color: white;
-    
-}
-
-/* Challenge - Input Likes Container - Inner Spin Buttons */
-#challenge_container input::-webkit-inner-spin-button{
-
-    width: 20px;
-    height: 20px;
-    
-}
-
-/* Challenge - Bet Likes Button */
-.postBet{
-
-    width: 200px;
-    height:45px;
-
-    margin-left: 15px;
-
-}
-
-#challenge_container textarea::placeholder{
-    color: #8AB0AB;
-    opacity: 0.5;
-} 
-
-#reply_container textarea:focus{
-    outline: none;
-    border-color: #8AB0AB;
-}
-
-#challenge_container > div:nth-child(2){
-
-    font-size: 12px;
-    color: #8AB0AB;
-    opacity: 0.7;
-    margin-bottom: 6px;
-
-}
-
-/* Challenge - Close Challenge Button */
-#challenge_container > div:nth-child(1){
-
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-
-    left: 460px;
-    top:1px;
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 10px;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-
-}
-
-#challenge_container > div:nth-child(1) > button{
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-
-    border: 0px;
-
-}
-
-#challenge_container > div:nth-child(1) > button > i{
-
-    background-color: rgb(59, 73, 80);
-    transform: scale(2, 2);
-
-}
-
-#challenge_container #closeChallenge:hover{
-
-    cursor: pointer;
-    color: rgb(255, 149, 110);
-
-}
-
-.replying_to_container {
-
-    width: 800px;
-
-    margin-top: 20px;
-    margin-bottom: 30px;
-
-    padding: 15px;
-
-    background-color: #314047;
-
-    border-left: solid coral 3px;
-    border-radius: 10px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    
-}
-
-.replying_to_container p{
-
-    margin-top: 0px;
-
-    color: white;
-
-}
-
-
-.replying_to_container .user_repliedto{
-    position: relative;
-    color: coral;
-
-
-    font-weight: 700;
-    font-size: 17px;
-
-
-}
-
-.create_reply_container{
-
-    position: relative;
-
-}
-
-.closeReply{
-
-    display: flex;
-    position: absolute;
-
-    left: 780px;
-    top: 30px;
-
-
-}
-
-.closeReply:hover{
-
-    cursor: pointer;
-
-}
-
-.closeReply i{
-
-    color: coral;
-
-}
-
-.closeReply:hover i{
-
-    color: rgb(224, 106, 63);
-
-}
-
-.reply_to{
-
-    font-size: 20px;
-    font-weight: 500;
-
-    color: salmon;
-
-}
-
-.reply_content{
-
-    width: 95%;
-    height: 140px;
-
-    margin-top: 15px;
-    margin-bottom: 25px;
-    margin-left: 10px;
-
-    padding-left: 5px;
-    padding-top: 5px;
-
-    background-color: lightgray;
-
-    border: 2px solid salmon;
-    border-radius: 5px;
-
-    font-family: "Inter", Arial;
-    font-size: 17px;
-
-    resize: none;
-
-
-}
-
-.reply_content::placeholder{
-
-    font-family: "Inter", Arial;
-    font-weight: 500;
-
-}
-
-.confirm_post_container{
-
-    display: flex;
-    justify-content: flex-end;
-
-    margin-right: 4%;
-    margin-bottom: 20px;
-
-}
-
-.confirm_post{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 40px;
-    width: 95px;
-
-    font-family: "Inter", Arial;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
-
-}
-
-.confirm_post:hover{
-
-    color: white;
-    background-color: #37474f;
-
-    border-color: orange;
-
-    cursor: pointer;
-
-}
-
-/* CHALLENGER VERSION */
-
-#challenge_container .challenger_stats_container{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-    height: 50px;
-    width: 100%;
-
-
-    font-family: 'Inter', Arial;
-    font-size: 18px;
-    color: white;
-
-
-}
-
-/* Challenge - Image Challenger */
-#challenge_container .challenger_icon{
-
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-
-    margin-right: 10px;
-
-}
-
-#challenge_container .challenger_rolls_likes_container{
-
-    display: flex;
-    align-items: center;
-
-    margin-left: 45px;
-
-}
-
-
-#challenge_container i{
-
-    color: white;
-
-}
-
-#challenge_container .challenger_rolled_number, #challenge_container .challenger_bet_likes{
-
-    font-size: 20px;
-    font-weight: 700;
-    color: salmon;
-
-    margin-left: 5px;
-    margin-right: 10px;
-
-}
-
-#challenge_container .postBet:hover{
-
-    color: white;
-    background-color: #37474f;
-
-    border-color: orange;
-
-    cursor: pointer;
-
-}
-
-
-
-
 
 
