@@ -1,1074 +1,697 @@
-/* Allows the file to calcualte both margin and padding when adjusting height and width of element, to avoid manual adjusting*/
-* {
-    box-sizing: border-box;
-}
+@layer components{
 
-body {
 
-    background-color: #1A1D1A;;
+    .banner_image{
 
-    margin: 0px;
+        @apply h-[20vh]
+                w-full
+                rounded-tl-md
+                rounded-tr-md
+                object-cover;
 
-    font-family: 'Inter', Arial;
+    }
+
+    .pfp{
+
+        @apply absolute
+                top-40
+                left-37.5
+                h-43.75
+                w-43.75
+                object-cover
+                rounded-[50%]
+                z-2;
+
+    }
+
+    .infobox{
+
+        @apply flex
+                flex-col
+                mt-[10vh]
+                gap-7.5
+                ml-20
+                w-387.5
+                bg-[#3E5058]
+                rounded-xl;
+
+    }
+
+
+    .left_side_info_container{
+
+        @apply flex
+                flex-col;
+
+    }
+
+    .right_side_info_container{
+
+        @apply flex
+                items-end
+                absolute
+                right-0
+                flex-col
+                w-100
+                -mt-2.5
+                ml-7.5;
+
+    }
+
+
+    .name {
+
+        @apply h-37.5
+                ml-22.5
+                mt-10;
+
+    }
+
+    .left_side_info_container .username{
+
+        @apply text-[salmon]
+                text-4xl
+                font-extrabold
+                mt-5;
+
+    }
+
+    .bio{
+
+        @apply text-xl
+                font-medium
+                w-250;
+
+    }
+
+    .right_side_stats_container{
+
+        @apply flex
+                justify-center
+                w-full
+                gap-[4vw]
+                mr-3;
+
+    }
+
+    .stats_container{
+
+        @apply flex
+                items-center
+                flex-col
+                mt-11.25;
+
+
+    }
+
+    .stats_label{
+
+        @apply text-xl
+                font-medium;
+
+    }
+
+    .stats_container p:first-child{
+
+        @apply text-4xl
+                font-extrabold
+                text-[salmon]
+                m-0
+                -mt-5;
+
+    }
+
+
+
+    .edit_profile_button{
+
+        @apply flex
+                items-center
+                h-10
+                w-10
+                mr-5
+                bg-transparent
+                border-0;
+
+
+    }
+
+    .edit_profile_button i{
+
+        @apply hover:text-[salmon]
+                hover:cursor-pointer;
+
+    }
+
+
+    .user_posts_replies_notifications_container{
+
+        @apply flex
+                flex-col
+                ml-20
+                h-250
+                min-h-250
+                w-287.5
+                mt-10
+                bg-[#28363b]
+                border-4
+                border-[#3E5058]
+                rounded-sm;
+
+    }
+
+    .post_reply_notifications_buttons_container{
+
+        @apply flex
+                border-b-4
+                border-b-[#3E5058];
+
+    }
+
+    .post_reply_notifications_buttons_container button{
+
+        @apply h-12.5
+                w-30
+                text-base
+                font-bold
+                text-[coral]
+                bg-[#3b4950]
+                border-r-4
+                border-r-[#3E5058]
+                border-t-0
+                border-l-0
+                border-b-0
+                float-left;
+
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:cursor-pointer;
+
+    }
+
+    .user_posts_replies_notifications_container .all_posts, .all_replies, .all_notifications{
+
+        @apply hidden
+                flex-col
+                justify-center
+                w-275
+                mt-5;
+
+    }
+
+    .display_visible{
+
+        @apply flex;
+
+    }
+
+    .challenge_stats_container{
+
+        @apply absolute
+                top-[61.5vh]
+                right-0
+                h-[30vh]
+                w-[21vw]
+                bg-[#28363b]
+                border-4
+                border-[#3E5058]
+                rounded-md;
+
+    }
+
+    .challenge_stats_container p{
+
+        @apply ml-3.75;
+
+    }
+
+    .challenge_stats_container hr{
+
+        @apply border-2
+                border-[#3E5058];
+
+    }
+
+    .stats_container_title{
+
+        @apply text-2xl
+                font-bold
+                m-0
+                mt-3.75;
+
+    }
+
+    .side_stats_container{
+
+        @apply flex
+                items-center
+                mt-5;
+
+    }
+
+    .stats_container_label{
+
+        @apply text-2xl
+                font-semibold
+                text-[salmon]
+                w-25;
+
+    }
+
+    .side_challenge_wins_counter, .side_challenge_losses_counter, .side_challenge_ties_counter{
+
+        @apply text-2xl
+                font-semibold
+                text-right
+                min-w-40;
+
+    }
+
+    .challenge_profile_button{
+
+        @apply flex
+                justify-center
+                items-center
+                h-[6vh]
+                w-[21vw]
+                mt-[8vh]
+                text-xl
+                font-bold
+                text-[whitesmoke]
+                bg-[coral]
+                border-2
+                border-[orangered]
+                rounded-md;
+        
+        @apply hover:bg-[#fb662f]
+                hover:border-[coral]
+                hover:cursor-pointer;
+    }
+
+    .delete_edit_container {
+
+        @apply flex
+                items-center
+                justify-center
+                ml-auto
+                mr-5
+                gap-1.25;
+
+    }   
     
-}
-
-.mainbox{
-  
-    position: absolute;
-
-}
-
-
-
-.banner_image{
-
-    height: 20vh;
-    width: 92vw;
-
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    object-fit: cover;
-
-}
-
-.pfp {
-
-    position: absolute;
-
-    top: 180px;
-    left: 150px;
-
-    height: 175px;
-    width: 175px;
-
-    object-fit: fill;
-    object-fit: cover;
-
-    border-radius: 50%;
-
-    z-index: 2;
-
-}
-
-
-.infobox{
-
-    display: flex;
-    flex-direction: column;
-
-    margin-top: 10vh;
-    gap: 30px;
-
-    height: 400px;
-
-    margin-left: 80px;
-
-    background-color: #3E5058;
-
-    border-radius: 5px;
-
-}
-
-.info_containers{
-
-    display: flex;
-
-}
-.left_side_info_container{
-
-    display: flex;
-    flex-direction: column;
-
-}
-
-.right_side_info_container{
-
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-
-    width: 400px;
-
-    margin-top: -10px;
-    margin-left: 30px;
-    
-}
-
-.name {
-
-    height: 150px;
-
-    margin-left: 90px;
-    margin-top: 40px;
-
-
-}
-
-.left_side_info_container .username{
-
-    color: salmon;
-    font-size: 35px;
-    font-weight: 800;
-
-
-}
-
-.bio{
-
-    font-size: 20px;
-    font-weight: 500;
-
-
-    width: 1000px;
-
-    margin-top: -10px;
-
-    color: white;
-
-}
-
-.right_side_stats_container{
-
-    display: flex;
-    justify-content: center;
-
-    width: 100%;
-
-    gap: 4vw;
-}
-
-.stats_container{
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    margin-top: 45px;
-}
-
-.stats_label{
-
-    font-size: 20px;
-    font-weight: 500;
-    color: white; 
-
-
-}
-
-.stats_container p:first-child{
-
-    font-size: 35px;
-    font-weight: 800;
-    color: salmon;  
-
-    margin: 0px;
-    margin-top: -20px;
-
-}
-
-
-
-.edit_profile_button{
-
-    display: flex;
-    align-items: center;
-
-    height: 40px;
-    width: 40px;
-
-    background: none;
-    border: none;
-
-}
-
-.edit_profile_button i{
-
-    color: white;
-
-}
-
-.edit_profile_button i:hover{
-
-    color: salmon;
-    cursor: pointer;
-    
-}
-
-.user_posts_replies_notifications_container{
-
-    display: flex;
-    flex-direction: column;
-
-    margin-left: 80px;
-
-    height:1000px;
-    width: 1150px;
-    
-
-    margin-top: 40px;
-
-    background-color: #28363b;
-
-    border: 3px solid #3E5058;
-    border-radius: 5px;
-
-}
-
-.post_reply_notifications_buttons_container{
-
-    display: flex;
-    border-bottom: 3px solid #3E5058;
-
-}
-
-.post_reply_notifications_buttons_container button{
-
-    height: 50px;
-    width: 120px;
-
-    font-size: 15px;
-    font-weight: 700;
-    font-family: "Inter", Arial;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-
-    border-right: 3px solid #3E5058;
-    border-top: 0px;
-    border-left: 0px;
-    border-bottom: 0px;
-
-    float: left;
-
-}
-
-.post_reply_notifications_buttons_container button:hover{
-
-    color: white;
-    background-color: #37474f;
-
-    cursor: pointer;
-
-
-}
-
-.post_reply_notifications_buttons_container .posts_button{
-
-    border-top-left-radius: 3px;
-    
-}
-
-.all_posts, .all_replies, .all_notifications{
-
-    display: none;
-    flex-direction: column;
-
-    width: 1100px;
-
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-.display_visible{
-
-    display:flex;
-
-}
-
-.challenge_stats_container{
-
-    position: absolute;
-
-    top: 58vh;
-    left: 75.5vw;
-
-    height: 30vh;
-    width: 21vw;
-
-    background-color: #28363b;
-
-    border: 3px solid #3E5058;
-    border-radius: 5px;
-
-}
-
-.challenge_stats_container p{
-
-    margin-left: 15px;
-
-}
-
-.challenge_stats_container hr{
-
-    border: 2px solid #3E5058;
-
-}
-
-.stats_container_title{
-
-    font-size: 25px;
-    font-weight: 700;
-    color: white;
-
-    margin: 0px;
-    margin-top: 15px;
-
-}
-
-.side_stats_container{
-
-    display: flex;
-    align-items: center;
-
-    margin-top: -10px;
-
-}
-
-.stats_container_label{
-
-    font-size: 22px;
-    font-weight: 600;
-    color: salmon;
-
-    width: 100px;
-
-
-
-}
-
-.side_challenge_wins_counter, .side_challenge_losses_counter, .side_challenge_ties_counter{
-
-
-    font-size: 24px;
-    font-weight: 600;
-
-    text-align: right;    
-    min-width: 200px;   
-    
-
-}
-
-.side_challenge_wins_counter{
-
-    color: rgba(122, 185, 72, 1);
-
-}
-
-.side_challenge_losses_counter{
-
-    color: rgb(227, 0, 0);
-
-}
-
-.side_challenge_ties_counter{
-
-    color: whitesmoke;
-
-}
-
-
-.challenge_profile_button{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 6vh;
-    width: 21vw;
-
-    margin-top: 3vh;
-
-    font-size: 20px;
-    font-family: "Inter", Arial;
-    font-weight: 700;
-
-    color: whitesmoke;
-    background-color: coral;
-    border: 1px solid orangered;
-    border-radius: 5px;
-
-}
-
-.challenge_profile_button:hover{
-
-    color: white;
-    background-color: rgb(251, 102, 47);
-
-    border-color: coral;
-
-    cursor: pointer;
-
-
-}
-
+    .all_replies .replying_to_container{
 
+        @apply w-200
+                mt-5
+                mb-7.5
+                p-3.75
+                bg-[#314047]
+                border-l-4
+                border-[coral]
+                rounded-xl
+                rounded-t-none
+                rounded-l-none;
 
-.delete_edit_container {
+    }
 
-    margin-left: auto;
-    margin-right: 20px;
+    .all_replies .reply{
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    
-}
-
-.delete_button {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: auto;
-    border: none;
-    background-color: #394b53;
-    height: 30px;
-    border-radius: 5px;
-    width:100px;
-    right: 300px;   
-
-}
-
-.edit_button {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: auto;
-    border: none;
-    background-color: #394b53;
-    height: 30px;
-    border-radius: 5px;
-    width:100px;   
-
-}
-
-.delete_button:hover{
-
-    cursor: pointer;
-    background-color: #495d65;
-
-}
-
-.edit_button:hover{
-
-    cursor: pointer;
-    background-color: #495d65;
-
-}
-
-.delete_button > h4, .edit_button > h4{
-
-    font-family: "Inter", Arial;
-    font-weight: 600;
-    font-size: 14px;
-
-
-    color: white;
-
-}
-
-/* Posts - Div Container that Contains a Button and its Counter */
-.counter_container, .challenge_button, .reply_button{
-
-    display: flex;
-    align-items: center;
-
-    background-color: #3E5058;
-
-    height: 30px;
-    width: auto;
-
-    padding-left: 15px;
-
-    border-radius: 5px;
-
-}
-
-.reply_button{
-
-    margin-left: 20px;
-
-}
-
-.counter_container:hover, .challenge_button:hover, .reply_button:hover{
-
-    background-color: #495d65;
-    cursor: pointer;
-
-}
-
-.challenge_button p, .reply_button p{
-
-    font-weight: 500;
-
-    transform: translateX(-5px);
-
-}
-
-#Save {
-    background-color:#8AB0AB;
-    
-}
-#edit_container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin-top: 5px;
-}
-
-#editArea{
-
-    width: 95%;
-    height: 140px;
-
-    margin-top: 15px;
-    margin-bottom: 25px;
-    margin-left: 10px;
-
-    padding-left: 5px;
-    padding-top: 5px;
-
-    background-color: lightgray;
-
-    border: 2px solid salmon;
-    border-radius: 5px;
-
-    font-family: "Inter", Arial;
-    font-size: 17px;
-
-    resize: none;
-
-
-}
-
-#editArea::placeholder{
-
-    font-family: "Inter", Arial;
-    font-weight: 500;
-
-}
-
-#Save{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 40px;
-    width: 95px;
-
-    font-family: "Inter", Arial;
-
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
-
-}
-
-#Save:hover{
-
-    color: white;
-    background-color: #37474f;
-
-    border-color: orange;
-
-    cursor: pointer;
-
-}
-
-
-/* Reply container and replies Section */
-
-.all_replies .replying_to_container {
-
-    width: 800px;
-
-    margin-top: 20px;
-    margin-bottom: 30px;
-
-    padding: 15px;
-
-    background-color: #314047;
-
-    border-left: solid coral 3px;
-    border-radius: 10px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    
-}
-
-.all_replies .reply{
-
-    width: auto;
-    height: auto;
-
-    margin-top: 10px;
-
-    padding-left: 20px;
-    padding-top: 15px;
-
-    background-color: #3E5058;
-    border-radius: 5px;
-
-}
-
-.all_replies .reply h3{
-
-    font-size: 22px;
-    font-family: "Inter", Arial;
-    font-weight: 600;
-
-    margin-top: 20px;
-    color: coral;
-
-}
-
-.all_replies .reply .description_short_post{
-
-    width: 95%;
-
-    margin-top: 0px;
-
-    font-size: 15px;
-    font-family: "Inter", Arial;
-    font-weight: 400;
+        @apply w-auto
+                h-auto
+                mt-2.5
+                pl-5
+                pt-3.75
+                bg-[#3E5058]
+                rounded-md;
 
-    color: white;
+    }
 
-    overflow: hidden;
+    .all_replies .reply h3{
 
-}
-
-
-.all_replies .replying_to_container p{
-
-    margin-top: 0px;
-
-    color: white;
-
-}
-
-
-.all_replies .replying_to_container .user_repliedto{
-    position: relative;
-    color: coral;
-
-
-    font-weight: 700;
-    font-size: 17px;
-
-
-}
-
-
-
-/* Notifications Container and Notifications Section */
-
-.all_notifications .challenge_notification, .all_notifications .challenge_results_notification{
-
-    display: flex;
-    align-items: center;
-
-    height: 10vh;
-
-    margin-bottom: 20px;
-
-    background-color: #3E5058;
-
-    border-radius: 5px;
-
-}
-
-
-.all_notifications .accept_deny_container{
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-
-    margin-right: 2vw;
-
-    gap: 20px;
-
-
-
-
-}
-
-
-.all_notifications .accept_challenge, .all_notifications .deny_challenge , .all_notifications .accept_result{
-
-    height: 20px;
-    width: 30px;
-
-    background: none;
-    border: none;
-
-    transform: scale(1.7, 1.7);
-
-    color: white;
-
-}
-
-.all_notifications .accept_challenge:hover, .all_notifications .deny_challenge:hover, .all_notifications .accept_result:hover{
-
-    color: salmon;
-
-    cursor: pointer;
-
-}
-
-.all_notifications img{
-
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+        @apply text-2xl
+                font-semibold
+                text-[coral]
+                mt-5;
 
-    margin-left: 10px;
+    }
 
-}
-
-.all_notifications .icon_name_challenge_container{
-
-    display: flex;
-
-    margin-left: 1vw;
-
-
-}
-
-.all_notifications .icon_name_challenge_container p{
-
-    font-size: 20px;
-    margin-left: 10px;
-
-    color: white;
-
-}
-
-.all_notifications .challenger_name{
+    .all_replies .reply .description_short_post{
 
-    font-weight: 700;
-}
-
-.all_notifications .roll_likes_container{
-
-    display: flex;
+        @apply w-[95%]
+                mt-0
+                text-base
+                font-normal
+                overflow-hidden;
 
-    margin-left: auto;
-    margin-right: 5vw;
+    }
 
-    gap: 2vw;
 
-}
+    .all_replies .replying_to_container p{
 
-.all_notifications .roll_likes_container i{
+        @apply mt-0;
 
-    color: white;
-
-}
+    }
 
-.all_notifications .roll_likes_container p{
 
-    font-size: 20px;
+    .all_replies .replying_to_container .user_repliedto{
 
-    color: salmon;
-    font-weight: 700;
+        @apply relative
+                text-[coral]
+                font-bold
+                text-lg;
 
+    }
 
-}
+    .all_notifications .challenge_notification, .all_notifications .challenge_results_notification{
 
-.all_notifications .results_alert_container{
+        @apply flex
+                items-center
+                h-[10vh]
+                mb-5
+                ml-10
+                bg-[#3E5058]
+                rounded-md
+                rounded-tl-none
+                rounded-bl-none;
 
-    display: flex;
-    align-items: center;
+    }
 
 
-}
+    .all_notifications .accept_deny_container{
 
-.all_notifications .results_name{
+        @apply flex
+                justify-end
+                items-center
+                mr-[2vw]
+                mt-7.5
+                gap-5
+                scale-[1];
 
-    font-size: 20px;
-    color: white;
-    font-weight: 700;
+        @apply hover:text-[salmon]
+                cursor-pointer;
 
-    margin-left: 10px;
+    }
 
-}
 
+    .all_notifications .accept_challenge, .all_notifications .deny_challenge , .all_notifications .accept_result{
 
-.all_notifications .results_alert{
+        @apply h-5
+                w-7.5
+                bg-transparent
+                border-0
+                scale-[1.7]
+                text-white;
 
-    width: 350px;
+        @apply hover:text-[salmon]
+                hover:cursor-pointer;
 
-    font-size: 18px;
-    color: coral;
-    font-weight: 500;
 
-    margin-left: 20px;
+    }
 
-}
+    .all_notifications img{
 
-.all_notifications .challenge_results_notification .accept_deny_container{
+        @apply h-12.5
+                w-12.5
+                rounded-[50%]
+                ml-2.5;
 
-    display: flex;
-    justify-content: flex-end;
+    }
 
-    margin-left: auto;
+    .all_notifications .icon_name_challenge_container{
 
-}
+        @apply flex
+                ml-[1vw]
+                mb-2.5;
 
-.all_notifications .challenge_results_notification .challenge_results_container{
+    }
 
-    display: flex;
+    .all_notifications .icon_name_challenge_container p{
 
-    margin-left: 20px;
+        @apply text-xl
+                ml-5;
 
-    gap: 15px;
+    }
 
-}
+    .all_notifications .challenger_name{
 
-.all_notifications .challenge_results_notification .results_display_container{
+        @apply font-bold;
+    }
 
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    .all_notifications .roll_likes_container{
 
+        @apply flex
+                ml-auto
+                mr-[5vw]
+                gap-[2vw]
+                mt-0
+                mb-0;
 
+    }
 
-}
+    .all_notifications .roll_likes_container p{
 
-.all_notifications .challenge_results_notification .number_result, .all_notifications .challenge_results_notification .number_result_betlikes{
+        @apply text-xl
+                text-[salmon]
+                font-bold;
 
-    transform: scale(1.2, 1.2);
-    color: salmon;
+    }
 
-    font-weight: 700;
+    .all_notifications .results_alert_container{
 
-    margin: 0px;
-    padding-bottom: 15px;
-}
+        @apply flex
+                items-center
+                mb-2.5
+                pb-2.5
+                ;
 
-.all_notifications .challenge_results_notification .number_result i, .all_notifications .challenge_results_notification .number_result_betlikes i{
+    }
 
-    transform: scale(1.2, 1.2);
-    color: white;
+    .all_notifications .results_name{
 
-    margin-right: 5px;
-}
+        @apply text-xl
+                font-bold
+                ml-2.5;
+    }
 
 
-/* Edit Bio Section */
-.edit_profile_container{
+    .all_notifications .results_alert{
 
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
+        @apply w-87.5
+                text-lg
+                text-[salmon]
+                font-medium
+                ml-5;
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    }
 
-    width: 40vw;
-    height: 65vh;
+    .all_notifications .challenge_results_notification .accept_deny_container{
 
-    border-radius: 10px;
+        @apply flex
+                justify-end
+                ml-auto;
 
-    color: coral;
-    background-color: #3e5058b9;
+    }
 
-    z-index: 7;
+    .all_notifications .challenge_results_notification .challenge_results_container{
 
+        @apply flex
+                ml-5
+                gap-3.75
+                mt-2.5;
 
-}
+    }
 
-.edit_profile_show{
+    .all_notifications .challenge_results_notification .results_display_container{
 
-    display: flex;
+        @apply flex
+                items-center
+                flex-col
+                gap-2.5;
 
-}
+    }
 
-.edit_profile_container .close_edit_profile {
+    .all_notifications .challenge_results_notification .number_result, .all_notifications .challenge_results_notification .number_result_betlikes{
 
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
+        @apply scale-[1.2]
+                text-[salmon]
+                font-bold
+                m-0
+                pb-3.75;
 
-    left: 94%;
-    top: 1px;
-    width: 40px;
-    height: 40px;
+    }
 
+    .all_notifications .challenge_results_notification .number_result i, .all_notifications .challenge_results_notification .number_result_betlikes i{
 
-    border-radius: 10px;
-    border: none;
-    color: white;
-    background-color: rgb(59, 73, 80);
-}
+        @apply scale-[1.2]
+                mr-1.25;
 
-.edit_profile_container .close_edit_profile i {
+    }
 
-    background-color: rgb(59, 73, 80);
-    transform: scale(2, 2);
+    .edit_profile_container{
 
-}
+        @apply hidden
+                flex-col
+                fixed
+                items-center
+                justify-center
+                top-[50%]
+                left-[50%]
+                w-[40vw]
+                h-[65vh]
+                rounded-xl
+                text-[coral]
+                bg-[#3e5058b9]
+                z-7;
 
-.edit_profile_container .close_edit_profile:hover{
+        transform: translate(-50%, -50%);
 
-    background-color: rgb(69, 85, 93);
-    cursor: pointer;
+    }
 
-}
+    .edit_profile_show{
 
-.main_edit_section_container{
+        @apply flex;
 
-    display: flex;
-    flex-direction: column;
+    }
 
-    width: 90%;
+    .edit_profile_container .close_edit_profile {
 
-}
+        @apply flex
+                absolute
+                items-center
+                justify-center
+                top-0
+                right-0
+                w-10
+                h-10
+                rounded-xl
+                border-0
+                text-white
+                bg-[#3b4950];
 
-.edit_section_container{
+        @apply hover:bg-[#45555d]
+                hover:cursor-pointer;
 
-    display: flex;
-    align-items: center;
+    }
 
-}
+    .edit_profile_container .close_edit_profile i {
 
-.edit_section_main_title{
+        @apply scale-[2.0];
 
-    font-weight: 800;
-    font-size: 32px;
-    
-    margin: 0px;
-}
+    }
 
-.edit_section_title{
+    .main_edit_section_container{
 
-    margin-left: auto;
-    margin-right: auto;
-    
-    font-weight: 700;
-    font-size: 22px;
-    text-decoration: underline;
+        @apply flex
+                flex-col
+                w-[90%];
 
-    text-align: center;
+    }
 
+    .edit_section_container{
 
-}
+        @apply flex
+                items-center;
 
-.edit_section_container .upload_button, .edit_section_container .edit_bio_button{
+    }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .edit_section_main_title{
 
-    margin-left: auto;
+        @apply font-extrabold
+                text-4xl
+                m-0;
+                
+    }
 
-    height: 50px;
-    width: 200px;
+    .edit_section_title{
 
-    font-size: 17px;
-    font-weight: 700;
+        @apply ml-auto
+                mr-auto
+                font-bold
+                text-2xl
+                underline
+                text-center;
 
-    color: coral;
-    background-color: rgb(59, 73, 80);
-    border: 1px solid coral;
-    border-radius: 10px;
+    }
 
-}
+    .edit_section_container .upload_button, .edit_section_container .edit_bio_button{
 
-.edit_section_container .upload_button:hover , .edit_section_container .edit_bio_button:hover{
+        @apply flex
+                justify-center
+                items-center
+                ml-auto
+                h-12.5
+                w-40
+                text-lg
+                font-bold
+                text-[coral]
+                bg-[#3b4950]
+                border-2
+                border-[coral]
+                rounded-xl;
 
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:border-[orange]
+                hover:cursor-pointer;
 
+    }
 
-    color: white;
-    background-color: #37474f;
 
-    border-color: orange;
 
-    cursor: pointer;
+    .banner_image_edit{
 
-}
+        @apply h-[10vh]
+                w-87.5
+                rounded-md
+                object-cover;
 
-.banner_image_edit{
+    }
 
-    height: 10vh;
-    width: 350px;
+    .pfp_edit{
 
-    border-radius: 5px;
+        @apply h-[12vh]
+                w-[12vh]
+                ml-[18%]
+                object-cover
+                rounded-[50%]
+                z-2;
+    }
 
-    object-fit: cover;
 
+    .edit_bio_area{
 
-}
+        @apply w-87.5
+                h-25
+                mt-3.75
+                mb-6.25
+                ml-2.5
+                pl-1.25
+                pt-1.25
+                bg-[lightgray]
+                border-2
+                border-[salmon]
+                rounded-md
+                resize-none
+                text-lg
+                placeholder:font-medium;
 
-.pfp_edit{
+    }
 
-    height: 12vh;
-    width: 12vh;
+    .hide{
 
-    margin-left: 18%;
+        @apply hidden;
 
-    object-fit: fill;
-    object-fit: cover;
 
-    border-radius: 50%;
+    }
 
-    z-index: 2;
 
 }
-
-
-.edit_bio_area{
-
-    width: 350px;
-    height: 100px;
-
-    margin-top: 15px;
-    margin-bottom: 25px;
-    margin-left: 10px;
-
-    padding-left: 5px;
-    padding-top: 5px;
 
-    background-color: lightgray;
 
-    border: 2px solid salmon;
-    border-radius: 5px;
 
-    font-family: "Inter", Arial;
-    font-size: 17px;
 
-    resize: none;
 
 
-}
-
-.edit_bio_area::placeholder{
-
-    font-family: "Inter", Arial;
-    font-weight: 500;
 
-}
-
 
-.hide{
 
-    display: none;
-
-}

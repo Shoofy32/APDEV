@@ -18,17 +18,8 @@
         <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
 
 
-        <!-- Link CSS File for header css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/log_reg_header_style.css">
-
-        <!-- Link CSS File for homepage css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/homepage_style.css">
-
-        <!-- Link CSS File for sidebar css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/sidebar_style.css">
-
-        <!-- Link CSS File for user post css design-->
-        <link rel= "stylesheet" type = "text/css" href = "../css/userpost_style.css">
+        <!-- Link CSS File for tailwind-->
+        <link rel= "stylesheet" href = "../css/tailwind_output.css">
 
 
         <!-- EJS user data -->
@@ -65,6 +56,9 @@
         <!-- Link JS File for notifications interaction -->
         <script src = "../javascript/notifications.js"></script>
 
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/pagination.js"></script>
+
     </head>
 
 
@@ -77,7 +71,7 @@
             <header>
 
                 <!-- Logo -->
-                <a class = "logo"> <img src = "../resources/images/Blevvit_Logo.png"> </a>
+                <img class = "logo" src = "../resources/images/Blevvit_Logo.png">
 
                 
                 <!-- Search bar -->
@@ -96,7 +90,7 @@
                 </div>
 
                 <!-- Notification Container for challenge notifications from other users -->
-                <div class = "notification_container">
+                <div class = "notification_container group">
                     <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
 
                     <div class = "notification_dropdown">
@@ -121,15 +115,15 @@
                         <img class = "header_pfp" src = "">
                         <p id = "username" class="username"></p>
 
-                        <button id = "logout" > Log out </button>
+                        <button class = "log_sign_in_button" id = "logout" > Log out </button>
 
                     </div>
 
                     <!-- Log In and Sign Up Buttons -->
                     <div class = "log_sign_in1" id = "anon">
 
-                        <button onclick = "window.location.href = '/login'"> Log In </button>
-                        <button onclick = "window.location.href = '/register'"> Sign Up </button>
+                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/login'"> Log In </button>
+                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/register'"> Sign Up </button>
 
                     </div>
 
@@ -165,11 +159,15 @@
                          <span> Home </span> 
                     </button>
 
-                    <button> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> <span> Trending </span> </button>
+                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Trending </span> 
+                    </button>
 
-                    <button> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> <span> Your Threads </span> </button>
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Your Threads </span> 
+                    </button>
 
-                    <hr>
+                    <hr class = "sidebar_border">
          
                 </div>
 
@@ -180,9 +178,9 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title"> Popular Topics </p>
+                        <p class = "side_bar_title_section"> Popular Topics </p>
 
-                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
                     </div>
 
@@ -222,7 +220,7 @@
 
                 <div class = "spacing_small"> </div>
 
-               <hr>
+               <hr class = "sidebar_border">
 
                <div class = "spacing_small"> </div>
 
@@ -231,9 +229,9 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title"> Resources </p>
+                        <p class = "side_bar_title_section"> Resources </p>
 
-                        <i class = "fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
                     </div>
 
@@ -261,25 +259,25 @@
 
 
 
-        <!-- Contains the dropdown for the forums -->
-        <section class = "dropdown_section">
+        <!-- Contains the dropdown_topic for the forums -->
+        <section class = "dropdown_container">
 
             <div id = "header_dropdown_space"> </div>
 
 
-            <h2 class = "dropdown_title_header"> Forum Categories </h2>
+            <h2 class = "dropdown_title_header mt-20 -mb-5"> Forum Categories </h2>
 
             <!-- Annoucements-->
-            <div class = "dropdown_annoucements">
+            <div class = "dropdown_section">
 
                 <!-- Announcements Dropdown -->
-                <div class = "dropdown"  onclick= "showDropdownContent(this)">
+                <div class = "text-white dropdown_topic"  onclick= "showDropdownContent(this)">
                     
-                    <i class = "fa-solid fa-bullhorn fa-xl" style = "color: #ffffff;"></i>
+                    <i class = "fa-solid fa-bullhorn fa-xl"></i>
 
-                    <b class = "dropdown_title"> Annoucements and Rules </b>
+                    <b class = "dropdown_title_section"> Annoucements and Rules </b>
 
-                    <i class = "fa-solid fa-caret-right fa-lg" style="color: #ffffff;"></i>
+                    <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
                 </div>
 
@@ -290,15 +288,15 @@
                     <!-- Announcements Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl"></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-bullhorn fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-bullhorn fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Forum Announcements </h2>
-                            <h4 class = "forum_description"> Discover news about the forum. </h4>
+                            <p class = "forum_description"> Discover news about the forum. </h4>
 
                         </div>
 
@@ -308,15 +306,15 @@
                     <!-- Rules Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-scale-balanced fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-scale-balanced fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Rules and Regulations </h2>
-                            <h4 class = "forum_description"> Learn about do's and dont's when posting and commenting in this website. </h4>
+                            <p class = "forum_description"> Learn about do's and dont's when posting and commenting in this website. </h4>
 
                         </div>
 
@@ -329,16 +327,16 @@
 
 
             <!-- Creative Writing -->
-            <div class = "dropdown_creative_works">
+            <div class = "dropdown_section">
 
                 <!-- Announcements Dropdown -->
-                <div class = "dropdown"  onclick = "showDropdownContent(this)">
+                <div class = "dropdown_topic"  onclick = "showDropdownContent(this)">
                     
-                    <i class="fa-solid fa-book fa-xl" style="color: #ffffff;"></i>
+                    <i class="text-white fa-solid fa-book fa-xl"></i>
 
-                    <b class = "dropdown_title"> Creative Works </b>
+                    <b class = "dropdown_title_section"> Creative Works </b>
 
-                    <i class = "fa-solid fa-caret-right fa-lg" style="color: #ffffff;"></i>
+                    <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
                 </div>
 
@@ -349,15 +347,15 @@
                     <!-- Creative Writing Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-pen-fancy fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-pen-fancy fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Creative Writing </h2>
-                            <h4 class = "forum_description"> Discover and discuss works from other users in the platform. </h4>
+                            <p class = "forum_description"> Discover and discuss works from other users in the platform. </h4>
 
                         </div>
 
@@ -367,15 +365,15 @@
                     <!-- Questing Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-people-group fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-people-group fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Questing </h2>
-                            <h4 class = "forum_description"> Exeprience creative works where the community controls the story. </h4>
+                            <p class = "forum_description"> Exeprience creative works where the community controls the story. </h4>
 
                         </div>
 
@@ -388,16 +386,16 @@
 
 
             <!-- Fiction Discussions -->
-            <div class = "dropdown_fiction_discussions">
+            <div class = "dropdown_section">
 
                 <!-- Discussion Dropdown -->
-                <div class = "dropdown" onclick= "showDropdownContent(this)">
+                <div class = "text-white dropdown_topic" onclick= "showDropdownContent(this)">
                     
-                    <i class = "fa-solid fa-robot fa-xl" style="color: #ffffff;"></i>
+                    <i class = "fa-solid fa-robot fa-xl"></i>
 
-                    <b class = "dropdown_title"> Fiction Discussion </b>
+                    <b class = "dropdown_title_section"> Fiction Discussion </b>
 
-                    <i class = "fa-solid fa-caret-right fa-lg" style="color: #ffffff;"></i>
+                    <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
                 </div>
 
@@ -408,15 +406,15 @@
                     <!-- General Fiction Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-comment-dots fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-comment-dots fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Fiction </h2>
-                            <h4 class = "forum_description"> Discuss about anything fiction related. </h4>
+                            <p class = "forum_description"> Discuss about anything fiction related. </h4>
 
                         </div>
 
@@ -426,15 +424,15 @@
                     <!-- Books & Novels Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-book-open fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-book-open fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Books & Novels </h2>
-                            <h4 class = "forum_description"> Discuss about your favorite books and authors. </h4>
+                            <p class = "forum_description"> Discuss about your favorite books and authors. </h4>
 
                         </div>
 
@@ -444,15 +442,15 @@
                     <!-- Movies & Shows Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-film fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-film fa-xl inner_image"></i>
 
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Movies & Shows </h2>
-                            <h4 class = "forum_description"> Talk about your favorite movies and shows from different directors. </h4>
+                            <p class = "forum_description"> Talk about your favorite movies and shows from different directors. </h4>
 
                         </div>
 
@@ -465,16 +463,16 @@
 
 
             <!-- Non Ficition Discussions -->
-            <div class = "dropdown_nonfiction_discussions">
+            <div class = "dropdown_section">
 
                 <!-- Nonfiction Discussion Dropdown -->
-                <div class = "dropdown"  onclick= "showDropdownContent(this)">
+                <div class = "text-white dropdown_topic"  onclick= "showDropdownContent(this)">
                     
-                    <i class = "fa-solid fa-globe fa-xl" style="color: #ffffff;"></i>
+                    <i class = "fa-solid fa-globe fa-xl"></i>
 
-                    <b class = "dropdown_title"> Nonfiction Discussion </b>
+                    <b class = "dropdown_title_section"> Nonfiction Discussion </b>
 
-                    <i class = "fa-solid fa-caret-right fa-lg" style="color: #ffffff;"></i>
+                    <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
                 </div>
 
@@ -485,15 +483,15 @@
                     <!-- General Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
-                        <i class="fa-solid fa-comment-dots fa-xl inner_image" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-comment-dots fa-xl inner_image"></i>
                         
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> General Nonfiction </h2>
-                            <h4 class = "forum_description"> Discuss about anything nonfiction related. </h4>
+                            <p class = "forum_description"> Discuss about anything nonfiction related. </h4>
 
                         </div>
 
@@ -503,7 +501,7 @@
                     <!-- News Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class = "fa-solid fa-hexagon fa-rotate-90 fa-2xl" style = "color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class = "hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl"></i>
 
                         <!-- Image inside hexagon -->
                         <i class = "fa-regular fa-newspaper fa-xl inner_image" style = "color: #ffffff;"></i>
@@ -511,7 +509,7 @@
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Current News </h2>
-                            <h4 class = "forum_description"> Discover the latest news from around the world and discuss about them. </h4>
+                            <p class = "forum_description"> Discover the latest news from around the world and discuss about them. </h4>
 
                         </div>
 
@@ -520,7 +518,7 @@
                     <!-- Technology Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class = "fa-solid fa-hexagon fa-rotate-90 fa-2xl" style = "color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class = "hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl"></i>
 
                         <!-- Image inside hexagon -->
                         <i class = "fa-solid fa-computer fa-xl inner_image" style = "color: #ffffff;"></i>
@@ -528,7 +526,7 @@
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Technology </h2>
-                            <h4 class = "forum_description"> Ask and talk about anything technology-related. </h4>
+                            <p class = "forum_description"> Ask and talk about anything technology-related. </h4>
 
                         </div>
 
@@ -537,7 +535,7 @@
                     <!-- Politics Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class = "fa-solid fa-hexagon fa-rotate-90 fa-2xl" style = "color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class = "hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl"></i>
 
                         <!-- Image inside hexagon -->
                         <i class = "fa-solid fa-landmark fa-xl inner_image" style = "color: #ffffff;"></i>
@@ -545,7 +543,7 @@
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Politics </h2>
-                            <h4 class = "forum_description"> Discuss the current political landscape of the world. </h4>
+                            <p class = "forum_description"> Discuss the current political landscape of the world. </h4>
 
                         </div>
 
@@ -554,7 +552,7 @@
                     <!-- Entertainment Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class = "fa-solid fa-hexagon fa-rotate-90 fa-2xl" style = "color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class = "hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl"></i>
 
                         <!-- Image inside hexagon -->
                         <i class = "fa-solid fa-champagne-glasses fa-xl inner_image" style = "color: #ffffff;"></i>
@@ -562,7 +560,7 @@
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Entertainment </h2>
-                            <h4 class = "forum_description"> Know more about your favorite celebrities and films, or anything about the entertainment industry. </h4>
+                            <p class = "forum_description"> Know more about your favorite celebrities and films, or anything about the entertainment industry. </h4>
 
                         </div>
 
@@ -571,7 +569,7 @@
                     <!-- Q&A Tab -->
                     <div class = "dropdown_content_tab">
 
-                        <i class="fa-solid fa-hexagon fa-rotate-90 fa-2xl" style="color: #03120e; transform: scale(2.2, 2.2)"></i>
+                        <i class="hexagon fa-solid fa-hexagon fa-rotate-90 fa-2xl" ></i>
 
                         <!-- Image inside hexagon -->
                         <i class = "fa-solid fa-question fa-xl inner_image" style = "color: #ffffff;"></i>
@@ -579,7 +577,7 @@
                         <div class = "dropdown_content_tab_description">
 
                             <h2 class = "forum_title"> Q&A </h2>
-                            <h4 class = "forum_description"> Help answer questions of other users or post your own questions for people to answer. </h4>
+                            <p class = "forum_description"> Help answer questions of other users or post your own questions for people to answer. </h4>
 
                         </div>
 
@@ -594,16 +592,16 @@
 
 
 
-        <!-- Contains the dropdown for the latest posts -->
-        <section class = "dropdown_section">
+        <!-- Contains the dropdown_topic for the latest posts -->
+        <section class = "dropdown_container mt-6">
 
             <h2 class = "dropdown_title_header"> Latest Posts </h2>
 
 
             <!-- Latest Posts Dropdown -->
-            <div class = "dropdown" onclick= "showDropdownContent(this)">
+            <div class = "dropdown_topic" onclick= "showDropdownContent(this)">
                 
-                <i class = "fa-solid fa-caret-right fa-lg" style="color: #ffffff;"></i>
+                <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
             </div>
 
@@ -615,19 +613,33 @@
             </div>
 
 
+            <div class = "pagination_container">
+
+                <i class = "fa-solid fa-chevron-left fa-2xl arrow"></i>
+
+                <p class = "pagination_number">1</p>
+                <p class = "pagination_number">2</p>
+               <p class = "pagination_number">3</p>
+                <p class = "pagination_number">...</p>
+ 
+                <i class = "fa-solid fa-chevron-right fa-2xl arrow"></i>
+
+            </div>
+
+
         </section>
 
 
-        <!-- Contains the dropdown for the popular posts -->
-        <section class = "dropdown_section">
+        <!-- Contains the dropdown_topic for the popular posts -->
+        <section class = "dropdown_container mt-6">
 
             <h2 class = "dropdown_title_header"> Popular Posts </h2>
 
 
             <!-- Latest Posts Dropdown -->
-            <div class = "dropdown" onclick= "showDropdownContent(this)">
+            <div class = "dropdown_topic" onclick= "showDropdownContent(this)">
                 
-                <i class = "fa-solid fa-caret-right fa-lg" style="color: #ffffff;"></i>
+                <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
             </div>
 
@@ -653,11 +665,11 @@
             </div>
 
             <!-- Recent Announcements Section -->
-            <div class = "recent_announcements"> 
+            <div class = "recent_announcements  "> 
 
                 <div class = "side_bar_title">
 
-                    <i class="fa-solid fa-bullhorn fa-xl inner_image" style="color: #ffffff;"></i>
+                    <i class="text-white fa-solid fa-bullhorn fa-xl"></i>
                     <h3> Recent Announcements </h3>
 
                 </div>
@@ -666,20 +678,6 @@
                 <p onclick = "goToForum('Announcements')"> Remember to read the rules of our site!!</p>
 
             </div>
-
-
-            <!-- Latest Posts -->
-            <div class = "latest_posts"> 
-
-                <div class = "side_bar_title">
-
-                    <i class="fa-solid fa-fire fa-lg" style="color: #ffffff;"></i>
-                    <h3> Popular Posts </h3>
-
-                </div>
-
-            </div>
-
 
             <!-- Statistics -->
             <div class = "statistics"> 
@@ -701,7 +699,7 @@
         <div class = "challenge" id = "challenge_container">
 
             <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
-            <div> <!-- stopPropogation prevents button from opening up userpost forum -->
+            <div class> <!-- stopPropogation prevents button from opening up userpost forum -->
                 <button id = "closeChallenge"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
             </div>
 
@@ -732,6 +730,9 @@
             </div>
 
         </div>
+
+
+
 
 
         

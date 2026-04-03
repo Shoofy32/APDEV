@@ -1,0 +1,243 @@
+@layer components{
+
+    /* Challenge - Div Container for Challenge*/
+    #challenge_container{
+
+        @apply fixed
+                flex
+                flex-col
+                items-center
+                justify-center
+                w-125
+                h-137.5
+                top-[50%]
+                left-[50%]
+                opacity-0
+                -z-40
+                gap-0.75
+                rounded-md
+                cursor-default
+                bg-[#3e5058b9];
+
+        transition: all 0.3s ease-in-out;
+        transform: translate(-50%, -50%);
+
+    }
+
+    /* Challenge - Roll 20 Title */
+    .roll_20{
+        
+        @apply text-4xl
+                font-semibold
+                m-0;
+    }
+
+    .dicebg{
+
+        @apply flex
+                justify-center;
+
+    }
+
+    /* Challenge - Challenge Container on Visible State */
+    #challenge_container.open {
+
+        @apply opacity-100
+                z-50
+                border-4
+                border-[#28363b];
+
+    }
+
+    /* Latests Posts - Container Storing Input and Button */
+    .bet_container{
+
+        @apply flex
+                justify-center
+                w-full
+                h-12.5;
+
+
+    }
+
+    /* Challenge - Bet Likes Text */
+    #challenge_container .bet_container p{
+
+        @apply  flex
+                items-center
+                text-xl
+                font-extrabold
+                -translate-y-2;
+    }
+
+    /* Challenge - Bet Container Button */
+    .bet_container button{
+
+        @apply text-lg
+                text-[coral]
+                bg-[#3b4950]
+                rounded-xl;
+
+    }
+
+    /* Challenge - Input Likes Container */
+    #challenge_container input{
+
+        @apply w-12.5
+            h-10
+            bg-[#1A1D1A]
+            text-[#8AB0AB]
+            ml-2.5
+            mb-2.5
+            text-base
+            font-semibold;
+        
+    }
+
+    /* Challenge - Input Likes Container - Inner Spin Buttons */
+    #challenge_container input::-webkit-inner-spin-button{
+
+        @apply w-5
+                h-5;
+        
+    }
+
+    /* Challenge - Bet Likes Button */
+    .postBet{
+
+        @apply w-50
+                h-11.25
+                ml-3.75
+                border-2;
+
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:border-[orange]
+                hover:cursor-pointer;
+
+    }
+
+    #challenge_container textarea{
+
+        @apply placeholder:text-[#8AB0AB]
+                placeholder:opacity-50;
+
+        @apply focus:outline-0
+                focus:border-[#8AB0AB];
+
+    } 
+
+    #challenge_container > div:nth-child(2){
+
+        font-size: 12px;
+        color: #8AB0AB;
+        opacity: 0.7;
+        margin-bottom: 6px;
+
+    }
+
+    /* Challenge - Close Challenge Button */
+    #challenge_container > div:nth-child(1){
+
+        @apply flex
+                absolute
+                items-center
+                justify-center
+                left-115
+                top-0
+                w-10
+                h-10
+                rounded-xl
+                text-[coral];
+
+    }
+
+    #challenge_container > div:nth-child(1) > button{
+
+        @apply   absolute
+                text-[coral]
+                bg-[#3b4950]
+                border-0
+                top-1
+                right-4.5;
+
+        @apply hover:cursor-pointer;
+
+    }
+
+    #challenge_container > div:nth-child(1) > button > i{
+
+        @apply bg-[#3b4950]
+                rounded-sm
+                scale-[2.0];
+
+        @apply hover:text-[coral];
+
+    }
+
+    /* Latests Posts - Text Result of Roll */
+    .roll_20_number{
+
+        @apply absolute
+                top-[46%]
+                text-4xl
+                font-semibold
+                text-[#ff956e];
+
+    }
+
+    /* Latests Posts - Text Result of Roll */
+    .result{
+
+        @apply text-xl
+                font-semibold
+                text-[#ff956e];
+
+    }
+
+    #challenge_container .challenger_stats_container{
+
+        @apply flex
+                justify-center
+                items-center
+                h-12.5
+                w-full
+                text-xl
+                text-white;
+
+    }
+
+    /* Challenge - Image Challenger */
+    #challenge_container .challenger_icon{
+
+        @apply h-11.25
+                w-11.25
+                rounded-[50%]
+                mr-2.5;
+
+    }
+
+    #challenge_container .challenger_rolls_likes_container{
+
+        @apply flex
+                items-center
+                ml-11.25;
+
+    }
+
+    #challenge_container .challenger_rolled_number, #challenge_container .challenger_bet_likes{
+
+        @apply text-xl
+                font-bold
+                text-[salmon]
+                ml-1.25
+                mr-2.5;
+
+    }
+
+}
+
+
+
+
+
