@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const page = parseInt(params.get("page")) || 1
     
     loadPosts(page)
-    loadPopularPosts(page)
+    loadPopularPosts()
 
 })
 // Function opens or closes dropdown menu
@@ -212,10 +212,10 @@ async function loadPosts(page = 1) {
 
 
 
-async function loadPopularPosts(page = 1) {
+async function loadPopularPosts() {
 
 
-    const response = await fetch(`https://blevvit.onrender.com/posts/Top3/${page}`);
+    const response = await fetch(`https://blevvit.onrender.com/posts/Top3`);
     const posts = await response.json();
 
     const all_posts_popular = document.querySelector(".all_posts_popular");

@@ -726,14 +726,12 @@ app.get("/posts/:page", async (req, res) => {
   }
 });
 
-app.get("/posts/Top3/:page", async (req, res) => {
-    const page = parseInt(req.params.page);
-    const limit = 15;
+app.get("/posts/Top3", async (req, res) => {
+    const limit = 10;
 
   try {
     const posts = await Post.find({})
       .sort({total_likes: 'desc'})
-      .skip((page - 1) * limit)
       .limit(limit);
 
     res.status(200).json(posts);
