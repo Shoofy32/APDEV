@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadPosts(forumTitle, page); // ← pass page
         const post = document.getElementById("post_button");
         
-        if(!info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {
+        if(info.user.isModerator !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {
             post.style.zIndex = -99999
         
         }

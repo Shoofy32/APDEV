@@ -710,21 +710,7 @@ app.post("/add-reply", async (req, res) => {
 
 
 //READ
-app.get("/posts/:page", async (req, res) => {
-  const page = parseInt(req.params.page);
-  const limit = 15;
 
-  try {
-    const posts = await Post.find({})
-      .sort({_id: -1})
-      .skip((page - 1) * limit)
-      .limit(limit);
-
-    res.status(200).json(posts);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 app.get("/posts/Top3", async (req, res) => {
     const limit = 10;
@@ -740,6 +726,35 @@ app.get("/posts/Top3", async (req, res) => {
   }
 });
 
+app.get("/posts/recentAnnouncements", async (req, res) => {
+    const limit = 10;
+
+  try {
+    const posts = await Post.find({forum_name : "Forum Announcements"})
+      .sort({_id: -1})
+      .limit(limit);
+
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/posts/:page", async (req, res) => {
+  const page = parseInt(req.params.page);
+  const limit = 15;
+
+  try {
+    const posts = await Post.find({})
+      .sort({_id: -1})
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.get("/posts", async (req, res) => {
 
