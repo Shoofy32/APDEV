@@ -126,7 +126,7 @@
     }
 
     /* Posts - Div Container that Contains a Button and its Counter */
-    .counter_container, .challenge_button, .reply_button, .comment_container{
+    .counter_container, .challenge_button, .reply_button, .comment_container, .delete_button, .edit_button{
 
         @apply flex
                 items-center
@@ -134,10 +134,20 @@
                 h-7.5
                 w-auto
                 pl-3.75
-                rounded-md;
+                rounded-md
+                font-[16px];
 
         @apply hover:bg-[#495d65]
                 hover:cursor-pointer;
+
+    }
+
+    .delete_button, .edit_button{
+
+        @apply w-27.5
+                justify-center
+                pr-5
+                ml-5;
 
     }
 
@@ -162,8 +172,7 @@
     /* Posts (Counter) - Counter of Button */
     .stats_post p{
 
-        @apply text-sm
-                font-normal
+        @apply font-normal
                 mr-5
                 pl-1.25;
 
@@ -179,7 +188,7 @@
 
     .replying_to_container {
 
-        @apply w-192.5
+        @apply w-190
                 mt-5
                 mb-7.5
                 p-3.75
@@ -216,7 +225,7 @@
 
         @apply flex
                 absolute
-                right-6.25
+                right-10
                 top-7.5;
 
         @apply hover:cursor-pointer;
@@ -236,7 +245,8 @@
 
         @apply text-xl
                 font-medium
-                text-[salmon];
+                text-[salmon]
+                ml-2.5;
     }
 
     .reply_content{
@@ -253,7 +263,8 @@
                 border-[salmon]
                 rounded-md
                 text-lg
-                resize-none;
+                resize-none
+                text-[#1A1A1A];
 
         @apply placeholder:font-semibold;
 
@@ -313,6 +324,7 @@
                 border-[salmon]
                 rounded-md
                 text-lg
+                text-[#1A1A1A]
                 resize-none
                 placeholder:font-medium;
 

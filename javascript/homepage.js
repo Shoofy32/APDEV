@@ -32,7 +32,7 @@ function showDropdownContent(divElement){
     // If condition checks if current display is hidden or not, and flips display and caret icon
     if(contentID.style.display == "none"){
 
-        contentID.style.display = "inline-block";
+        contentID.style.display = "flex";
 
         // Change from right to down
         caretIcon.classList.toggle("fa-caret-right");
