@@ -39,7 +39,8 @@
 1. Clone or download repository 
 2. Open cmd within the directory and run "npm install" to intsall all dependecies and packages
 3. Ensure your MongoDB server is running
-4. Open your web browser and type in "localhost:3000/" to be directed to the homepage
+4. In the same cmd window you ran "npm install" run "node index.js"  
+5. Open your web browser and type in "localhost:3000/" to be directed to the homepage
 
 ---
 
