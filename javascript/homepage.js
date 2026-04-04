@@ -59,7 +59,7 @@ async function loadPosts(page = 1) {
     const response = await fetch(`https://blevvit.onrender.com/posts/${page}`);
     const posts = await response.json();
 
-    const all_posts = document.querySelector(".all_posts");
+    const all_posts = document.getElementsByClassName("all_posts")[0];
     
     for (const post of posts) {
         
@@ -217,8 +217,8 @@ async function loadPopularPosts() {
 
     const response = await fetch(`https://blevvit.onrender.com/posts/Top3`);
     const posts = await response.json();
-
-    const all_posts_popular = document.querySelector(".all_posts_popular");
+    
+    const all_posts_popular = document.getElementsByClassName("all_posts_popular")[0];
     
      for (const post of posts) {
         
