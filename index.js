@@ -717,7 +717,7 @@ app.get("/posts/Top3", async (req, res) => {
 
   try {
     const posts = await Post.find({})
-      .sort({total_likes: 'desc'})
+      .sort({ total_likes: -1, _id: -1 })
       .limit(limit);
 
     res.status(200).json(posts);
