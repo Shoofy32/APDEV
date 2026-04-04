@@ -36,6 +36,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentLosses.textContent = profileUser.losses;
     currentTies.textContent = profileUser.ties;
 
+    //runs all the loading functions
+    await loadPosts();
+
     // Add classList to post container to show posts when userpage is first loaded
     allPostsContainer.classList.toggle("display_visible");
 
@@ -480,6 +483,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Make functions and requests globally accessible
     window.updateHeaderNotifications = updateHeaderNotifications;
 
-    //Runs the loadPosts function upon page load
-    window.addEventListener("load", loadPosts());
 });

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+
+        <title> Blevvit </title>
+
+        <link rel = "icon" href="../resources/images/flag.png" type = "image/png"></linkrel>
+
+        <!-- Links to Inter Font (Free and Open Sourced) https://fonts.google.com/specimen/Inter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Link to Free Icons Website https://fontawesome.com/ -->
+        <link href="../fontawesome/css/all.min.css" rel = "stylesheet"/>
+
+
+        <!-- Link CSS File for tailwind-->
+        <link rel= "stylesheet" href = "../css/tailwind_output.css">
+
+
+        <!-- EJS user data -->
+        <script>
+
+            const info = <%- JSON.stringify({ 
+                userLoggedIn: user ? true : false, 
+                user: user || null 
+            }) %>;
+
+        </script>
+
+        <!-- Link JS File for routes interaction -->
+        <script type = "module" src = "../javascript/routes.js"></script>
+
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "../javascript/sidebar.js"></script>
+
+        <!-- Link JS File for logins -->
+        <script src = "../javascript/log_reg_header.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script type = "module" src = "../javascript/searchbar.js"></script>
+        
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/notifications.js"></script>
+
+        <!-- Link JS File for posts interaction -->
+        <script type = "module" src = "../javascript/forumloadlink.js"></script>
+        
+        <!-- Link JS File for notifications interaction -->
+        <script src = "../javascript/about.js"></script>
+
+    </head>
+
+
+    <body>
+
+        <!-- Contains the header of the home page -->
+        <article>
+
+
+            <header>
+
+                <!-- Logo -->
+                <img class = "logo" src = "../resources/images/Blevvit_Logo.png">
+
+                
+                <!-- Search bar -->
+                <div class = "search_bar">
+
+                    <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
+
+                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+
+                </div>
+
+                <!-- Like Container for showing current likes user has -->
+                <div class = "likes_container">
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i>
+                    <p class = "like_amount"></p>
+                </div>
+
+                <!-- Notification Container for challenge notifications from other users -->
+                <div class = "notification_container group">
+                    <button class = "notification_button"> <i class="fa-regular fa-bell fa-xl"></i> <span class = notification_alert>!</span> </button>
+
+                    <div class = "notification_dropdown">
+
+                        <p class = "notifications_header"> Notifications </p>
+
+                        <div class = "notification_content_container">
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="log_sign_in" id="topright">
+
+
+
+                    <div class = "log_sign_in2" id = "user">
+
+                        <img class = "header_pfp" src = "">
+                        <p id = "username" class="username"></p>
+
+                        <button class = "log_sign_in_button" id = "logout" > Log out </button>
+
+                    </div>
+
+                    <!-- Log In and Sign Up Buttons -->
+                    <div class = "log_sign_in1" id = "anon">
+
+                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/login'"> Log In </button>
+                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/register'"> Sign Up </button>
+
+                    </div>
+
+                
+
+
+
+                </div>
+            </header>
+
+
+        </article>
+
+
+        <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
+
+
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i>
+                         <span> Home </span> 
+                    </button>
+
+                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Trending </span> 
+                    </button>
+
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Your Threads </span> 
+                    </button>
+
+                    <hr class = "sidebar_border">
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title_section"> Popular Topics </p>
+
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Creative Writing </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Fiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr class = "sidebar_border">
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title_section"> Resources </p>
+
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  Rules </span> 
+                        </button>
+
+                        <button class = "about_topic_button"> <i class = "fa-solid fa-circle-info fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  About Blevvit </span> 
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class = "about_container">
+
+            <div class = "about_top_container">
+            
+                <div class = "about_left_container">
+
+                    <p class = "about_title"> Blevvit </p>
+                    <p class = "about_subtitle"> Forum Based Website </p>
+                    <p class = "about_description"> Welcome to Blevvit! This website was built as a university project with its main purpose being to showcase our group’s understanding and application of the lessons we were taught throughout our app development course.</p>
+                    <p class = "about_description">Blevvit is a web service that functions as an online web forum where registered users can make posts, interact with posts, and talk about anything that interests them. 
+                                                We also have a “challenge” feature that allows users to bet their own earned likes by aiming to roll a d20 higher than their opponent. </p>
+                    <p class = "about_description">The site is built using Node with its backend being stored in MongoDB.</p>
+
+                </div>
+
+
+                <div class = "about_right_container">
+
+                    <img class = "about_logo" src = "../resources/images/Blevvit_Logo.png">
+
+                    <img class = "pagination_image_about" src = "../resources/images/Blevvit_About1.jpg">
+
+                    
+                    <div class = "pagination_container">
+
+                        <i class = "fa-solid fa-chevron-left fa-2xl arrow"></i>
+
+                        <p class = "pagination_number pagination_active">1</p>
+                        <p class = "pagination_number">2</p>
+                        <p class = "pagination_number">3</p>
+                        <p class = "pagination_number">4</p>
+        
+                        <i class = "fa-solid fa-chevron-right fa-2xl arrow"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class = "about_bottom_container">
+
+                <p class = "about_subtitle"> Packages, Applications and Dependencies Used </p>
+
+                <div class = "collection_list">
+
+                    <p class = "content collection_element"> Node </p>
+                    <p class = "content collection_element"> MongoDB </p>
+                    <p class = "content collection_element"> Mongoose </p>
+                    <p class = "content collection_element"> EJS</p>
+                    <p class = "content collection_element"> Express </p>
+                    <p class = "content collection_element"> Express-Session </p>
+                    <p class = "content collection_element"> Cookie-Parser </p>
+                    <p class = "content collection_element"> Cors </p>
+                    <p class = "content collection_element"> Tailwind </p>
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+        
+    </body>
+
+
+
+
+</html>

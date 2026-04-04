@@ -68,7 +68,7 @@
 
     }
 
-    .sidebar_home_button, .sidebar_topic_button{
+    .sidebar_home_button, .sidebar_topic_button, .about_topic_button{
 
 
         @apply flex 
@@ -80,8 +80,7 @@
                 font-light
                 text-white
                 bg-[#3E5058]
-                border-0
-                border-r-[10];
+                border-0;
 
         @apply hover:bg-[#2e3c42]
                 hover:cursor-pointer;

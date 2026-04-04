@@ -86,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
             post.style.zIndex = -99999
         
         }
+
+
         if (post) post.addEventListener("click", () => openPostPage(forumTitle));
     }
 
