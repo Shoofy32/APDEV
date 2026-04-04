@@ -13,7 +13,7 @@
 @import "./challenge_user_style.css";
 @import "./userprofile_style.css";
 @import "./pagination_style.css";
-
+@import "./about_style.css";
 
 @layer utilities{
 
@@ -71,7 +71,7 @@ body{
 
         @apply m-0
                 select-none
-                text-white;
+                text-[whitesmoke];
 
     }
 

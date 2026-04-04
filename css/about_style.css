@@ -1,0 +1,136 @@
+@layer components{
+
+    .about_container{
+
+        @apply flex
+                flex-col
+                absolute
+                top-50
+                left-75
+                w-[1200]
+                h-auto;
+    }
+
+    .about_top_container{
+
+        @apply flex;
+
+
+    }
+
+    .about_bottom_container{
+
+        @apply flex
+                flex-col
+                w-[1100px]
+                mt-15
+                mb-15
+                gap-7.5;
+
+    }
+
+    .about_left_container{
+
+
+        @apply w-125
+
+
+    }
+
+    .about_right_container{
+
+
+        @apply flex
+                flex-col
+                justify-end
+                items-center
+                mt-100
+                ml-12.5
+                w-150
+                h-31.25;
+
+
+    }
+
+    .about_title{
+
+        @apply font-extrabold
+                text-8xl
+                text-[coral];
+
+    }
+
+    .about_subtitle{
+
+        @apply font-semibold   
+                text-3xl
+                text-[salmon];
+
+    }
+
+    .about_description{
+
+        @apply font-medium
+                text-xl
+                mt-5;
+
+
+    }
+
+    .about_logo{
+
+        @apply w-full
+                ml-15;
+
+    }
+
+    .pagination_image_about{
+
+        @apply mt-7.5
+                min-w-135
+                min-h-75
+                max-w-135
+                max-h-75
+                ml-10
+                border-2
+                border-[salmon];
+
+    }
+
+    .collection_list{
+
+        @apply flex
+                flex-wrap
+                gap-y-2.5
+                gap-x-2.5
+                h-auto;
+
+    }
+
+    .collection_element{
+
+        @apply flex
+                justify-center
+                items-center
+                m-0
+                pl-[0.5vw]
+                pr-[0.5vw]
+                h-[4vh]
+                text-xl
+                font-medium
+                bg-[#181B1E]
+                border-2
+                border-white
+                rounded-xl
+                scale-[1]
+                shadow-[0px_0px_0px_white];
+
+        transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+        @apply hover:shadow-[0px_0px_5px_white]
+                hover:scale-[1.05];
+
+    }
+
+
+}
