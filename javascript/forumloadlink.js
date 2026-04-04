@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementsByClassName("forum_description")[0].textContent = forumDescription;
 
         loadPosts(forumTitle, page); // ← pass page
+        loadRecentAnnouncements()
         const post = document.getElementById("post_button");
         
         if(info.user.isModerator !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {

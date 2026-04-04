@@ -173,7 +173,7 @@ async function loadPosts(name, page = 1) {
         if((info.userLoggedIn && post.username === info.user.username))  {
           interaction_container.append(like,dislike, comment, delete_edit_container)
         }
-        else if(info.user.isModerator !== null && info.user.isModerator && post.username !== info.user.username) {
+        else if(info.user !== null && info.user.isModerator && post.username !== info.user.username) {
            interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
 
         }
@@ -335,3 +335,19 @@ async function updateUserLikesPost(id, increment) {
 
 
   
+async function loadRecentAnnouncements() {
+    const response = await fetch(`https://blevvit.onrender.com/posts/recentAnnouncements`);
+    const posts = await response.json();
+    const recent_announcements = document.getElementsByClassName("recent_announcements")[0];
+    console.log(response)
+    for (const post of posts) {
+
+      const announcement = document.createElement("p")
+      announcement.innerText = post.post_title
+      announcement.addEventListener('click', function(){
+         window.location.href = `forum?forum=Forum%20Announcements`;
+      })
+      recent_announcements.append(announcement)
+    }
+
+}
