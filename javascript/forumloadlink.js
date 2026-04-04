@@ -83,12 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
         loadRecentAnnouncements()
         const post = document.getElementById("post_button");
         
-        if(info.user.isModerator !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {
+        if(info.user !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {
             post.style.zIndex = -99999
         
         }
-
-
         if (post) post.addEventListener("click", () => openPostPage(forumTitle));
     }
 
