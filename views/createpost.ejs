@@ -43,6 +43,12 @@
         <!-- Link JS File for notifications interaction -->
         <script src = "../javascript/notifications.js"></script>
 
+        <!-- Link JS File for sidebar interaction -->
+        <script src = "../javascript/sidebar.js"></script>
+
+        <!-- Link JS File for forum load link interaction -->
+        <script src = "../javascript/forumloadlink.js"></script>
+
 
     </head>
 
@@ -50,7 +56,7 @@
 
         
    
-    <article>
+        <article>
 
             <header>
 
@@ -119,65 +125,186 @@
             </header>
 
 
-    </article>
+        </article>
 
-    <div class="content_container">
+        <!-- Contains the side bar -->
+        <div class = "side_bar" id = "side_bar"> 
 
-            <div class="visited_container">
-            <div class="breadcrumbs">
 
-                <a href = "homepage.html">Blevvit&nbsp; </a>
-                <span class = "separator">
-                <h5> - </h5>
-                </span>
-                    <a href = "forum.html">&nbsp;Forums</a>
+            <!-- Contains the clickable button that opens up the side bar-->
+            <div class = "clickable_container" id = "sidebar_button_container">
+
+                <i class="fa-solid fa-circle-chevron-right fa-xl clickable" id = "sidebar_button"></i>
+
+            </div>
+
+            <!-- Contains the different contents found in the side bar -->
+            <div class = "side_bar_content" id = "side_bar_content">
+
+                <!-- Contains the home, trending, and your threads buttons -->
+                <div class = "side_bar_home">
+
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-house fa-lg" style = "color: #ffffff;"></i>
+                         <span> Home </span> 
+                    </button>
+
+                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Trending </span> 
+                    </button>
+
+                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Your Threads </span> 
+                    </button>
+
+                    <hr class = "sidebar_border">
+         
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+                <!-- Contains the different topics you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title_section"> Popular Topics </p>
+
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Topic Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Creative Writing </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Fiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Q&A </span> 
+                        </button>
+                        
+         
+
+                    </div>
+
+
+
+                </div>
+
+                <div class = "spacing_small"> </div>
+
+               <hr class = "sidebar_border">
+
+               <div class = "spacing_small"> </div>
+
+                <!-- Contains the different resources you can search in the website -->
+                <div class = "side_bar_topics"> 
+
+                    <div class = "side_bar_title_container">
+
+                        <p class = "side_bar_title_section"> Resources </p>
+
+                        <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
+
+                    </div>
+
+                    
+                    <!-- Resources Tabs Through Dropdown -->
+                    <div class = "side_bar_dropdown">
+
+                        <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  Rules </span> 
+                        </button>
+
+                        <button class = "about_topic_button"> <i class = "fa-solid fa-circle-info fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name">  About Blevvit </span> 
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="content_container">
+
+                <div class="visited_container">
+                <div class="breadcrumbs">
+
+                    <a href = "homepage.html">Blevvit&nbsp; </a>
+                    <span class = "separator">
+                    <h5> - </h5>
+                    </span>
+                        <a href = "forum.html">&nbsp;Forums</a>
+                
+                </div>
             
             </div>
         
-        </div>
-    
-    
-        <form>
-            <div class="post_container">
-            <div class="title_container">
-                <input id="title" name="title" placeholder="Title"/>
-            </div>
+        
+            <form>
+                <div class="post_container">
+                <div class="title_container">
+                    <input id="title" name="title" placeholder="Title"/>
+                </div>
+                
             
-        
-            <div id="tag_container">
+                <div id="tag_container">
 
-            </div>
-            <textarea id="content" name="content" placeholder="Body"></textarea>
+                </div>
+                <textarea id="content" name="content" placeholder="Body"></textarea>
+            
+                    <div id="add_tag_container">
+                    <button id="add_tag">
+                    Add Tag
+                </button>
+                </div>
+                <button type="button" id="post">Post</button>
+                </div>
+            </form>
         
-                <div id="add_tag_container">
-                <button id="add_tag">
-                Add Tag
-            </button>
-            </div>
-            <button type="button" id="post">Post</button>
-            </div>
-        </form>
-    
-        
-        
-    </div>
-
-    <div class="tag_add" id="tag_add">
-
-        <p class = "text-center text-xl font-bold"> Add New Tag</p>
-        <div class = "closeTag_container">
-            <button id="closeTag"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+            
+            
         </div>
-    
+
+        <div class="tag_add" id="tag_add">
+
+            <p class = "text-center text-xl font-bold"> Add New Tag</p>
+            <div class = "closeTag_container">
+                <button id="closeTag"><i class="fa-regular fa-circle-xmark fa-large"></i></button> 
+            </div>
         
-        <input id="addTags" type="text" placeholder="Enter a tag"></input>
+            
+            <input id="addTags" type="text" placeholder="Enter a tag"></input>
 
-       
-         <div id="confirm_post">
-            <button id="postTag">Add</button> 
+        
+            <div id="confirm_post">
+                <button id="postTag">Add</button> 
+            </div>
         </div>
-    </div>
 
- </body>
+    </body>
 
 </html>

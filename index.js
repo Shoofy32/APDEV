@@ -105,6 +105,10 @@ app.get("/userprofile", isAuthenticated, (req, res) =>{
   res.render("userprofile", { user: req.session.user || null });
 });
 
+app.get("/about", (req, res) =>{
+  res.render("about", { user: req.session.user || null });
+});
+
 //variable to store the user to be loaded's data
 let loadedUser;
 

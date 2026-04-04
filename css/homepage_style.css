@@ -239,6 +239,13 @@
                 float-left;
     
     }
+
+    .all_posts_popular{
+
+        @apply flex
+                flex-col;
+
+    }
     
 }
 

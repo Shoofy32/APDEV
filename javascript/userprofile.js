@@ -58,11 +58,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         currentTies.textContent = info.user.ties;
     }
 
-    //runs all the loading functions
-    document.addEventListener("DOMContentLoaded", () => {
 
-        loadPosts();
-    })
+    //runs all the loading functions
+    await loadPosts();
 
     // Add classList to post container to show posts when userpage is first loaded
     allPostsContainer.classList.toggle("display_visible");
@@ -238,12 +236,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const acceptResultButton = event.target.closest(".accept_result");
 
         // If conditions check for which button was clicked and calls the function corresponding to that button
-        if(acceptChallengeButton){
-
-            console.log("EAFAEF");
+        if(acceptChallengeButton)
             acceptUserChallenge(event);
-
-        }
 
         else if(denyChallengeButton)
             rejectChallengeNotification(event.target.closest(".deny_challenge")); // Get the closest deny_challenge associated with the click
@@ -675,6 +669,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Make functions and requests globally accessible
     window.updateHeaderNotifications = updateHeaderNotifications;
 
-    //Runs the loadPosts function upon page load
-    window.addEventListener("load", loadPosts());
 });

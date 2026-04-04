@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sideBarDropdowns = document.getElementsByClassName("side_bar_title_container"); // Dropdown titles
 
+    const aboutButton = document.getElementsByClassName("about_topic_button")[0];
+
 
     // Add eventlistener to the sidebar button to call showSideBar()
     caretIcon.addEventListener("click" , showSideBar);
@@ -24,6 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
             showSideBarContent(sideBarDropdowns[i]);
     
         });
+
+    aboutButton.addEventListener("click", () => {
+
+        window.location.href = "/about";
+
+    });
 
 
 // ------------------ FUNCTIONS ------------------ //

@@ -173,7 +173,7 @@ async function loadPosts(name, page = 1) {
         if((info.userLoggedIn && post.username === info.user.username))  {
           interaction_container.append(like,dislike, comment, delete_edit_container)
         }
-        else if(info.user.isModerator !== null && info.user.isModerator && post.username !== info.user.username) {
+        else if(info.userLoggedIn && info.user.isModerator !== null && info.user.isModerator && post.username !== info.user.username) {
            interaction_container.append(like,dislike, comment, challenge, delete_edit_container)
 
         }
