@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const page = parseInt(params.get("page")) || 1
     
     loadPosts(page)
-    loadPopularPosts()
+    loadPopularPosts() 
+    loadRecentAnnouncements()
 
 })
 // Function opens or closes dropdown menu
@@ -363,6 +364,22 @@ async function loadPopularPosts() {
   
 }
 
+async function loadRecentAnnouncements() {
+    const response = await fetch(`https://blevvit.onrender.com/posts/recentAnnouncements`);
+    const posts = await response.json();
+    const recent_announcements = document.getElementsByClassName("recent_announcements")[0];
+    console.log(response)
+    for (const post of posts) {
+
+      const announcement = document.createElement("p")
+      announcement.innerText = post.post_title
+      announcement.addEventListener('click', function(){
+         window.location.href = `forum?forum=Forum%20Announcements`;
+      })
+      recent_announcements.append(announcement)
+    }
+
+}
 async function deletePost(id) {
 
   await fetch(`https://blevvit.onrender.com/post/${id}`, {
@@ -454,4 +471,3 @@ async function updateUserLikesPost(id, increment) {
 }
 
 
-  

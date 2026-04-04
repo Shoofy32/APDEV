@@ -35,13 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
  
     // Check if userpost to avoid loading backend in forum page
     if((window.location.href.includes("userpost"))){
-
+        
     
     (async () => {
-      
+        
         await loadPost(id,page);
         loadPosts(id, page);
+        
     })();
+    
 
     }
 
