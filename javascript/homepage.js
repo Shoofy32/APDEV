@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     
     const url = window.location.href
     const index = url.indexOf("page=")
@@ -6,19 +6,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const page_number = parseInt(url.substring(index + 5))
     const invalidPage = !url.includes("page=") || !/^\d+$/.test(raw_page) || page_number < 1;
     //Checks if page is greater than zero, defaults otherwise   
-    if(invalidPage) {
-        window.onload = function() {
-    
-        window.location.href = '/?page=1'
-        };
-    }
+    if (invalidPage) {
+    window.onload = function () {
+        const hash = window.location.hash; // captures "#trending" if present
+        window.location.href = '/?page=1' + hash;
+    };
+  }
 
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("page")) || 1
     
     loadPosts(page)
-    loadPopularPosts() 
+    await loadPopularPosts()  
     loadRecentAnnouncements()
+
+  if (window.location.hash === "#trending") {
+    setTimeout(() => {
+        document.getElementsByClassName("all_posts_popular")[0].scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }
 
 })
 // Function opens or closes dropdown menu
