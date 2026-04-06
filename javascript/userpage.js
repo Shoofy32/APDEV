@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let response = await fetch("/load-posts/" + profileUser.username);
         posts = await response.json();
 
-        posts.forEach(async (postload)=>{
+         for (const postload of posts){
             const response = await fetch(`https://blevvit.onrender.com/post/`+postload._id);
             const post = await response.json()
 
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             post_container.classList.add("group");
 
             allPostsContainer.append(post_container)
-        });
+        };
 
         // Temp addition to show number of posts
         currentNumberOfPosts.textContent = posts.length;
@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let response = await fetch("/load-replies/" + profileUser.username);
         replies = await response.json();
 
-        replies.forEach(async reply => {
+         for (const reply of replies) {
             const user_info = await fetch(`https://blevvit.onrender.com/user/${reply.poster_id}`);
             const user = await user_info.json();
             console.log(user)
@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             allRepliesContainer.append(userPost)
             
-        });
+        };
     }
 
 

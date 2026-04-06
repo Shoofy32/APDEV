@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const sideBarProfile = document.getElementsByClassName("sidebar_profile_button")[0]; // Side bar home button
     const sideBarShop = document.getElementsByClassName("sidebar_shop_button")[0]; // Side bar home button
 
+    const sideBarTrending = document.getElementsByClassName("sidebar_home_button")[1]
+    const sideBarThreads = document.getElementsByClassName("sidebar_home_button")[2]
     const sideBarDropdowns = document.getElementsByClassName("side_bar_title_container"); // Dropdown titles
-
     const aboutButton = document.getElementsByClassName("about_topic_button")[0];
 
 
@@ -20,6 +21,24 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "/";
 
     });
+
+    sideBarTrending.addEventListener("click", () => {
+        
+        if (window.location.pathname === "/") {
+            document.getElementsByClassName("all_posts_popular")[0].scrollIntoView({ behavior: "smooth" });
+        } else {
+            window.location.href = "/?page=1#trending";
+            }
+
+
+    });
+
+
+    
+    sideBarThreads.addEventListener("click", function () {
+         window.location.href = "/userprofile";
+
+    })
 
     // Add eventlistener to each sidebar dropdown to expand when clicked
     for(let i = 0; i < sideBarDropdowns.length; i ++)

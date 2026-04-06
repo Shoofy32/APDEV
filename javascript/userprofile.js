@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let response = await fetch("/load-posts/"+info.user.username);
         posts = await response.json();
 
-        posts.forEach(async (postload)=>{
+        for (const postload of posts){
             const response = await fetch(`https://blevvit.onrender.com/post/`+postload._id);
             const post = await response.json()
 
@@ -440,7 +440,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             allPostsContainer.append(post_container)
             
-        });
+        };
 
         // Temp addition to show number of posts
         currentNumberOfPosts.textContent = posts.length;
