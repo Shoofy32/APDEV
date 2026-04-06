@@ -32,7 +32,7 @@
                 userLoggedIn: user ? true : false, 
                 user: user || null 
             }) %>;
-
+            
         </script>
         
         <!-- Link JS File for routes interaction -->
@@ -56,8 +56,12 @@
         <!-- Link JS File for user profile interaction -->
         <script src = "../javascript/userprofile.js"></script>
 
-        <!-- Link JS File for logins -->
+        <!-- Link JS File for logins interaction -->
         <script src = "../javascript/log_reg_header.js"></script>
+
+        <!-- Link JS File for user profile style edit interaction -->
+        <script src = "../javascript/userprofile_edit_style.js"></script>
+
 
 
     </head>
@@ -77,12 +81,12 @@
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
-                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+                    <input class = "search_bar_input" type = "text" placeholder = "Search...">
 
                 </div>
 
                 <!-- Like Container for showing current likes user has -->
-                <div class = "likes_container">
+                <div class = "likes_container group">
                     <i class="fa-regular fa-thumbs-up fa-xl"></i>
                     <p class = "like_amount"></p>
                 </div>
@@ -120,8 +124,8 @@
                     <!-- Log In and Sign Up Buttons -->
                     <div class = "log_sign_in1" id = "anon">
 
-                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/login'"> Log In </button>
-                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/register'"> Sign Up </button>
+                        <button class = "log_sign_in_button sign1_log_in"> Log In </button>
+                        <button class = "log_sign_in_button sign1_register"> Sign Up </button>
 
                     </div>
 
@@ -131,6 +135,7 @@
 
                 </div>
             </header>
+
 
 
         </article>
@@ -156,15 +161,15 @@
                          <span> Home </span> 
                     </button>
 
-                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
-                        <span> Trending </span> 
+                    <button class = "sidebar_profile_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> User Profile </span> 
                     </button>
 
-                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
-                        <span> Your Threads </span> 
+                    <button class = "sidebar_shop_button"> <i class = "fa-solid fa-shop fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Shop </span> 
                     </button>
 
-                    <hr class = "sidebar_border">
+                    <hr class = "sidebar_border mt-3">
          
                 </div>
 
@@ -175,7 +180,7 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title_section"> Popular Topics </p>
+                        <p class = "side_bar_title_section"> Forum Topics </p>
 
                         <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
@@ -185,29 +190,51 @@
                     <!-- Topic Tabs Through Dropdown -->
                     <div class = "side_bar_dropdown">
 
-                        <div class = "spacing"> </div>
-
-                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
-                            <span class = "sidebar_topic_name"> Announcements </span> 
-                        </button>
+                        <i class="fa-solid fa-people-group fa-xl inner_image"></i>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Creative Writing </span> 
                         </button>
 
-                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
-                            <span class = "sidebar_topic_name"> Technology </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-people-group fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Questing </span> 
                         </button>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Fiction </span> 
                         </button>
 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-book-open fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Books & Novels </span> 
+                        </button>
+                        
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-film fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Movies & Shows </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> General Nonfiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-regular fa-newspaper fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Current News </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-landmark fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Politics </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-champagne-glasses fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Entertainment </span> 
+                        </button>
+
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Q&A </span> 
                         </button>
-                        
-         
 
                     </div>
 
@@ -237,6 +264,10 @@
                     <div class = "side_bar_dropdown">
 
                         <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name">  Rules </span> 
@@ -458,6 +489,52 @@
                     <button class = "edit_bio_button"> Save Bio </button>
                     
 
+                </div>
+
+
+                <p class = "edit_section_title">Edit Style</p>
+
+                <div class = "edit_style_section_container">
+
+                    <div class = "select_style_container">
+
+                        <p class = "select_style_header">Username</p>
+
+
+                        <div class = "select_style_list_container username_styles">
+
+                            <p class = "style_element active_style"> None </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class = "select_style_container">
+
+                        <p class = "select_style_header">Banner</p>
+
+
+                        <div class = "select_style_list_container banner_styles">
+
+                            <p class = "style_element active_style"> None </p>
+
+                        </div>
+
+                    </div>
+                    
+                    <div class = "select_style_container">
+
+                        <p class = "select_style_header">Pfp</p>
+
+
+                        <div class = "select_style_list_container pfp_styles">
+
+                            <p class = "style_element active_style"> None </p>
+
+                        </div>
+
+                    </div>
+                    
                 </div>
 
             </div>

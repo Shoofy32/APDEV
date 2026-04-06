@@ -71,12 +71,12 @@
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
-                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+                    <input class = "search_bar_input" type = "text" placeholder = "Search...">
 
                 </div>
 
                 <!-- Like Container for showing current likes user has -->
-                <div class = "likes_container">
+                <div class = "likes_container group">
                     <i class="fa-regular fa-thumbs-up fa-xl"></i>
                     <p class = "like_amount"></p>
                 </div>
@@ -114,8 +114,8 @@
                     <!-- Log In and Sign Up Buttons -->
                     <div class = "log_sign_in1" id = "anon">
 
-                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/login'"> Log In </button>
-                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/register'"> Sign Up </button>
+                        <button class = "log_sign_in_button sign1_log_in"> Log In </button>
+                        <button class = "log_sign_in_button sign1_register"> Sign Up </button>
 
                     </div>
 
@@ -125,6 +125,7 @@
 
                 </div>
             </header>
+
 
 
         </article>
@@ -151,15 +152,15 @@
                          <span> Home </span> 
                     </button>
 
-                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
-                        <span> Trending </span> 
+                    <button class = "sidebar_profile_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> User Profile </span> 
                     </button>
 
-                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
-                        <span> Your Threads </span> 
+                    <button class = "sidebar_shop_button"> <i class = "fa-solid fa-shop fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Shop </span> 
                     </button>
 
-                    <hr class = "sidebar_border">
+                    <hr class = "sidebar_border mt-3">
          
                 </div>
 
@@ -170,7 +171,7 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title_section"> Popular Topics </p>
+                        <p class = "side_bar_title_section"> Forum Topics </p>
 
                         <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
@@ -180,29 +181,51 @@
                     <!-- Topic Tabs Through Dropdown -->
                     <div class = "side_bar_dropdown">
 
-                        <div class = "spacing"> </div>
-
-                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
-                            <span class = "sidebar_topic_name"> Announcements </span> 
-                        </button>
+                        <i class="fa-solid fa-people-group fa-xl inner_image"></i>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Creative Writing </span> 
                         </button>
 
-                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
-                            <span class = "sidebar_topic_name"> Technology </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-people-group fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Questing </span> 
                         </button>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Fiction </span> 
                         </button>
 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-book-open fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Books & Novels </span> 
+                        </button>
+                        
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-film fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Movies & Shows </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> General Nonfiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-regular fa-newspaper fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Current News </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-landmark fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Politics </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-champagne-glasses fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Entertainment </span> 
+                        </button>
+
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Q&A </span> 
                         </button>
-                        
-         
 
                     </div>
 
@@ -232,6 +255,10 @@
                     <div class = "side_bar_dropdown">
 
                         <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name">  Rules </span> 
@@ -266,14 +293,16 @@
                 </div>
 
                 <p> Filter: </p>
-                <input type = "text" placeholder = "Search..." onkeydown = "updateTagSelection(this, event)">
+                <input class = "filter_inputfield" type = "text" placeholder = "Search...">
+
+                <p class = "filter_alert filter_alert_hidden">Alert!</p>
 
                 <div class = "input_tags_wrapper"></div>
 
                 <div class = "filter_tag_button_container">
 
-                    <button class = "filter_tag_button" onclick = "filterByTags()"> Filter Result </button>
-                    <button class = "filter_tag_button" onclick = "clearFilterTags()"> Clear Filters </button>
+                    <button class = "filter_tag_button filter_by_tags"> Filter Result </button>
+                    <button class = "filter_tag_button clear_filter"> Clear Filters </button>
                 </div>
 
             </div>
@@ -293,6 +322,42 @@
 
 
             
+        </div>
+
+
+        <!-- Div contains the challenge container -->
+        <div class = "challenge" id = "challenge_container">
+
+            <!-- Div Contains Close Challenge button and Links Through openChallenge When Pressed -->
+            <div class> <!-- stopPropogation prevents button from opening up userpost forum -->
+                <button id = "closeChallenge"><i class="fa-regular fa-circle-xmark fa-large"></i></button>
+            </div>
+
+            <h2 class = "roll_20"> Roll D20 </h2>
+
+            <div class = "challenger_stats_container">                
+
+            </div>
+
+            <p class = "roll_20_number"></p>
+
+
+            <div class = "dicebg">
+                <img src="../../resources/images/d20.png">
+            </div>
+
+            <p class = "result"> Result </p>
+
+            <!-- Div contains Bet Container Likes Input and Button and Links rollD20 When Button is Pressed -->
+            <div class = "bet_container">
+
+                <p> Bet Likes </p>
+
+                <input class = "betLikes" type = "number" placeholder = "0"></input>
+                <button class = "postBet">Bet</button> 
+
+            </div>
+
         </div>
 
 

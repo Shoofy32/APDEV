@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     tag_container = document.getElementById('tag_container');
     postTag = document.getElementById('postTag')
     addTags = document.getElementById('addTags')
+
+    createPostAlert = document.getElementsByClassName("createpost_alert")[0];
   
 
     add_tag.addEventListener("click", function(e) {
@@ -32,15 +34,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const value = addTags.value.trim();
 
     if (!value) {
-        alert("Tag cannot be empty");
+
+        if(createPostAlert.classList.contains("createpost_alert_hidden"))
+          createPostAlert.classList.toggle("createpost_alert_hidden");
+
+        createPostAlert.textContent = "Tag cannot be empty"
         return;
     }
 
     
     for (let tag of existingTags) {
         if (tag.innerText.toLowerCase() === value.toLowerCase()) {
-            alert("Tag already exists");
+
+          if(createPostAlert.classList.contains("createpost_alert_hidden"))
+            createPostAlert.classList.toggle("createpost_alert_hidden");
+
+            createPostAlert.textContent = "Tag already exists"
             return;
+
         }
        
     }
@@ -55,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("post").addEventListener("click", addPost);
     
 });
+
 async function addPost() {
   if(info.userLoggedIn) {
     const username = info.user.username
@@ -95,19 +107,8 @@ async function addPost() {
     }
    
     }
-  else {
-    alert("You must be logged in to post!")
-  }
   
  
 
 }
 
-async function updatePosts(userId, postId) {
-
-  await fetch(`/user/addReply/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ posts: postId })
-  });
-}

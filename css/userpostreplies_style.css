@@ -30,7 +30,9 @@
                 bg-[#3E5058]
                 rounded-md;
 
-        @apply hover:cursor-pointer;
+        @apply hover:cursor-pointer
+                hover:scale-[1.01]
+                hover:bg-[#2e3c42];
 
     }
 
@@ -138,7 +140,8 @@
                 font-[16px];
 
         @apply hover:bg-[#495d65]
-                hover:cursor-pointer;
+                hover:cursor-pointer
+                group-hover:bg-[#2e3c42];
 
     }
 

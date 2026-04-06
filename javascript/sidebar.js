@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const caretIcon = document.getElementsByClassName("clickable_container")[0]; // Get the caret icon
     const sideBarHome = document.getElementsByClassName("sidebar_home_button")[0]; // Side bar home button
+    const sideBarProfile = document.getElementsByClassName("sidebar_profile_button")[0]; // Side bar home button
+    const sideBarShop = document.getElementsByClassName("sidebar_shop_button")[0]; // Side bar home button
+
     const sideBarTrending = document.getElementsByClassName("sidebar_home_button")[1]
     const sideBarThreads = document.getElementsByClassName("sidebar_home_button")[2]
     const sideBarDropdowns = document.getElementsByClassName("side_bar_title_container"); // Dropdown titles
@@ -45,9 +48,24 @@ document.addEventListener("DOMContentLoaded", () => {
     
         });
 
+    // Add event listener to sidebar home button to move to the homepage when clicked
     aboutButton.addEventListener("click", () => {
 
         window.location.href = "/about";
+
+    });
+
+    // Add event listener to sidebar shop button to move to shop when clicked
+    sideBarProfile.addEventListener("click", () => {
+
+        window.location.href = "/userprofile";
+
+    });
+
+    // Add event listener to sidebar shop button to move to userprofile when clicked
+    sideBarShop.addEventListener("click", () => {
+
+        window.location.href = "/shop";
 
     });
 
@@ -71,11 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if(caretIcon.classList.contains("fa-circle-chevron-right")){
 
             // Expand sidebar
-            sidebar.style.width = "250px"
-            sidebar_button.style.left = "235px";
+            sidebar.classList.toggle("side_bar_open");
+            sidebar_button.classList.toggle("clickable_container_open");
 
             // Show sidebar content
-            sidebar_content.style.visibility = "visible";
+            sidebar_content.classList.toggle("side_bar_content_show");
 
             // Change from right to left
             caretIcon.classList.toggle("fa-circle-chevron-right");
@@ -85,11 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
         else{
 
             // Minimize sidebar
-            sidebar.style.width = "30px"
-            sidebar_button.style.left = "15px";
+            sidebar.classList.toggle("side_bar_open");
+            sidebar_button.classList.toggle("clickable_container_open");
 
-            // Hide sidebar content
-            sidebar_content.style.visibility = "hidden";
+            // Show sidebar content
+            sidebar_content.classList.toggle("side_bar_content_show");
 
             // Change from left to right
             caretIcon.classList.toggle("fa-circle-chevron-left"); 

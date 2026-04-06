@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
     
+
+    // Dropdown topic containers
+    const dropdownTopics = document.getElementsByClassName("dropdown_topic");
+
     const url = window.location.href
     const index = url.indexOf("page=")
     const raw_page = index !== -1 ? url.substring(index + 5).split("&")[0] : "";
@@ -15,6 +19,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get("page")) || 1
+
+
+    // Add event listener for each dropdown topic to call showDropdownContent
+    for(let i = 0; i < dropdownTopics.length; i++)
+        dropdownTopics[i].addEventListener("click", () => {
+      
+            showDropdownContent(dropdownTopics[i]);
+      
+        });
+
+
     
     loadPosts(page)
     await loadPopularPosts()  
@@ -27,6 +42,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
 })
+
+
 // Function opens or closes dropdown menu
 function showDropdownContent(divElement){
 
@@ -199,12 +216,16 @@ async function loadPosts(page = 1) {
         }
        
         
-        
-
-
+        // Load styles  
+        if(user.equippedItems.equippedUsername)
+            namePost.style.color = user.equippedItems.equippedUsername;
+        if(user.equippedItems.equippedPfp)
+            profile.style.border = `4px solid ${user.equippedItems.equippedPfp}`;
 
 
         userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+
+        userPost.classList.add("group");
 
         all_posts.append(userPost);
 
@@ -358,7 +379,16 @@ async function loadPopularPosts() {
         }
        
 
+        // Load styles  
+        if(user.equippedItems.equippedUsername)
+            namePost.style.color = user.equippedItems.equippedUsername;
+        if(user.equippedItems.equippedPfp)
+            profile.style.border = `2px solid ${user.equippedItems.equippedPfp}`;
+
+
         userPost.append(iconNameDate, title, tags_post, description, interaction_container);
+
+        userPost.classList.add("group");
 
         all_posts_popular.append(userPost);
 
@@ -385,95 +415,6 @@ async function loadRecentAnnouncements() {
       recent_announcements.append(announcement)
     }
 
-}
-async function deletePost(id) {
-
-  await fetch(`https://blevvit.onrender.com/post/${id}`, {
-    method: "DELETE"
-  });
-
-}
-
-async function updatePost(id, post_content, is_edited) {
-  await fetch(`https://blevvit.onrender.com/post/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ post_content, is_edited})
-  });
-}
-
-async function updatePostLikes(id, increment) {
-  await fetch(`https://blevvit.onrender.com/post/${id}/likes`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
-}
-
-async function updatePostDislikes(id, increment) {
-  await fetch(`https://blevvit.onrender.com/post/${id}/dislikes`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
-}
-
-async function updateTotalComments(id, increment) {
-  await fetch(`https://blevvit.onrender.com/post/${id}/total_comments`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
-}
-
-async function updateUserLikedPosts(userId, postId) {
-
-  await fetch(`/user/likedPosts/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ liked_posts_id: postId })
-  });
-}
-
-async function removeUserLikedPosts(userId, postId) {
-
-  await fetch(`/user/removeLikedPosts/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ liked_posts_id: postId })
-  });
-}
-
-
-async function updateUserDislikedPosts(userId, postId) {
-
-  await fetch(`/user/dislikedPosts/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ disliked_posts_id: postId })
-  });
-}
-
-async function removeUserDislikedPosts(userId, postId) {
-
-  await fetch(`/user/removeDislikedPosts/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ disliked_posts_id: postId })
-  });
-}
-
-async function updateUserLikesPost(id, increment) {
-
-  const response = await fetch(`https://blevvit.onrender.com/post/${id}`);
-  const post = await response.json()
-  const user_id = post.poster_id
-
-  await fetch(`/user/likes/${user_id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
 }
 
 
