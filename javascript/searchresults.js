@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const userPost = document.createElement("div");
             userPost.id = post._id
             userPost.classList.add("post");
+            userPost.classList.add("group");
 
             const iconNameDate = document.createElement("div");
             iconNameDate.classList.add("icon_name_date_post");

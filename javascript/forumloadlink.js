@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         loadRecentAnnouncements()
         const post = document.getElementById("post_button");
         
-        if(info.user !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {
-            post.style.zIndex = -99999
+        if(info.user == null || (info.user !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Rules") || forumTitle.includes("Forum Announcements") || forumTitle.includes("Announcements")))) {
+            post.remove()
         
         }
         if (post) post.addEventListener("click", () => openPostPage(forumTitle));
