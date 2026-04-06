@@ -859,6 +859,7 @@ app.get("/reply/:id", async (req, res) => {
 
 app.get("/load-posts/:username", async (req,res)=>{
   const response = await Post.find({username: req.params.username})
+  .sort({_id: -1})
   res.json(response);
 });
 

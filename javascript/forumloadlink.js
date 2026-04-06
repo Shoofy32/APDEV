@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadForum(){
         const params = new URLSearchParams(window.location.search);
         const forumTitle = decodeURIComponent(params.get("forum")).split("?")[0]; 
+        
         const page = parseInt(params.get("page")) || 1; // ← reads page number
 
         const [forumImage, forumDescription] = forumInformation(forumTitle);
@@ -99,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             post.remove()
         
         }
-        if (post) post.addEventListener("click", () => openPostPage(forumTitle));
+        if (post) post.addEventListener("click", () => openPostPage(encodeURIComponent(forumTitle)));
     }
 
 
