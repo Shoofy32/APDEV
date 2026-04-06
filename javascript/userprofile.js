@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function loadPosts(){
 
         allPostsContainer.innerHTML="";
-
+        
         let response = await fetch("/load-posts/"+info.user.username);
         posts = await response.json();
 

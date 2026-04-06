@@ -51,9 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add eventlistener to each sidebar button to call moveToForum() when clicked
     for(let i = 0; i < sideBarButtons.length; i++)
         sideBarButtons[i].addEventListener("click", () => {
-    
-            moveToForum(sideBarButtons[i].textContent.trim());
-            sessionStorage.clear();
+           
+            if(sideBarButtons[i].textContent.trim() === "Rules") {
+                moveToForum("Rules and Regulations")
+            }
+            if(sideBarButtons[i].textContent.trim() === "Announcements") {
+            
+                moveToForum("Forum Announcements")
+            }
+            else{
+                moveToForum(sideBarButtons[i].textContent.trim());
+                sessionStorage.clear();
+            }
+
     
         });
 
@@ -85,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
         loadRecentAnnouncements()
         const post = document.getElementById("post_button");
         
-        if(info.user !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Forum Announcements"))) {
-            post.style.zIndex = -99999
+        if(info.user == null || (info.user !== null && !info.user.isModerator && (forumTitle.includes("Rules and Regulations") || forumTitle.includes("Rules") || forumTitle.includes("Forum Announcements") || forumTitle.includes("Announcements")))) {
+            post.remove()
         
         }
         if (post) post.addEventListener("click", () => openPostPage(forumTitle));
@@ -101,13 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Switch statement obtains the needed information depending on the type parameter
         switch (type){
 
-            case "Announcements":
             case "Forum Announcements":
                 forumImage = "../resources/images/announcements.jpg";
                 forumDescription = "Learn important information about Blevvit.";
                 break;
 
-            case "Rules": 
             case "Rules and Regulations": 
                 forumImage = "../resources/images/rules_and_regulations.jpg";
                 forumDescription = "Learn how to be a respectful member in Blevvit.";

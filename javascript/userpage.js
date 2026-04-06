@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentWins.textContent = profileUser.wins;
     currentLosses.textContent = profileUser.losses;
     currentTies.textContent = profileUser.ties;
-
+    
     //Load the styles the user has equipped
     loadEquippedStyles();
 
@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     function loadEquippedStyles(){
 
 
-
+        console.log(profileUser.equippedItems)
         if(profileUser.equippedItems.equippedUsername)
             username.style.color = profileUser.equippedItems.equippedUsername;
 
@@ -494,7 +494,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             userBanner.style.border = `4px solid ${profileUser.equippedBanner}`;
 
         if(profileUser.equippedItems.equippedPfp)
-            userPfp.style.border = `4px solid ${profileUser.equippedPfp}`;
+            
+            userPfp.style.border = `4px solid ${profileUser.equippedItems.equippedPfp}`;
 
 
     }
