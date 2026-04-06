@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     tag_container = document.getElementById('tag_container');
     postTag = document.getElementById('postTag')
     addTags = document.getElementById('addTags')
+
+    createPostAlert = document.getElementsByClassName("createpost_alert")[0];
   
 
     add_tag.addEventListener("click", function(e) {
@@ -32,15 +34,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const value = addTags.value.trim();
 
     if (!value) {
-        alert("Tag cannot be empty");
+
+        if(createPostAlert.classList.contains("createpost_alert_hidden"))
+          createPostAlert.classList.toggle("createpost_alert_hidden");
+
+        createPostAlert.textContent = "Tag cannot be empty"
         return;
     }
 
     
     for (let tag of existingTags) {
         if (tag.innerText.toLowerCase() === value.toLowerCase()) {
-            alert("Tag already exists");
+
+          if(createPostAlert.classList.contains("createpost_alert_hidden"))
+            createPostAlert.classList.toggle("createpost_alert_hidden");
+
+            createPostAlert.textContent = "Tag already exists"
             return;
+
         }
        
     }
@@ -55,48 +66,52 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("post").addEventListener("click", addPost);
     
 });
+
 async function addPost() {
-  if(info.userLoggedIn) {
-    const username = info.user.username
-    const params = new URLSearchParams(window.location.search);
-    const forum_name = params.get("forum");
 
-    const post_title = document.getElementById('title').value
-    const post_content = document.getElementById('content').value
-    const total_likes = 0
-    const is_edited = false
-    const date = new Date().toLocaleDateString();
-    const total_dislikes = 0
-    const total_comments = 0
-    const poster_id = info.user._id
-    alert("Post made successfully!")
-    const response = await fetch("https://blevvit.onrender.com/add-post", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
+    if(info.userLoggedIn) {
+      const username = info.user.username
+      const params = new URLSearchParams(window.location.search);
+      const forum_name = params.get("forum");
+
+      const post_title = document.getElementById('title').value
+      const post_content = document.getElementById('content').value
+      const total_likes = 0
+      const is_edited = false
+      const date = new Date().toLocaleDateString();
+      const total_dislikes = 0
+      const total_comments = 0
+      const poster_id = info.user._id
+
+      if(!createPostAlert.classList.contains("createpost_alert_hidden"))
+        createPostAlert.classList.toggle("createpost_alert_hidden");
+
+      createPostAlert.textContent = "Post made successfully!"
+
+      const response = await fetch("https://blevvit.onrender.com/add-post", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
+      
+      });
+      const data = await response.json();
+      const postId = data.postId; 
+
+      updatePosts(poster_id, postId)
     
-    });
-    const data = await response.json();
-    const postId = data.postId; 
 
-    updatePosts(poster_id, postId)
-   
+      window.location.href = `forum?forum=${forum_name}&page=1`;
+      }
+    else {
 
-    window.location.href = `forum?forum=${forum_name}&page=1`;
+      if(createPostAlert.classList.contains("createpost_alert_hidden"))
+        createPostAlert.classList.toggle("createpost_alert_hidden");
+
+      createPostAlert.textContent = "You must be logged in to post!"
+
     }
-  else {
-    alert("You must be logged in to post!")
-  }
   
  
 
 }
 
-async function updatePosts(userId, postId) {
-
-  await fetch(`/user/addReply/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ posts: postId })
-  });
-}

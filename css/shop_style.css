@@ -1,0 +1,146 @@
+@layer components{
+
+    .shop_container{
+
+        @apply flex
+                flex-wrap
+                absolute
+                left-[125px]
+                top-[135px]
+                w-[1500px]
+                gap-y-5.5
+                gap-x-3.5
+                h-auto;
+
+    }
+
+    .shop_item_container{
+
+        @apply flex
+                flex-col
+                items-center
+                pt-[50px]
+                bg-[#3E5058]
+                border-4
+                border-[#2e3c42]
+                h-[550px]
+                w-[350px]
+                shadow-[0px_0px_15px_#26413C];
+
+        @apply hover:bg-[#37474f]
+                hover:scale-[1.01];
+    
+    }
+
+    .item_preview_container .banner_image{
+
+        @apply w-[300px]
+                rounded-none;
+
+
+    }
+
+    .item_preview_container .pfp{
+
+        @apply relative
+                top-0
+                left-0
+                scale-[0.9]
+                -mb-[10px];
+
+
+    }
+
+    .username_item_preview{
+
+        @apply text-4xl
+                font-extrabold
+                mt-[70px]
+                mb-[55px];
+
+
+    }
+
+    .item_name{
+
+        @apply font-extrabold
+                text-3xl
+                text-[coral]
+                mt-[20px]
+                text-center;
+
+    }
+
+    .item_description{
+
+        @apply font-medium
+                text-lg
+                text-center
+                mt-[10px]
+                w-[300px]
+                h-[40px]
+
+    }
+
+    .item_price_container{
+
+        @apply flex
+                items-center
+                mt-[50px]
+                scale-[1.3];
+
+    }
+
+    .item_price_container i{
+
+        @apply text-[coral];
+
+    }
+
+    .shop_price{
+
+        @apply text-xl
+                font-bold
+                text-[coral];
+
+    }
+
+    .buy_alert{
+
+        @apply font-bold
+                text-xl
+                text-[orangered]
+                mt-[25px]
+                visible;
+
+    }
+
+    .buy_alert_hidden{
+
+        @apply invisible;
+
+    }
+
+
+    .buy_item_button{
+
+        @apply h-10
+                w-40
+                mt-[15px]
+                mb-[35px]
+                text-[coral]
+                bg-[#3b4950]
+                border
+                border-[coral]
+                rounded-[10px]
+                text-lg;
+
+        @apply hover:text-white
+                hover:bg-[#37474f]
+                hover:border-[orange]
+                hover:cursor-pointer
+                hover:scale-[1.1];
+
+    }
+
+}

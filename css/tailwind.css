@@ -14,6 +14,7 @@
 @import "./userprofile_style.css";
 @import "./pagination_style.css";
 @import "./about_style.css";
+@import "./shop_style.css";
 
 @layer utilities{
 
@@ -37,6 +38,7 @@ body{
     @apply bg-[#1A1D1A] 
             m-0
             font-[Inter];
+            
     zoom: 90%;
             
 }
@@ -82,6 +84,56 @@ body{
     i{
 
         @apply text-white;
+
+    }
+
+   p, h1, h2, h3, h4, h5, i, div, button{
+
+        @apply transition-all duration-200 ease-in-out;
+
+    }
+
+
+    ::-webkit-scrollbar {
+
+        width: 15px;
+
+    }
+
+    ::-webkit-scrollbar-track {
+
+        background: #2e3c42;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+
+        background: salmon;
+        border-radius: 20vh;
+
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+
+        background: darksalmon;
+        cursor: pointer;
+
+    }
+
+
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+
+        -webkit-appearance: none;
+        margin: 0;
+
+    }
+
+
+    input[type=number] {
+
+        -moz-appearance: textfield;
 
     }
 

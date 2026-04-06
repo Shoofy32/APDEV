@@ -6,9 +6,11 @@
             absolute
             w-87.5
             h-17.5
-            left-5;
+            left-5
+            transition-all duration-200 ease-in-out;
 
-        @apply cursor-pointer;
+        @apply hover:cursor-pointer
+                hover:scale-[1.05];
 
     }
 
@@ -30,9 +32,15 @@
 
     }
 
+    .search_bar i{
+
+        @apply ml-[10px];
+
+    }
+
     .search_bar input{
 
-        @apply w-100
+        @apply w-110
                 h-10
                 ml-2.5
                 font-normal

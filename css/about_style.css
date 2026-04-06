@@ -22,7 +22,7 @@
 
         @apply flex
                 flex-col
-                w-[1100px]
+                w-275
                 mt-15
                 mb-15
                 gap-7.5;
@@ -124,8 +124,6 @@
                 rounded-xl
                 scale-[1]
                 shadow-[0px_0px_0px_white];
-
-        transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
 
         @apply hover:shadow-[0px_0px_5px_white]
                 hover:scale-[1.05];

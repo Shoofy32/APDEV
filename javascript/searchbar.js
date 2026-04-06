@@ -1,33 +1,51 @@
-import {showSearchResults} from "../javascript/searchresults.js"; // Import showSearchResults function
-import {tester} from "../javascript/searchresults.js"; // Import showSearchResults function
-// Make searchPost Global
-window.searchPost = searchPost;
+document.addEventListener("DOMContentLoaded", () => {
 
-// Function Opens Search Results Page After Enter Key Press
-function searchPost(searchElement, event){
+    // Get search bar input from header
+    const searchBarInput = document.getElementsByClassName("search_bar_input")[0];
+    
 
-    // Obtain Value in searchElement
-    var searchContent = searchElement.value;
+    document.addEventListener("keydown", (event) => {
 
-    // If Enter Key is Pressed and Either Length is Greater than 3 or Equal to 0, then Open Page
-    if(event.key == "Enter" && (searchContent.length >= 3 || searchContent.length == 0)){
+        if(event.key === "Enter" && document.activeElement === searchBarInput)
+            searchPost(searchBarInput);
 
-        // Open localStorage and Add search-content Item with Data of Result
-        localStorage.setItem("search-content", searchContent);
+    })
 
-        // If Current Path Location is not Search Results, then Send Data of LocalStorage to Search Results and Open It
-        if(window.location.pathname != "/searchresults")
-            window.location.href = "/searchresults";
-        else{ // Already in Search Results and Instead Update Search Content and Search Results
 
-            // Update localStorage and Refresh SearchResults
+
+    // Function Opens Search Results Page After Enter Key Press
+    function searchPost(searchElement){
+
+        // Obtain Value in searchElement
+        var searchContent = searchElement.value;
+
+
+            // Open localStorage and Add search-content Item with Data of Result
             localStorage.setItem("search-content", searchContent);
-            showSearchResults();
-            
 
-        }
+            // If Current Path Location is not Search Results, then Send Data of LocalStorage to Search Results and Open It
+            if(window.location.pathname != "/searchresults")
+                window.location.href = "/searchresults";
+            else{ // Already in Search Results and Instead Update Search Content and Search Results
+
+                // Update localStorage and Refresh SearchResults
+                localStorage.setItem("search-content", searchContent);
+                showSearchResults();
+                
+
+            }
+
 
 
     }
 
-}
+
+    
+
+
+    // Make searchPost Global
+    window.searchPost = searchPost;
+
+
+});
+

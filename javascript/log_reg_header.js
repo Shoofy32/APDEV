@@ -2,7 +2,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Get the 2 types of containers for login header
     const anonContainer = document.getElementById("anon"); // Not logged in container
-     const userContainer = document.getElementById("user"); // Logged in container
+    const userContainer = document.getElementById("user"); // Logged in container
+
+    // Get the log in and register button for anon
+    const anonLogInButton = document.getElementsByClassName("sign1_log_in")[0]; // Not logged in container
+    const anonRegisterButton = document.getElementsByClassName("sign1_register")[0]; // Logged in container      
+
 
     // Get the likes and notifications container
     const likesContainer = document.getElementsByClassName("likes_container")[0];
@@ -28,6 +33,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = "/";
 
     });
+
+
+     // Add event listener to logo to go back to the homepage (uses route in server.js)
+    anonLogInButton.addEventListener("click", () => {
+
+        window.location.href = "/login";
+
+    });   
+
+
+
+    // Add event listener to logo to go back to the homepage (uses route in server.js)
+    anonRegisterButton.addEventListener("click", () => {
+
+        window.location.href = "/register";
+
+    });
+
+
+    // Check if like container exists before adding event listener
+    if(likesContainer)
+        // Add event listener to go to shop page when clicked
+        likesContainer.addEventListener("click", () => {
+
+            window.location.href = "/shop";
+
+        });
+
 
 
     // Checks info from session to see if user is logged in, if so, display user info
@@ -67,12 +100,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         notificationButtonDisplay();
         
 
-
         // Show user display and show the likes and notifications display
         userContainer.style.display = "flex";
         anonContainer.style.display = "none";
         likesContainer.style.display = "flex";
         notificationsContainer.style.display = "flex";
+
+
+        // Load any equipped styles
+        if(info.user.equippedItems.equippedUsername)
+            username.style.color = info.user.equippedItems.equippedUsername;
+        else
+            username.style.color = "";
+
+        if(info.user.equippedItems.equippedPfp)
+            pfp.style.border = `4px solid ${info.user.equippedItems.equippedPfp}`;
+        else
+            pfp.style.border = "";
+
+
+
 
     }
     // Check if user is not logged in and not in login and resgister page

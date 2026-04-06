@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
    }
 
     // If current path is at either forum.html or userpost.html, add event listener to return forum links
-    if(window.location.pathname === "/forum"  || window.location.pathname == "userpost"){
+    if(window.location.pathname === "/forum"  || window.location.pathname == "/userpost"){
 
 
         const returnForumLink = document.getElementsByClassName("return_forum_link"); // Return forum links
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
         for(let i = 0; i < returnForumLink.length; i++)
             returnForumLink[i].addEventListener("click", () => {
 
+
                 // Obtain from sessionStorage the stored href
                 window.location.href = sessionStorage.getItem("lastLoadedForum");
 
             });
+
 
     }
         
