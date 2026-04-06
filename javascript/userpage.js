@@ -491,7 +491,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
         if(profileUser.equippedItems.equippedBanner)
-            userBanner.style.border = `4px solid ${profileUser.equippedBanner}`;
+            userBanner.style.border = `4px solid ${profileUser.equippedItems.equippedBanner}`;
 
         if(profileUser.equippedItems.equippedPfp)
             
