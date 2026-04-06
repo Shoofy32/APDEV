@@ -68,47 +68,44 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function addPost() {
+  if(info.userLoggedIn) {
+    const username = info.user.username
+    const params = new URLSearchParams(window.location.search);
+    const forum_name = params.get("forum");
 
-    if(info.userLoggedIn) {
-      const username = info.user.username
-      const params = new URLSearchParams(window.location.search);
-      const forum_name = params.get("forum");
+    const post_title = document.getElementById('title').value
+    const post_content = document.getElementById('content').value
+    const total_likes = 0
+    const is_edited = false
+    const date = new Date().toLocaleDateString();
+    const total_dislikes = 0
+    const total_comments = 0
+    const poster_id = info.user._id
 
-      const post_title = document.getElementById('title').value
-      const post_content = document.getElementById('content').value
-      const total_likes = 0
-      const is_edited = false
-      const date = new Date().toLocaleDateString();
-      const total_dislikes = 0
-      const total_comments = 0
-      const poster_id = info.user._id
+    if(post_title === "") {
+      alert("Title must not be empty!")
+    }
+    else if (post_content === "") {
+      alert("Content must not be empty!")
+    }
+    else{
+        alert("Post made successfully!")
+        const response = await fetch("https://blevvit.onrender.com/add-post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
+        
+        });
+        const data = await response.json();
+        const postId = data.postId; 
 
-      if(!createPostAlert.classList.contains("createpost_alert_hidden"))
-        createPostAlert.classList.toggle("createpost_alert_hidden");
-
-      createPostAlert.textContent = "Post made successfully!"
-
-      const response = await fetch("https://blevvit.onrender.com/add-post", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
+        updatePosts(poster_id, postId)
       
-      });
-      const data = await response.json();
-      const postId = data.postId; 
 
-      updatePosts(poster_id, postId)
-    
+        window.location.href = `forum?forum=${forum_name}&page=1`;
 
-      window.location.href = `forum?forum=${forum_name}&page=1`;
-      }
-    else {
-
-      if(createPostAlert.classList.contains("createpost_alert_hidden"))
-        createPostAlert.classList.toggle("createpost_alert_hidden");
-
-      createPostAlert.textContent = "You must be logged in to post!"
-
+    }
+   
     }
   
  
