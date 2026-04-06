@@ -69,20 +69,31 @@ async function addPost() {
     const total_dislikes = 0
     const total_comments = 0
     const poster_id = info.user._id
-    alert("Post made successfully!")
-    const response = await fetch("https://blevvit.onrender.com/add-post", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
-    
-    });
-    const data = await response.json();
-    const postId = data.postId; 
 
-    updatePosts(poster_id, postId)
+    if(post_title === "") {
+      alert("Title must not be empty!")
+    }
+    else if (post_content === "") {
+      alert("Content must not be empty!")
+    }
+    else{
+        alert("Post made successfully!")
+        const response = await fetch("https://blevvit.onrender.com/add-post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, post_title, post_content, forum_name, tags,total_likes, is_edited, date, total_dislikes, total_comments,poster_id})
+        
+        });
+        const data = await response.json();
+        const postId = data.postId; 
+
+        updatePosts(poster_id, postId)
+      
+
+        window.location.href = `forum?forum=${forum_name}&page=1`;
+
+    }
    
-
-    window.location.href = `forum?forum=${forum_name}&page=1`;
     }
   else {
     alert("You must be logged in to post!")
