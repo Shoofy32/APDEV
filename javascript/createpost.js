@@ -102,7 +102,7 @@ async function addPost() {
         updatePosts(poster_id, postId)
       
 
-        window.location.href = `forum?forum=${forum_name}&page=1`;
+        window.location.href = `forum?forum=${encodeURIComponent(forum_name)}&page=1`;
 
     }
    
