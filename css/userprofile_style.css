@@ -326,6 +326,8 @@
                 bg-[#3E5058]
                 rounded-md
                 ml-10;
+            
+        @apply hover:bg-[#2e3c42];
 
     }
 
@@ -377,6 +379,9 @@
                 rounded-tl-none
                 rounded-bl-none;
 
+        @apply hover:scale-[1.01]
+                hover:bg-[#2e3c42];
+
     }
 
 
@@ -406,7 +411,8 @@
                 text-white;
 
         @apply hover:text-[salmon]
-                hover:cursor-pointer;
+                hover:cursor-pointer
+                hover:scale-[1.9];
 
 
     }
@@ -536,11 +542,11 @@
                 flex-col
                 fixed
                 items-center
-                justify-center
                 top-[50%]
                 left-[50%]
                 w-[40vw]
-                h-[65vh]
+                h-[80vh]
+                pt-[30px]
                 rounded-xl
                 text-[coral]
                 bg-[#3e5058b9]
@@ -591,7 +597,7 @@
 
     }
 
-    .edit_section_container{
+    .edit_section_container, .edit_style_section_container{
 
         @apply flex
                 items-center;
@@ -614,6 +620,12 @@
                 text-2xl
                 underline
                 text-center;
+
+    }
+
+    .edit_style_section_container{
+
+        @apply gap-[50px];
 
     }
 
@@ -681,10 +693,55 @@
 
     }
 
+    .select_style_container{
+
+        @apply flex
+                flex-col;
+
+
+    }
+
+    .select_style_list_container{
+
+        @apply flex
+                flex-col
+                h-[70px]
+                w-[150px]
+                bg-[#28363ba3]
+                overflow-y-scroll;
+
+    }
+
+    .select_style_header{
+
+        @apply text-2xl
+                font-bold
+                ml-[10px]
+                text-center;
+
+    }
+
+    .select_style_list_container p{
+
+        @apply font-semibold
+                text-[coral];
+
+        @apply hover:cursor-pointer
+                hover:text-white;
+
+
+    }
+
+    .style_element.active_style{
+
+        @apply text-white;
+
+    }
+
+
     .hide{
 
         @apply hidden;
-
 
     }
 

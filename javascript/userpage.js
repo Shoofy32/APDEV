@@ -36,8 +36,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentLosses.textContent = profileUser.losses;
     currentTies.textContent = profileUser.ties;
 
+    //Load the styles the user has equipped
+    loadEquippedStyles();
+
     //runs all the loading functions
     await loadPosts();
+
+
 
     // Add classList to post container to show posts when userpage is first loaded
     allPostsContainer.classList.toggle("display_visible");
@@ -201,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             dislike.append(i2, total_dislikes)
 
             const comment = document.createElement('div')
-            comment.classList.add('reply_button')
+            comment.classList.add('comment_container')
 
             const i3 = document.createElement('i')
             i3.classList.add('fa-regular')
@@ -209,8 +214,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const reply = document.createElement('p')
             reply.classList.add('comment_counter')
-            reply.innerText = "Reply"
+            reply.innerText = post.total_comments
             comment.append(i3, reply)
+
             
 
             const challenge = document.createElement('div')
@@ -267,8 +273,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                 interaction_container.append(like,dislike, comment, challenge)
                 
             }
+
+            // Load styles  
+            if(user.equippedItems.equippedUsername)
+                userh5.style.color = user.equippedItems.equippedUsername;
+            if(user.equippedItems.equippedPfp)
+                profile_picture.style.border = `2px solid ${user.equippedItems.equippedPfp}`;
+
+
                 
             post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
+
+            post_container.classList.add("group");
 
             allPostsContainer.append(post_container)
         });
@@ -395,19 +411,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             i2.dataset.clicked = "true"
             }
         
-
-            const comment = document.createElement('div')
-            comment.classList.add('reply_button')
-
-            const i3 = document.createElement('i')
-            i3.classList.add('fa-regular')
-            i3.classList.add('fa-comment')
-
-            const replyLang = document.createElement('p')
-            replyLang.classList.add('comment_counter')
-            replyLang.innerText = "Reply"
-            comment.append(i3, replyLang)
-
+            
             const challenge = document.createElement('div')
             challenge.classList.add('challenge_button')
 
@@ -450,19 +454,52 @@ document.addEventListener("DOMContentLoaded", async () => {
             delete_edit_container.append(delete_button, edit_button)
         
             if(info.userLoggedIn && reply.username === info.user.username) {
-            interaction_container.append(like,dislike, comment, delete_edit_container)
+            interaction_container.append(like,dislike, delete_edit_container)
             }
 
             else {
-            interaction_container.append(like,dislike, comment, challenge)
+            interaction_container.append(like,dislike, challenge)
 
             }
+
+
+            // Load styles  
+            if(user.equippedItems.equippedUsername)
+                name.style.color = user.equippedItems.equippedUsername;
+            if(user.equippedItems.equippedPfp)
+                profile.style.border = `2px solid ${user.equippedItems.equippedPfp}`;
         
+
             userPost.append(iconNameDate,post_contents, interaction_container)
+
+            userPost.classList.add("group");
+
             allRepliesContainer.append(userPost)
             
         });
     }
+
+
+
+    // Function equips the styles to view in userpage
+    function loadEquippedStyles(){
+
+
+
+        if(profileUser.equippedItems.equippedUsername)
+            username.style.color = profileUser.equippedItems.equippedUsername;
+
+
+        if(profileUser.equippedItems.equippedBanner)
+            userBanner.style.border = `4px solid ${profileUser.equippedBanner}`;
+
+        if(profileUser.equippedItems.equippedPfp)
+            userPfp.style.border = `4px solid ${profileUser.equippedPfp}`;
+
+
+    }
+
+
 
 
     // -- NOTIFICATIONS INTERACTION FUNCTIONS -- //

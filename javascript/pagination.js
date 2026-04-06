@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const maxPageLimit = 30;
 
     const paginationNumbers = document.getElementsByClassName("pagination_number"); // Pagination number list
+    const inputPage = document.getElementsByClassName("inputPage")[0]; // Input page element
 
     // Individual pagination numbers
     let paginationList; // Pagination list
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function(){
         else
             paginationNumbers[i].addEventListener("click", () => {
 
-                alert("NAV TO BE ADDED");
+                paginationNumbers[i].closest(".pagination_container").classList.toggle("page_selector_container_show");
 
             });
 
@@ -51,9 +52,42 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
 
+    document.addEventListener("keydown", (event) => {
+
+        if(event.key === "Enter" && parseInt(inputPage.value) >= 1 && parseInt(inputPage.value) <= maxPageLimit){
+
+
+        // Update displayedNumber and currentNumber
+        displayedNumber = 0;
+        currentNumber = parseInt(inputPage.value);
+
+        // Update paginationList
+        paginationNumber1.textContent = parseInt(inputPage.value);
+        paginationNumber2.textContent = parseInt(inputPage.value) + 1;
+        paginationNumber3.textContent = parseInt(inputPage.value) + 2;
+
+        // Save to session storage before moving to new page
+        sessionStorage.setItem("currentNumber", currentNumber)
+        sessionStorage.setItem("displayedNumber", displayedNumber)
+        sessionStorage.setItem("paginationNumber", JSON.stringify([paginationNumber1.textContent, 
+                                paginationNumber2.textContent, paginationNumber3.textContent]))
+
+
+        // Change page and reset inputPage
+        changePage(parseInt(inputPage.value));
+        inputPage.value = "";
+
+
+        }
+
+    })
+
+
     loadPagination(); // Load pagination
 
 
+
+    // ---------------- FUNCTION ---------------- // 
 
 
     // Function loads active pagination and numbers in pagination

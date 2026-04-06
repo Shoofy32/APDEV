@@ -39,7 +39,8 @@
 
     .dropdown_content{
 
-        @apply inline-block 
+        @apply flex
+                flex-col
                 w-full 
                 h-auto 
                 m-0;
@@ -75,6 +76,9 @@
                 bg-[#3E5058]
                 border-2
                 rounded-sm;
+
+        @apply hover:scale-[1.01]
+                hover:bg-[#37474f];
 
         box-shadow: 0 6px 11px -8px orange; 
 
@@ -202,7 +206,7 @@
         @apply font-semibold 
                 text-xl
                 text-[#3E5058] 
-                ml-2.5 
+                ml-5 
                 underline
                 text-wrap;
 
@@ -212,11 +216,33 @@
 
     }
 
+    .statistics_label{
+
+        @apply flex
+                items-center
+                ml-5
+                mt-2
+                text-xl
+                font-semibold
+                text-[#3E5058];
+
+    }
+
+    .statistics_counter{
+
+        @apply  ml-auto
+                mr-5
+                text-[orangered];
+
+    }
+
     .side_bar_title{
 
         @apply flex 
                 items-center
-                w-full h-12.5 
+                w-full 
+                h-12.5 
+                mb-[10px]
                 bg-[#26413C] 
                 border-b-2 
                 border-b-[#3E5058];

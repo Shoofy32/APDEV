@@ -130,11 +130,11 @@
 
         @apply absolute
                 left-140
-                w-37.5
+                w-42.5
                 h-12.5
                 bg-[#ff7a3d]
                 text-white
-                mt-2.5
+                mt-10
                 ml-130
                 border-0
                 rounded-lg
@@ -153,7 +153,8 @@
     .recent_announcements{
 
         @apply w-83
-                min-h-100
+                min-h-110
+                mt-[35px]
                 -ml-7
                 text-base;
 
@@ -164,7 +165,7 @@
         @apply w-83
                 -ml-7
                 mt-5
-                min-h-100;
+                min-h-60;
 
     }
 

@@ -59,6 +59,9 @@
         <!-- Link JS File for notifications interaction -->
         <script src = "../javascript/pagination.js"></script>
 
+        <!-- Link JS File for statistics interaction -->
+        <script src = "../javascript/statistics.js"></script>
+
     </head>
 
 
@@ -79,12 +82,12 @@
 
                     <i class="fa-solid fa-magnifying-glass fa-lg" style = "color: #ffffff;"></i>
 
-                    <input type = "text" placeholder = "Search..." onkeydown = "searchPost(this, event)">
+                    <input class = "search_bar_input" type = "text" placeholder = "Search...">
 
                 </div>
 
                 <!-- Like Container for showing current likes user has -->
-                <div class = "likes_container">
+                <div class = "likes_container group">
                     <i class="fa-regular fa-thumbs-up fa-xl"></i>
                     <p class = "like_amount"></p>
                 </div>
@@ -122,8 +125,8 @@
                     <!-- Log In and Sign Up Buttons -->
                     <div class = "log_sign_in1" id = "anon">
 
-                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/login'"> Log In </button>
-                        <button class = "log_sign_in_button"  onclick = "window.location.href = '/register'"> Sign Up </button>
+                        <button class = "log_sign_in_button sign1_log_in"> Log In </button>
+                        <button class = "log_sign_in_button sign1_register"> Sign Up </button>
 
                     </div>
 
@@ -159,15 +162,15 @@
                          <span> Home </span> 
                     </button>
 
-                    <button class = "sidebar_home_button"> <i class = "fa-solid fa-arrow-up-right-dots fa-lg" style = "color: #ffffff;"></i> 
-                        <span> Trending </span> 
+                    <button class = "sidebar_profile_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
+                        <span> User Profile </span> 
                     </button>
 
-                    <button class = "sidebar_home_button"> <i class = "fa-regular fa-user fa-lg" style = "color: #ffffff;"></i> 
-                        <span> Your Threads </span> 
+                    <button class = "sidebar_shop_button"> <i class = "fa-solid fa-shop fa-lg" style = "color: #ffffff;"></i> 
+                        <span> Shop </span> 
                     </button>
 
-                    <hr class = "sidebar_border">
+                    <hr class = "sidebar_border mt-3">
          
                 </div>
 
@@ -178,7 +181,7 @@
 
                     <div class = "side_bar_title_container">
 
-                        <p class = "side_bar_title_section"> Popular Topics </p>
+                        <p class = "side_bar_title_section"> Forum Topics </p>
 
                         <i class = "caret fa-solid fa-caret-right fa-sm" style = "color: #78939e;"></i>
 
@@ -188,29 +191,51 @@
                     <!-- Topic Tabs Through Dropdown -->
                     <div class = "side_bar_dropdown">
 
-                        <div class = "spacing"> </div>
-
-                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
-                            <span class = "sidebar_topic_name"> Announcements </span> 
-                        </button>
+                        <i class="fa-solid fa-people-group fa-xl inner_image"></i>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-pen-fancy fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Creative Writing </span> 
                         </button>
 
-                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
-                            <span class = "sidebar_topic_name"> Technology </span> 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-people-group fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Questing </span> 
                         </button>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Fiction </span> 
                         </button>
 
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-book-open fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Books & Novels </span> 
+                        </button>
+                        
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-film fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Movies & Shows </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-comment-dots fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> General Nonfiction </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-regular fa-newspaper fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Current News </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-computer fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Technology </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-landmark fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Politics </span> 
+                        </button>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-champagne-glasses fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Entertainment </span> 
+                        </button>
+
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-question fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name"> Q&A </span> 
                         </button>
-                        
-         
 
                     </div>
 
@@ -240,6 +265,10 @@
                     <div class = "side_bar_dropdown">
 
                         <div class = "spacing"> </div>
+
+                        <button class = "sidebar_topic_button"> <i class = "fa-solid fa-bullhorn fa-lg" style = "color: #ffffff;"></i> 
+                            <span class = "sidebar_topic_name"> Announcements </span> 
+                        </button>
 
                         <button class = "sidebar_topic_button"> <i class = "fa-solid fa-scale-balanced fa-lg" style = "color: #ffffff;"></i> 
                             <span class = "sidebar_topic_name">  Rules </span> 
@@ -274,7 +303,7 @@
             <div class = "dropdown_section">
 
                 <!-- Announcements Dropdown -->
-                <div class = "text-white dropdown_topic"  onclick= "showDropdownContent(this)">
+                <div class = "text-white dropdown_topic">
                     
                     <i class = "fa-solid fa-bullhorn fa-xl"></i>
 
@@ -333,7 +362,7 @@
             <div class = "dropdown_section">
 
                 <!-- Announcements Dropdown -->
-                <div class = "dropdown_topic"  onclick = "showDropdownContent(this)">
+                <div class = "dropdown_topic">
                     
                     <i class="text-white fa-solid fa-book fa-xl"></i>
 
@@ -392,7 +421,7 @@
             <div class = "dropdown_section">
 
                 <!-- Discussion Dropdown -->
-                <div class = "text-white dropdown_topic" onclick= "showDropdownContent(this)">
+                <div class = "text-white dropdown_topic">
                     
                     <i class = "fa-solid fa-robot fa-xl"></i>
 
@@ -469,7 +498,7 @@
             <div class = "dropdown_section">
 
                 <!-- Nonfiction Discussion Dropdown -->
-                <div class = "text-white dropdown_topic"  onclick= "showDropdownContent(this)">
+                <div class = "text-white dropdown_topic">
                     
                     <i class = "fa-solid fa-globe fa-xl"></i>
 
@@ -602,7 +631,7 @@
 
 
             <!-- Latest Posts Dropdown -->
-            <div class = "dropdown_topic" onclick= "showDropdownContent(this)">
+            <div class = "dropdown_topic">
                 
                 <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
@@ -622,10 +651,17 @@
 
                 <p class = "pagination_number">1</p>
                 <p class = "pagination_number">2</p>
-               <p class = "pagination_number">3</p>
-                <p class = "pagination_number">...</p>
+                <p class = "pagination_number">3</p>
+                <p class = "pagination_number pagination_input">...</p>
  
                 <i class = "fa-solid fa-chevron-right fa-2xl arrow"></i>
+
+                <div class = "page_selector_container">
+                
+                    <p class = "inputPage_header">Input Page</p>
+                    <input class = "inputPage" type = "number" placeholder = "0"></input>
+
+                </div> 
 
             </div>
 
@@ -640,7 +676,7 @@
 
 
             <!-- Latest Posts Dropdown -->
-            <div class = "dropdown_topic" onclick= "showDropdownContent(this)">
+            <div class = "dropdown_topic">
                 
                 <i class = "caret fa-solid fa-caret-right fa-lg"></i>
 
@@ -659,14 +695,6 @@
         <!-- Article contains the side content in the home page -->
         <article class = "home_side_content">
 
-            <!-- New Posts and Create Thread Buttons -->
-            <div class = "post_and_threads_buttons">
- 
-                <button onclick= "window.location.href = '../forumpage/post.html';"> <i class = "fa-solid fa-bolt" style = "color: #ffffff;"></i> New Posts </button>
-                <button onclick= "window.location.href = '../forumpage/post.html';"> <i class = "fa-solid fa-square-pen fa-lg" style = "color: #ffffff;"></i> Post Thread </button>
-
-            </div>
-
             <!-- Recent Announcements Section -->
             <div class = "recent_announcements  "> 
 
@@ -676,9 +704,6 @@
                     <h3> Recent Announcements </h3>
 
                 </div>
-
-                <p onclick = "goToForum('Announcements')"> Blevvit Opening Page </p>
-                <p onclick = "goToForum('Announcements')"> Remember to read the rules of our site!!</p>
 
             </div>
 
@@ -691,6 +716,11 @@
                     <h3> Statistics </h3>
 
                 </div>
+
+                <p class = "statistics_label">Posts: <span class = "statistics_counter statistic_post">0</span></p>
+                <p class = "statistics_label">Messages: <span class = "statistics_counter statistic_messages">0</span></p>
+                <p class = "statistics_label">Members: <span class = "statistics_counter statistic_members">0</span></p>
+                <p class = "statistics_label">Moderators: <span class = "statistics_counter statistic_mods">0</span></p>
 
             </div>
 
@@ -726,7 +756,6 @@
 
                 <p> Bet Likes </p>
 
-                <!-- stopPropogation prevents button from opening up userpost forum -->
                 <input class = "betLikes" type = "number" placeholder = "0"></input>
                 <button class = "postBet">Bet</button> 
 

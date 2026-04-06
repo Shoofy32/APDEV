@@ -18,7 +18,15 @@ const userSchema = new mongoose.Schema({
     liked_replies_id : [String],
     disliked_posts_id : [String],
     disliked_replies_id : [String],
-    isModerator: {type: Boolean, default: false}
+    isModerator: {type: Boolean, default: false},
+    itemsBought: {type: [String], default: []},
+    equippedItems:{
+
+        equippedUsername: {type: String, default: null},
+        equippedBanner: {type: String, default: null},
+        equippedPfp: {type: String, default: null},
+
+    }
     
 });
 

@@ -200,16 +200,18 @@
       }
         
 
+      // Load styles  
+      if(user.equippedItems.equippedUsername)
+          userh5.style.color = user.equippedItems.equippedUsername;
+      if(user.equippedItems.equippedPfp)
+          profile_picture.style.border = `2px solid ${user.equippedItems.equippedPfp}`;
 
 
       post_container.append(post_info, post_title, tags_post, post_body, interaction_container)
 
-      all_posts.append(post_container)
+      post_container.classList.add("group");
 
-        
-        
-    
-    
+      all_posts.append(post_container)
 
     }
 
@@ -419,10 +421,17 @@
         }
         
 
-  
+        // Load styles  
+        if(user.equippedItems.equippedUsername)
+            name.style.color = user.equippedItems.equippedUsername;
+        if(user.equippedItems.equippedPfp)
+            profile.style.border = `2px solid ${user.equippedItems.equippedPfp}`;
 
   
         userPost.append(iconNameDate,post_contents, interaction_container)
+
+        userPost.classList.add("group");
+
         all_posts.append(userPost)
         
     };
@@ -430,130 +439,4 @@
 
     }
 
-async function deleteReply(id) {
- 
-  await fetch(`https://blevvit.onrender.com/reply/${id}`, {
-    method: "DELETE"
-  });
 
-}
-
-async function addReply(username, replying_to, original_content, reply_content, unique_post_id, parent_reply_id, poster_id) {
-  const date = new Date().toLocaleDateString();
-  await fetch("https://blevvit.onrender.com/add-reply", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ 
-      username, 
-      replying_to, 
-      original_content, 
-      reply_content, 
-      unique_post_id, 
-      total_likes: 0,         
-      is_edited: false, 
-      parent_reply_id,
-      date,
-      total_dislikes: 0,
-      poster_id: poster_id
-
-    })
-  });
-}
-
-
-async function updateReply(id, reply_content, is_edited, original_content) {
-   ;
-
-  await fetch(`https://blevvit.onrender.com/reply/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ reply_content, is_edited, original_content})
-  });
- 
-}
-
-async function updateReplyLikes(id, increment) {
-  await fetch(`https://blevvit.onrender.com/reply/${id}/likes`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
-}
-
-async function updateReplyDislikes(id, increment) {
-  await fetch(`https://blevvit.onrender.com/reply/${id}/dislikes`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
-}
-
-async function updateUserReplies(userId, postId) {
-
-  await fetch(`/user/addPost/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ replies: postId })
-  });
-}
-
-
-
-async function updateUserLikedReplies(userId, postId) {
-
-  await fetch(`/user/likedReplies/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ liked_replies_id: postId })
-  });
-}
-
-async function updateUserLikesReply(id, increment) {
-
-  const response = await fetch(`/reply/${id}`);
-  const reply = await response.json()
-  const user_id = reply.poster_id
-
-  await fetch(`/user/likes/${user_id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ increment })
-  });
-}
-
-async function removeUserLikedReplies(userId, postId) {
-
-  await fetch(`/user/removeLikedReplies/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ liked_replies_id: postId })
-  });
-}
-
-
-async function updateUserDislikedReplies(userId, postId) {
-
-  await fetch(`/user/dislikedReplies/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ disliked_replies_id: postId })
-  });
-}
-
-async function removeUserLikedReplies(userId, postId) {
-
-  await fetch(`/user/removeDislikedReplies/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ disliked_replies_id: postId })
-  });
-}
-
-async function removeUserDislikedReplies(userId, postId) {
-
-  await fetch(`/user/removeDislikedReplies/${userId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ disliked_replies_id: postId })
-  });
-}

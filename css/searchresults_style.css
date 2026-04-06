@@ -9,13 +9,18 @@
     /* Search - Container */
     .search_container{
 
-        @apply flex
-                flex-col
+        @apply flex-col
                 w-325
                 h-250
                 pl-25
                 pt-25;
                 
+
+    }
+
+    .search_container .post{
+
+        @apply w-287.5;
 
     }
 
@@ -30,7 +35,7 @@
                 min-h-100
                 max-h-125
                 ml-12.5
-                mt-42.5
+                mt-35
                 bg-[#8AB0AB]
                 border-2
                 border-[#3E5058]
@@ -77,12 +82,13 @@
     .tag_filter_container p{
 
         @apply text-lg
-                font-medium;
+                font-medium
+                ml-[10px];
 
     }
 
     /* Search Result Filter System - Containers */
-    .tag_filter_container p, .tag_filter_container input, .tag_filter_container .filter_tag_button_container{
+    .tag_filter_container input, .tag_filter_container .filter_tag_button_container{
 
         @apply ml-2.5
                 mr-3.75;
@@ -95,7 +101,8 @@
         @apply flex
                 justify-center
                 mt-auto
-                mb-5;
+                mb-5
+                gap-1;
 
     }
 
@@ -139,7 +146,8 @@
         @apply hover:text-white
                 hover:bg-[#37474f]
                 hover:border-[orange]
-                hover:cursor-pointer;
+                hover:cursor-pointer
+                hover:scale-[1.1];
 
     }
 
@@ -148,30 +156,62 @@
 
         @apply flex
                 flex-wrap
-                h-62.5
-                ml-2.5
-                mr-3.75
-                mt-2.5
-                overflow-y-auto;
+                ml-[10px]
+                pt-[10px]
+                pb-[10px]
+                gap-y-1.5
+                gap-x-1.5
+                max-h-[250px]
+                bg-none
+                overflow-y-auto
+                overflow-x-hidden;
 
     }
 
     /* Search Result Filter System - Input Tags Display*/
     .input_tag_display{
 
-        @apply inline-flex
-                items-center
+        @apply flex
                 justify-center
-                w-auto
-                h-7.5
-                mt-1.25
-                pl-0.5
-                pr-0.5
-                text-sm
-                font-semibold
+                items-center
+                m-0
+                pl-[0.5vw]
+                pr-[0.5vw]
+                h-[4vh]
+                text-xl
+                font-medium
                 bg-[#26413C]
-                rounded-md;
+                border-2
+                border-white
+                rounded-xl
+                scale-[1]
+                shadow-[0px_0px_0px_#26413C];
 
+        @apply hover:shadow-[0px_0px_8px_#26413C]
+                hover:overflow-y-hidden
+                hover:overflow-x-hidden;
+
+    }
+
+
+
+    .filter_alert{
+
+        @apply font-bold
+                text-lg
+                text-[orangered]
+                text-center
+                visible
+                opacity-100;
+
+    }
+
+    .filter_alert_hidden{
+
+        @apply invisible
+                opacity-0;
+
+        transition: opacity 0s;
 
     }
 
