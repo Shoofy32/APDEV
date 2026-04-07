@@ -13,6 +13,7 @@
         @apply hover:text-[coral]
                 hover:underline
                 hover:cursor-pointer;
+        
 
     }
 
@@ -20,6 +21,7 @@
     .log_sign_in_button{
 
         @apply h-10
+                
                 w-16.25
                 text-[coral]
                 bg-[#3b4950]
@@ -40,6 +42,7 @@
     .log_sign_in1{
 
         @apply w-47.5
+                
                 hidden
                 justify-center
                 items-center
@@ -54,6 +57,9 @@
                 items-center
                 hidden
                 gap-2.5;
+                
+                
+                
 
     }
 
