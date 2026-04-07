@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if(sideBarButtons[i].textContent.trim() === "Rules") {
                 moveToForum("Rules and Regulations")
             }
-            if(sideBarButtons[i].textContent.trim() === "Announcements") {
+            else if(sideBarButtons[i].textContent.trim() === "Announcements") {
             
                 moveToForum("Forum Announcements")
             }
