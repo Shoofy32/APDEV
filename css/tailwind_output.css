@@ -706,7 +706,7 @@
   #forum_head #post_button {
     position: absolute;
     left: calc(var(--spacing) * 140);
-    margin-top: calc(var(--spacing) * 10);
+    margin-top: calc(var(--spacing) * 2);
     margin-left: calc(var(--spacing) * 130);
     height: calc(var(--spacing) * 12.5);
     width: calc(var(--spacing) * 42.5);
