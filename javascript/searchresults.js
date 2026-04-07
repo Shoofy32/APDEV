@@ -222,7 +222,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+            if(user.equippedItems.equippedUsername)
+                namePost.style.color = user.equippedItems.equippedUsername;
 
+            if(user.equippedItems.equippedPfp)
+                profile.style.border = `2px solid ${user.equippedItems.equippedPfp}`;
+
+            
             userPost.append(iconNameDate, title, tags_post, description, interaction_container);
             highlightText(title, searchResult);
             highlightText(description, searchResult)
