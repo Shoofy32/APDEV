@@ -156,15 +156,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const post_body = document.createElement('p')
             post_body.classList.add("description_short_post")
-            post_body.innerText = post.post_content
-            //Check if it is edited
-            if(post.is_edited === true) {
-                post_body.innerText = post_body.innerText
+            if (post.is_edited === true) {
+                const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
                 const strongEdited = document.createElement("strong")
-                strongEdited.innerHTML = " (edited)"
-                post_body.append(strongEdited)
+                strongEdited.textContent = "(edited)"
+                post_body.append(text, strongEdited)  // append both at once
+            } else {
+                post_body.textContent = post.post_content
             }
-            
+
             //Interaction Container (likes, dislikes, reply)
             const interaction_container = document.createElement("div")
             interaction_container.classList.add("stats_post")
@@ -356,16 +356,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             replying_to_container.append(span_reply, br1, br2, replying_paragraph)
             const user_reply = document.createElement("p") //The reply paragraph div
             user_reply.classList.add("description_short_post")
-            user_reply.innerHTML = reply.reply_content
-
 
             //Check if it is edited
             if(reply.is_edited) {
-            user_reply.innerHTML = user_reply.innerText.replace("(edited)", "")
+            const text = document.createTextNode(reply.reply_content.replace("(edited)", "").trimEnd() + " ")
             const strongEdited = document.createElement("strong")
             strongEdited.innerHTML = " (edited)"
-            user_reply.append(strongEdited)
+            user_reply.append(text, strongEdited)
 
+            }
+            else {
+                user_reply.textContent = reply.reply_content
             }
             post_contents.append(replying_to_container)
             post_contents.append(user_reply)
