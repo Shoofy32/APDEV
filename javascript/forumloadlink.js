@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener("DOMContentLoaded", async () => {
+    
     const sideBarButtons = document.getElementsByClassName("sidebar_topic_button"); // Sidebar topic buttons
 
     // If current html is forum.html, load the forum information
@@ -12,17 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // If current path is at either forum.html or userpost.html, add event listener to return forum links
     if(window.location.pathname === "/forum"  || window.location.pathname == "/userpost"){
-
-
+        const params = new URLSearchParams(window.location.search)
+        id = params.get("id")
+        const response = await fetch(`https://blevvit.onrender.com/post/${id}`)
+        const post = await response.json()
         const returnForumLink = document.getElementsByClassName("return_forum_link"); // Return forum links
-
+        
         // Add event listener to each return forum link so that when clicked, it will load the last loaded forum page
         for(let i = 0; i < returnForumLink.length; i++)
             returnForumLink[i].addEventListener("click", () => {
 
 
-                // Obtain from sessionStorage the stored href
-                window.location.href = sessionStorage.getItem("lastLoadedForum");
+                moveToForum(post.forum_name)
+          
 
             });
 
