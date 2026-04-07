@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Open localStorage and Add search-content Item with Data of Result
             localStorage.setItem("search-content", searchContent);
-
+            
             // If Current Path Location is not Search Results, then Send Data of LocalStorage to Search Results and Open It
             if(window.location.pathname != "/searchresults")
                 window.location.href = "/searchresults";
