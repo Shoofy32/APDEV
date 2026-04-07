@@ -107,7 +107,8 @@
     .stats_label{
 
         @apply text-xl
-                font-medium;
+                font-medium
+                text-center;
 
     }
 
@@ -225,7 +226,7 @@
 
     .challenge_stats_container p{
 
-        @apply ml-3.75;
+        @apply ml-6.75;
 
     }
 
@@ -546,7 +547,7 @@
                 left-[50%]
                 w-[40vw]
                 h-[80vh]
-                pt-[30px]
+                pt-7.5
                 rounded-xl
                 text-[coral]
                 bg-[#3e5058b9]
@@ -625,7 +626,7 @@
 
     .edit_style_section_container{
 
-        @apply gap-[50px];
+        @apply gap-12.5;
 
     }
 
@@ -705,8 +706,8 @@
 
         @apply flex
                 flex-col
-                h-[70px]
-                w-[150px]
+                h-17.5
+                w-37.5
                 bg-[#28363ba3]
                 overflow-y-scroll;
 
@@ -716,7 +717,7 @@
 
         @apply text-2xl
                 font-bold
-                ml-[10px]
+                ml-2.5
                 text-center;
 
     }

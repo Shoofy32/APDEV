@@ -83,7 +83,7 @@
 
         @apply text-lg
                 font-medium
-                ml-[10px];
+                ml-2.5;
 
     }
 
@@ -156,12 +156,12 @@
 
         @apply flex
                 flex-wrap
-                ml-[10px]
-                pt-[10px]
-                pb-[10px]
+                ml-2.5
+                pt-2.5
+                pb-2.5
                 gap-y-1.5
                 gap-x-1.5
-                max-h-[250px]
+                max-h-62.5
                 bg-none
                 overflow-y-auto
                 overflow-x-hidden;

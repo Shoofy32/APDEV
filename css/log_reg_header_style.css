@@ -34,7 +34,7 @@
 
     .search_bar i{
 
-        @apply ml-[10px];
+        @apply ml-2.5;
 
     }
 

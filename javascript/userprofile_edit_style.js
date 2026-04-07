@@ -76,39 +76,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         editStylePfp.innerHTML = `<p class = "style_element ${!equippedPfp ? "active_style" : ""}"> None </p>`;
 
 
+        // Loop each style owned and add their HTML depending if it's equipped or not
         for(let i = 0; i < stylesOwned.length; i++){
+
+            // Match the name of the style with items in the dataase
+            const equippedItemsMatch = items.find(item => item.name.trim() === stylesOwned[i].trim())
+            let selecteditemType = null;
+
+            // If a match is found, find its types
+            if(equippedItemsMatch)
+                selecteditemType = equippedItemsMatch.itemValue.trim();
 
             
             let isActive = "";
 
-            for(let j = 0; j < items.length; j++)
-                if(items[j].itemValue.trim() === equippedUsername || items[j].itemValue.trim() === equippedBanner
-                    || items[j].itemValue.trim() === equippedPfp){
 
-                        let selectedItem = items[j].itemValue.trim();
-
-                        if((stylesOwned[i].includes("Username") && equippedUsername === selectedItem) || 
-                           (stylesOwned[i].includes("Banner") && equippedBanner === selectedItem) ||
-                           (stylesOwned[i].includes("Profile") && equippedPfp === selectedItem)){
-
-                                isActive = "active_style";
-                                break;
-
-                        }
-
-                }
+            // Set style to active if match is found and is equipped
+            if((stylesOwned[i].includes("Username") && equippedUsername === selecteditemType) || 
+                (stylesOwned[i].includes("Banner") && equippedBanner === selecteditemType) ||
+                (stylesOwned[i].includes("Profile") && equippedPfp === selecteditemType))
+                    isActive = "active_style";
 
 
-
+            // Insert HTML                
             if(stylesOwned[i].includes("Username"))
                 editStyleUsername.insertAdjacentHTML("beforeend", `<p class = "style_element ${isActive}">${stylesOwned[i]}</p>`);
             else if(stylesOwned[i].includes("Banner"))
                 editStyleBanner.insertAdjacentHTML("beforeend", `<p class = "style_element ${isActive}">${stylesOwned[i]}</p>`);
             else if(stylesOwned[i].includes("Profile"))
                 editStylePfp.insertAdjacentHTML("beforeend", `<p class = "style_element ${isActive}">${stylesOwned[i]}</p>`);
-
-
-
 
         }
 
@@ -132,6 +128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let equipItemValue = null;
 
+        // Check item list to check if there are any matches of name
         for(let i = 0; i < items.length; i++){
             if(items[i].name.trim() === elementToEquip.textContent.trim())
                 equipItemValue = items[i].itemValue.trim();
