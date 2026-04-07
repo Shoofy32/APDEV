@@ -1176,7 +1176,7 @@
   }
   .likes_container {
     position: absolute;
-    right: calc(var(--spacing) * 90);
+    right: calc(var(--spacing) * 100);
     margin-left: 8%;
     display: none;
     width: calc(var(--spacing) * 25);
