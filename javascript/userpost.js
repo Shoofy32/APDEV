@@ -80,8 +80,10 @@
       post_body.classList.add("description_short_post")
       if (post.is_edited === true) {
           const content = post.post_content.replace("(edited)", "").trimEnd()
-          post_body.innerHTML = `${content} (edited)`
-          post_title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
+          post_body.innerHTML = `${content}`
+          post_title.title.innerHTML =`${post.post_title} 
+          <span class = "flex items-center"><i class="fa-solid fa-pen-to-square 
+          fa-2xs text-[lightgray] scale-[0.9]"></i><span class = "text-white text-[12px] font-semibold text-[lightgray] italic">edited</span></span>`
       } else {
           post_body.textContent = post.post_content
       }
