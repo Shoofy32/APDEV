@@ -12,7 +12,7 @@
     .post_container {
 
         @apply pt-12.5
-                h-[50vh]
+                min-h-[50vh] 
                 flex
                 flex-col
                 items-center
@@ -37,7 +37,8 @@
     .post_container textarea {
 
         @apply w-125
-                h-50
+                min-h-80
+                resize-none
                 bg-[#03120E]
                 text-white
                 text-base
@@ -192,6 +193,7 @@
     #tag_container {
 
         @apply flex
+                flex-wrap
                 w-125
                 gap-1.25;
 
@@ -202,8 +204,17 @@
         @apply rounded-xl
                 bg-[whitesmoke]
                 text-sm
-                w-12.5
+                w-auto
+                p-1
+                border-2
+                border-[#3b4950]
+                scale-[1]
+                shadow-[0px_0px_0px_whitesmoke]
                 text-center;
+
+        @apply hover:shadow-[0px_0px_3px_whitesmoke]
+                hover:scale-[1.03];
+
 
     }
 
@@ -224,6 +235,13 @@
                 opacity-0;
 
         transition: opacity 0s;
+
+    }
+
+
+    .userpost_container .post .description_short_post, .userpost_container .reply .description_short_post{
+
+        @apply flex;
 
     }
 

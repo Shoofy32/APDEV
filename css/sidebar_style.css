@@ -18,7 +18,7 @@
 
     .side_bar_open {
 
-        @apply w-[250px];      
+        @apply w-62.5;      
 
     }
 
@@ -39,7 +39,7 @@
 
     .clickable_container_open{
 
-        @apply left-[235px];
+        @apply left-58.75;
 
     }
 
@@ -71,7 +71,7 @@
         @apply flex 
                 flex-col
                 absolute
-                right-[350px]
+                right-87.5
                 h-50
                 w-37.5
                 ml-5
@@ -83,7 +83,7 @@
 
     .side_bar_content_show{
 
-        @apply right-[80px];
+        @apply right-20;
 
     }
 
@@ -174,10 +174,10 @@
     .side_bar_dropdown{
 
         @apply inline-block
-                w-[220px]
+                w-55
                 max-h-60
                 mb-10
-                ml-[70px]
+                ml-17.5
                 overflow-y-auto
                 overflow-x-hidden
                 transition-transform duration-200 ease-in-out;;

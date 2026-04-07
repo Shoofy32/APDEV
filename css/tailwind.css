@@ -39,8 +39,6 @@ body{
             m-0
             font-[Inter];
             
-    zoom: 90%;
-            
 }
 
 
@@ -127,6 +125,7 @@ body{
 
         -webkit-appearance: none;
         margin: 0;
+        display: none;
 
     }
 

@@ -3,11 +3,12 @@
     header .username{
 
         @apply flex
-                justify-center
                 items-center
                 text-sm
                 font-bold
-                text-[coral];
+                text-[coral]
+                max-w-30
+                overflow-x-hidden;
 
         @apply hover:text-[coral]
                 hover:underline
@@ -78,7 +79,7 @@
     #logout{
 
         @apply absolute
-                right-[3.3vw];
+                right-[1vw];
 
     }
 
@@ -86,7 +87,7 @@
 
         @apply  items-center
                 absolute
-                right-100
+                right-95
                 hidden
                 w-25
                 ml-[8%];
@@ -96,7 +97,9 @@
 
     .likes_container p{
 
-        @apply ml-2.5;
+        @apply ml-2.5
+                max-w-20
+                overflow-x-hidden;
 
         @apply group-hover:text-[coral];
 
