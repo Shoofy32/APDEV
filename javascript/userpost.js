@@ -79,6 +79,7 @@
       const post_body = document.createElement('p')
       post_body.classList.add("description_short_post")
       if (post.is_edited === true) {
+          post_body.textContent = "" 
           const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
           const strongEdited = document.createElement("strong")
           strongEdited.textContent = "(edited)"
