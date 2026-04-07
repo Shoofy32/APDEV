@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Add event listener on notification container for event delegating
     notificationContentContainer.addEventListener("click", (event) => {
-
+        
         // Targets the closest elements based on where you clicked
         const acceptChallengeButton = event.target.closest(".accept_challenge"); // Accept challenge button
         const denyChallengeButton = event.target.closest(".deny_challenge"); // Deny challenge button
@@ -299,7 +299,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Async function performs the actions for user challenge if user accepts it
     async function acceptUserChallenge(event){
-
+        const notificationContainer = event.target.closest(".challenge_notification");
+        const denyChallengeButton = notificationContainer.querySelector(".deny_challenge")
+    
+        const response = await fetch("/user-login"); // Fetch from route
+        const info = await response.json() // Convert to object
+        var displayResultElement = document.getElementsByClassName("result")[0];
         // Add temporary event listener for postBet to call the rollAndGetWinner function.
         const betChallengeButton = document.getElementsByClassName("postBet")[0]; // bet likes button
 
@@ -315,23 +320,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Call challenge user which opens challenge container with stats of the person challenging them
         challengeUser(name, image, rollNumber, betLikes);
-
+        const userBetLikes = document.getElementsByClassName("betLikes")[0]
         // Set dataset flag to true to avoid both event listeners in notification and posts js from running at once
         betChallengeButton.dataset.challengeFromNotification = "true"; // Notification challenge
-
+        userBetLikes.value= betLikes
+        userBetLikes.readOnly = true;
         // Create a new Promise object, storing the results of rollAndGetWinner (resolved) when completed.
         let succesfulRoll = new Promise((resolve) => {
 
             // Function wrapper for event listener removal and to pass index
             function rollAndGetWinnerWrapper(){
-
                 // Get the closest accept_challenge associated with the click and then get the eventual resolve of promise after function is done
                 rollAndGetWinner(event.target.closest(".accept_challenge"), rollAndGetWinnerWrapper, betLikes, challengeContainer).then(resolve)
 
             }
 
             // Call function wrapper for rollAndGetWinner
-            betChallengeButton.addEventListener("click", rollAndGetWinnerWrapper);
+            betChallengeButton.addEventListener("click", function() {
+                if(info.user.likes < userBetLikes.value) {
+                    displayResultElement.textContent = "Not enough likes!"
+                    betChallengeButton.disabled = true;
+                    rejectChallengeNotification(denyChallengeButton)
+                    
+                }
+                else {
+                    rollAndGetWinnerWrapper()
+                }
+            });
 
         });
 
@@ -364,7 +379,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
         // Call openChallenge function with stats
-        openChallenge();
+        acceptChallenge();
+
+    }
+
+    function acceptChallenge(){
+        const challenger_stats_container = document.getElementsByClassName("challenger_stats_container")[0];
+        // Obtain the Challenge Div Element
+        var challengeElement = document.getElementsByClassName("challenge")[0];
+        
+
+        // Obtain the Roll 20 Number and the Result Text Elements
+        var displayResultNumberElement = document.getElementsByClassName("roll_20_number")[0];
+  
+        var displayResultElement = document.getElementsByClassName("result")[0];
+
+        // Empty the Roll 20 Number and Result Text Elements When Closing
+        displayResultNumberElement.textContent = "";
+        displayResultElement.textContent = "Result";
+
+        challengeElement.classList.toggle("open");
 
     }
 
@@ -559,7 +593,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Function closes the user challenge and removes the notification, and challenger in the roll D20 display
     function closeUserChallenge(buttonElement){
-
         // Check if buttonElement null, return if it is
         if(!buttonElement)
             return;
