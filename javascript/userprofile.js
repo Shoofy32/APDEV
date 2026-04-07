@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Convert read file to a Base-64 encoded string to use for src
             reader.readAsDataURL(uploadedImage);
 
-            console.log(reader.result);
 
             // Event handler when reader finishes reading the file to reaplce pfp image with the read file
             reader.onload = (async function(e){
@@ -131,7 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Convert read file to a Base-64 encoded string to use for src
             reader.readAsDataURL(uploadedImage);
 
-            console.log(reader.result);
 
             // Event handler when reader finishes reading the file to reaplce pfp image with the read file
             reader.onload = (async function(e){
@@ -459,7 +457,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         replies.forEach(async reply => {
             const user_info = await fetch(`https://blevvit.onrender.com/user/${reply.poster_id}`);
             const user = await user_info.json();
-            console.log(user)
             
             const userPost = document.createElement("div");
             userPost.classList.add("reply");

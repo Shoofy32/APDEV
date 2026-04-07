@@ -404,7 +404,7 @@ async function loadRecentAnnouncements() {
     const response = await fetch(`https://blevvit.onrender.com/posts/recentAnnouncements`);
     const posts = await response.json();
     const recent_announcements = document.getElementsByClassName("recent_announcements")[0];
-    console.log(response)
+    
     for (const post of posts) {
 
       const announcement = document.createElement("p")

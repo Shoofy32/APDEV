@@ -338,9 +338,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function opens the challenge window
     function openChallenge(){
-
+        const challenger_stats_container = document.getElementsByClassName("challenger_stats_container")[0];
         // Obtain the Challenge Div Element
         var challengeElement = document.getElementsByClassName("challenge")[0];
+        
 
         // Obtain the Roll 20 Number and the Result Text Elements
         var displayResultNumberElement = document.getElementsByClassName("roll_20_number")[0];
@@ -351,10 +352,20 @@ document.addEventListener("DOMContentLoaded", () => {
         displayResultNumberElement.textContent = "";
         displayResultElement.textContent = "Result";
 
-        
-        challengeElement.classList.toggle("open");
+        challenger_stats_container.innerHTML = 
+        `<div class = "challenger_stats_container">
+            
 
+
+        </div>`
+        var likesValueContainer = document.getElementsByClassName("betLikes")[0];
+        likesValueContainer.value = 0;
+        likesValueContainer.readOnly = false;
+        challengeElement.classList.toggle("open");
+        challengeElement.querySelector(".postBet").disabled = false;
     }
+
+
 
 
     // rollD20 Global Variables
@@ -476,7 +487,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             createReply(divElement);
             previousPostReply = divElement;
-            console.log("1");
+            
 
         }
         else if(previousPostReply != divElement && replyContainer.length > 0){
@@ -484,13 +495,13 @@ document.addEventListener("DOMContentLoaded", () => {
             replyContainer[0].remove(); // Remove the container
             createReply(divElement); // Call function to create the container
             previousPostReply = divElement;
-            console.log("2");
+        
 
         }
         else if(previousPostReply === divElement && replyContainer.length > 0){
 
             replyContainer[0].remove(); // Remove the container   
-            console.log("3");
+
 
         }
 

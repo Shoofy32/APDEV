@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", async () => {
          for (const reply of replies) {
             const user_info = await fetch(`https://blevvit.onrender.com/user/${reply.poster_id}`);
             const user = await user_info.json();
-            console.log(user)
+    
             
             const userPost = document.createElement("div");
             userPost.classList.add("reply");
@@ -484,8 +484,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Function equips the styles to view in userpage
     function loadEquippedStyles(){
 
-
-        console.log(profileUser.equippedItems)
         if(profileUser.equippedItems.equippedUsername)
             username.style.color = profileUser.equippedItems.equippedUsername;
 
