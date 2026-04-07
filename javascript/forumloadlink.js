@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         for(let i = 0; i < returnForumLink.length; i++)
             returnForumLink[i].addEventListener("click", () => {
 
-
+                if(post.forum_name=== undefined) {
+                    return;
+                }
                 moveToForum(post.forum_name)
           
 
