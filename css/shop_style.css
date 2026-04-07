@@ -5,9 +5,9 @@
         @apply flex
                 flex-wrap
                 absolute
-                left-[125px]
-                top-[135px]
-                w-[1500px]
+                left-31.25
+                top-33.75
+                w-375
                 gap-y-5.5
                 gap-x-3.5
                 h-auto;
@@ -19,12 +19,12 @@
         @apply flex
                 flex-col
                 items-center
-                pt-[50px]
+                pt-12.5
                 bg-[#3E5058]
                 border-4
                 border-[#2e3c42]
-                h-[550px]
-                w-[350px]
+                h-137.5
+                w-87.5
                 shadow-[0px_0px_15px_#26413C];
 
         @apply hover:bg-[#37474f]
@@ -34,7 +34,8 @@
 
     .item_preview_container .banner_image{
 
-        @apply w-[300px]
+        @apply w-75
+                h-[18vh]
                 rounded-none;
 
 
@@ -46,7 +47,7 @@
                 top-0
                 left-0
                 scale-[0.9]
-                -mb-[10px];
+                -mb-2.5;
 
 
     }
@@ -55,8 +56,8 @@
 
         @apply text-4xl
                 font-extrabold
-                mt-[70px]
-                mb-[55px];
+                mt-17.5
+                mb-13.75;
 
 
     }
@@ -66,7 +67,8 @@
         @apply font-extrabold
                 text-3xl
                 text-[coral]
-                mt-[20px]
+                mt-5
+                min-h-20
                 text-center;
 
     }
@@ -76,9 +78,9 @@
         @apply font-medium
                 text-lg
                 text-center
-                mt-[10px]
-                w-[300px]
-                h-[40px]
+                mt-2.5
+                w-75
+                min-h-20
 
     }
 
@@ -86,7 +88,8 @@
 
         @apply flex
                 items-center
-                mt-[50px]
+                absolute
+                mt-85
                 scale-[1.3];
 
     }
@@ -110,7 +113,7 @@
         @apply font-bold
                 text-xl
                 text-[orangered]
-                mt-[25px]
+                mt-6.25
                 visible;
 
     }
@@ -126,8 +129,8 @@
 
         @apply h-10
                 w-40
-                mt-[15px]
-                mb-[35px]
+                mt-3.75
+                mb-8.75
                 text-[coral]
                 bg-[#3b4950]
                 border

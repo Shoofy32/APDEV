@@ -54,8 +54,8 @@
                 flex-col
                 justify-center
                 items-center
-                w-[150px]
-                right-[420px]
+                w-37.5
+                right-105
                 bottom-12
                 bg-[#2e3c42]
                 border-2
@@ -86,7 +86,7 @@
             mb-2.5
             text-base
             font-semibold
-            placeholder:ml-[10px];
+            placeholder:ml-2.5;
 
     }
 
