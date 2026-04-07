@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function that showsSearchResults Based on Search Result
     async function showSearchResults(){
-
+        
         searchResult = localStorage.getItem("search-content");
         var query_counter = 0;
         var query_counter_display = document.getElementsByClassName("query_counter")[0];
@@ -59,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
         posts.forEach(async post => {
             
             //Get user information
-            if(post.post_title.includes(searchResult)) {
+            
+            if(post.post_title.includes(searchResult) || post.post_content.includes(searchResult)) {
             query_counter++;
             const user_info = await fetch(`https://blevvit.onrender.com/user/${post.poster_id}`);
             const user = await user_info.json();
@@ -224,6 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             userPost.append(iconNameDate, title, tags_post, description, interaction_container);
             highlightText(title, searchResult);
+            highlightText(description, searchResult)
             all_posts.append(userPost);
         }   
             
