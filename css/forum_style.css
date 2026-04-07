@@ -1,5 +1,12 @@
 @layer components{
 
+    .announcement_head_container{
+
+        @apply mt-10;
+
+    }
+
+
     .content_container .all_posts{
 
         @apply mr-auto

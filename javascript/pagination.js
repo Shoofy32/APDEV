@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-    alert
     // Constants to adjust pagination variables
     const minPaginationNumber = 0;
     const maxPaginationNumber = 2;

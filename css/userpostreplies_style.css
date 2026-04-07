@@ -359,6 +359,13 @@
                 hover:cursor-pointer;
     }
 
+
+    .userpost_container .all_posts .post, .userpost_container .all_posts .reply{
+
+        @apply hover:cursor-default;
+
+    }
+
 }
 
 

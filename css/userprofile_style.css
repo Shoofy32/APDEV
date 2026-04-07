@@ -213,7 +213,7 @@
     .challenge_stats_container{
 
         @apply absolute
-                top-[61.5vh]
+                top-[58.5vh]
                 right-0
                 h-[30vh]
                 w-[21vw]
@@ -372,7 +372,7 @@
 
         @apply flex
                 items-center
-                h-[10vh]
+                min-h-[10vh]
                 mb-5
                 ml-10
                 bg-[#3E5058]
@@ -478,9 +478,10 @@
 
     .all_notifications .results_name{
 
-        @apply text-xl
+        @apply text-lg
                 font-bold
-                ml-2.5;
+                ml-2.5
+                text-center;
     }
 
 
@@ -490,7 +491,8 @@
                 text-lg
                 text-[salmon]
                 font-medium
-                ml-5;
+                ml-5
+                text-center;
 
     }
 
@@ -516,6 +518,7 @@
         @apply flex
                 items-center
                 flex-col
+                justify-center
                 gap-2.5;
 
     }
