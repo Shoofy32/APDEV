@@ -156,14 +156,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const post_body = document.createElement('p')
             post_body.classList.add("description_short_post")
-            if (post.is_edited === true) {
-                const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
-                const strongEdited = document.createElement("strong")
-                strongEdited.textContent = "(edited)"
-                post_body.append(text, strongEdited)  // append both at once
+             if (post.is_edited === true) {
+                const content = post.post_content.replace("(edited)", "").trimEnd()
+                post_body.innerHTML = `${content} (edited)`
+                post_title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
             } else {
                 post_body.textContent = post.post_content
             }
+
 
             //Interaction Container (likes, dislikes, reply)
             const interaction_container = document.createElement("div")
@@ -356,7 +356,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             replying_to_container.append(span_reply, br1, br2, replying_paragraph)
             const user_reply = document.createElement("p") //The reply paragraph div
             user_reply.classList.add("description_short_post")
-
             //Check if it is edited
             if(reply.is_edited) {
             const text = document.createTextNode(reply.reply_content.replace("(edited)", "").trimEnd() + " ")

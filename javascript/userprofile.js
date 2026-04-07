@@ -306,11 +306,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             const post_body = document.createElement('p')
             post_body.classList.add("description_short_post")
             
-            if (post.is_edited === true) {
-                const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
-                const strongEdited = document.createElement("strong")
-                strongEdited.textContent = "(edited)"
-                post_body.append(text, strongEdited)  // append both at once
+             if (post.is_edited === true) {
+                const content = post.post_content.replace("(edited)", "").trimEnd()
+                post_body.innerHTML = `${content} (edited)`
+                post_title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
             } else {
                 post_body.textContent = post.post_content
             }

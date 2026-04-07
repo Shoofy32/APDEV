@@ -129,13 +129,13 @@ async function loadPosts(page = 1) {
         description.classList.add("description_short_post");
 
         if (post.is_edited === true) {
-            const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
-            const strongEdited = document.createElement("strong")
-            strongEdited.textContent = "(edited)"
-            description.append(text, strongEdited)  // append both at once
+          const content = post.post_content.replace("(edited)", "").trimEnd()
+          description.innerHTML = `${content} (edited)`
+          title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
         } else {
-            description.textContent = post.post_content
+          description.textContent = post.post_content
         }
+
         iconNameDate.append(profile, namePost, datePost);
 
         //Interaction Containers
@@ -291,16 +291,15 @@ async function loadPopularPosts() {
 
         const description = document.createElement("p");
         description.classList.add("description_short_post");
-        
-        description.innerText = post.post_content;
+
         if (post.is_edited === true) {
-            const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
-            const strongEdited = document.createElement("strong")
-            strongEdited.textContent = "(edited)"
-            description.append(text, strongEdited)  // append both at once
+          const content = post.post_content.replace("(edited)", "").trimEnd()
+          description.innerHTML = `${content} (edited)`
+          title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
         } else {
-            description.textContent = post.post_content
+          description.textContent = post.post_content
         }
+
 
         iconNameDate.append(profile, namePost, datePost);
 

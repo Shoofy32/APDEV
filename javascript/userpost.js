@@ -80,7 +80,8 @@
       post_body.classList.add("description_short_post")
       if (post.is_edited === true) {
           const content = post.post_content.replace("(edited)", "").trimEnd()
-          post_body.innerHTML = `${content} <i class="fa-solid fa-pen-to-square"></i>`
+          post_body.innerHTML = `${content} (edited)`
+          post_title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
       } else {
           post_body.textContent = post.post_content
       }
@@ -292,10 +293,8 @@
         user_reply.classList.add("description_short_post")
 
         if(reply.is_edited) {
-            const text = document.createTextNode(reply.reply_content.replace("(edited)", "").trimEnd() + " ")
-            const strongEdited = document.createElement("strong")
-            strongEdited.innerHTML = " (edited)"
-            user_reply.append(text, strongEdited)
+            const content = reply.reply_content.replace("(edited)", "").trimEnd()
+            user_reply.innerHTML = `${content} (edited)`
 
             }
             
