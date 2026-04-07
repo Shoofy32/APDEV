@@ -3555,6 +3555,7 @@ body {
   margin: calc(var(--spacing) * 0);
   background-color: #1A1D1A;
   font-family: Inter;
+  zoom: 110%;
 }
 @layer base {
   * {
