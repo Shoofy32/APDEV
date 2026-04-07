@@ -127,14 +127,15 @@ async function loadPosts(page = 1) {
 
         const description = document.createElement("p");
         description.classList.add("description_short_post");
-        description.innerText = post.post_content;
-        if(post.is_edited === true) {
-            description.innerText = post.post_content.replace("(edited)", "")
-            const strongEdited = document.createElement("strong")
-            strongEdited.innerHTML = " (edited)"
-            description.append(strongEdited)
-        }
 
+        if (post.is_edited === true) {
+            const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
+            const strongEdited = document.createElement("strong")
+            strongEdited.textContent = "(edited)"
+            description.append(text, strongEdited)  // append both at once
+        } else {
+            description.textContent = post.post_content
+        }
         iconNameDate.append(profile, namePost, datePost);
 
         //Interaction Containers
@@ -290,12 +291,15 @@ async function loadPopularPosts() {
 
         const description = document.createElement("p");
         description.classList.add("description_short_post");
+        
         description.innerText = post.post_content;
-        if(post.is_edited === true) {
-            description.innerText = post.post_content.replace("(edited)", "")
+        if (post.is_edited === true) {
+            const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
             const strongEdited = document.createElement("strong")
-            strongEdited.innerHTML = " (edited)"
-            description.append(strongEdited)
+            strongEdited.textContent = "(edited)"
+            description.append(text, strongEdited)  // append both at once
+        } else {
+            description.textContent = post.post_content
         }
 
         iconNameDate.append(profile, namePost, datePost);
