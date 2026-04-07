@@ -83,6 +83,46 @@
     }
 
 
+    .password_instructions {
+
+        @apply opacity-0
+                invisible
+                absolute
+                bg-[#2e3c42]
+                border-4
+                border-[salmon]
+                p-2
+                transition-all duration-200 ease-in-out
+                text-left;
+
+    }
+
+
+    #pass:focus + .password_instructions {
+
+        @apply opacity-100
+                visible
+                transition-all duration-200 ease-in-out;
+
+    }
+
+
+    .password_instructions_header{
+
+        @apply font-bold
+                text-xl
+                text-[coral];
+
+    }
+
+
+    .password_instructions_element{
+
+        @apply font-medium
+                ml-2.5;
+
+    }
+
 
 
 }

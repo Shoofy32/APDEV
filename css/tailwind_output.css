@@ -632,6 +632,9 @@
   }
 }
 @layer components {
+  .announcement_head_container {
+    margin-top: calc(var(--spacing) * 10);
+  }
   .content_container .all_posts {
     margin-right: auto;
     margin-left: auto;
@@ -1107,8 +1110,9 @@
 @layer components {
   header .username {
     display: flex;
+    max-width: calc(var(--spacing) * 28);
     align-items: center;
-    justify-content: center;
+    overflow-x: hidden;
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
     --tw-font-weight: var(--font-weight-bold);
@@ -1195,11 +1199,11 @@
   }
   #logout {
     position: absolute;
-    right: 3.3vw;
+    right: 1vw;
   }
   .likes_container {
     position: absolute;
-    right: calc(var(--spacing) * 100);
+    right: calc(var(--spacing) * 95);
     margin-left: 8%;
     display: none;
     width: calc(var(--spacing) * 25);
@@ -1212,6 +1216,8 @@
   }
   .likes_container p {
     margin-left: calc(var(--spacing) * 2.5);
+    max-width: calc(var(--spacing) * 20);
+    overflow-x: hidden;
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         color: coral;
@@ -1481,6 +1487,47 @@
   }
   .remtext {
     color: aliceblue;
+  }
+  .password_instructions {
+    visibility: hidden;
+    position: absolute;
+    border-style: var(--tw-border-style);
+    border-width: 4px;
+    border-color: salmon;
+    background-color: #2e3c42;
+    padding: calc(var(--spacing) * 2);
+    text-align: left;
+    opacity: 0%;
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+    --tw-ease: var(--ease-in-out);
+    transition-timing-function: var(--ease-in-out);
+  }
+  #pass:focus + .password_instructions {
+    visibility: visible;
+    opacity: 100%;
+    transition-property: all;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+    --tw-ease: var(--ease-in-out);
+    transition-timing-function: var(--ease-in-out);
+  }
+  .password_instructions_header {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    color: coral;
+  }
+  .password_instructions_element {
+    margin-left: calc(var(--spacing) * 2.5);
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
 }
 @layer components {
@@ -2251,6 +2298,13 @@
       }
     }
   }
+  .userpost_container .all_posts .post, .userpost_container .all_posts .reply {
+    &:hover {
+      @media (hover: hover) {
+        cursor: default;
+      }
+    }
+  }
 }
 @layer components {
   #challenge_container {
@@ -2641,7 +2695,7 @@
   }
   .challenge_stats_container {
     position: absolute;
-    top: 61.5vh;
+    top: 58.5vh;
     right: calc(var(--spacing) * 0);
     height: 30vh;
     width: 21vw;
@@ -2787,7 +2841,7 @@
     margin-bottom: calc(var(--spacing) * 5);
     margin-left: calc(var(--spacing) * 10);
     display: flex;
-    height: 10vh;
+    min-height: 10vh;
     align-items: center;
     border-radius: var(--radius-md);
     border-top-left-radius: 0;
@@ -2886,14 +2940,16 @@
   }
   .all_notifications .results_name {
     margin-left: calc(var(--spacing) * 2.5);
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
+    text-align: center;
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
   .all_notifications .results_alert {
     margin-left: calc(var(--spacing) * 5);
     width: calc(var(--spacing) * 87.5);
+    text-align: center;
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
     --tw-font-weight: var(--font-weight-medium);
@@ -2915,6 +2971,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: calc(var(--spacing) * 2.5);
   }
   .all_notifications .challenge_results_notification .number_result, .all_notifications .challenge_results_notification .number_result_betlikes {

@@ -480,7 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let replyContainer = document.getElementsByClassName("create_reply_container"); // Reply container
 
-        console.log(previousPostReply);
 
         // Check if the reply container exists by checking length
         if(replyContainer.length === 0){
@@ -553,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function creates the reply after pressing the enter button on the reply container
     window.uploadReply = function uploadReply(divElement){
-    console.log("replyPostId:", replyPostId)
+
 
     const postContainer = document.getElementsByClassName("all_posts")[0]; // Container for all posts
     

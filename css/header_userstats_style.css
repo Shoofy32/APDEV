@@ -7,7 +7,7 @@
                 text-sm
                 font-bold
                 text-[coral]
-                max-w-30
+                max-w-28
                 overflow-x-hidden;
 
         @apply hover:text-[coral]

@@ -215,7 +215,6 @@ app.post("/registerUser", async (req, res) => {
             }
             req.session.save((err)=>{
               if (err) {
-                console.log("broken");
                 return res.status(409).json({ success: false, message: "broken" });
               }
               res.redirect("/");
@@ -274,7 +273,6 @@ app.post("/logUser", express.urlencoded({extended: true}), async (req, res) => {
             }
         req.session.save((err)=>{
           if (err) {
-            console.log("broken");
             return res.status(201).json({ success: false, message: broken});
           }
         res.redirect("/");
@@ -729,7 +727,6 @@ app.post("/add-post", async (req, res) => {
     total_likes, is_edited,date, total_dislikes, total_comments, poster_id});
 
     
-  console.log(res)
   await newPost.save();
   
   res.json({ message: "User added", postId: newPost._id});
@@ -738,7 +735,7 @@ app.post("/add-post", async (req, res) => {
 
 
 app.post("/add-reply", async (req, res) => {
-  console.log("req.body:", req.body);
+
   const {username, replying_to, original_content, reply_content, unique_post_id, total_likes, is_edited, 
     parent_reply_id, date,total_dislikes,poster_id} = req.body;
 
