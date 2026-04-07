@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateCounter(likeButton, likeButton.closest(".counter_container").parentElement);
         else if(dislikeButton)
             updateCounter(dislikeButton, dislikeButton.closest(".counter_container").parentElement);
-        else if(challengeButton){
+        else if(challengeButton && info.userLoggedIn){
 
             window.challengedUser = post_reply.getElementsByClassName("name_post")[0].textContent;
             openChallenge();
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateCounter(likeButton, likeButton.closest(".counter_container").parentElement);
             else if(dislikeButton)
                 updateCounter(dislikeButton, dislikeButton.closest(".counter_container").parentElement);
-            else if(challengeButton){
+            else if(challengeButton && info.userLoggedIn){
 
                 window.challengedUser = post_reply.getElementsByClassName("name_post")[0].textContent;
                 openChallenge();
