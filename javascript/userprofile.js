@@ -310,9 +310,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const text = document.createTextNode(post.post_content.replace("(edited)", "").trimEnd() + " ")
                 const strongEdited = document.createElement("strong")
                 strongEdited.textContent = "(edited)"
-                description.append(text, strongEdited)  // append both at once
+                post_body.append(text, strongEdited)  // append both at once
             } else {
-                description.textContent = post.post_content
+                post_body.textContent = post.post_content
             }
 
             
@@ -521,7 +521,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             else {
                 user_reply.textContent = reply.reply_content
             }
-            
+
             post_contents.append(replying_to_container)
             post_contents.append(user_reply)
 
