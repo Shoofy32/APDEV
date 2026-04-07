@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function that showsSearchResults Based on Search Result
     async function showSearchResults(){
+        
         searchResult = localStorage.getItem("search-content");
-        console.log((searchResult))
         var query_counter = 0;
         var query_counter_display = document.getElementsByClassName("query_counter")[0];
         var query_result = document.getElementsByClassName("search_query")[0];
