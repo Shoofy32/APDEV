@@ -3448,7 +3448,7 @@
     }
   }
   .item_preview_container .banner_image {
-    height: 18vh;
+    height: 40vh;
     width: calc(var(--spacing) * 75);
     border-radius: 0;
   }
