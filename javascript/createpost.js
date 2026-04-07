@@ -83,10 +83,19 @@ async function addPost() {
     const poster_id = info.user._id
 
     if(post_title === "") {
-      alert("Title must not be empty!")
+       if(createPostAlert.classList.contains("createpost_alert_hidden"))
+          createPostAlert.classList.toggle("createpost_alert_hidden");
+
+        createPostAlert.textContent = "Title cannot be empty"
+        return;
+      
     }
     else if (post_content === "") {
-      alert("Content must not be empty!")
+        if(createPostAlert.classList.contains("createpost_alert_hidden"))
+          createPostAlert.classList.toggle("createpost_alert_hidden");
+
+        createPostAlert.textContent = "Body cannot be empty"
+        return;
     }
     else{
         alert("Post made successfully!")
