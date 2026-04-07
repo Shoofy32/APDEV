@@ -65,8 +65,10 @@ async function loadPosts(name, page = 1) {
         description.classList.add("description_short_post");
         if (post.is_edited === true) {
           const content = post.post_content.replace("(edited)", "").trimEnd()
-          description.innerHTML = `${content} (edited)`
-          title.innerHTML =`${post.post_title} <i class="fa-solid fa-pen-to-square"></i>`
+          description.innerHTML = `${content}`
+          title.innerHTML =`${post.post_title} 
+          <span class = "flex items-center"><i class="fa-solid fa-pen-to-square 
+          fa-2xs text-[lightgray] scale-[0.9]"></i><span class = "text-white text-[12px] font-semibold text-[lightgray] italic">edited</span></span>`
         } else {
           description.textContent = post.post_content
         }
