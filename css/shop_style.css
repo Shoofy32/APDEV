@@ -35,7 +35,7 @@
     .item_preview_container .banner_image{
 
         @apply w-75
-                h-[40vh]
+                h-[40]
                 rounded-none;
 
 
