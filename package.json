@@ -7,7 +7,8 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "mongoose": "^9.2.3",
-    "server.js": "^1.0.0"
+    "server.js": "^1.0.0",
+    "tailwind": "^4.0.0"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.2",

@@ -296,6 +296,9 @@
   .grow {
     flex-grow: 1;
   }
+  .scale-\[0\.9\] {
+    scale: 0.9;
+  }
   .rotate-90 {
     rotate: 90deg;
   }
@@ -313,6 +316,9 @@
   }
   .flex-col {
     flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
   }
   .justify-center {
     justify-content: center;
@@ -339,6 +345,9 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-\[12px\] {
+    font-size: 12px;
+  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -355,6 +364,9 @@
   }
   .text-\[coral\] {
     color: coral;
+  }
+  .text-\[lightgray\] {
+    color: lightgray;
   }
   .text-\[whitesmoke\] {
     color: whitesmoke;
@@ -2586,6 +2598,7 @@
   .stats_container {
     margin-top: calc(var(--spacing) * 11.25);
     display: flex;
+    width: 50px;
     flex-direction: column;
     align-items: center;
   }
@@ -2695,8 +2708,8 @@
   }
   .challenge_stats_container {
     position: absolute;
-    top: 58.5vh;
-    right: calc(var(--spacing) * 0);
+    top: 57.5vh;
+    right: calc(var(--spacing) * -10);
     height: 30vh;
     width: 21vw;
     border-radius: var(--radius-md);
@@ -2743,7 +2756,7 @@
     font-weight: var(--font-weight-semibold);
   }
   .challenge_profile_button {
-    margin-top: 8vh;
+    margin-top: 12vh;
     display: flex;
     height: 6vh;
     width: 21vw;

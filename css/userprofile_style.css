@@ -99,6 +99,7 @@
         @apply flex
                 items-center
                 flex-col
+                w-[50px]
                 mt-11.25;
 
 
@@ -213,8 +214,8 @@
     .challenge_stats_container{
 
         @apply absolute
-                top-[58.5vh]
-                right-0
+                top-[57.5vh]
+                -right-10
                 h-[30vh]
                 w-[21vw]
                 bg-[#28363b]
@@ -279,7 +280,7 @@
                 items-center
                 h-[6vh]
                 w-[21vw]
-                mt-[8vh]
+                mt-[12vh]
                 text-xl
                 font-bold
                 text-[whitesmoke]
